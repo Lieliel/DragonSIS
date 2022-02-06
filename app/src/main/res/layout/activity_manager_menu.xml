@@ -4,28 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".ManagerMenu"
     android:gravity="center"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/txt_login_user"
+    <Button
+        android:id="@+id/btn_useracc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/log_user_hint"
-        ></EditText>
-
-    <EditText
-        android:id="@+id/txt_login_pass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/log_pass_hint"
-        ></EditText>
+        android:text="@string/menu_useracc_btn"
+        ></Button>
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_inventory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/log_btn"
+        android:text="@string/menu_inventory_btn"
         ></Button>
+
+    <Button
+        android:id="@+id/btn_products"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_products_btn"
+        ></Button>
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_logout_btn"
+        ></Button>
+
 </LinearLayout>

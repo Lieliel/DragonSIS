@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">DragonSIS</string>
+
+    <!--log in-->
+
+    <string name="log_user_hint">username</string>
+    <string name="log_pass_hint">password</string>
+    <string name="log_btn">Log in</string>
+
+    <!--menu screen-->
+
+    <string name="menu_useracc_btn">User Accounts</string>
+    <string name="menu_inventory_btn">View Inventory</string>
+    <string name="menu_products_btn">View Products</string>
+    <string name="menu_logout_btn">Log out</string>
 </resources>
