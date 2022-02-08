@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">DragonSIS</string>
 
+    <!--General Strings-->
+    <string name="gnr_back_to_menu">Back to Menu</string>
+
     <!--log in-->
 
     <string name="log_user_hint">username</string>
@@ -13,4 +16,12 @@
     <string name="menu_inventory_btn">View Inventory</string>
     <string name="menu_products_btn">View Products</string>
     <string name="menu_logout_btn">Log out</string>
+
+    <!--generate pdf-->
+
+    <string name="pdf_gen_sales">Generate Sales Report</string>
+    <string name="pdf_gen_inv">Generate Inventory Report</string>
+    <string name="pdf_gen_full">Generate Full Report</string>
+
+
 </resources>

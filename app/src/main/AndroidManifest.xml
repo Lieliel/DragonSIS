@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".GeneratePdfReport"
+            android:exported="true" />
+        <activity
             android:name=".UserAccounts"
             android:exported="true" />
         <activity
