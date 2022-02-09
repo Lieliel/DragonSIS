@@ -9,12 +9,17 @@ import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class GeneratePdfReport extends AppCompatActivity {
 
@@ -38,7 +43,7 @@ public class GeneratePdfReport extends AppCompatActivity {
             public void onClick(View view) {
                 //create Sales Report
                 createSalesPdf();
-                Toast.makeText(GeneratePdfReport.this, "Generate Sales PDF", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GeneratePdfReport.this, "Sales Report Generated", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -46,7 +51,8 @@ public class GeneratePdfReport extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //create Inventory Report
-                Toast.makeText(GeneratePdfReport.this, "Generate Inventory PDF", Toast.LENGTH_SHORT).show();
+                createInvPdf();
+                Toast.makeText(GeneratePdfReport.this, "Inventory Report Generated", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -54,36 +60,112 @@ public class GeneratePdfReport extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //create Full Report
-                Toast.makeText(GeneratePdfReport.this, "Generate Full PDF", Toast.LENGTH_SHORT).show();
+                createFullPdf();
+                Toast.makeText(GeneratePdfReport.this, "Full Report Generated", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void createSalesPdf() {
+    private void createFullPdf() {
+        PdfDocument myPdf = new PdfDocument();
+        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
+        PdfDocument.Page myPage = myPdf.startPage(myPageInfo);
 
-        PdfDocument mySalesPdf = new PdfDocument();
-        PdfDocument.PageInfo mySalesPageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
-        PdfDocument.Page mySalesPage = mySalesPdf.startPage(mySalesPageInfo);
-
-        Paint mySalesPaint = new Paint();
-        String mySalesString = "Sales Sample";
-        int x = 10;
+        Paint myPaint = new Paint();
+        String reportTitle = "Dragon M Full Report";
+        int x = 85;
         int y = 25;
-        mySalesPage.getCanvas().drawText(mySalesString, x, y, mySalesPaint);
-        mySalesPdf.finishPage(mySalesPage);
+        myPage.getCanvas().drawText(reportTitle, 93, 25, myPaint);
 
-        String myFilePath = Environment.getExternalStorageDirectory().getPath() + "/mySalesPdf.pdf";
+        String cTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        String cDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        Log.i("Current Time", cTime.toString());
+        Log.i("Current Time", cDate.toString());
+        myPage.getCanvas().drawText(cDate+", "+cTime, 95, 45, myPaint);
+
+        myPdf.finishPage(myPage);
+
+        String myFilePath = Environment.getExternalStorageDirectory().getPath() + "/DMFull_"+cDate+"_"+cTime+".pdf";
         File myFile = new File(myFilePath);
 
         try {
-            mySalesPdf.writeTo(new FileOutputStream(myFile));
+            myPdf.writeTo(new FileOutputStream(myFile));
         }catch (Exception e){
-            Toast.makeText(GeneratePdfReport.this, "Di gumana Sales LMAO", Toast.LENGTH_SHORT).show();
+            String filePath = Environment.getExternalStorageDirectory().getPath().toString();
+            Log.i("External Storage Path", filePath);
+            Toast.makeText(GeneratePdfReport.this, "Report Generation Unsuccessful", Toast.LENGTH_SHORT).show();
 
         }
 
-        mySalesPdf.close();
+        myPdf.close();
+    }
 
+    private void createInvPdf() {
+        PdfDocument myPdf = new PdfDocument();
+        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
+        PdfDocument.Page myPage = myPdf.startPage(myPageInfo);
+
+        Paint myPaint = new Paint();
+        String reportTitle = "Dragon M Inventory Report";
+        int x = 85;
+        int y = 25;
+        myPage.getCanvas().drawText(reportTitle, 75, 25, myPaint);
+
+        String cTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        String cDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        Log.i("Current Time", cTime.toString());
+        Log.i("Current Time", cDate.toString());
+        myPage.getCanvas().drawText(cDate+", "+cTime, 95, 45, myPaint);
+
+        myPdf.finishPage(myPage);
+
+        String myFilePath = Environment.getExternalStorageDirectory().getPath() + "/DMInventory_"+cDate+"_"+cTime+".pdf";
+        File myFile = new File(myFilePath);
+
+        try {
+            myPdf.writeTo(new FileOutputStream(myFile));
+        }catch (Exception e){
+            String filePath = Environment.getExternalStorageDirectory().getPath().toString();
+            Log.i("External Storage Path", filePath);
+            Toast.makeText(GeneratePdfReport.this, "Report Generation Unsuccessful", Toast.LENGTH_SHORT).show();
+
+        }
+
+        myPdf.close();
+    }
+
+    public void createSalesPdf() {
+        PdfDocument myPdf = new PdfDocument();
+        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
+        PdfDocument.Page myPage = myPdf.startPage(myPageInfo);
+
+        Paint myPaint = new Paint();
+        String reportTitle = "Dragon M Sales Report";
+        int x = 85;
+        int y = 25;
+        myPage.getCanvas().drawText(reportTitle, 85, 25, myPaint);
+
+        String cTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        String cDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        Log.i("Current Time", cTime.toString());
+        Log.i("Current Time", cDate.toString());
+        myPage.getCanvas().drawText(cDate+", "+cTime, 95, 45, myPaint);
+
+        myPdf.finishPage(myPage);
+
+        String myFilePath = Environment.getExternalStorageDirectory().getPath() + "/DMSales_"+cDate+"_"+cTime+".pdf";
+        File myFile = new File(myFilePath);
+
+        try {
+            myPdf.writeTo(new FileOutputStream(myFile));
+        }catch (Exception e){
+            String filePath = Environment.getExternalStorageDirectory().getPath().toString();
+            Log.i("External Storage Path", filePath);
+            Toast.makeText(GeneratePdfReport.this, "Report Generation Unsuccessful", Toast.LENGTH_SHORT).show();
+
+        }
+
+        myPdf.close();
 
     }
 }
