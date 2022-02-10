@@ -1,40 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:gravity="center"
-    android:orientation="vertical">
-
-    <EditText
-        android:id="@+id/txt_login_user"
-        android:layout_width="266dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/button2"
-        android:padding="15dp"
-        android:hint="@string/log_user_hint"></EditText>
-
-    <EditText
-        android:id="@+id/txt_login_pass"
-        android:layout_width="266dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/button2"
-        android:padding="15dp"
-        android:hint="@string/log_pass_hint"
-        ></EditText>
+    android:background="#b2e1fd"
+    android:backgroundTint="#b2e1fd"
+    tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btn_login"
-        android:layout_width="147dp"
-        android:layout_height="50dp"
-        android:background="@drawable/button2"
-        android:backgroundTint="@color/gray"
+        android:id="@+id/mainlogin"
+        android:layout_width="217dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#072f5f"
+        android:text="Login"
         android:textColor="@color/white"
-        android:textSize="20dp"
-        android:text="@string/log_btn">
-        </Button>
-</LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainpassword" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="173dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="257dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="152dp"
+        android:gravity="center"
+        android:text="Dragon M Inventory System"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/mainusername"
+        android:layout_width="266dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:hint="Enter Username"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+    <EditText
+        android:id="@+id/mainpassword"
+        android:layout_width="264dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="17dp"
+        android:ems="10"
+        android:hint="Enter Password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainusername" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="122dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="Login as :"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="19dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="125dp"
+        android:background="@drawable/img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+    </ImageView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
