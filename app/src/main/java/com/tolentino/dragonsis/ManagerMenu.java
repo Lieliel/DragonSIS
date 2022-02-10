@@ -23,7 +23,7 @@ public class ManagerMenu extends AppCompatActivity {
         btn_useracc = findViewById(R.id.btn_useracc);
         btn_inventory = findViewById(R.id.btn_inventory);
         btn_products = findViewById(R.id.btn_products);
-        btn_pdf = findViewById(R.id.btn_products);
+        btn_pdf = findViewById(R.id.btn_pdf);
         btn_logout = findViewById(R.id.btn_logout);
 
         btn_useracc.setOnClickListener(new View.OnClickListener() {
