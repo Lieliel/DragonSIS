@@ -10,22 +10,31 @@
 
     <EditText
         android:id="@+id/txt_login_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/log_user_hint"
-        ></EditText>
+        android:layout_width="266dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/button2"
+        android:padding="15dp"
+        android:hint="@string/log_user_hint"></EditText>
 
     <EditText
         android:id="@+id/txt_login_pass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="266dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/button2"
+        android:padding="15dp"
         android:hint="@string/log_pass_hint"
         ></EditText>
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/log_btn"
-        ></Button>
+        android:layout_width="147dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button2"
+        android:backgroundTint="@color/gray"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:text="@string/log_btn">
+        </Button>
 </LinearLayout>

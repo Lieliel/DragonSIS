@@ -8,31 +8,49 @@
     android:gravity="center"
     android:orientation="vertical">
 
+
     <Button
         android:id="@+id/btn_useracc"
-        android:layout_width="wrap_content"
+        android:layout_width="202dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/button"
         android:text="@string/menu_useracc_btn"
-        ></Button>
+        android:textColor="@color/white"></Button>
 
     <Button
         android:id="@+id/btn_inventory"
-        android:layout_width="wrap_content"
+        android:layout_width="205dp"
+        android:layout_marginBottom="25dp"
         android:layout_height="wrap_content"
-        android:text="@string/menu_inventory_btn"
-        ></Button>
+        android:textColor="@color/white"
+        android:background="@drawable/button"
+        android:text="@string/menu_inventory_btn"></Button>
 
     <Button
         android:id="@+id/btn_products"
-        android:layout_width="wrap_content"
+        android:layout_width="206dp"
+        android:layout_marginBottom="25dp"
         android:layout_height="wrap_content"
-        android:text="@string/menu_products_btn"
-        ></Button>
+        android:textColor="@color/white"
+        android:background="@drawable/button"
+        android:text="@string/menu_products_btn"></Button>
+
+    <Button
+        android:id="@+id/btn_pdf"
+        android:layout_width="204dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/button"
+        android:text="@string/menu_pdf_btn"
+        android:textColor="@color/white"></Button>
 
     <Button
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:background="@drawable/button"
         android:text="@string/menu_logout_btn"
         ></Button>
 
