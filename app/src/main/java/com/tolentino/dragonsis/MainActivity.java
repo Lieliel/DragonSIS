@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         a1=(EditText)findViewById(R.id.mainusername);
         a2=(EditText)findViewById(R.id.mainpassword);
 
+        DbManager db = new DbManager(MainActivity.this);
+
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,numberArray);
         spinner.setAdapter(adapter);
