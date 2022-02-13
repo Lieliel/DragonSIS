@@ -16,12 +16,16 @@ public class DbManager extends SQLiteOpenHelper {
 
     //Accounts
     private static final String ACC_TABLE_NAME = "accounts_table";
+    //dagdagan ng ID
     private static final String ACC_COL1 = "username";
     private static final String ACC_COL2 = "password";
     private static final String ACC_COL3 = "usertype";
 
     //Products
-    //insert here...
+    private static final String PROD_TABLE_NAME = "products_table";
+    private static final String PROD_COL1 = "prod_ID";
+    private static final String PROD_COL2 = "prod_name";
+    private static final String PROD_COL3 = "prod_crit_num";
 
     //Inventory
     //insert here...
@@ -46,7 +50,11 @@ public class DbManager extends SQLiteOpenHelper {
         db.execSQL(create_Acc_Table);
 
         //create_Prod_Table
-        //insert here...
+        String create_Prod_Table = "CREATE TABLE " + PROD_TABLE_NAME + "("
+                + PROD_COL1 + " TEXT PRIMARY KEY,"
+                + PROD_COL2 + " TEXT,"
+                + PROD_COL3 + " TEXT)";
+        db.execSQL(create_Prod_Table);
 
         //create_Inv_Table
         //insert here...
@@ -75,7 +83,22 @@ public class DbManager extends SQLiteOpenHelper {
         cValues.put(ACC_COL3, usertype);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(ACC_TABLE_NAME, null, cValues);
-        Log.i("ACCOUNST TABLE:", "New User Added");
+        Log.i("ACCOUNT TABLE:", "New User Added");
+        db.close();
+    }
+
+    // Adding New Product Details
+    void insertProduct(String prod_id, String prod_name, String prod_crit_num) {
+        //Get the Data Repository in write mode
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Create a new map of values, where column names are the keys
+        ContentValues cValues = new ContentValues();
+        cValues.put(PROD_COL1, prod_id);
+        cValues.put(PROD_COL2, prod_name);
+        cValues.put(PROD_COL3, prod_crit_num);
+        // Insert the new row, returning the primary key value of the new row
+        long newRowId = db.insert(PROD_TABLE_NAME, null, cValues);
+        Log.i(" TABLE:", "New Product Added");
         db.close();
     }
 
