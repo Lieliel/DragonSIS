@@ -16,10 +16,11 @@ public class DbManager extends SQLiteOpenHelper {
 
     //Accounts
     private static final String ACC_TABLE_NAME = "accounts_table";
-    //dagdagan ng ID
-    private static final String ACC_COL1 = "username";
-    private static final String ACC_COL2 = "password";
-    private static final String ACC_COL3 = "usertype";
+    private static final String ACC_COL1 = "user_ID";
+    private static final String ACC_COL2 = "user_password";
+    private static final String ACC_COL3 = "user_name";
+    private static final String ACC_COL4 = "user_email";
+    private static final String ACC_COL5 = "user_type";
 
     //Products
     private static final String PROD_TABLE_NAME = "products_table";
@@ -46,7 +47,9 @@ public class DbManager extends SQLiteOpenHelper {
         String create_Acc_Table = "CREATE TABLE " + ACC_TABLE_NAME + "("
                 + ACC_COL1 + " TEXT PRIMARY KEY,"
                 + ACC_COL2 + " TEXT,"
-                + ACC_COL3 + " TEXT)";
+                + ACC_COL3 + " TEXT,"
+                + ACC_COL4 + " TEXT,"
+                + ACC_COL5 + " TEXT)";
         db.execSQL(create_Acc_Table);
 
         //create_Prod_Table
@@ -73,14 +76,16 @@ public class DbManager extends SQLiteOpenHelper {
     }
 
     // Adding new User Details
-    void insertUser(String username, String password, String usertype) {
+    void insertUser(String user_ID, String user_password, String user_name, String user_email, String user_type) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();
-        cValues.put(ACC_COL1, username);
-        cValues.put(ACC_COL2, password);
-        cValues.put(ACC_COL3, usertype);
+        cValues.put(ACC_COL1, user_ID);
+        cValues.put(ACC_COL2, user_password);
+        cValues.put(ACC_COL3, user_name);
+        cValues.put(ACC_COL4, user_email);
+        cValues.put(ACC_COL5, user_type);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(ACC_TABLE_NAME, null, cValues);
         Log.i("ACCOUNT TABLE:", "New User Added");
@@ -110,9 +115,11 @@ public class DbManager extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
             HashMap<String, String> users = new HashMap<>();
-            users.put("username", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
-            users.put("password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
-            users.put("usertype", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+            users.put("user_ID", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
+            users.put("user_password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
+            users.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
+            users.put("user_email", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
+            users.put("usertype", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL5)));
             userList.add(users);
 
             Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1))
@@ -130,13 +137,17 @@ public class DbManager extends SQLiteOpenHelper {
         Cursor cursor = db.query(ACC_TABLE_NAME, new String[]{ACC_COL1, ACC_COL2, ACC_COL3}, ACC_COL1 + "=?", new String[]{String.valueOf(username)}, null, null, null, null);
         if (cursor.moveToNext()) {
             HashMap<String, String> user = new HashMap<>();
-            user.put("username", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
-            user.put("password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
-            user.put("usertype", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+            user.put("user_ID", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
+            user.put("user_password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
+            user.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+            user.put("user_email", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
+            user.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL5)));
 
             Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL5)));
 
             userList.add(user);
         }
@@ -144,11 +155,12 @@ public class DbManager extends SQLiteOpenHelper {
     }
 
     // Delete User Details
-    public void deleteUser(String username) {
+    public void deleteUser(String user_ID) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(ACC_TABLE_NAME, ACC_COL1 + " = ?", new String[]{String.valueOf(username)});
+        db.delete(ACC_TABLE_NAME, ACC_COL1 + " = ?", new String[]{String.valueOf(user_ID)});
         db.close();
     }
+
 
     //check if User record exists
     public boolean checkUserValues(String fieldValue) {
