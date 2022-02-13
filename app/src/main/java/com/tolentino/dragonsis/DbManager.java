@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class DbManager extends SQLiteOpenHelper {
 
     private static final String TAG = "DbManager";
@@ -61,76 +64,81 @@ public class DbManager extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addData(String item) {
+    // Adding new User Details
+    void insertUser(String username, String password, String usertype) {
+        //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ACC_COL3, item);
-
-        Log.d(TAG, "addData: Adding " + item + " to " + ACC_TABLE_NAME);
-
-        long result = db.insert(ACC_TABLE_NAME, null, contentValues);
-
-        //if date as inserted incorrectly it will return -1
-        if (result == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        //Create a new map of values, where column names are the keys
+        ContentValues cValues = new ContentValues();
+        cValues.put(ACC_COL1, username);
+        cValues.put(ACC_COL2, password);
+        cValues.put(ACC_COL3, usertype);
+        // Insert the new row, returning the primary key value of the new row
+        long newRowId = db.insert(ACC_TABLE_NAME, null, cValues);
+        Log.i("ACCOUNST TABLE:", "New User Added");
+        db.close();
     }
 
-    /**
-     * Returns all the data from database
-     * @return
-     */
-    public Cursor getData(){
+    // Get All User Details
+    public ArrayList<HashMap<String, String>> getUsers() {
         SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> userList = new ArrayList<>();
         String query = "SELECT * FROM " + ACC_TABLE_NAME;
-        Cursor data = db.rawQuery(query, null);
-        return data;
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            HashMap<String, String> users = new HashMap<>();
+            users.put("username", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
+            users.put("password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
+            users.put("usertype", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+            userList.add(users);
+
+            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+        }
+        return userList;
     }
 
-    /**
-     * Returns only the ID that matches the name passed in
-     * @param name
-     * @return
-     */
-    public Cursor getItemID(String name){
+    // Get User Details based on Username
+    public ArrayList<HashMap<String, String>> getUserByUsername(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + ACC_COL1 + " FROM " + ACC_TABLE_NAME +
-                " WHERE " + ACC_COL2 + " = '" + name + "'";
-        Cursor data = db.rawQuery(query, null);
-        return data;
+        ArrayList<HashMap<String, String>> userList = new ArrayList<>();
+        String query = "SELECT * FROM " + ACC_TABLE_NAME;
+        Cursor cursor = db.query(ACC_TABLE_NAME, new String[]{ACC_COL1, ACC_COL2, ACC_COL3}, ACC_COL1 + "=?", new String[]{String.valueOf(username)}, null, null, null, null);
+        if (cursor.moveToNext()) {
+            HashMap<String, String> user = new HashMap<>();
+            user.put("username", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
+            user.put("password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
+            user.put("usertype", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+
+            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+
+            userList.add(user);
+        }
+        return userList;
     }
 
-    /**
-     * Updates the name field
-     * @param newName
-     * @param id
-     * @param oldName
-     */
-    public void updateName(String newName, int id, String oldName){
+    // Delete User Details
+    public void deleteUser(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE " + ACC_TABLE_NAME + " SET " + ACC_COL2 +
-                " = '" + newName + "' WHERE " + ACC_COL1 + " = '" + id + "'" +
-                " AND " + ACC_COL2 + " = '" + oldName + "'";
-        Log.d(TAG, "updateName: query: " + query);
-        Log.d(TAG, "updateName: Setting name to " + newName);
-        db.execSQL(query);
+        db.delete(ACC_TABLE_NAME, ACC_COL1 + " = ?", new String[]{String.valueOf(username)});
+        db.close();
     }
 
-    /**
-     * Delete from database
-     * @param id
-     * @param name
-     */
-    public void deleteName(int id, String name){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "DELETE FROM " + ACC_TABLE_NAME + " WHERE "
-                + ACC_COL1 + " = '" + id + "'" +
-                " AND " + ACC_COL2 + " = '" + name + "'";
-        Log.d(TAG, "deleteName: query: " + query);
-        Log.d(TAG, "deleteName: Deleting " + name + " from database.");
-        db.execSQL(query);
+    //check if User record exists
+    public boolean checkUserValues(String fieldValue) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = { ACC_COL1 };
+        String selection = ACC_COL1 + " =?";
+        String[] selectionArgs = { fieldValue };
+        String limit = "1";
+
+        Cursor cursor = db.query(ACC_TABLE_NAME, columns, selection, selectionArgs, null, null, null, limit);
+        boolean exists = (cursor.getCount() > 0);
+        cursor.close();
+        return exists;
     }
 
 }
