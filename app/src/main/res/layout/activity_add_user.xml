@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddUser">
+
+    <ImageView
+        android:id="@+id/img_back_add_user"
+        android:src="@drawable/back_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:clickable="true"
+
+        android:layout_alignParentLeft="true"
+        ></ImageView>
+
+    <EditText
+        android:id="@+id/edit_add_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Input new Username"
+
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"></EditText>
+
+    <EditText
+        android:id="@+id/edit_add_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Input new Password"
+
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/edit_add_username"></EditText>
+
+    <EditText
+        android:id="@+id/edit_add_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Input new Password"
+
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/edit_add_password"></EditText>
+
+    <Spinner
+        android:id="@+id/spin_add_usertype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_add_email"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:hint="Input new Usertype"></Spinner>
+
+    <Button
+        android:id="@+id/btn_user_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add User"
+
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/spin_add_usertype"
+        android:layout_marginTop="50dp"
+        ></Button>
+</RelativeLayout>
