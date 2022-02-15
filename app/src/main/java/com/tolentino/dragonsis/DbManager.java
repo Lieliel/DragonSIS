@@ -45,16 +45,16 @@ public class DbManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String create_Acc_Table = "CREATE TABLE " + ACC_TABLE_NAME + "("
-                + ACC_COL1 + " TEXT PRIMARY KEY,"
+                + ACC_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + ACC_COL2 + " TEXT,"
-                + ACC_COL3 + " TEXT,"
+                + ACC_COL3 + " TEXT UNIQUE,"
                 + ACC_COL4 + " TEXT,"
                 + ACC_COL5 + " TEXT)";
         db.execSQL(create_Acc_Table);
 
         //create_Prod_Table
         String create_Prod_Table = "CREATE TABLE " + PROD_TABLE_NAME + "("
-                + PROD_COL1 + " TEXT PRIMARY KEY,"
+                + PROD_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + PROD_COL2 + " TEXT,"
                 + PROD_COL3 + " TEXT)";
         db.execSQL(create_Prod_Table);
@@ -76,35 +76,50 @@ public class DbManager extends SQLiteOpenHelper {
     }
 
     // Adding new User Details
-    void insertUser(String user_ID, String user_password, String user_name, String user_email, String user_type) {
+    void insertUser(String user_password, String user_name, String user_email, String user_type) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();
-        cValues.put(ACC_COL1, user_ID);
         cValues.put(ACC_COL2, user_password);
         cValues.put(ACC_COL3, user_name);
         cValues.put(ACC_COL4, user_email);
         cValues.put(ACC_COL5, user_type);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(ACC_TABLE_NAME, null, cValues);
-        Log.i("ACCOUNT TABLE:", "New User Added");
+
+        if(newRowId == 1){
+            Log.i("ACCOUNT TABLE:", "User Added Correctly");
+        }else{
+            Log.i("ACCOUNT TABLE:", "User not Added Correctly");
+        }
+
         db.close();
     }
 
     // Adding New Product Details
-    void insertProduct(String prod_id, String prod_name, String prod_crit_num) {
+    void insertProduct(String prod_name, String prod_crit_num) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();
-        cValues.put(PROD_COL1, prod_id);
         cValues.put(PROD_COL2, prod_name);
         cValues.put(PROD_COL3, prod_crit_num);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(PROD_TABLE_NAME, null, cValues);
-        Log.i(" TABLE:", "New Product Added");
+
+        if(newRowId == 1){
+            Log.i("PRODUCT TABLE:", "Product Added Correctly");
+        }else{
+            Log.i("PRODUCT TABLE:", "Product not Added Correctly");
+        }
+
         db.close();
+    }
+
+    // Update User Details
+    void updateUser(){
+        //tsaka na lagyan
     }
 
     // Get All User Details
@@ -117,14 +132,16 @@ public class DbManager extends SQLiteOpenHelper {
             HashMap<String, String> users = new HashMap<>();
             users.put("user_ID", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
             users.put("user_password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
-            users.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
+            users.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
             users.put("user_email", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
-            users.put("usertype", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL5)));
+            users.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL5)));
             userList.add(users);
 
             Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL5)));
         }
         return userList;
     }
@@ -134,7 +151,7 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> userList = new ArrayList<>();
         String query = "SELECT * FROM " + ACC_TABLE_NAME;
-        Cursor cursor = db.query(ACC_TABLE_NAME, new String[]{ACC_COL1, ACC_COL2, ACC_COL3}, ACC_COL1 + "=?", new String[]{String.valueOf(username)}, null, null, null, null);
+        Cursor cursor = db.query(ACC_TABLE_NAME, new String[]{ACC_COL1, ACC_COL2, ACC_COL3, ACC_COL4, ACC_COL5}, ACC_COL3 + "=?", new String[]{String.valueOf(username)}, null, null, null, null);
         if (cursor.moveToNext()) {
             HashMap<String, String> user = new HashMap<>();
             user.put("user_ID", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
@@ -155,9 +172,9 @@ public class DbManager extends SQLiteOpenHelper {
     }
 
     // Delete User Details
-    public void deleteUser(String user_ID) {
+    public void deleteUser(String user_name) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(ACC_TABLE_NAME, ACC_COL1 + " = ?", new String[]{String.valueOf(user_ID)});
+        db.delete(ACC_TABLE_NAME, ACC_COL3 + " = ?", new String[]{String.valueOf(user_name)});
         db.close();
     }
 

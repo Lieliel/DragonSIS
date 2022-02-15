@@ -38,4 +38,30 @@
         android:layout_marginTop="30sp"
         ></ImageView>
 
+    <TextView
+        android:id="@+id/txt_userlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="User list"
+        android:layout_marginTop="20dp"
+
+        android:layout_below="@+id/img_add_user"></TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+
+        android:layout_below="@+id/txt_userlist">
+
+        <ListView
+            android:id="@+id/list_users"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </ListView>
+
+    </LinearLayout>
+
 </RelativeLayout>

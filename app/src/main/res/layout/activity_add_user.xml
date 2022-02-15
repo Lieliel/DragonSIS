@@ -39,7 +39,7 @@
         android:id="@+id/edit_add_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Input new Password"
+        android:hint="Input new Email"
 
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
@@ -52,8 +52,7 @@
         android:layout_below="@+id/edit_add_email"
 
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:hint="Input new Usertype"></Spinner>
+        android:layout_marginTop="20dp"></Spinner>
 
     <Button
         android:id="@+id/btn_user_submit"
