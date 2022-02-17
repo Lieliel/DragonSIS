@@ -30,13 +30,54 @@ public class DbManager extends SQLiteOpenHelper {
     private static final String PROD_COL3 = "prod_crit_num";
 
     //Inventory
-    //insert here...
-
-    //Sales History
-    //insert here...
+    private static final String INV_TABLE_NAME = "inventory_table";
+    private static final String INV_COL1 = "item_no";
+    private static final String INV_COL2 = "item_name";
+    private static final String INV_COL3 = "item_description";
+    private static final String INV_COL4 = "item_quantity";
+    private static final String INV_COL5 = "item_critical_num";
+    private static final String INV_COL6 = "prod_ID";
+    private static final String INV_COL7 = "user_ID";
+    private static final String INV_COL8 = "category_ID";
 
     //Inventory History
-    //insert here...
+    private static final String INV_HIS_TABLE_NAME = "inventory_history_table";
+    private static final String INV_HIS_COL1 = "history_no";
+    private static final String INV_HIS_COL2 = "item_quantity_change";
+    private static final String INV_HIS_COL3 = "date_updated";
+    private static final String INV_HIS_COL4 = "item_no";
+    private static final String INV_HIS_COL5 = "item_name";
+
+    //Sales History
+    private static final String SALES_TABLE_NAME = "sales_table";
+    private static final String SALES_COL1 = "sales_ID";
+    private static final String SALES_COL2 = "sales_amount";
+    private static final String SALES_COL3 = "items_sold";
+    private static final String SALES_COL4 = "sales_dates";
+    private static final String SALES_COL5 = "sales_time";
+
+    //Category
+    private static final String CAT_TABLE_NAME = "category_table";
+    private static final String CAT_COL1 = "category_ID";
+    private static final String CAT_COL2 = "category_name";
+    private static final String CAT_COL3 = "category_description";
+
+    //Customer
+    private static final String CST_TABLE_NAME = "customer_table";
+    private static final String CST_COL1 = "customer_ID";
+    private static final String CST_COL2 = "customer_name";
+
+    //Purchase Order
+    private static final String PUR_TABLE_NAME = "purchase_table";
+    private static final String PUR_COL1 = "order_ID";
+    private static final String PUR_COL2 = "order_date";
+    private static final String PUR_COL3 = "item_no";
+
+    //Order Product Quantity
+    private static final String QNT_TABLE_NAME = "purchase_table";
+    private static final String QNT_COL1 = "item_no";
+    private static final String QNT_COL2 = "order_quantity";
+
 
 
     public DbManager(Context context) {
@@ -61,13 +102,61 @@ public class DbManager extends SQLiteOpenHelper {
         db.execSQL(create_Prod_Table);
 
         //create_Inv_Table
-        //insert here...
+        String create_Inv_Table = "CREATE TABLE " + INV_TABLE_NAME + "("
+                + INV_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + INV_COL2 + " TEXT,"
+                + INV_COL3 + " TEXT,"
+                + INV_COL4 + " TEXT,"
+                + INV_COL5 + " TEXT,"
+                + INV_COL6 + " TEXT,"
+                + INV_COL7 + " TEXT,"
+                + INV_COL8 + " TEXT)";
+        db.execSQL(create_Inv_Table);
 
         //create_Sales_Table
-        //insert here...
+        String create_Sales_Table = "CREATE TABLE " + SALES_TABLE_NAME + "("
+                + SALES_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + SALES_COL2 + " TEXT,"
+                + SALES_COL3 + " TEXT,"
+                + SALES_COL4 + " TEXT,"
+                + SALES_COL5 + " TEXT)";
+        db.execSQL(create_Sales_Table);
 
         //create_InvHis_Table
-        //insert here...
+        String create_Inv_His_Table = "CREATE TABLE " + INV_HIS_TABLE_NAME + "("
+                + INV_HIS_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + INV_HIS_COL2 + " TEXT,"
+                + INV_HIS_COL3 + " TEXT,"
+                + INV_HIS_COL4 + " TEXT,"
+                + INV_HIS_COL5 + " TEXT)";
+        db.execSQL(create_Inv_His_Table);
+
+        //create_Category_Table
+        String create_Category_Table = "CREATE TABLE " + CAT_TABLE_NAME + "("
+                + CAT_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + CAT_COL2 + " TEXT,"
+                + CAT_COL3 + " TEXT)";
+        db.execSQL(create_Category_Table);
+
+        //create_Customer_Table
+        String create_Cst_Table = "CREATE TABLE " + CST_TABLE_NAME + "("
+                + CST_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + CST_COL2 + " TEXT)";
+        db.execSQL(create_Cst_Table);
+
+        //create_Purchase_Table
+        String create_Purchase_Table = "CREATE TABLE " + PUR_TABLE_NAME + "("
+                + PUR_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + PUR_COL2 + " TEXT,"
+                + PUR_COL3 + " TEXT)";
+        db.execSQL(create_Purchase_Table);
+
+        //create_ProdQnt_Table
+        String create_ProdQnt_Table = "CREATE TABLE " + QNT_TABLE_NAME + "("
+                + QNT_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + QNT_COL2 + " TEXT)";
+        db.execSQL(create_ProdQnt_Table);
+
     }
 
     @Override
