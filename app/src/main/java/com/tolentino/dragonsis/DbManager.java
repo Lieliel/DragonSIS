@@ -3,6 +3,7 @@ package com.tolentino.dragonsis;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -73,6 +74,21 @@ public class DbManager extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + ACC_TABLE_NAME);
         onCreate(db);
+    }
+
+    //user registered check
+    public boolean LoginCheck(String user, String pass) throws SQLException
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor mcursor = db.rawQuery("SELECT * FROM accounts_table WHERE user_name =? and user_password =?", new String[]{user,pass});
+        if (mcursor!=null)
+        {
+            if (mcursor.getCount()>0)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Adding new User Details

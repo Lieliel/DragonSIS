@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinner;
     String[] numberArray = {"Employee","Manager"};
     EditText a1,a2;
+    DbManager db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         spinner = (Spinner)findViewById(R.id.spinner);
         a1=(EditText)findViewById(R.id.mainusername);
         a2=(EditText)findViewById(R.id.mainpassword);
+        db=new DbManager(this);
 
         DbManager db = new DbManager(MainActivity.this);
 
@@ -67,16 +69,18 @@ public class MainActivity extends AppCompatActivity {
     public void employee_login(){
         String user=a1.getText().toString().trim();
         String pass=a2.getText().toString().trim();
-        if(((user.equals("")))){
-            Toast.makeText(this,"Please fill up the Username!!!",Toast.LENGTH_LONG).show();
-        }else if (((pass.equals("")))){
-            Toast.makeText(this,"Please fill up the Password!!!",Toast.LENGTH_LONG).show();
-        }else if(user.equals("employee") && pass.equals("employee123")) {
-            Toast.makeText(this,"Logging in!",Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, EmployeeMenu.class);
-            startActivity(intent);
-        }else {
-            Toast.makeText(this,"Invalid Details!!",Toast.LENGTH_LONG).show();
+        if((!(user.equals("")))&&(!(pass.equals("")))){
+            Boolean ifexisting=db.LoginCheck(user,pass);
+            if(ifexisting){
+                Toast.makeText(this,"Logging in!!",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this, EmployeeMenu.class);
+                intent.putExtra("user_ID",user);
+                startActivity(intent);
+            }else{
+                Toast.makeText(this,"Not registered or Invalid details!!",Toast.LENGTH_LONG).show();
+            }
+        }else{
+            Toast.makeText(this,"All fields are required!!",Toast.LENGTH_LONG).show();
         }
     }
 
