@@ -30,13 +30,21 @@
         android:id="@+id/img_add_user"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/add_img"
-        android:clickable="true"
-
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/img_back_user_accounts"
+        android:layout_alignParentLeft="true"
+
         android:layout_marginTop="30sp"
-        ></ImageView>
+        android:clickable="true"
+        android:src="@drawable/add_img"></ImageView>
+
+    <Spinner
+        android:id="@+id/spin_sort_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/srch_user"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="30dp"></Spinner>
 
     <TextView
         android:id="@+id/txt_userlist"

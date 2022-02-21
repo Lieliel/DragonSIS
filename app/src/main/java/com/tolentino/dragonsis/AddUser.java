@@ -48,23 +48,6 @@ public class AddUser extends AppCompatActivity {
             }
         });
 
-        spin_add_usertype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (spin_add_usertype.getSelectedItem().equals("Employee")){
-                    //if Employee naselect
-                }
-                if (spin_add_usertype.getSelectedItem().equals("Manager")){
-                    //if Manager naselect
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
         btn_user_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +59,8 @@ public class AddUser extends AppCompatActivity {
                 db.insertUser(txt_password,txt_username,txt_email,spin_usertype);
                 Log.i("ACCOUNTS TABLE", "User Inserted: " + txt_username + ", " + txt_password + ", " + txt_email + ", " + spin_usertype);
 
+                Intent i = new Intent(AddUser.this, UserAccounts.class);
+                startActivity(i);
             }
         });
 

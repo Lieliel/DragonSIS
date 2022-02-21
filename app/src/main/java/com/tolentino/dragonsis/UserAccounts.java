@@ -10,6 +10,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ public class UserAccounts extends AppCompatActivity {
     ImageView img_back_user_accounts;
     SearchView srch_user;
     ImageView img_add_user;
+    Spinner spin_sort_user;
     DbManager db;
     ListView list_users;
 
@@ -30,6 +32,7 @@ public class UserAccounts extends AppCompatActivity {
         img_back_user_accounts = findViewById(R.id.img_back_user_accounts);
         srch_user = findViewById(R.id.srch_user);
         img_add_user = findViewById(R.id.img_add_user);
+        spin_sort_user = findViewById(R.id.spin_sort_user);
 
         db = new DbManager(this);
         list_users = findViewById(R.id.list_users);

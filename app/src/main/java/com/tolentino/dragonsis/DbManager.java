@@ -66,14 +66,15 @@ public class DbManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //Create Users Table
         String create_Acc_Table = "CREATE TABLE " + ACC_TABLE_NAME + "("
-                + ACC_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + ACC_COL2 + " TEXT UNIQUE,"
+                + ACC_COL1 + " TEXT PRIMARY KEY,"
                 + ACC_COL2 + " TEXT,"
-                + ACC_COL3 + " TEXT)";
+                + ACC_COL3 + " TEXT,"
+                + ACC_COL4 + " TEXT)";
         db.execSQL(create_Acc_Table);
 
-        //create_Prod_Table
+        //create Products Table
         String create_Prod_Table = "CREATE TABLE " + PROD_TABLE_NAME + "("
                 + PROD_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + PROD_COL2 + " TEXT,"
@@ -142,6 +143,7 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();
+        cValues.put(ACC_COL1, user_name);
         cValues.put(ACC_COL2, user_password);
         cValues.put(ACC_COL3, user_type);
         cValues.put(ACC_COL4, user_email);
@@ -212,7 +214,7 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> userList = new ArrayList<>();
         String query = "SELECT * FROM " + ACC_TABLE_NAME;
-        Cursor cursor = db.query(ACC_TABLE_NAME, new String[]{ACC_COL1, ACC_COL2, ACC_COL3, ACC_COL4}, ACC_COL3 + "=?", new String[]{String.valueOf(username)}, null, null, null, null);
+        Cursor cursor = db.query(ACC_TABLE_NAME, new String[]{ACC_COL1, ACC_COL2, ACC_COL3, ACC_COL4}, ACC_COL1 + "=?", new String[]{String.valueOf(username)}, null, null, null, null);
         if (cursor.moveToNext()) {
             HashMap<String, String> user = new HashMap<>();
             user.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
