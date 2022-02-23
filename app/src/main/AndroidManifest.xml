@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".UpdateAccount"
+            android:exported="true" />
+        <activity
             android:name=".AddUser"
             android:exported="true" />
         <activity

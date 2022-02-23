@@ -145,8 +145,8 @@ public class DbManager extends SQLiteOpenHelper {
         ContentValues cValues = new ContentValues();
         cValues.put(ACC_COL1, user_name);
         cValues.put(ACC_COL2, user_password);
-        cValues.put(ACC_COL3, user_type);
-        cValues.put(ACC_COL4, user_email);
+        cValues.put(ACC_COL3, user_email);
+        cValues.put(ACC_COL4, user_type);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(ACC_TABLE_NAME, null, cValues);
 
@@ -219,8 +219,8 @@ public class DbManager extends SQLiteOpenHelper {
             HashMap<String, String> user = new HashMap<>();
             user.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
             user.put("user_password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
-            user.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
-            user.put("user_email", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
+            user.put("user_email", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+            user.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
 
             Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2))
