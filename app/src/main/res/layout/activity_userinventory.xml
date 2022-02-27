@@ -6,19 +6,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    tools:context=".ViewInventory">
+    tools:context=".UserViewInventory">
 
     <ImageView
-        android:id="@+id/img_back_view_inventory2"
+        android:id="@+id/img_back_user_inventory"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:src="@drawable/back_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <ImageView
+        android:id="@+id/img_back_user_inventory2"
         android:layout_width="59dp"
         android:layout_height="59dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="92dp"
         android:clickable="true"
         android:src="@drawable/ic_baseline_add_circle_outline_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_back_view_inventory"></ImageView>
+        app:layout_constraintTop_toBottomOf="@+id/img_back_user_inventory"></ImageView>
 
     <EditText
         android:id="@+id/editTextTextPersonName3"
@@ -48,18 +60,6 @@
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <ImageView
-        android:id="@+id/img_back_view_inventory"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:clickable="true"
-        android:src="@drawable/back_img"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
 
     <EditText
         android:id="@+id/editTextTextPersonName"

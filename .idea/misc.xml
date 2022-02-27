@@ -30,6 +30,17 @@
         <entry key="..\:/Users/jvinc/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_view_inventory.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/jvinc/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_view_products.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/jvinc/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_view_products2.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/sel/Desktop/DragonSIS/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.21770833333333334" />
+        <entry key="..\:/Users/sel/Desktop/DragonSIS/app/src/main/res/drawable/my_border.xml" value="0.21770833333333334" />
+        <entry key="..\:/Users/sel/Desktop/DragonSIS/app/src/main/res/layout/activity_employee_menu.xml" value="0.1" />
+        <entry key="..\:/Users/sel/Desktop/DragonSIS/app/src/main/res/layout/activity_manager_menu.xml" value="0.12047101449275362" />
+        <entry key="..\:/Users/sel/Desktop/DragonSIS/app/src/main/res/layout/activity_userinventory.xml" value="0.2015625" />
+        <entry key="..\:/Users/sel/Desktop/DragonSIS/app/src/main/res/layout/activity_userinventoryupdates.xml" value="0.2015625" />
+        <entry key="..\:/Users/sel/Desktop/DragonSIS/app/src/main/res/layout/activity_userproducts.xml" value="0.2015625" />
+        <entry key="..\:/Users/sel/Desktop/DragonSIS/app/src/main/res/layout/activity_view_inventory.xml" value="0.12047101449275362" />
+        <entry key="..\:/Users/sel/Desktop/DragonSIS/app/src/main/res/layout/activity_view_inventory_updates.xml" value="0.2015625" />
+        <entry key="..\:/Users/sel/Desktop/DragonSIS/app/src/main/res/layout/activity_view_products2.xml" value="0.12047101449275362" />
+        <entry key="..\:/Users/sel/Desktop/DragonSIS/app/src/main/res/layout/list_row_user.xml" value="0.2015625" />
       </map>
     </option>
   </component>

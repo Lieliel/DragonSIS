@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ViewProducts">
 
-
     <ImageView
-        android:id="@+id/img_back_view_inventory2"
+        android:id="@+id/img_back_user_inventory2"
         android:layout_width="51dp"
         android:layout_height="57dp"
         android:layout_alignParentLeft="true"

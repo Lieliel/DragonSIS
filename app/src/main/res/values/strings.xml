@@ -24,5 +24,18 @@
     <string name="pdf_gen_inv">Generate Inventory Report</string>
     <string name="pdf_gen_full">Generate Full Report</string>
 
+    <!--generate pdf-->
+
+
+    <string name="view_inv">View Inventory</string>
+    <string name="view_inv_updates">View Inventory Updates</string>
+    <string name="view_product_list">View Product List</string>
+    <string name="view_accs">View Accounts</string>
+    <string name="manage_transac">Manage Transactions</string>
+    <string name="gen_rep">Generate Report</string>
+    <string name="logout">Logout</string>
+    <string name="view_invupdates">View Inventory Updates</string>
+    <string name="view_productlist">View Product List</string>
+
 
 </resources>
