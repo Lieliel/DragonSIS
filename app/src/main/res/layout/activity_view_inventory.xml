@@ -9,7 +9,7 @@
     tools:context=".ViewInventory">
 
     <ImageView
-        android:id="@+id/img_back_view_inventory2"
+        android:id="@+id/img_back_view_products"
         android:layout_width="59dp"
         android:layout_height="59dp"
         android:layout_alignParentLeft="true"

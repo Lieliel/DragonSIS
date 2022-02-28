@@ -19,8 +19,8 @@ public class DbManager extends SQLiteOpenHelper {
     private static final String ACC_TABLE_NAME = "accounts_table";
     private static final String ACC_COL1 = "user_name";
     private static final String ACC_COL2 = "user_password";
-    private static final String ACC_COL3 = "user_email";
-    private static final String ACC_COL4 = "user_type";
+    private static final String ACC_COL3 = "user_type";
+    private static final String ACC_COL4 = "user_email";
 
     //Products
     private static final String PROD_TABLE_NAME = "products_table";
@@ -78,7 +78,7 @@ public class DbManager extends SQLiteOpenHelper {
         String create_Prod_Table = "CREATE TABLE " + PROD_TABLE_NAME + "("
                 + PROD_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + PROD_COL2 + " TEXT,"
-                + PROD_COL3 + " TEXT,"
+                + PROD_COL3 + " INTEGER,"
                 + PROD_COL4 + " TEXT,"
                 + PROD_COL5 + " INTEGER,"
                 + PROD_COL6 + " TEXT)";
@@ -145,8 +145,8 @@ public class DbManager extends SQLiteOpenHelper {
         ContentValues cValues = new ContentValues();
         cValues.put(ACC_COL1, user_name);
         cValues.put(ACC_COL2, user_password);
-        cValues.put(ACC_COL3, user_email);
-        cValues.put(ACC_COL4, user_type);
+        cValues.put(ACC_COL3, user_type);
+        cValues.put(ACC_COL4, user_email);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(ACC_TABLE_NAME, null, cValues);
 
@@ -160,7 +160,7 @@ public class DbManager extends SQLiteOpenHelper {
     }
 
     // Adding New Product Details
-    void insertProduct(String prod_name, Integer prod_critical_num, String prod_description, Integer prod_price, String prod_category) {
+    void insertProduct(String prod_name, int prod_critical_num, String prod_description, int prod_price, String prod_category) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
@@ -275,8 +275,8 @@ public class DbManager extends SQLiteOpenHelper {
             HashMap<String, String> users = new HashMap<>();
             users.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
             users.put("user_password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
-            users.put("user_email", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
-            users.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
+            users.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+            users.put("user_email", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
             userList.add(users);
 
             Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1))
@@ -291,18 +291,18 @@ public class DbManager extends SQLiteOpenHelper {
     // Get All Product Details
     public ArrayList<HashMap<String, String>> getProducts() {
         SQLiteDatabase db = this.getWritableDatabase();
-        ArrayList<HashMap<String, String>> userList = new ArrayList<>();
+        ArrayList<HashMap<String, String>> productList = new ArrayList<>();
         String query = "SELECT * FROM " + PROD_TABLE_NAME;
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
-            HashMap<String, String> users = new HashMap<>();
-            users.put("prod_ID", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1)));
-            users.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2)));
-            users.put("prod_critical_num", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3)));
-            users.put("prod_description", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
-            users.put("prod_price", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5)));
-            users.put("prod_category", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
-            userList.add(users);
+            HashMap<String, String> products = new HashMap<>();
+            products.put("prod_ID", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1)));
+            products.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2)));
+            products.put("prod_critical_num", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3)));
+            products.put("prod_description", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4)));
+            products.put("prod_price", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5)));
+            products.put("prod_category", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
+            productList.add(products);
 
             Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2))
@@ -311,7 +311,7 @@ public class DbManager extends SQLiteOpenHelper {
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
         }
-        return userList;
+        return productList;
     }
 
 
@@ -325,8 +325,8 @@ public class DbManager extends SQLiteOpenHelper {
             HashMap<String, String> user = new HashMap<>();
             user.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
             user.put("user_password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
-            user.put("user_email", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
-            user.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
+            user.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+            user.put("user_email", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
 
             Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2))

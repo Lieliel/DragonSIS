@@ -21,10 +21,10 @@
         android:id="@+id/srch_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:queryHint="Search User"
-
         android:layout_alignParentRight="true"
-        ></SearchView>
+        android:background="@drawable/my_border"
+
+        android:queryHint="Search User"></SearchView>
 
     <ImageView
         android:id="@+id/img_add_user"

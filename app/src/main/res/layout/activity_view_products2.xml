@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/img_back_view_inventory2"
+        android:id="@+id/img_back_view_products"
         android:layout_width="51dp"
         android:layout_height="57dp"
         android:layout_alignParentLeft="true"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"></ImageView>
 
     <ImageView
-        android:id="@+id/img_back_view_inventory3"
+        android:id="@+id/img_add_product"
         android:layout_width="63dp"
         android:layout_height="66dp"
         android:layout_alignParentLeft="true"
@@ -31,8 +31,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></ImageView>
 
-    <EditText
-        android:id="@+id/editTextTextPersonName4"
+    <SearchView
+        android:id="@+id/srch_product"
         android:layout_width="215dp"
         android:layout_height="58dp"
         android:layout_marginTop="24dp"
@@ -46,7 +46,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/txt_view_prod_label"
         android:layout_width="80dp"
         android:layout_height="45dp"
         android:layout_marginStart="20dp"
@@ -57,11 +57,11 @@
         android:text="View By"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        app:layout_constraintStart_toEndOf="@+id/img_back_view_inventory3"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+        app:layout_constraintStart_toEndOf="@+id/img_add_product"
+        app:layout_constraintTop_toBottomOf="@+id/srch_product" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/txt_sort_products"
         android:layout_width="80dp"
         android:layout_height="45dp"
         android:layout_marginStart="20dp"
@@ -72,11 +72,12 @@
         android:text="Sort By"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        app:layout_constraintStart_toEndOf="@+id/img_back_view_inventory3"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintStart_toEndOf="@+id/img_add_product"
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_prod_label" />
 
+    <!--Spinner dapat toh-->
     <EditText
-        android:id="@+id/editTextTextPersonName5"
+        android:id="@+id/edit_prod_category"
         android:layout_width="193dp"
         android:layout_height="45dp"
         android:layout_marginTop="50dp"
@@ -87,8 +88,9 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+        app:layout_constraintTop_toBottomOf="@+id/srch_product" />
 
+    <!--Spinner din dapat toh-->
     <EditText
         android:id="@+id/editTextTextPersonName6"
         android:layout_width="192dp"
@@ -101,13 +103,13 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_prod_category" />
 
     <ListView
-        android:layout_width="422dp"
+        android:id="@+id/list_products"
+        android:layout_width="match_parent"
         android:layout_height="497dp"
         android:layout_marginTop="20dp"
-        android:background="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />

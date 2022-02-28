@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".AddProduct"
+            android:exported="true" />
+        <activity
             android:name=".UpdateAccount"
             android:exported="true" />
         <activity
@@ -35,6 +38,18 @@
             android:exported="true" />
         <activity
             android:name=".ManagerMenu"
+            android:exported="true" />
+        <activity
+            android:name=".UserProducts"
+            android:exported="true" />
+        <activity
+            android:name=".UserInventoryUpdates"
+            android:exported="true" />
+        <activity
+            android:name=".UserViewInventory"
+            android:exported="true" />
+        <activity
+            android:name=".ViewInventoryUpdates"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
