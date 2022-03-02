@@ -19,7 +19,6 @@ import java.util.HashMap;
 public class UserAccounts extends AppCompatActivity {
 
     ImageView img_back_user_accounts;
-    SearchView srch_user;
     ImageView img_add_user;
     DbManager db;
     ListView list_users;
@@ -30,7 +29,6 @@ public class UserAccounts extends AppCompatActivity {
         setContentView(R.layout.activity_user_accounts);
 
         img_back_user_accounts = findViewById(R.id.img_back_user_accounts);
-        srch_user = findViewById(R.id.srch_user);
         img_add_user = findViewById(R.id.img_add_user);
 
         db = new DbManager(this);
@@ -55,6 +53,7 @@ public class UserAccounts extends AppCompatActivity {
             }
         });
 
+        //Initiate ListView
         list_users = findViewById(R.id.list_users);
         ArrayList<HashMap<String, String>> userList = db.getUsers();
         ListAdapter listAdapter = new SimpleAdapter(UserAccounts.this, userList, R.layout.list_row_user, new String[]{"user_name","user_password","user_type","user_email"}, new int[]{R.id.row_username, R.id.row_password, R.id.row_usertype, R.id.row_email});
@@ -81,4 +80,5 @@ public class UserAccounts extends AppCompatActivity {
             }
         });
     }
+
 }

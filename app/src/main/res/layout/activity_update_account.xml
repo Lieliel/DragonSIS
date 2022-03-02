@@ -55,12 +55,12 @@
         android:text="User Type:"
         ></TextView>
 
-    <TextView
-        android:id="@+id/txt_upd_acc_usertype"
+    <Spinner
+        android:id="@+id/spin_upd_acc_usertype"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Sample User Type"
-        ></TextView>
+        ></Spinner>
 
     <Button
         android:id="@+id/btn_upd_acc_update"

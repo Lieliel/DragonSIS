@@ -17,15 +17,6 @@
         android:layout_alignParentLeft="true"
         ></ImageView>
 
-    <SearchView
-        android:id="@+id/srch_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/my_border"
-
-        android:queryHint="Search User"></SearchView>
-
     <ImageView
         android:id="@+id/img_add_user"
         android:layout_width="50dp"
@@ -36,15 +27,6 @@
         android:layout_marginTop="30sp"
         android:clickable="true"
         android:src="@drawable/add_img"></ImageView>
-
-    <Spinner
-        android:id="@+id/spin_sort_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_below="@+id/srch_user"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="30dp"></Spinner>
 
     <TextView
         android:id="@+id/txt_userlist"

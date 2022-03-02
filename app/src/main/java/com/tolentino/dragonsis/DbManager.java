@@ -260,8 +260,23 @@ public class DbManager extends SQLiteOpenHelper {
 
 
     // Update User Details
-    void updateUser(){
-        //tsaka na lagyan
+    void updateUser(String username, String password, String email, String usertype){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ACC_COL2, password);
+        values.put(ACC_COL3, usertype);
+        values.put(ACC_COL4, email);
+
+        //Cursor cursor = db.rawQuery("Select * from " + ACC_TABLE_NAME + " where " + ACC_COL1 + "= ?",new String[]{username});
+
+        long newRowId = db.update(ACC_TABLE_NAME, values, ACC_COL1 + "=?", new String[]{username});
+
+        if(newRowId == 1){
+            Log.i("SALES TABLE:", "User Updated Correctly");
+        }else{
+            Log.i("SALES TABLE:", "User not Updated Correctly");
+        }
+
     }
 
     // Get All User Details
