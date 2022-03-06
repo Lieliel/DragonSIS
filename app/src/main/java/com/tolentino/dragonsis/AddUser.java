@@ -19,6 +19,7 @@ public class AddUser extends AppCompatActivity {
     EditText edit_add_username;
     EditText edit_add_password;
     EditText edit_add_email;
+    EditText edit_confirm_password;
     Spinner spin_add_usertype;
     String[] userTypeArray = {"Employee", "Manager"};
     Button btn_user_submit;
@@ -33,6 +34,7 @@ public class AddUser extends AppCompatActivity {
         spin_add_usertype = findViewById(R.id.spin_add_usertype);
         edit_add_username = findViewById(R.id.edit_add_username);
         edit_add_password = findViewById(R.id.edit_add_password);
+        //findviewbyID ng confirm pass
         edit_add_email = findViewById(R.id.edit_add_email);
         btn_user_submit = findViewById(R.id.btn_user_submit);
         db = new DbManager(this);
@@ -54,13 +56,18 @@ public class AddUser extends AppCompatActivity {
                 String txt_username = edit_add_username.getText().toString();
                 String txt_password = edit_add_password.getText().toString();
                 String txt_email = edit_add_email.getText().toString();
+                //String txt_confirm_password = gettext.tostring;
                 String spin_usertype = spin_add_usertype.getSelectedItem().toString();
+
+                //if statement(parehas yung txt pass tsaka txt confirm pass){
 
                 db.insertUser(txt_password,txt_username,txt_email,spin_usertype);
                 Log.i("ACCOUNTS TABLE", "User Inserted: " + txt_username + ", " + txt_password + ", " + txt_email + ", " + spin_usertype);
 
                 Intent i = new Intent(AddUser.this, UserAccounts.class);
                 startActivity(i);
+            //}else{Toast error/incorrect password}
+
             }
         });
 
