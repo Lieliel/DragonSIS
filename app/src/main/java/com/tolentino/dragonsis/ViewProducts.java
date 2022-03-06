@@ -21,6 +21,7 @@ public class ViewProducts extends AppCompatActivity {
     ImageView img_add_product;
     DbManager db;
     ListView list_products;
+    ListAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class ViewProducts extends AppCompatActivity {
 
         db = new DbManager(this);
 
+        //Back to Manager Menu
         img_back_view_products.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,8 +56,21 @@ public class ViewProducts extends AppCompatActivity {
         //Adapt Products List
         list_products = findViewById(R.id.list_products);
         ArrayList<HashMap<String, String>> productlist = db.getProducts();
-        ListAdapter listAdapter = new SimpleAdapter(ViewProducts.this, productlist, R.layout.list_row_product, new String[]{"prod_name","prod_description","prod_price","prod_category"}, new int[]{R.id.row_product_name, R.id.row_product_description, R.id.row_product_price, R.id.row_product_category});
+        listAdapter = new SimpleAdapter(ViewProducts.this, productlist, R.layout.list_row_product, new String[]{"prod_name","prod_description","prod_price","prod_category"}, new int[]{R.id.row_product_name, R.id.row_product_description, R.id.row_product_price, R.id.row_product_category});
         list_products.setAdapter(listAdapter);
 
+        //Search Product Function
+        srch_product.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                ((SimpleAdapter)ViewProducts.this.listAdapter).getFilter().filter(s);
+                return false;
+            }
+        });
     }
 }

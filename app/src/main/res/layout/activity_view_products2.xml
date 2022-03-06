@@ -33,14 +33,14 @@
 
     <SearchView
         android:id="@+id/srch_product"
-        android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:maxWidth="215dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="28dp"
-        android:background="@drawable/my_border"
         android:ems="10"
-        android:hint="Search Products"
-        android:inputType="textPersonName"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search Products"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_view_prod_label" />
 
     <!--Spinner dapat toh-->
-    <EditText
+    <Spinner
         android:id="@+id/edit_prod_category"
         android:layout_width="193dp"
         android:layout_height="45dp"
@@ -84,14 +84,12 @@
         android:layout_marginEnd="18dp"
         android:background="@drawable/my_border"
         android:ems="10"
-        android:hint="Category"
-        android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/srch_product" />
 
     <!--Spinner din dapat toh-->
-    <EditText
+    <Spinner
         android:id="@+id/editTextTextPersonName6"
         android:layout_width="192dp"
         android:layout_height="45dp"
@@ -99,8 +97,6 @@
         android:layout_marginEnd="18dp"
         android:background="@drawable/my_border"
         android:ems="10"
-        android:hint="Alphabetical A-Z"
-        android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_prod_category" />
