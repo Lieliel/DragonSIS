@@ -20,7 +20,6 @@ public class DbManager extends SQLiteOpenHelper {
     private static final String ACC_COL1 = "user_name";
     private static final String ACC_COL2 = "user_password";
     private static final String ACC_COL3 = "user_type";
-    private static final String ACC_COL4 = "user_email";
 
     //Products
     private static final String PROD_TABLE_NAME = "products_table";
@@ -70,8 +69,7 @@ public class DbManager extends SQLiteOpenHelper {
         String create_Acc_Table = "CREATE TABLE " + ACC_TABLE_NAME + "("
                 + ACC_COL1 + " TEXT PRIMARY KEY,"
                 + ACC_COL2 + " TEXT,"
-                + ACC_COL3 + " TEXT,"
-                + ACC_COL4 + " TEXT)";
+                + ACC_COL3 + " TEXT)";
         db.execSQL(create_Acc_Table);
 
         //create Products Table
@@ -137,6 +135,7 @@ public class DbManager extends SQLiteOpenHelper {
         return false;
     }
 
+
     // Adding new User Details
     void insertUser(String user_password, String user_name, String user_email, String user_type) {
         //Get the Data Repository in write mode
@@ -146,7 +145,6 @@ public class DbManager extends SQLiteOpenHelper {
         cValues.put(ACC_COL1, user_name);
         cValues.put(ACC_COL2, user_password);
         cValues.put(ACC_COL3, user_type);
-        cValues.put(ACC_COL4, user_email);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(ACC_TABLE_NAME, null, cValues);
 
@@ -158,6 +156,80 @@ public class DbManager extends SQLiteOpenHelper {
 
         db.close();
     }
+
+
+    // Update User Details
+    void updateUser(String username, String password, String usertype){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ACC_COL2, password);
+        values.put(ACC_COL3, usertype);
+
+        //Cursor cursor = db.rawQuery("Select * from " + ACC_TABLE_NAME + " where " + ACC_COL1 + "= ?",new String[]{username});
+
+        long newRowId = db.update(ACC_TABLE_NAME, values, ACC_COL1 + "=?", new String[]{username});
+
+        if(newRowId == 1){
+            Log.i("SALES TABLE:", "User Updated Correctly");
+        }else{
+            Log.i("SALES TABLE:", "User not Updated Correctly");
+        }
+
+    }
+
+
+    // Get All User Details
+    public ArrayList<HashMap<String, String>> getUsers() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> userList = new ArrayList<>();
+        String query = "SELECT * FROM " + ACC_TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            HashMap<String, String> users = new HashMap<>();
+            users.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
+            users.put("user_password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
+            users.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+            userList.add(users);
+
+            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+        }
+        return userList;
+    }
+
+
+    // Get User Details based on Username
+    public ArrayList<HashMap<String, String>> getUserByUsername(String username) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> userList = new ArrayList<>();
+        String query = "SELECT * FROM " + ACC_TABLE_NAME;
+        Cursor cursor = db.query(ACC_TABLE_NAME, new String[]{ACC_COL1, ACC_COL2, ACC_COL3}, ACC_COL1 + "=?", new String[]{String.valueOf(username)}, null, null, null, null);
+        if (cursor.moveToNext()) {
+            HashMap<String, String> user = new HashMap<>();
+            user.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
+            user.put("user_password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
+            user.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+
+            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+
+            userList.add(user);
+        }
+        return userList;
+    }
+
+
+    // Delete User Details
+    public void deleteUser(String user_name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(ACC_TABLE_NAME, ACC_COL1 + " = ?", new String[]{String.valueOf(user_name)});
+        db.close();
+    }
+
+
+
 
     // Adding New Product Details
     void insertProduct(String prod_name, int prod_critical_num, String prod_description, int prod_price, String prod_category) {
@@ -182,124 +254,6 @@ public class DbManager extends SQLiteOpenHelper {
         db.close();
     }
 
-
-    // Adding new Inventory
-    void insertUser(Integer inventory_ID, String inventory_date, Integer inventory_quantity, Integer inventory_quantity_change, String inventory_remark, String inventory_date_updated, String prod_name) {
-        //Get the Data Repository in write mode
-        SQLiteDatabase db = this.getWritableDatabase();
-        //Create a new map of values, where column names are the keys
-        ContentValues cValues = new ContentValues();
-        cValues.put(INV_COL1, inventory_ID);
-        cValues.put(INV_COL2, inventory_date);
-        cValues.put(INV_COL3, inventory_quantity);
-        cValues.put(INV_COL4, inventory_quantity_change);
-        cValues.put(INV_COL5, inventory_remark);
-        cValues.put(INV_COL6, inventory_date_updated);
-        cValues.put(INV_COL7, prod_name);
-        // Insert the new row, returning the primary key value of the new row
-        long newRowId = db.insert(INV_TABLE_NAME, null, cValues);
-
-        if(newRowId == 1){
-            Log.i("INVENTORY TABLE:", "Inventory Added Correctly");
-        }else{
-            Log.i("INVENTORY TABLE:", "Inventory not Added Correctly");
-        }
-
-        db.close();
-    }
-
-
-    // Adding new Inventory History
-    void insertUser(Integer update_ID, String inventory_update_date, String inventory_action, Integer inventory_quantity_change, Integer inventory_ID, String inventory_name) {
-        //Get the Data Repository in write mode
-        SQLiteDatabase db = this.getWritableDatabase();
-        //Create a new map of values, where column names are the keys
-        ContentValues cValues = new ContentValues();
-        cValues.put(INV_HIS_COL1, inventory_ID);
-        cValues.put(INV_HIS_COL2, inventory_update_date);
-        cValues.put(INV_HIS_COL3, inventory_action);
-        cValues.put(INV_HIS_COL4, inventory_quantity_change);
-        cValues.put(INV_HIS_COL5, inventory_ID);
-        cValues.put(INV_HIS_COL6, inventory_name);
-        // Insert the new row, returning the primary key value of the new row
-        long newRowId = db.insert(INV_HIS_TABLE_NAME, null, cValues);
-
-        if(newRowId == 1){
-            Log.i("INVENTORYHISTORY TABLE:", "Inventory History Added Correctly");
-        }else{
-            Log.i("INVENTORYHISTORY TABLE:", "Inventory History not Added Correctly");
-        }
-
-        db.close();
-    }
-
-
-    // Adding new Sales Details
-    void insertUser(Integer sales_ID, Integer sales_amount, Integer items_sold, String sales_dates, String sales_time) {
-        //Get the Data Repository in write mode
-        SQLiteDatabase db = this.getWritableDatabase();
-        //Create a new map of values, where column names are the keys
-        ContentValues cValues = new ContentValues();
-        cValues.put(SALES_COL1, sales_ID);
-        cValues.put(SALES_COL2, sales_amount);
-        cValues.put(SALES_COL3, items_sold);
-        cValues.put(SALES_COL4, sales_dates);
-        cValues.put(SALES_COL5, sales_time);
-        // Insert the new row, returning the primary key value of the new row
-        long newRowId = db.insert(SALES_TABLE_NAME, null, cValues);
-
-        if(newRowId == 1){
-            Log.i("SALES TABLE:", "Sales Added Correctly");
-        }else{
-            Log.i("SALES TABLE:", "Sales not Added Correctly");
-        }
-
-        db.close();
-    }
-
-
-
-    // Update User Details
-    void updateUser(String username, String password, String email, String usertype){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(ACC_COL2, password);
-        values.put(ACC_COL3, usertype);
-        values.put(ACC_COL4, email);
-
-        //Cursor cursor = db.rawQuery("Select * from " + ACC_TABLE_NAME + " where " + ACC_COL1 + "= ?",new String[]{username});
-
-        long newRowId = db.update(ACC_TABLE_NAME, values, ACC_COL1 + "=?", new String[]{username});
-
-        if(newRowId == 1){
-            Log.i("SALES TABLE:", "User Updated Correctly");
-        }else{
-            Log.i("SALES TABLE:", "User not Updated Correctly");
-        }
-
-    }
-
-    // Get All User Details
-    public ArrayList<HashMap<String, String>> getUsers() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ArrayList<HashMap<String, String>> userList = new ArrayList<>();
-        String query = "SELECT * FROM " + ACC_TABLE_NAME;
-        Cursor cursor = db.rawQuery(query, null);
-        while (cursor.moveToNext()) {
-            HashMap<String, String> users = new HashMap<>();
-            users.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
-            users.put("user_password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
-            users.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
-            users.put("user_email", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
-            userList.add(users);
-
-            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
-        }
-        return userList;
-    }
 
     // Get All Product Details
     public ArrayList<HashMap<String, String>> getProducts() {
@@ -327,6 +281,68 @@ public class DbManager extends SQLiteOpenHelper {
         return productList;
     }
 
+
+    // Get Product Details based on Product ID
+    public ArrayList<HashMap<String, String>> getProductByProductID(String productID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> productList = new ArrayList<>();
+        String query = "SELECT * FROM " + PROD_TABLE_NAME;
+        Cursor cursor = db.query(PROD_TABLE_NAME, new String[]{PROD_COL1, PROD_COL2, PROD_COL3, PROD_COL4, PROD_COL5, PROD_COL6}, PROD_COL1 + "=?", new String[]{String.valueOf(productID)}, null, null, null, null);
+        if (cursor.moveToNext()) {
+            HashMap<String, String> product = new HashMap<>();
+            product.put("prod_ID", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1)));
+            product.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2)));
+            product.put("prod_critical_num", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3)));
+            product.put("prod_description", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4)));
+            product.put("prod_price", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5)));
+            product.put("prod_category", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
+
+            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
+
+            productList.add(product);
+        }
+        return productList;
+    }
+
+
+    // Delete Product Details
+    public void deleteProduct(String prod_ID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(PROD_TABLE_NAME, PROD_COL1 + " = ?", new String[]{String.valueOf(prod_ID)});
+        db.close();
+    }
+
+
+
+
+    // Adding new Inventory
+    void insertUser(Integer inventory_ID, String inventory_date, Integer inventory_quantity, Integer inventory_quantity_change, String inventory_remark, String inventory_date_updated, String prod_name) {
+        //Get the Data Repository in write mode
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Create a new map of values, where column names are the keys
+        ContentValues cValues = new ContentValues();
+        cValues.put(INV_COL1, inventory_ID);
+        cValues.put(INV_COL2, inventory_date);
+        cValues.put(INV_COL3, inventory_quantity);
+        cValues.put(INV_COL4, inventory_quantity_change);
+        cValues.put(INV_COL5, inventory_remark);
+        cValues.put(INV_COL6, inventory_date_updated);
+        cValues.put(INV_COL7, prod_name);
+        // Insert the new row, returning the primary key value of the new row
+        long newRowId = db.insert(INV_TABLE_NAME, null, cValues);
+
+        if(newRowId == 1){
+            Log.i("INVENTORY TABLE:", "Inventory Added Correctly");
+        }else{
+            Log.i("INVENTORY TABLE:", "Inventory not Added Correctly");
+        }
+
+        db.close();
+    }
 
     // Get All Inventory Details
     public ArrayList<HashMap<String, String>> getInventory() {
@@ -356,108 +372,6 @@ public class DbManager extends SQLiteOpenHelper {
         return inventoryList;
     }
 
-
-    // Get All Inventory History Details
-    public ArrayList<HashMap<String, String>> getInventoryHistory() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ArrayList<HashMap<String, String>> historyList = new ArrayList<>();
-        String query = "SELECT * FROM " + INV_HIS_TABLE_NAME;
-        Cursor cursor = db.rawQuery(query, null);
-        while (cursor.moveToNext()) {
-            HashMap<String, String> history = new HashMap<>();
-            history.put("update_ID", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL1)));
-            history.put("inventory_update_date", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL2)));
-            history.put("inventory_action", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL3)));
-            history.put("inventory_quantity_change", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL4)));
-            history.put("inventory_ID", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL5)));
-            history.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL6)));
-            historyList.add(history);
-
-            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL1))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL2))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL3))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL4))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL5))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL6)));
-        }
-        return historyList;
-    }
-
-
-    // Get All Sales Details
-    public ArrayList<HashMap<String, String>> getSales() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ArrayList<HashMap<String, String>> salesList = new ArrayList<>();
-        String query = "SELECT * FROM " + SALES_TABLE_NAME;
-        Cursor cursor = db.rawQuery(query, null);
-        while (cursor.moveToNext()) {
-            HashMap<String, String> sales = new HashMap<>();
-            sales.put("sales_ID", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL1)));
-            sales.put("sales_amount", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL2)));
-            sales.put("sales_sold", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL3)));
-            sales.put("sales_dates", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL4)));
-            sales.put("sales_time", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL5)));
-            salesList.add(sales);
-
-            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL1))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL2))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL3))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL4))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL5)));
-        }
-        return salesList;
-    }
-
-
-
-
-    // Get User Details based on Username
-    public ArrayList<HashMap<String, String>> getUserByUsername(String username) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ArrayList<HashMap<String, String>> userList = new ArrayList<>();
-        String query = "SELECT * FROM " + ACC_TABLE_NAME;
-        Cursor cursor = db.query(ACC_TABLE_NAME, new String[]{ACC_COL1, ACC_COL2, ACC_COL3, ACC_COL4}, ACC_COL1 + "=?", new String[]{String.valueOf(username)}, null, null, null, null);
-        if (cursor.moveToNext()) {
-            HashMap<String, String> user = new HashMap<>();
-            user.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
-            user.put("user_password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
-            user.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
-            user.put("user_email", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
-
-            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
-
-            userList.add(user);
-        }
-        return userList;
-    }
-
-    // Get Product Details based on Product ID
-    public ArrayList<HashMap<String, String>> getProductByProductID(String productID) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ArrayList<HashMap<String, String>> productList = new ArrayList<>();
-        String query = "SELECT * FROM " + PROD_TABLE_NAME;
-        Cursor cursor = db.query(PROD_TABLE_NAME, new String[]{PROD_COL1, PROD_COL2, PROD_COL3, PROD_COL4, PROD_COL5, PROD_COL6}, PROD_COL1 + "=?", new String[]{String.valueOf(productID)}, null, null, null, null);
-        if (cursor.moveToNext()) {
-            HashMap<String, String> product = new HashMap<>();
-            product.put("prod_ID", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1)));
-            product.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2)));
-            product.put("prod_critical_num", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3)));
-            product.put("prod_description", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4)));
-            product.put("prod_price", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5)));
-            product.put("prod_category", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
-
-            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
-
-            productList.add(product);
-        }
-        return productList;
-    }
 
     // Get Inventory Details based on Inventory ID
     public ArrayList<HashMap<String, String>> getInventoryByInventoryID(String inventoryID) {
@@ -489,6 +403,67 @@ public class DbManager extends SQLiteOpenHelper {
     }
 
 
+    // Delete Inventory Details
+    public void deleteInventory(String inventory_ID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(INV_TABLE_NAME, INV_COL1 + " = ?", new String[]{String.valueOf(inventory_ID)});
+        db.close();
+    }
+
+
+
+    // Adding new Inventory History
+    void insertUser(Integer update_ID, String inventory_update_date, String inventory_action, Integer inventory_quantity_change, Integer inventory_ID, String inventory_name) {
+        //Get the Data Repository in write mode
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Create a new map of values, where column names are the keys
+        ContentValues cValues = new ContentValues();
+        cValues.put(INV_HIS_COL1, inventory_ID);
+        cValues.put(INV_HIS_COL2, inventory_update_date);
+        cValues.put(INV_HIS_COL3, inventory_action);
+        cValues.put(INV_HIS_COL4, inventory_quantity_change);
+        cValues.put(INV_HIS_COL5, inventory_ID);
+        cValues.put(INV_HIS_COL6, inventory_name);
+        // Insert the new row, returning the primary key value of the new row
+        long newRowId = db.insert(INV_HIS_TABLE_NAME, null, cValues);
+
+        if(newRowId == 1){
+            Log.i("INVENTORYHISTORY TABLE:", "Inventory History Added Correctly");
+        }else{
+            Log.i("INVENTORYHISTORY TABLE:", "Inventory History not Added Correctly");
+        }
+
+        db.close();
+    }
+
+
+    // Get All Inventory History Details
+    public ArrayList<HashMap<String, String>> getInventoryHistory() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> historyList = new ArrayList<>();
+        String query = "SELECT * FROM " + INV_HIS_TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            HashMap<String, String> history = new HashMap<>();
+            history.put("update_ID", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL1)));
+            history.put("inventory_update_date", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL2)));
+            history.put("inventory_action", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL3)));
+            history.put("inventory_quantity_change", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL4)));
+            history.put("inventory_ID", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL5)));
+            history.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL6)));
+            historyList.add(history);
+
+            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL1))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL2))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL3))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL4))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL5))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL6)));
+        }
+        return historyList;
+    }
+
+
     // Get Inventory History Details based on Update ID
     public ArrayList<HashMap<String, String>> getInventoryHistoryByUpdateID(String updateID) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -517,6 +492,61 @@ public class DbManager extends SQLiteOpenHelper {
     }
 
 
+
+
+
+    // Adding new Sales Details
+    void insertUser(Integer sales_ID, Integer sales_amount, Integer items_sold, String sales_dates, String sales_time) {
+        //Get the Data Repository in write mode
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Create a new map of values, where column names are the keys
+        ContentValues cValues = new ContentValues();
+        cValues.put(SALES_COL1, sales_ID);
+        cValues.put(SALES_COL2, sales_amount);
+        cValues.put(SALES_COL3, items_sold);
+        cValues.put(SALES_COL4, sales_dates);
+        cValues.put(SALES_COL5, sales_time);
+        // Insert the new row, returning the primary key value of the new row
+        long newRowId = db.insert(SALES_TABLE_NAME, null, cValues);
+
+        if(newRowId == 1){
+            Log.i("SALES TABLE:", "Sales Added Correctly");
+        }else{
+            Log.i("SALES TABLE:", "Sales not Added Correctly");
+        }
+
+        db.close();
+    }
+
+
+
+    // Get All Sales Details
+    public ArrayList<HashMap<String, String>> getSales() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> salesList = new ArrayList<>();
+        String query = "SELECT * FROM " + SALES_TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            HashMap<String, String> sales = new HashMap<>();
+            sales.put("sales_ID", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL1)));
+            sales.put("sales_amount", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL2)));
+            sales.put("sales_sold", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL3)));
+            sales.put("sales_dates", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL4)));
+            sales.put("sales_time", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL5)));
+            salesList.add(sales);
+
+            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL1))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL2))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL3))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL4))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL5)));
+        }
+        return salesList;
+    }
+
+
+
+
     // Get Sales Details based on Sales ID
     public ArrayList<HashMap<String, String>> getSalesBySalesID(String salesID) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -543,29 +573,6 @@ public class DbManager extends SQLiteOpenHelper {
     }
 
 
-    // Delete User Details
-    public void deleteUser(String user_name) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(ACC_TABLE_NAME, ACC_COL1 + " = ?", new String[]{String.valueOf(user_name)});
-        db.close();
-    }
-
-
-    // Delete Product Details
-    public void deleteProduct(String prod_ID) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(PROD_TABLE_NAME, PROD_COL1 + " = ?", new String[]{String.valueOf(prod_ID)});
-        db.close();
-    }
-
-
-    // Delete Inventory Details
-    public void deleteInventory(String inventory_ID) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(INV_TABLE_NAME, INV_COL1 + " = ?", new String[]{String.valueOf(inventory_ID)});
-        db.close();
-    }
-
 
     // Delete Sales Details
     public void deleteSales(String sales_ID) {
@@ -573,6 +580,7 @@ public class DbManager extends SQLiteOpenHelper {
         db.delete(SALES_TABLE_NAME, SALES_COL1 + " = ?", new String[]{String.valueOf(sales_ID)});
         db.close();
     }
+
 
 
     //check if User record exists

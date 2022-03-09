@@ -18,12 +18,10 @@ public class UpdateAccount extends AppCompatActivity {
     SharedPreferences pref;
     TextView txt_upd_acc_username;
     TextView txt_upd_acc_password;
-    TextView txt_upd_acc_email;
     DbManager db;
 
     EditText edit_upd_acc_username;
     EditText edit_upd_acc_password;
-    EditText edit_upd_acc_email;
     Spinner spin_upd_acc_usertype;
     String[] userTypeArray = {"Employee", "Manager"};
 
@@ -38,7 +36,6 @@ public class UpdateAccount extends AppCompatActivity {
         db = new DbManager(this);
         edit_upd_acc_username = findViewById(R.id.edit_upd_acc_username);
         edit_upd_acc_password = findViewById(R.id.edit_upd_acc_password);
-        edit_upd_acc_email = findViewById(R.id.edit_upd_acc_email);
         spin_upd_acc_usertype = findViewById(R.id.spin_upd_acc_usertype);
 
         btn_upd_acc_remove = findViewById(R.id.btn_upd_acc_remove);
@@ -47,7 +44,6 @@ public class UpdateAccount extends AppCompatActivity {
         pref = getSharedPreferences("user_list", MODE_PRIVATE);
         edit_upd_acc_username.setText(pref.getString("username",null));
         edit_upd_acc_password.setText(pref.getString("password",null));
-        edit_upd_acc_email.setText(pref.getString("email",null));
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, userTypeArray);
         spin_upd_acc_usertype.setAdapter(adapter);
@@ -73,12 +69,11 @@ public class UpdateAccount extends AppCompatActivity {
             public void onClick(View view) {
 
                 //Add Values in input objects into String
-                String user_name = edit_upd_acc_username.getText().toString();
+                String username = edit_upd_acc_username.getText().toString();
                 String password = edit_upd_acc_password.getText().toString();
-                String email = edit_upd_acc_email.getText().toString();
                 String user_type = spin_upd_acc_usertype.getSelectedItem().toString();
 
-                db.updateUser(user_name, password, email, user_type);
+                db.updateUser(username, password, user_type);
                 Intent i = new Intent(UpdateAccount.this, UserAccounts.class);
                 startActivity(i);
             }

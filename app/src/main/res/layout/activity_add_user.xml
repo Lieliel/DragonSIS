@@ -36,20 +36,20 @@
         android:layout_below="@+id/edit_add_username"></EditText>
 
     <EditText
-        android:id="@+id/edit_add_email"
+        android:id="@+id/edit_confirm_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Input new Email"
+        android:layout_below="@+id/edit_add_password"
 
-        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/edit_add_password"></EditText>
+        android:layout_marginTop="20dp"
+        android:hint="Confirm Password"></EditText>
 
     <Spinner
         android:id="@+id/spin_add_usertype"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_add_email"
+        android:layout_below="@+id/edit_confirm_password"
 
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"></Spinner>
@@ -58,10 +58,9 @@
         android:id="@+id/btn_user_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add User"
+        android:layout_below="@+id/spin_add_usertype"
 
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/spin_add_usertype"
         android:layout_marginTop="50dp"
-        ></Button>
+        android:text="Add User"></Button>
 </RelativeLayout>

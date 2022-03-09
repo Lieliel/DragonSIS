@@ -18,7 +18,6 @@ public class AddUser extends AppCompatActivity {
     ImageView img_back_add_user;
     EditText edit_add_username;
     EditText edit_add_password;
-    EditText edit_add_email;
     EditText edit_confirm_password;
     Spinner spin_add_usertype;
     String[] userTypeArray = {"Employee", "Manager"};
@@ -35,7 +34,7 @@ public class AddUser extends AppCompatActivity {
         edit_add_username = findViewById(R.id.edit_add_username);
         edit_add_password = findViewById(R.id.edit_add_password);
         //findviewbyID ng confirm pass
-        edit_add_email = findViewById(R.id.edit_add_email);
+        edit_confirm_password = findViewById(R.id.edit_confirm_password);
         btn_user_submit = findViewById(R.id.btn_user_submit);
         db = new DbManager(this);
 
@@ -55,14 +54,14 @@ public class AddUser extends AppCompatActivity {
             public void onClick(View view) {
                 String txt_username = edit_add_username.getText().toString();
                 String txt_password = edit_add_password.getText().toString();
-                String txt_email = edit_add_email.getText().toString();
+                String txt_confirm = edit_confirm_password.getText().toString();
                 //String txt_confirm_password = gettext.tostring;
                 String spin_usertype = spin_add_usertype.getSelectedItem().toString();
 
                 //if statement(parehas yung txt pass tsaka txt confirm pass){
 
-                db.insertUser(txt_password,txt_username,txt_email,spin_usertype);
-                Log.i("ACCOUNTS TABLE", "User Inserted: " + txt_username + ", " + txt_password + ", " + txt_email + ", " + spin_usertype);
+                db.insertUser(txt_password,txt_username,txt_confirm,spin_usertype);
+                Log.i("ACCOUNTS TABLE", "User Inserted: " + txt_username + ", " + txt_password + ", " + txt_confirm + ", " + spin_usertype);
 
                 Intent i = new Intent(AddUser.this, UserAccounts.class);
                 startActivity(i);
