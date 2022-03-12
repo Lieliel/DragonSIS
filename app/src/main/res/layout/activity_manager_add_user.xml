@@ -8,13 +8,12 @@
 
     <ImageView
         android:id="@+id/img_back_add_user"
-        android:src="@drawable/back_img"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
         android:clickable="true"
 
-        android:layout_alignParentLeft="true"
-        ></ImageView>
+        android:src="@drawable/back_img"></ImageView>
 
     <EditText
         android:id="@+id/edit_add_username"
@@ -29,11 +28,19 @@
         android:id="@+id/edit_add_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Input new Password"
+        android:layout_below="@+id/edit_add_username"
+        android:layout_marginStart="30dp"
 
-        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/edit_add_username"></EditText>
+        android:layout_marginTop="20dp"
+        android:hint="Input new Password"></EditText>
+
+    <ImageView
+        android:id="@+id/imageview_show_hide_pwd"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/edit_add_password"
+        android:layout_marginTop="-41dp" />
 
     <EditText
         android:id="@+id/edit_confirm_password"
@@ -63,4 +70,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:text="Add User"></Button>
+    
 </RelativeLayout>
