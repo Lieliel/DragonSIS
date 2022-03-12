@@ -70,7 +70,7 @@
         android:layout_marginEnd="28dp"
         android:ems="10"
         android:iconifiedByDefault="false"
-        android:queryHint="Search Inventory"
+        android:queryHint="Search Products"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

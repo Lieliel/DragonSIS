@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,25 +12,41 @@
         android:id="@+id/btn_gnr_sales"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pdf_gen_sales"></Button>
+        android:layout_marginTop="220dp"
+        android:text="@string/pdf_gen_sales"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></Button>
 
     <Button
         android:id="@+id/btn_gnr_inv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pdf_gen_inv"></Button>
+        android:layout_marginTop="20dp"
+        android:text="@string/pdf_gen_inv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_gnr_sales"></Button>
 
     <Button
         android:id="@+id/btn_gnr_full"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pdf_gen_full"></Button>
+        android:layout_marginTop="20dp"
+        android:text="@string/pdf_gen_full"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_gnr_inv"></Button>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/gnr_back_to_menu"></Button>
+        android:layout_marginTop="20dp"
+        android:text="@string/gnr_back_to_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_gnr_full"></Button>
 
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

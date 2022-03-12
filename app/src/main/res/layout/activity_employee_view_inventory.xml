@@ -41,7 +41,7 @@
         android:background="@drawable/my_border"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Quantity Demand"
+        android:hint="Quantity Demand"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
@@ -61,16 +61,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="211dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="28dp"
+    <SearchView
+        android:id="@+id/search_inventory"
+        android:layout_height="58dp"
+        android:layout_width="wrap_content"
+        android:maxWidth="215dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="28dp"
-        android:background="@drawable/my_border"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Seach Inventory"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search Products"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -84,10 +84,10 @@
         android:background="@drawable/my_border"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Category"
+        android:hint="Category"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/search_inventory" />
 
     <TextView
         android:id="@+id/textView2"
@@ -102,7 +102,7 @@
         android:textAlignment="center"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/search_inventory" />
 
     <ListView
         android:layout_width="422dp"

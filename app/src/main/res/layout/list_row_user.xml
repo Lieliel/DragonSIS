@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="5dp">
@@ -8,19 +10,25 @@
         android:id="@+id/row_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="sample username"
-
         android:layout_alignParentLeft="true"
-        ></TextView>
+
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:text="sample username"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <TextView
         android:id="@+id/row_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="sample password"
-
         android:layout_below="@+id/row_username"
-        ></TextView>
+
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:text="sample password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row_username"></TextView>
 
     <TextView
         android:id="@+id/row_usertype"
@@ -28,6 +36,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
 
-        android:text="sample user type"></TextView>
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="5dp"
+        android:text="sample user type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/row_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/row_usertype"
+
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="5dp"
+        android:text="sample email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row_usertype"></TextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

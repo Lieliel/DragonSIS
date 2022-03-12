@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"></ImageView>
 
     <EditText
-        android:id="@+id/editTextTextPersonName7"
+        android:id="@+id/search_inventory_history"
         android:layout_width="216dp"
         android:layout_height="49dp"
         android:layout_marginTop="20dp"
@@ -45,7 +45,7 @@
         android:textAlignment="center"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+        app:layout_constraintTop_toBottomOf="@+id/search_inventory_history" />
 
     <EditText
         android:id="@+id/editTextTextPersonName8"
@@ -59,7 +59,7 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+        app:layout_constraintTop_toBottomOf="@+id/search_inventory_history" />
 
     <ListView
         android:layout_width="426dp"
