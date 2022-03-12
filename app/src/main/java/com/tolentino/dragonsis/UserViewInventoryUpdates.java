@@ -7,25 +7,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class UserProducts extends AppCompatActivity {
+public class UserViewInventoryUpdates extends AppCompatActivity {
 
-    ImageView img_back_user_inventory2;
+    ImageView img_back_user_inventory4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_userproducts);
+        setContentView(R.layout.activity_userinventoryupdates);
 
-        img_back_user_inventory2 = findViewById(R.id.img_back_user_inventory2);
+        img_back_user_inventory4 = findViewById(R.id.img_back_user_inventory4);
 
-        img_back_user_inventory2.setOnClickListener(new View.OnClickListener() {
+        img_back_user_inventory4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(UserProducts.this, EmployeeMenu.class);
+                Intent i = new Intent(UserViewInventoryUpdates.this, EmployeeMenu.class);
                 startActivity(i);
             }
         });
-
 
     }
 }

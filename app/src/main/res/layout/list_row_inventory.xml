@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/row_inventory_product_ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+
+        android:text="sample inventory ID"></TextView>
+
+    <TextView
+        android:id="@+id/row_inventory_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/row_inventory_product_ID"
+
+        android:text="sample inventory name"></TextView>
+
+    <TextView
+        android:id="@+id/row_inventory_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+
+        android:text="sample date"></TextView>
+
+    <TextView
+        android:id="@+id/row_inventory_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/row_inventory_date"
+
+        android:layout_alignParentRight="true"
+        android:text="sample quantity"></TextView>
+
+</RelativeLayout>

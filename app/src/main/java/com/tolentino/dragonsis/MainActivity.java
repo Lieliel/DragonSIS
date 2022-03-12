@@ -31,13 +31,14 @@ public class MainActivity extends AppCompatActivity {
 
         DbManager db = new DbManager(MainActivity.this);
 
-        //Add dummy account if no manager record exists
+        /*Add dummy account if no manager record exists
         boolean managerExists = db.checkUserValues("manager");
         if(!managerExists) {
             Log.i("DATABASE TAG", String.valueOf(managerExists));
             db.insertUser("manager123", "manager", "manager@gmail.com", "Manager");
-        }
+         }*/
 
+        //Login to the app
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,12 +51,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //login function
     public void login(){
         String user=a1.getText().toString().trim();
         String pass=a2.getText().toString().trim();
+
+        //check if Login EditTexts are filled
         if((!(user.equals("")))&&(!(pass.equals("")))){
+
+            //check if credentials exist
             Boolean ifexisting=db.LoginCheck(user,pass);
+
             if(ifexisting){
+                //determines user type of the user that logs in
                 if(db.getUserByUsername(user).get(0).get("user_type").toString().equals("Employee")){
                     Toast.makeText(this,"Login Successful",Toast.LENGTH_LONG).show();
 
@@ -76,7 +84,23 @@ public class MainActivity extends AppCompatActivity {
 
 
             }else{
-                Toast.makeText(this,"Not registered or Invalid details",Toast.LENGTH_LONG).show();
+                //Developer Account Login
+                if(user.equals("mandev")&&pass.equals("mandev123")){
+                    Toast.makeText(this,"Developer Login Successful",Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(this, ManagerMenu.class);
+                    intent.putExtra("user_ID",user);
+                    startActivity(intent);
+                }else if(user.equals("empdev")&&pass.equals("empdev123")) {
+                    Toast.makeText(this, "Developer Login Successful", Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(this, EmployeeMenu.class);
+                    intent.putExtra("user_ID", user);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(this,"Not registered or Invalid details",Toast.LENGTH_LONG).show();
+                }
+
             }
         }else{
             Toast.makeText(this,"All fields are required",Toast.LENGTH_LONG).show();

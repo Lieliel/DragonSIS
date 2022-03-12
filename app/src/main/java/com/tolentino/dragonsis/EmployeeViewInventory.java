@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class UserViewInventory extends AppCompatActivity {
+public class EmployeeViewInventory extends AppCompatActivity {
 
     ImageView img_back_user_inventory;
 
@@ -21,7 +21,7 @@ public class UserViewInventory extends AppCompatActivity {
         img_back_user_inventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(UserViewInventory.this, EmployeeMenu.class);
+                Intent i = new Intent(EmployeeViewInventory.this, EmployeeMenu.class);
                 startActivity(i);
             }
         });

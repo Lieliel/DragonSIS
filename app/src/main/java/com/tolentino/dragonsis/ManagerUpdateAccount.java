@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class UpdateAccount extends AppCompatActivity {
+public class ManagerUpdateAccount extends AppCompatActivity {
 
     SharedPreferences pref;
     TextView txt_upd_acc_username;
@@ -45,25 +45,29 @@ public class UpdateAccount extends AppCompatActivity {
         edit_upd_acc_username.setText(pref.getString("username",null));
         edit_upd_acc_password.setText(pref.getString("password",null));
 
+        //Adapter for the user type spinner
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, userTypeArray);
         spin_upd_acc_usertype.setAdapter(adapter);
 
+        //Selects default usertype upon entering the activity
         if(pref.getString("usertype", null).equals("Employee")){
             spin_upd_acc_usertype.setSelection(0);
         }else{
             spin_upd_acc_usertype.setSelection(1);
         }
 
+        //Removes User from Database
         btn_upd_acc_remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 db.deleteUser(pref.getString("username", null));
                 Log.i("USER TABLE:", "Successfully deleted Account");
-                Intent i = new Intent(UpdateAccount.this, UserAccounts.class);
+                Intent i = new Intent(ManagerUpdateAccount.this, ManagerUserAccounts.class);
                 startActivity(i);
             }
         });
 
+        //Updates the information in the database using the info in this activity
         btn_upd_acc_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +78,7 @@ public class UpdateAccount extends AppCompatActivity {
                 String user_type = spin_upd_acc_usertype.getSelectedItem().toString();
 
                 db.updateUser(username, password, user_type);
-                Intent i = new Intent(UpdateAccount.this, UserAccounts.class);
+                Intent i = new Intent(ManagerUpdateAccount.this, ManagerUserAccounts.class);
                 startActivity(i);
             }
         });

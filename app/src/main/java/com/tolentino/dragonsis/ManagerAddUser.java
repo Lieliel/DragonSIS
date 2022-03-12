@@ -6,14 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-public class AddUser extends AppCompatActivity {
+public class ManagerAddUser extends AppCompatActivity {
 
     ImageView img_back_add_user;
     EditText edit_add_username;
@@ -44,7 +43,7 @@ public class AddUser extends AppCompatActivity {
         img_back_add_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(AddUser.this,UserAccounts.class);
+                Intent i = new Intent(ManagerAddUser.this, ManagerUserAccounts.class);
                 startActivity(i);
             }
         });
@@ -63,7 +62,7 @@ public class AddUser extends AppCompatActivity {
                 db.insertUser(txt_password,txt_username,txt_confirm,spin_usertype);
                 Log.i("ACCOUNTS TABLE", "User Inserted: " + txt_username + ", " + txt_password + ", " + txt_confirm + ", " + spin_usertype);
 
-                Intent i = new Intent(AddUser.this, UserAccounts.class);
+                Intent i = new Intent(ManagerAddUser.this, ManagerUserAccounts.class);
                 startActivity(i);
             //}else{Toast error/incorrect password}
 

@@ -17,11 +17,10 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class GeneratePdfReport extends AppCompatActivity {
+public class ManagerGeneratePdfReport extends AppCompatActivity {
 
     Button btn_gnr_sales;
     Button btn_gnr_inv;
@@ -32,7 +31,7 @@ public class GeneratePdfReport extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_pdf_report);
 
-        ActivityCompat.requestPermissions(GeneratePdfReport.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
+        ActivityCompat.requestPermissions(ManagerGeneratePdfReport.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
         btn_gnr_sales = findViewById(R.id.btn_gnr_sales);
         btn_gnr_inv = findViewById(R.id.btn_gnr_inv);
@@ -43,7 +42,7 @@ public class GeneratePdfReport extends AppCompatActivity {
             public void onClick(View view) {
                 //create Sales Report
                 createSalesPdf();
-                Toast.makeText(GeneratePdfReport.this, "Sales Report Generated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ManagerGeneratePdfReport.this, "Sales Report Generated", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -52,7 +51,7 @@ public class GeneratePdfReport extends AppCompatActivity {
             public void onClick(View view) {
                 //create Inventory Report
                 createInvPdf();
-                Toast.makeText(GeneratePdfReport.this, "Inventory Report Generated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ManagerGeneratePdfReport.this, "Inventory Report Generated", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -61,7 +60,7 @@ public class GeneratePdfReport extends AppCompatActivity {
             public void onClick(View view) {
                 //create Full Report
                 createFullPdf();
-                Toast.makeText(GeneratePdfReport.this, "Full Report Generated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ManagerGeneratePdfReport.this, "Full Report Generated", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -93,7 +92,7 @@ public class GeneratePdfReport extends AppCompatActivity {
         }catch (Exception e){
             String filePath = Environment.getExternalStorageDirectory().getPath().toString();
             Log.i("External Storage Path", filePath);
-            Toast.makeText(GeneratePdfReport.this, "Report Generation Unsuccessful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ManagerGeneratePdfReport.this, "Report Generation Unsuccessful", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -127,7 +126,7 @@ public class GeneratePdfReport extends AppCompatActivity {
         }catch (Exception e){
             String filePath = Environment.getExternalStorageDirectory().getPath().toString();
             Log.i("External Storage Path", filePath);
-            Toast.makeText(GeneratePdfReport.this, "Report Generation Unsuccessful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ManagerGeneratePdfReport.this, "Report Generation Unsuccessful", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -161,7 +160,7 @@ public class GeneratePdfReport extends AppCompatActivity {
         }catch (Exception e){
             String filePath = Environment.getExternalStorageDirectory().getPath().toString();
             Log.i("External Storage Path", filePath);
-            Toast.makeText(GeneratePdfReport.this, "Report Generation Unsuccessful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ManagerGeneratePdfReport.this, "Report Generation Unsuccessful", Toast.LENGTH_SHORT).show();
 
         }
 

@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-public class AddProduct extends AppCompatActivity {
+public class ManagerAddProduct extends AppCompatActivity {
 
     ImageView img_back_add_product;
     EditText edit_add_productname;
@@ -44,7 +44,7 @@ public class AddProduct extends AppCompatActivity {
         img_back_add_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(AddProduct.this, ViewProducts.class);
+                Intent i = new Intent(ManagerAddProduct.this, ManagerViewProducts.class);
                 startActivity(i);
             }
         });
@@ -64,7 +64,7 @@ public class AddProduct extends AppCompatActivity {
                 db.insertProduct(txt_prod_name,txt_prod_crit_num,txt_prod_descrip,txt_prod_price,spin_category);
                 Log.i("ACCOUNTS TABLE", "User Inserted: " + txt_prod_name + ", " + txt_prod_descrip + ", " + txt_prod_crit_num + ", " + txt_prod_price + ", " + spin_category);
 
-                Intent i = new Intent(AddProduct.this, ViewProducts.class);
+                Intent i = new Intent(ManagerAddProduct.this, ManagerViewProducts.class);
                 startActivity(i);
             }
         });

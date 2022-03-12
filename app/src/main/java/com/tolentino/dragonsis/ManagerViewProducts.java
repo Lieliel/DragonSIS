@@ -14,11 +14,12 @@ import android.widget.SimpleAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ViewProducts extends AppCompatActivity {
+public class ManagerViewProducts extends AppCompatActivity {
 
     ImageView img_back_view_products;
-    SearchView srch_product;
     ImageView img_add_product;
+    SearchView srch_product;
+
     DbManager db;
     ListView list_products;
     ListAdapter listAdapter;
@@ -26,7 +27,7 @@ public class ViewProducts extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_products2);
+        setContentView(R.layout.activity_view_products);
 
         img_back_view_products = findViewById(R.id.img_back_view_products);
         srch_product = findViewById(R.id.srch_product);
@@ -38,7 +39,7 @@ public class ViewProducts extends AppCompatActivity {
         img_back_view_products.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ViewProducts.this, ManagerMenu.class);
+                Intent i = new Intent(ManagerViewProducts.this, ManagerMenu.class);
                 startActivity(i);
             }
         });
@@ -47,7 +48,7 @@ public class ViewProducts extends AppCompatActivity {
         img_add_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ViewProducts.this, AddProduct.class);
+                Intent i = new Intent(ManagerViewProducts.this, ManagerAddProduct.class);
                 startActivity(i);
 
             }
@@ -56,7 +57,7 @@ public class ViewProducts extends AppCompatActivity {
         //Adapt Products List
         list_products = findViewById(R.id.list_products);
         ArrayList<HashMap<String, String>> productlist = db.getProducts();
-        listAdapter = new SimpleAdapter(ViewProducts.this, productlist, R.layout.list_row_product, new String[]{"prod_name","prod_description","prod_price","prod_category"}, new int[]{R.id.row_product_name, R.id.row_product_description, R.id.row_product_price, R.id.row_product_category});
+        listAdapter = new SimpleAdapter(ManagerViewProducts.this, productlist, R.layout.list_row_product, new String[]{"prod_name","prod_description","prod_price","prod_category"}, new int[]{R.id.row_inventory_product_ID, R.id.row_product_description, R.id.row_product_price, R.id.row_product_category});
         list_products.setAdapter(listAdapter);
 
         //Search Product Function
@@ -68,7 +69,7 @@ public class ViewProducts extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                ((SimpleAdapter)ViewProducts.this.listAdapter).getFilter().filter(s);
+                ((SimpleAdapter) ManagerViewProducts.this.listAdapter).getFilter().filter(s);
                 return false;
             }
         });

@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/drawable/button.xml" value="0.2101851851851852" />
+        <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_add_inventory.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_add_product.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_add_user.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_employee_menu.xml" value="0.19947916666666668" />
@@ -12,8 +13,9 @@
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_menu.xml" value="0.19947916666666668" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_update_account.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_user_accounts.xml" value="0.19947916666666668" />
-        <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_view_inventory.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_view_inventory.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_view_products2.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/list_row_inventory.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/list_row_product.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/list_row_sortby.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/list_row_user.xml" value="0.22447916666666667" />

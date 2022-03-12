@@ -28,35 +28,43 @@ public class ManagerMenu extends AppCompatActivity {
         btn_logout = findViewById(R.id.btn_logout);
         btn_viewinvupd = findViewById(R.id.btn_viewinvupd);
 
+        //Redirect to User Accounts
         btn_useraccounts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerMenu.this, UserAccounts.class);
+                Intent i = new Intent(ManagerMenu.this, ManagerUserAccounts.class);
                 startActivity(i);
             }
         });
 
+        //Redirect to View Inventory
         btn_inventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerMenu.this, ViewInventory.class);
+                Intent i = new Intent(ManagerMenu.this, ManagerViewInventory.class);
                 startActivity(i);
             }
         });
+
+        //Redirect to Products
         btn_products.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerMenu.this, ViewProducts.class);
+                Intent i = new Intent(ManagerMenu.this, ManagerViewProducts.class);
                 startActivity(i);
             }
         });
+
+        //Redirect to Generate Pdf
         btn_pdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerMenu.this, GeneratePdfReport.class);
+                Intent i = new Intent(ManagerMenu.this, ManagerGeneratePdfReport.class);
                 startActivity(i);
             }
         });
+
+        //Redirect to Logout
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,10 +73,11 @@ public class ManagerMenu extends AppCompatActivity {
             }
         });
 
+        //Redirect to View Inventory Updates
         btn_viewinvupd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerMenu.this, ViewInventoryUpdates.class);
+                Intent i = new Intent(ManagerMenu.this, UserViewInventoryUpdates.class);
                 startActivity(i);
             }
         });

@@ -10,13 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class UserAccounts extends AppCompatActivity {
+public class ManagerUserAccounts extends AppCompatActivity {
 
     ImageView img_back_user_accounts;
     ImageView img_add_user;
@@ -37,7 +36,7 @@ public class UserAccounts extends AppCompatActivity {
         img_back_user_accounts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(UserAccounts.this, ManagerMenu.class);
+                Intent i = new Intent(ManagerUserAccounts.this, ManagerMenu.class);
                 startActivity(i);
 
             }
@@ -47,7 +46,7 @@ public class UserAccounts extends AppCompatActivity {
         img_add_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(UserAccounts.this, AddUser.class);
+                Intent i = new Intent(ManagerUserAccounts.this, ManagerAddUser.class);
                 startActivity(i);
 
             }
@@ -56,7 +55,7 @@ public class UserAccounts extends AppCompatActivity {
         //Initiate ListView
         list_users = findViewById(R.id.list_users);
         ArrayList<HashMap<String, String>> userList = db.getUsers();
-        ListAdapter listAdapter = new SimpleAdapter(UserAccounts.this, userList, R.layout.list_row_user, new String[]{"user_name","user_password","user_type"}, new int[]{R.id.row_username, R.id.row_password, R.id.row_usertype});
+        ListAdapter listAdapter = new SimpleAdapter(ManagerUserAccounts.this, userList, R.layout.list_row_user, new String[]{"user_name","user_password","user_type"}, new int[]{R.id.row_username, R.id.row_password, R.id.row_usertype});
         list_users.setAdapter(listAdapter);
 
         //Select item from User List then redirect to Update Account
@@ -67,13 +66,14 @@ public class UserAccounts extends AppCompatActivity {
 
                 SharedPreferences pref = getSharedPreferences("user_list", MODE_PRIVATE);
 
+                //Add information of selected item to Shared Preferences
                 SharedPreferences.Editor edit = pref.edit();
                 edit.putString("username", userList.get(i).get("user_name"));
                 edit.putString("password", userList.get(i).get("user_password"));
                 edit.putString("usertype", userList.get(i).get("user_type"));
                 edit.commit();
 
-                Intent intent = new Intent(UserAccounts.this, UpdateAccount.class);
+                Intent intent = new Intent(ManagerUserAccounts.this, ManagerUpdateAccount.class);
                 startActivity(intent);
 
             }

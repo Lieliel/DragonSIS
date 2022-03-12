@@ -24,32 +24,34 @@ public class EmployeeMenu extends AppCompatActivity {
         btn_prodlist = findViewById(R.id.btn_prodlist);
         btn_log = findViewById(R.id.btn_log);
 
-
-
+        //Redirect to Inventory List
         btn_viewinv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(EmployeeMenu.this, UserViewInventory.class);
+                Intent i = new Intent(EmployeeMenu.this, EmployeeViewInventory.class);
                 startActivity(i);
             }
         });
 
+        //Redirect to Products List
         btn_prodlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(EmployeeMenu.this, UserProducts.class);
+                Intent i = new Intent(EmployeeMenu.this, EmployeeViewProducts.class);
                 startActivity(i);
             }
         });
 
+        //Redirect to View Inventory
         btn_invupd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(EmployeeMenu.this, UserInventoryUpdates.class);
+                Intent i = new Intent(EmployeeMenu.this, UserViewInventoryUpdates.class);
                 startActivity(i);
             }
         });
 
+        //Log out
         btn_log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

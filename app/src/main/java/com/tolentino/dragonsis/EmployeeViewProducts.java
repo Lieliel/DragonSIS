@@ -7,23 +7,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class ViewInventory extends AppCompatActivity {
+public class EmployeeViewProducts extends AppCompatActivity {
 
-    ImageView img_back_view_inventory;
+    ImageView img_back_user_inventory2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_inventory);
+        setContentView(R.layout.activity_userproducts);
 
-        img_back_view_inventory = findViewById(R.id.img_back_view_inventory);
+        img_back_user_inventory2 = findViewById(R.id.img_back_user_inventory2);
 
-        img_back_view_inventory.setOnClickListener(new View.OnClickListener() {
+        img_back_user_inventory2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ViewInventory.this, ManagerMenu.class);
+                Intent i = new Intent(EmployeeViewProducts.this, EmployeeMenu.class);
                 startActivity(i);
             }
         });
+
+
     }
 }
