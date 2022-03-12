@@ -26,7 +26,7 @@ public class ManagerAddUser extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_user);
+        setContentView(R.layout.activity_manager_add_user);
 
         img_back_add_user = findViewById(R.id.img_back_add_user);
         spin_add_usertype = findViewById(R.id.spin_add_usertype);

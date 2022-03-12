@@ -14,7 +14,7 @@ public class UserViewInventoryUpdates extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_userinventoryupdates);
+        setContentView(R.layout.activity_employee_inventory_updates);
 
         img_back_user_inventory4 = findViewById(R.id.img_back_user_inventory4);
 

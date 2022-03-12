@@ -136,6 +136,10 @@ public class DbManager extends SQLiteOpenHelper {
     }
 
 
+    ////////////////////////////////////////////////////////////////////
+    //////////////////////// USER FUNCTIONS ////////////////////////////
+    ////////////////////////////////////////////////////////////////////
+
     // Adding new User Details
     void insertUser(String user_password, String user_name, String user_email, String user_type) {
         //Get the Data Repository in write mode
@@ -228,7 +232,9 @@ public class DbManager extends SQLiteOpenHelper {
         db.close();
     }
 
-
+    ////////////////////////////////////////////////////////////////////
+    ///////////////////// PRODUCT FUNCTIONS ////////////////////////////
+    ////////////////////////////////////////////////////////////////////
 
 
     // Adding New Product Details
@@ -281,6 +287,25 @@ public class DbManager extends SQLiteOpenHelper {
         return productList;
     }
 
+    //Function to add Products List to Inventory Spinner
+    public ArrayList<String> getProductsName() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<String> productNameList = new ArrayList<String>();
+        String query = "SELECT * FROM " + PROD_TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()) {
+            do {
+                productNameList.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+            cursor.close();
+            db.close();
+        }
+
+        return productNameList;
+
+    }
+
 
     // Get Product Details based on Product ID
     public ArrayList<HashMap<String, String>> getProductByProductID(String productID) {
@@ -316,21 +341,22 @@ public class DbManager extends SQLiteOpenHelper {
         db.close();
     }
 
-
-
+    ////////////////////////////////////////////////////////////////////
+    ///////////////////// INVENTORY FUNCTIONS //////////////////////////
+    ////////////////////////////////////////////////////////////////////
 
     // Adding new Inventory
-    void insertUser(Integer inventory_ID, String inventory_date, Integer inventory_quantity, Integer inventory_quantity_change, String inventory_remark, String inventory_date_updated, String prod_name) {
+    void insertInventory(String prod_name, String inventory_date, int inventory_quantity) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();
-        cValues.put(INV_COL1, inventory_ID);
+        //cValues.put(INV_COL1, inventory_ID);
         cValues.put(INV_COL2, inventory_date);
         cValues.put(INV_COL3, inventory_quantity);
-        cValues.put(INV_COL4, inventory_quantity_change);
-        cValues.put(INV_COL5, inventory_remark);
-        cValues.put(INV_COL6, inventory_date_updated);
+        //cValues.put(INV_COL4, inventory_quantity_change);
+        //cValues.put(INV_COL5, inventory_remark);
+        //cValues.put(INV_COL6, inventory_date_updated);
         cValues.put(INV_COL7, prod_name);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(INV_TABLE_NAME, null, cValues);

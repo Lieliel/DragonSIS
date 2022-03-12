@@ -30,13 +30,14 @@ public class ManagerViewInventory extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_inventory);
+        setContentView(R.layout.activity_manager_view_inventory);
 
         img_back_view_inventory = findViewById(R.id.img_back_view_inventory);
         img_add_inventory = findViewById(R.id.img_add_inventory);
         srch_inventory = findViewById(R.id.srch_inventory);
         spin_sort_inventory = findViewById(R.id.spin_sort_inventory);
         spin_view_inventory = findViewById(R.id.spin_view_inventory);
+        db = new DbManager(this);
 
         //back to main menu
         img_back_view_inventory.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +63,20 @@ public class ManagerViewInventory extends AppCompatActivity {
         ArrayList<HashMap<String, String>> inventorylist = db.getInventory();
         listAdapter = new SimpleAdapter(ManagerViewInventory.this, inventorylist, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity});
         list_inventory.setAdapter(listAdapter);
+
+        //Search Inventory Function
+        srch_inventory.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                ((SimpleAdapter) ManagerViewInventory.this.listAdapter).getFilter().filter(s);
+                return false;
+            }
+        });
 
 
     }

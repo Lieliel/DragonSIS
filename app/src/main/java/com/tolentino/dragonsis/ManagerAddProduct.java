@@ -27,7 +27,7 @@ public class ManagerAddProduct extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_product);
+        setContentView(R.layout.activity_manager_add_product);
 
         img_back_add_product = findViewById(R.id.img_back_add_product);
         edit_add_productname = findViewById(R.id.edit_add_productname);

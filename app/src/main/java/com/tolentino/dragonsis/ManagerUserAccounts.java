@@ -25,7 +25,7 @@ public class ManagerUserAccounts extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_accounts);
+        setContentView(R.layout.activity_manager_user_accounts);
 
         img_back_user_accounts = findViewById(R.id.img_back_user_accounts);
         img_add_user = findViewById(R.id.img_add_user);

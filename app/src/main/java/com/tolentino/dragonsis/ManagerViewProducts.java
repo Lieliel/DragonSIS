@@ -27,7 +27,7 @@ public class ManagerViewProducts extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_products);
+        setContentView(R.layout.activity_manager_view_products);
 
         img_back_view_products = findViewById(R.id.img_back_view_products);
         srch_product = findViewById(R.id.srch_product);
@@ -57,7 +57,7 @@ public class ManagerViewProducts extends AppCompatActivity {
         //Adapt Products List
         list_products = findViewById(R.id.list_products);
         ArrayList<HashMap<String, String>> productlist = db.getProducts();
-        listAdapter = new SimpleAdapter(ManagerViewProducts.this, productlist, R.layout.list_row_product, new String[]{"prod_name","prod_description","prod_price","prod_category"}, new int[]{R.id.row_inventory_product_ID, R.id.row_product_description, R.id.row_product_price, R.id.row_product_category});
+        listAdapter = new SimpleAdapter(ManagerViewProducts.this, productlist, R.layout.list_row_product, new String[]{"prod_name","prod_description","prod_price","prod_category"}, new int[]{R.id.row_product_name, R.id.row_product_description, R.id.row_product_price, R.id.row_product_category});
         list_products.setAdapter(listAdapter);
 
         //Search Product Function

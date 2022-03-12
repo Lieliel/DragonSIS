@@ -14,7 +14,7 @@ public class EmployeeViewProducts extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_userproducts);
+        setContentView(R.layout.activity_employee_view_products);
 
         img_back_user_inventory2 = findViewById(R.id.img_back_user_inventory2);
 

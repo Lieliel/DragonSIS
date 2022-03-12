@@ -14,7 +14,7 @@ public class EmployeeViewInventory extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_userinventory);
+        setContentView(R.layout.activity_employee_view_inventory);
 
         img_back_user_inventory = findViewById(R.id.img_back_user_inventory);
 

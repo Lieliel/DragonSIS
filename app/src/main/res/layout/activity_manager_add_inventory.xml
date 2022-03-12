@@ -29,36 +29,35 @@
         android:id="@+id/spin_add_inventory_productname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-
         android:layout_below="@id/txt_inv_name_label"
+
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"></Spinner>
 
     <TextView
         android:id="@+id/txt_inv_date_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-
         android:layout_below="@id/spin_add_inventory_productname"
+
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:text="Product Date Added"></TextView>
 
     <EditText
-        android:id="@+id/edit_add_inventory"
+        android:id="@+id/edit_add_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/txt_inv_date_label"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:hint="MM/DD/YYYY"
-        android:layout_below="@id/txt_inv_date_label"
-        ></EditText>
+        android:hint="MM/DD/YYYY"></EditText>
 
     <TextView
         android:id="@+id/txt_inv_quantity_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edit_add_inventory"
+        android:layout_below="@id/edit_add_date"
         android:layout_centerHorizontal="true"
 
         android:layout_marginTop="10dp"
@@ -68,11 +67,11 @@
         android:id="@+id/edit_inv_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/txt_inv_quantity_label"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:hint="Sample Quantity"
-        android:layout_below="@id/txt_inv_quantity_label"
-        ></EditText>
+        android:inputType="number"
+        android:hint="Sample Quantity"></EditText>
 
     <Button
         android:id="@+id/btn_inv_submit"

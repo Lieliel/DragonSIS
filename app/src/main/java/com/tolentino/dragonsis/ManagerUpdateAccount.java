@@ -31,7 +31,7 @@ public class ManagerUpdateAccount extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_account);
+        setContentView(R.layout.activity_manager_update_account);
 
         db = new DbManager(this);
         edit_upd_acc_username = findViewById(R.id.edit_upd_acc_username);
