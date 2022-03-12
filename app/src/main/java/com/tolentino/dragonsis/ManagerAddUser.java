@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class ManagerAddUser extends AppCompatActivity {
 
@@ -93,17 +94,14 @@ public class ManagerAddUser extends AppCompatActivity {
         String txt_password = edit_add_password.getText().toString().trim();
         String txt_confirm = edit_confirm_password.getText().toString().trim();
         if (txt_password.isEmpty()) {
-            edit_add_password.setText("Field can't be empty");
-            return false;
-        }  if (txt_password.length()<5) {
-            edit_add_password.setText("Password must be at least 5 characters");
+            Toast.makeText(this,"Field can't be empty",Toast.LENGTH_LONG).show();
             return false;
         }
         if (!txt_password.equals(txt_confirm)) {
-            edit_confirm_password.setText("Password Would Not be matched");
+            Toast.makeText(this,"Password would not match",Toast.LENGTH_LONG).show();
             return false;
         }else {
-            edit_confirm_password.setText("Password Matched");
+            Toast.makeText(this,"Password matched",Toast.LENGTH_LONG).show();
             return true;
         }
     }
