@@ -35,7 +35,6 @@ public class ManagerAddUser extends AppCompatActivity {
         spin_add_usertype = findViewById(R.id.spin_add_usertype);
         edit_add_username = findViewById(R.id.edit_add_username);
         edit_add_password = findViewById(R.id.edit_add_password);
-        //findviewbyID ng confirm pass
         edit_confirm_password = findViewById(R.id.edit_confirm_password);
         btn_user_submit = findViewById(R.id.btn_user_submit);
         db = new DbManager(this);
@@ -46,13 +45,13 @@ public class ManagerAddUser extends AppCompatActivity {
         imageViewShowHidePwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (edit_add_password.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())){
+                if (edit_add_password.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())) {
                     edit_add_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     //Change Icon
                     imageViewShowHidePwd.setImageResource(R.drawable.hide_pass);
                 } else
                     edit_add_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    imageViewShowHidePwd.setImageResource(R.drawable.show_pass);
+                imageViewShowHidePwd.setImageResource(R.drawable.show_pass);
             }
         });
 
@@ -74,36 +73,47 @@ public class ManagerAddUser extends AppCompatActivity {
                 String txt_username = edit_add_username.getText().toString();
                 String txt_password = edit_add_password.getText().toString();
                 String txt_confirm = edit_confirm_password.getText().toString();
-                //String txt_confirm_password = gettext.tostring;
                 String spin_usertype = spin_add_usertype.getSelectedItem().toString();
 
-                //if statement(parehas yung txt pass tsaka txt confirm pass){
+                if (validateCredentials()) {
+                    db.insertUser(txt_password, txt_username, txt_confirm, spin_usertype);
+                    Log.i("ACCOUNTS TABLE", "User Inserted: " + txt_username + ", " + txt_password + ", " + txt_confirm + ", " + spin_usertype);
 
-                db.insertUser(txt_password,txt_username,txt_confirm,spin_usertype);
-                Log.i("ACCOUNTS TABLE", "User Inserted: " + txt_username + ", " + txt_password + ", " + txt_confirm + ", " + spin_usertype);
+                    Intent i = new Intent(ManagerAddUser.this, ManagerUserAccounts.class);
+                    startActivity(i);
 
-                Intent i = new Intent(ManagerAddUser.this, ManagerUserAccounts.class);
-                startActivity(i);
-            //}else{Toast error/incorrect password}
+                }
+
 
             }
         });
 
-        }
-    private boolean validatePassword() {
+    }
+
+    private boolean validateCredentials() {
+        String txt_username = edit_add_username.getText().toString();
         String txt_password = edit_add_password.getText().toString().trim();
         String txt_confirm = edit_confirm_password.getText().toString().trim();
-        if (txt_password.isEmpty()) {
-            Toast.makeText(this,"Field can't be empty",Toast.LENGTH_LONG).show();
-            return false;
+        try {
+
+            if (txt_username.equals(db.getUserByUsername(txt_username).get(0).get("user_name"))) {
+                Toast.makeText(this, "Username already used", Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+        } catch (Exception e) {
+            if (txt_password.isEmpty()) {
+                Toast.makeText(this, "Field can't be empty", Toast.LENGTH_LONG).show();
+                return false;
+            }
+            if (!txt_password.equals(txt_confirm)) {
+                Toast.makeText(this, "Password did not match", Toast.LENGTH_LONG).show();
+                return false;
+            } else {
+                return true;
+            }
         }
-        if (!txt_password.equals(txt_confirm)) {
-            Toast.makeText(this,"Password would not match",Toast.LENGTH_LONG).show();
-            return false;
-        }else {
-            Toast.makeText(this,"Password matched",Toast.LENGTH_LONG).show();
-            return true;
-        }
+        return false;
     }
 }
 

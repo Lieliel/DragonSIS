@@ -68,13 +68,13 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this,"Login Successful",Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(this, EmployeeMenu.class);
-                    intent.putExtra("user_ID",user);
+                    intent.putExtra("user_name",user);
                     startActivity(intent);
                 }else if(db.getUserByUsername(user).get(0).get("user_type").toString().equals("Manager")){
                     Toast.makeText(this,"Login Successful",Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(this, ManagerMenu.class);
-                    intent.putExtra("user_ID",user);
+                    intent.putExtra("user_name",user);
                     startActivity(intent);
                 }else{
                     Toast.makeText(this,"Error in determining User Type", Toast.LENGTH_LONG).show();

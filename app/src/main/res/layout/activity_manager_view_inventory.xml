@@ -70,7 +70,7 @@
         android:layout_marginEnd="28dp"
         android:ems="10"
         android:iconifiedByDefault="false"
-        android:queryHint="Search Products"
+        android:queryHint="Search Inventory"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -98,7 +98,7 @@
         android:background="@color/black"
         android:backgroundTint="@color/black"
         android:gravity="center"
-        android:text="View By"
+        android:text="Choose Category"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"

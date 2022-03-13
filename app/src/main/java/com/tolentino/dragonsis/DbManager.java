@@ -517,10 +517,6 @@ public class DbManager extends SQLiteOpenHelper {
         return historyList;
     }
 
-
-
-
-
     // Adding new Sales Details
     void insertUser(Integer sales_ID, Integer sales_amount, Integer items_sold, String sales_dates, String sales_time) {
         //Get the Data Repository in write mode

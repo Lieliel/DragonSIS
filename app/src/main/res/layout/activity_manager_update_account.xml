@@ -82,32 +82,32 @@
         android:id="@+id/spin_upd_acc_usertype"
         android:layout_width="139dp"
         android:layout_height="40dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="472dp"
         android:hint="Sample User Type"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></Spinner>
-
-    <Button
-        android:id="@+id/btn_upd_acc_update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:text="update"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_upd_acc_usertype_label"></Button>
 
     <Button
         android:id="@+id/btn_upd_acc_remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="16dp"
         android:text="remove"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_upd_acc_update"></Button>
+
+    <Button
+        android:id="@+id/btn_upd_acc_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:text="update"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_upd_acc_usertype_label"></Button>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

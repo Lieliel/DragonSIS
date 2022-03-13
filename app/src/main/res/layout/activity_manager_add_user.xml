@@ -29,24 +29,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edit_add_username"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="30dp"
 
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:hint="Input new Password"></EditText>
+        android:hint="Input new Password"
+        android:inputType="textPassword"></EditText>
 
     <ImageView
         android:id="@+id/imageview_show_hide_pwd"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@id/edit_add_password"
-        android:layout_marginTop="-41dp" />
+        android:layout_toEndOf="@id/edit_add_password"
+        android:layout_alignTop="@+id/edit_add_password"/>
 
     <EditText
         android:id="@+id/edit_confirm_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edit_add_password"
+        android:inputType="textPassword"
 
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
