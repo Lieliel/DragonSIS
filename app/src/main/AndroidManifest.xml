@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".ManagerUpdateProducts"
+            android:exported="true" />
+        <activity
             android:name=".ManagerAddInventory"
             android:exported="true" />
         <activity
