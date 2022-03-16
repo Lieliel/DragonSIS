@@ -64,6 +64,7 @@ public class ManagerAddUser extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerAddUser.this, ManagerUserAccounts.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -81,6 +82,7 @@ public class ManagerAddUser extends AppCompatActivity {
 
                     Intent i = new Intent(ManagerAddUser.this, ManagerUserAccounts.class);
                     startActivity(i);
+                    finish();
 
                 }
 

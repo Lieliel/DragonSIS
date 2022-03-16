@@ -70,12 +70,14 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(this, EmployeeMenu.class);
                     intent.putExtra("user_name",user);
                     startActivity(intent);
+                    finish();
                 }else if(db.getUserByUsername(user).get(0).get("user_type").toString().equals("Manager")){
                     Toast.makeText(this,"Login Successful",Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(this, ManagerMenu.class);
                     intent.putExtra("user_name",user);
                     startActivity(intent);
+                    finish();
                 }else{
                     Toast.makeText(this,"Error in determining User Type", Toast.LENGTH_LONG).show();
                 }
@@ -91,12 +93,14 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(this, ManagerMenu.class);
                     intent.putExtra("user_ID",user);
                     startActivity(intent);
+                    finish();
                 }else if(user.equals("empdev")&&pass.equals("empdev123")) {
                     Toast.makeText(this, "Developer Login Successful", Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(this, EmployeeMenu.class);
                     intent.putExtra("user_ID", user);
                     startActivity(intent);
+                    finish();
                 }else{
                     Toast.makeText(this,"Not registered or Invalid details",Toast.LENGTH_LONG).show();
                 }

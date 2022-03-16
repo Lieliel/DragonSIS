@@ -46,6 +46,7 @@ public class ManagerAddProduct extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerAddProduct.this, ManagerViewProducts.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -66,6 +67,7 @@ public class ManagerAddProduct extends AppCompatActivity {
 
                 Intent i = new Intent(ManagerAddProduct.this, ManagerViewProducts.class);
                 startActivity(i);
+                finish();
             }
         });
 

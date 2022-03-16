@@ -75,6 +75,7 @@ public class ManagerUserAccounts extends AppCompatActivity {
 
                 Intent intent = new Intent(ManagerUserAccounts.this, ManagerUpdateAccount.class);
                 startActivity(intent);
+                finish();
 
             }
         });

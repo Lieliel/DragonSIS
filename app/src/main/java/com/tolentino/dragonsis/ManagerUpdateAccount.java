@@ -64,6 +64,7 @@ public class ManagerUpdateAccount extends AppCompatActivity {
                 Log.i("USER TABLE:", "Successfully deleted Account");
                 Intent i = new Intent(ManagerUpdateAccount.this, ManagerUserAccounts.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -80,6 +81,7 @@ public class ManagerUpdateAccount extends AppCompatActivity {
                 db.updateUser(username, password, user_type);
                 Intent i = new Intent(ManagerUpdateAccount.this, ManagerUserAccounts.class);
                 startActivity(i);
+                finish();
             }
         });
 

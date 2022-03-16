@@ -23,6 +23,7 @@ public class ViewInventoryUpdates extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ViewInventoryUpdates.this, ManagerMenu.class);
                 startActivity(i);
+                finish();
             }
         });
 

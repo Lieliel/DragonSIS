@@ -41,6 +41,7 @@ public class ManagerViewProducts extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerViewProducts.this, ManagerMenu.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -50,6 +51,7 @@ public class ManagerViewProducts extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerViewProducts.this, ManagerAddProduct.class);
                 startActivity(i);
+                finish();
 
             }
         });

@@ -45,6 +45,7 @@ public class ManagerViewInventory extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerViewInventory.this, ManagerMenu.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -54,6 +55,7 @@ public class ManagerViewInventory extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerViewInventory.this, ManagerAddInventory.class);
                 startActivity(i);
+                finish();
 
             }
         });

@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_employee_menu.xml" value="0.1274062816616008" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_employee_view_inventory.xml" value="0.26197916666666665" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_employee_view_products.xml" value="0.26197916666666665" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_main.xml" value="0.21014492753623187" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_menu.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/drawable/button.xml" value="0.2101851851851852" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_add_inventory.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_add_product.xml" value="0.22447916666666667" />
@@ -17,6 +22,7 @@
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_add_user.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_menu.xml" value="0.19947916666666668" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_update_account.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_update_products.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_view_inventory.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_view_products.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_update_account.xml" value="0.25" />

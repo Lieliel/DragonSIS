@@ -5,17 +5,15 @@
     android:id="@+id/activity_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#b2e1fd"
-    android:backgroundTint="#b2e1fd"
-    tools:context=".MainActivity">
-
+    tools:context=".MainActivity"
+    android:padding="25dp">
 
     <Button
         android:id="@+id/mainlogin"
         android:layout_width="218dp"
         android:layout_height="56dp"
         android:layout_marginTop="32dp"
-        android:backgroundTint="#072f5f"
+
         android:text="Login"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
