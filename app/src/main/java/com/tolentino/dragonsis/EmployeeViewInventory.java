@@ -23,6 +23,7 @@ public class EmployeeViewInventory extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(EmployeeViewInventory.this, EmployeeMenu.class);
                 startActivity(i);
+                finish();
             }
         });
     }
