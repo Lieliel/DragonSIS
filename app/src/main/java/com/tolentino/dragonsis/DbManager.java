@@ -315,7 +315,7 @@ public class DbManager extends SQLiteOpenHelper {
         Cursor cursor = db.query(PROD_TABLE_NAME, new String[]{PROD_COL1, PROD_COL2, PROD_COL3, PROD_COL4, PROD_COL5, PROD_COL6}, PROD_COL1 + "=?", new String[]{String.valueOf(productID)}, null, null, null, null);
         if (cursor.moveToNext()) {
             HashMap<String, String> product = new HashMap<>();
-            product.put("prod_ID", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1)));
+            product.put("prod_id", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1)));
             product.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2)));
             product.put("prod_critical_num", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3)));
             product.put("prod_description", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4)));
@@ -339,6 +339,28 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(PROD_TABLE_NAME, PROD_COL1 + " = ?", new String[]{String.valueOf(prod_ID)});
         db.close();
+    }
+
+    // Update Product Details
+    void updateProduct(String prod_id, String prod_name, String prod_descrip, String prod_critnum, String prod_price, String prod_category){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(PROD_COL2, prod_name);
+        values.put(PROD_COL3, prod_critnum);
+        values.put(PROD_COL4, prod_descrip);
+        values.put(PROD_COL5, prod_price);
+        values.put(PROD_COL6, prod_category);
+
+        //Cursor cursor = db.rawQuery("Select * from " + ACC_TABLE_NAME + " where " + ACC_COL1 + "= ?",new String[]{username});
+
+        long newRowId = db.update(PROD_TABLE_NAME, values, PROD_COL1 + "=?", new String[]{prod_id});
+
+        if(newRowId == 1){
+            Log.i("PRODUCT TABLE:", "Product Updated Correctly");
+        }else{
+            Log.i("PRODUCT TABLE:", "Product not Updated Correctly");
+        }
+
     }
 
     ////////////////////////////////////////////////////////////////////

@@ -52,7 +52,7 @@ public class ManagerUserAccounts extends AppCompatActivity {
             }
         });
 
-        //Initiate ListView
+        //Adapt Users List
         list_users = findViewById(R.id.list_users);
         ArrayList<HashMap<String, String>> userList = db.getUsers();
         ListAdapter listAdapter = new SimpleAdapter(ManagerUserAccounts.this, userList, R.layout.list_row_user, new String[]{"user_name","user_password","user_type"}, new int[]{R.id.row_username, R.id.row_password, R.id.row_usertype});
