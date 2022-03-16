@@ -72,6 +72,7 @@ public class ManagerMenu extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerMenu.this, MainActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -88,7 +89,7 @@ public class ManagerMenu extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
-                .setTitle("Really Exit?")
+                .setTitle("Exit")
                 .setMessage("Are you sure you want to exit?")
                 .setNegativeButton(android.R.string.no, null)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
