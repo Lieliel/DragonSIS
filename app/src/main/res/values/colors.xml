@@ -10,4 +10,11 @@
     <color name="gray">#808080</color>
     <color name="background_color">#FF000000</color>
     <color name="border_color">#FF000000</color>
+    
+    //color palette 1
+    <color name="light_gray">#FFD3D4D9</color>
+    <color name="blue_munsell">#FF4B88A2</color>
+    <color name="fiery_rose">#FFF45B69</color>
+    <color name="eerie_black">#FF252627</color>
+    <color name="snow">#FFFFF9FB</color>
 </resources>
