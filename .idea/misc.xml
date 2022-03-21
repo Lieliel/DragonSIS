@@ -3,11 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/drawable/button.xml" value="0.22" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/drawable/button2.xml" value="0.267" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/drawable/my_border.xml" value="0.331" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_employee_menu.xml" value="0.1274062816616008" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_employee_view_inventory.xml" value="0.26197916666666665" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_employee_view_products.xml" value="0.26197916666666665" />
-        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_main.xml" value="0.21014492753623187" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_main.xml" value="0.9" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_add_inventory.xml" value="0.2015625" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_add_product.xml" value="0.2015625" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_add_user.xml" value="0.2015625" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_menu.xml" value="0.33" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_view_inventory.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/drawable/button.xml" value="0.2101851851851852" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_add_inventory.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_add_product.xml" value="0.22447916666666667" />

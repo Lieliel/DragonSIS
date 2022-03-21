@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 public class ManagerViewInventory extends AppCompatActivity {
 
     ImageView img_back_view_inventory;
-    ImageView img_add_inventory;
+    Button img_add_inventory;
     SearchView srch_inventory;
     Spinner spin_view_inventory;
     Spinner spin_sort_inventory;
