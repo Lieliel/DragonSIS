@@ -4,110 +4,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManagerViewProducts">
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    tools:context=".ManagerViewProducts"
+    android:padding="25dp">
 
 
     <ImageView
         android:id="@+id/img_back_view_products"
-        android:layout_width="51dp"
-        android:layout_height="57dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
         android:clickable="true"
-        android:src="@drawable/back_img"
+        android:src="@drawable/ic_baseline_arrow_back_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <ImageView
-        android:id="@+id/img_add_product"
-        android:layout_width="63dp"
-        android:layout_height="66dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="152dp"
-        android:clickable="true"
-        android:src="@drawable/ic_baseline_add_circle_outline_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Products"
+        android:textSize="22sp"
+        app:layout_constraintLeft_toRightOf="@id/img_back_view_products"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="25dp"/>
 
     <SearchView
         android:id="@+id/srch_product"
         android:layout_height="58dp"
-        android:layout_width="wrap_content"
-        android:maxWidth="215dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="28dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="50dp"
         android:ems="10"
         android:iconifiedByDefault="false"
         android:queryHint="Search Products"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
-        android:id="@+id/txt_view_prod_label"
-        android:layout_width="80dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
-        android:background="@color/black"
-        android:backgroundTint="@color/black"
-        android:gravity="center"
-        android:text="Choose Category"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        app:layout_constraintStart_toEndOf="@+id/img_add_product"
-        app:layout_constraintTop_toBottomOf="@+id/srch_product" />
-
-    <TextView
-        android:id="@+id/txt_sort_products"
-        android:layout_width="80dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/black"
-        android:backgroundTint="@color/black"
-        android:gravity="center"
-        android:text="Sort By"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        app:layout_constraintStart_toEndOf="@+id/img_add_product"
-        app:layout_constraintTop_toBottomOf="@+id/txt_view_prod_label" />
-
-    <!--Spinner dapat toh-->
-    <Spinner
-        android:id="@+id/edit_prod_category"
-        android:layout_width="193dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="18dp"
-        android:background="@drawable/my_border"
-        android:ems="10"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/srch_product" />
-
-    <!--Spinner din dapat toh-->
-    <Spinner
-        android:id="@+id/editTextTextPersonName6"
-        android:layout_width="192dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="18dp"
-        android:background="@drawable/my_border"
-        android:ems="10"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_prod_category" />
-
-    <ListView
-        android:id="@+id/list_products"
+    <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="497dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/srch_product"
+        android:layout_marginTop="24dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="Choose Category"
+            android:textAlignment="center"/>
+
+        <Spinner
+            android:id="@+id/edit_prod_category"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:textAlignment="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/txt_sort_products"
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="Sort By"
+            android:textAlignment="center"/>
+
+        <Spinner
+            android:id="@+id/editTextTextPersonName6"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_prod_category" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/img_add_product"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:text="Add Product"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2"
+        android:focusable="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />
+        app:layout_constraintTop_toBottomOf="@+id/img_add_product">
+
+        <ListView
+            android:id="@+id/list_products"
+            android:layout_width="match_parent"
+            android:layout_height="370dp"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

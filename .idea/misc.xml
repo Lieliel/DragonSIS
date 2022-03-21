@@ -14,7 +14,14 @@
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_add_product.xml" value="0.2015625" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_add_user.xml" value="0.2015625" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_menu.xml" value="0.33" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_update_products.xml" value="0.26197916666666665" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_user_accounts.xml" value="0.38697916666666665" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_view_inventory.xml" value="0.33" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_view_inventory_updates.xml" value="0.26197916666666665" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_view_products.xml" value="0.38697916666666665" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/list_row_inventory.xml" value="0.38697916666666665" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/list_row_product.xml" value="0.38697916666666665" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/list_row_user.xml" value="0.38697916666666665" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/drawable/button.xml" value="0.2101851851851852" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_add_inventory.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_add_product.xml" value="0.22447916666666667" />

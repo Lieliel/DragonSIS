@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -19,7 +20,7 @@ import java.util.HashMap;
 public class ManagerViewProducts extends AppCompatActivity {
 
     ImageView img_back_view_products;
-    ImageView img_add_product;
+    Button img_add_product;
     SearchView srch_product;
 
     DbManager db;
@@ -43,6 +44,8 @@ public class ManagerViewProducts extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerViewProducts.this, ManagerMenu.class);
                 startActivity(i);
+                Intent endActivity = new Intent("finish_activity");
+                sendBroadcast(endActivity);
                 finish();
             }
         });
@@ -53,8 +56,9 @@ public class ManagerViewProducts extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerViewProducts.this, ManagerAddProduct.class);
                 startActivity(i);
+                Intent endActivity = new Intent("finish_activity");
+                sendBroadcast(endActivity);
                 finish();
-
             }
         });
 
@@ -97,8 +101,10 @@ public class ManagerViewProducts extends AppCompatActivity {
                 edit.commit();
 
                 Intent intent = new Intent(ManagerViewProducts.this, ManagerUpdateProducts.class);
+                Intent endActivity = new Intent("finish_activity");
+                sendBroadcast(endActivity);
                 startActivity(intent);
-
+                finish();
             }
         });
     }

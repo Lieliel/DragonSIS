@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 public class ManagerUserAccounts extends AppCompatActivity {
 
     ImageView img_back_user_accounts;
-    ImageView img_add_user;
+    Button img_add_user;
     DbManager db;
     ListView list_users;
 
@@ -38,7 +39,9 @@ public class ManagerUserAccounts extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerUserAccounts.this, ManagerMenu.class);
                 startActivity(i);
-
+                Intent endActivity = new Intent("finish_activity");
+                sendBroadcast(endActivity);
+                finish();
             }
         });
 
@@ -48,7 +51,7 @@ public class ManagerUserAccounts extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerUserAccounts.this, ManagerAddUser.class);
                 startActivity(i);
-
+                finish();
             }
         });
 
@@ -75,6 +78,8 @@ public class ManagerUserAccounts extends AppCompatActivity {
 
                 Intent intent = new Intent(ManagerUserAccounts.this, ManagerUpdateAccount.class);
                 startActivity(intent);
+                Intent endActivity = new Intent("finish_activity");
+                sendBroadcast(endActivity);
                 finish();
 
             }

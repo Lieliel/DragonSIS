@@ -13,7 +13,7 @@
         android:id="@+id/img_back_view_inventory"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:clickable="true"
         android:src="@drawable/ic_baseline_arrow_back_24"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
         android:textSize="22sp"
         app:layout_constraintLeft_toRightOf="@id/img_back_view_inventory"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
         />
 
     <SearchView
@@ -34,7 +34,6 @@
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="4dp"
         android:ems="10"
         android:iconifiedByDefault="false"
         android:queryHint="Search Inventory"
@@ -53,15 +52,9 @@
             android:id="@+id/textView2"
             android:layout_width="120dp"
             android:layout_height="45dp"
-
-            android:background="@color/black"
-            android:backgroundTint="@color/black"
             android:gravity="center"
             android:text="Choose Category"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/srch_inventory"/>
+            android:textAlignment="center"/>
 
         <Spinner
             android:id="@+id/spin_view_inventory"
@@ -83,12 +76,9 @@
             android:id="@+id/textView4"
             android:layout_width="120dp"
             android:layout_height="45dp"
-            android:background="@color/black"
-            android:backgroundTint="@color/black"
             android:gravity="center"
             android:text="Sort By"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <Spinner
@@ -105,20 +95,27 @@
         android:id="@+id/img_add_inventory"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_marginTop="16dp"
         android:clickable="true"
         android:text="Add Inventory"
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout2"/>
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2"
+        android:focusable="true" />
 
-    <ListView
-        android:id="@+id/list_inventory"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="370dp"
+        android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_add_inventory"/>
+        app:layout_constraintTop_toBottomOf="@+id/img_add_inventory">
+
+        <ListView
+            android:id="@+id/list_inventory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

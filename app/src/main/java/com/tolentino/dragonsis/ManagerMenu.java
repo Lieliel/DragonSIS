@@ -3,8 +3,11 @@ package com.tolentino.dragonsis;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +20,7 @@ public class ManagerMenu extends AppCompatActivity {
     Button btn_pdf;
     Button btn_logout;
     Button btn_viewinvupd;
+    BroadcastReceiver broadcastReceiver1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +89,18 @@ public class ManagerMenu extends AppCompatActivity {
             }
         });
 
+        broadcastReceiver1 = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity")) {
+                    finish();
+                    unregisterReceiver(broadcastReceiver1);
+                }
+            }
+        };
+        registerReceiver(broadcastReceiver1, new IntentFilter("finish_activity"));
     }
     @Override
     public void onBackPressed() {

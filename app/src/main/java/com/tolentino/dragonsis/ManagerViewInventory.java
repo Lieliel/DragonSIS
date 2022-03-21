@@ -48,6 +48,8 @@ public class ManagerViewInventory extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerViewInventory.this, ManagerMenu.class);
                 startActivity(i);
+                Intent endActivity = new Intent("finish_activity");
+                sendBroadcast(endActivity);
                 finish();
             }
         });
@@ -58,6 +60,8 @@ public class ManagerViewInventory extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerViewInventory.this, ManagerAddInventory.class);
                 startActivity(i);
+                Intent endActivity = new Intent("finish_activity");
+                sendBroadcast(endActivity);
                 finish();
 
             }
@@ -104,7 +108,9 @@ public class ManagerViewInventory extends AppCompatActivity {
 
                 Intent intent = new Intent(ManagerViewInventory.this, ManagerUpdateProducts.class);
                 startActivity(intent);
-
+                Intent endActivity = new Intent("finish_activity");
+                sendBroadcast(endActivity);
+                finish();
             }
         });
     }

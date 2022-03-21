@@ -8,9 +8,9 @@
         android:id="@+id/row_inventory_product_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
 
-        android:text="sample inventory ID"></TextView>
+        android:text="sample inventory ID"/>
 
     <TextView
         android:id="@+id/row_inventory_name"
@@ -18,15 +18,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/row_inventory_product_ID"
 
-        android:text="sample inventory name"></TextView>
+        android:text="sample inventory name"/>
 
     <TextView
         android:id="@+id/row_inventory_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
 
-        android:text="sample date"></TextView>
+        android:text="sample date"/>
 
     <TextView
         android:id="@+id/row_inventory_quantity"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/row_inventory_date"
 
-        android:layout_alignParentRight="true"
-        android:text="sample quantity"></TextView>
+        android:layout_alignParentEnd="true"
+        android:text="sample quantity"/>
 
 </RelativeLayout>

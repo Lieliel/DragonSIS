@@ -17,10 +17,12 @@
             android:exported="true" />
         <activity
             android:name=".ManagerAddInventory"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".ManagerAddProduct"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".ManagerUpdateAccount"
             android:exported="true" />
@@ -29,16 +31,19 @@
             android:exported="true" />
         <activity
             android:name=".ManagerViewProducts"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".ManagerViewInventory"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".ManagerGeneratePdfReport"
             android:exported="true" />
         <activity
             android:name=".ManagerUserAccounts"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".EmployeeMenu"
             android:exported="true" />
@@ -47,16 +52,20 @@
             android:exported="true" />
         <activity
             android:name=".EmployeeViewProducts"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".UserViewInventoryUpdates"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".EmployeeViewInventory"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".ViewInventoryUpdates"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

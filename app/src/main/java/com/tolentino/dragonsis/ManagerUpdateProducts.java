@@ -55,6 +55,7 @@ public class ManagerUpdateProducts extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerUpdateProducts.this, ManagerViewProducts.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -106,6 +107,7 @@ public class ManagerUpdateProducts extends AppCompatActivity {
                 Log.i("PRODUCT TABLE:", "Successfully deleted Product");
                 Intent i = new Intent(ManagerUpdateProducts.this, ManagerViewProducts.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -125,6 +127,7 @@ public class ManagerUpdateProducts extends AppCompatActivity {
                 db.updateProduct(prod_id, prod_name, prod_descrip, prod_critnum, prod_price, prod_category);
                 Intent i = new Intent(ManagerUpdateProducts.this, ManagerViewProducts.class);
                 startActivity(i);
+                finish();
             }
         });
 
