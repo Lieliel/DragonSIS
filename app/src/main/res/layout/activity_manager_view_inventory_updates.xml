@@ -7,6 +7,35 @@
     tools:context=".ViewInventoryUpdates">
 
 
+    <EditText
+        android:id="@+id/editTextTextPersonName5"
+        android:layout_width="212dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/my_border"
+        android:ems="10"
+        android:hint="Category"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/black"
+        android:backgroundTint="@color/black"
+        android:gravity="center"
+        android:text="View By"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+
     <ImageView
         android:id="@+id/img_back_view_inventory4"
         android:layout_width="51dp"
@@ -27,7 +56,7 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/my_border"
         android:ems="10"
-        android:hint="Search Inventory History"
+        android:hint="Search Inventory"
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +85,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/my_border"
         android:ems="10"
-        android:hint="Newest, Oldest"
+        android:hint="Quantity, Demand"
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,5 +99,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName8" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="59dp"
+        android:layout_height="59dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_baseline_add_circle_outline_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/add_img"
+        tools:layout_editor_absoluteY="106dp"></ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

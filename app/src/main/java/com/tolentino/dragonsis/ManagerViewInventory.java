@@ -3,8 +3,10 @@ package com.tolentino.dragonsis;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -80,6 +82,29 @@ public class ManagerViewInventory extends AppCompatActivity {
             }
         });
 
+        //Select item from Product List then redirect to Update Products
+        list_inventory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //Toast.makeText(UserAccounts.this, userList.get(i).toString(),Toast.LENGTH_LONG).show();
 
+                SharedPreferences pref = getSharedPreferences("inventory_list", MODE_PRIVATE);
+
+                //Add information of selected item to Shared Preferences
+                SharedPreferences.Editor edit = pref.edit();
+                edit.putString("inventory_ID", inventorylist.get(i).get("inventory_ID"));
+                edit.putString("inventory_date", inventorylist.get(i).get("inventory_date"));
+                edit.putString("inventory_quantity", inventorylist.get(i).get("inventory_quantity"));
+                edit.putString("inventory_quantity_change", inventorylist.get(i).get("inventory_quantity_chang"));
+                edit.putString("inventory_remark", inventorylist.get(i).get("inventory_remark"));
+                edit.putString("inventory_date_updated", inventorylist.get(i).get("inventory_date_updated"));
+                edit.putString("prod_name", inventorylist.get(i).get("prod_name"));
+                edit.commit();
+
+                Intent intent = new Intent(ManagerViewInventory.this, ManagerUpdateProducts.class);
+                startActivity(intent);
+
+            }
+        });
     }
 }
