@@ -48,7 +48,7 @@ public class EmployeeMenu extends AppCompatActivity {
         btn_invupd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(EmployeeMenu.this, UserViewInventoryUpdates.class);
+                Intent i = new Intent(EmployeeMenu.this, EmployeeInventoryUpdates.class);
                 startActivity(i);
             }
         });

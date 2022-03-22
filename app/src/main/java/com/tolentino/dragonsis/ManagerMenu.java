@@ -80,12 +80,13 @@ public class ManagerMenu extends AppCompatActivity {
         btn_viewinvupd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerMenu.this, ViewInventoryUpdates.class);
+                Intent i = new Intent(ManagerMenu.this, ManagerInventoryUpdates.class);
                 startActivity(i);
             }
         });
 
     }
+
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)

@@ -7,21 +7,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class UserViewInventoryUpdates extends AppCompatActivity {
+public class ManagerInventoryUpdates extends AppCompatActivity {
 
-    ImageView img_back_user_inventory4;
+    ImageView img_back_man_view_inventory_updates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_employee_inventory_updates);
+        setContentView(R.layout.activity_manager_view_inventory_updates);
 
-        img_back_user_inventory4 = findViewById(R.id.img_back_user_inventory4);
+        img_back_man_view_inventory_updates = findViewById(R.id.img_back_man_view_inventory_updates);
 
-        img_back_user_inventory4.setOnClickListener(new View.OnClickListener() {
+        img_back_man_view_inventory_updates.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(UserViewInventoryUpdates.this, EmployeeMenu.class);
+                Intent i = new Intent(ManagerInventoryUpdates.this, ManagerMenu.class);
                 startActivity(i);
                 finish();
             }

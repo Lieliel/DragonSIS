@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewInventoryUpdates">
+    tools:context=".ManagerInventoryUpdates">
 
 
     <EditText
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
 
     <ImageView
-        android:id="@+id/img_back_view_inventory4"
+        android:id="@+id/img_back_man_view_inventory_updates"
         android:layout_width="51dp"
         android:layout_height="57dp"
         android:layout_alignParentLeft="true"

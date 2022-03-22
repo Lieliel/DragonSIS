@@ -52,13 +52,13 @@
             android:name=".EmployeeViewProducts"
             android:exported="true" />
         <activity
-            android:name=".UserViewInventoryUpdates"
+            android:name=".EmployeeInventoryUpdates"
             android:exported="true" />
         <activity
             android:name=".EmployeeViewInventory"
             android:exported="true" />
         <activity
-            android:name=".ViewInventoryUpdates"
+            android:name=".ManagerInventoryUpdates"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
