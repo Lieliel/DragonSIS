@@ -21,16 +21,19 @@
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manage_view_products.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_add_inventory.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_add_product.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_add_sales.xml" value="0.5" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_add_user.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_generate_pdf_report.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_menu.xml" value="0.19947916666666668" />
+        <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_transaction_options.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_update_account.xml" value="0.25" />
-        <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_update_inventory.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_update_inventory.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_update_products.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_user_accounts.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_view_inventory.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_view_inventory_updates.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_view_products.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_manager_view_sales.xml" value="0.18" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_update_account.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_user_accounts.xml" value="0.19947916666666668" />
         <entry key="..\:/AndroidStudioProjects/DragonSIS/app/src/main/res/layout/activity_userinventory.xml" value="0.22447916666666667" />

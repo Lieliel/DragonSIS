@@ -106,10 +106,11 @@
         android:layout_height="59dp"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
         android:clickable="true"
         android:src="@drawable/ic_baseline_add_circle_outline_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/add_img"
-        tools:layout_editor_absoluteY="106dp"></ImageView>
+        app:layout_constraintTop_toBottomOf="@+id/img_back_man_view_inventory_updates"
+        app:srcCompat="@drawable/add_img"></ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

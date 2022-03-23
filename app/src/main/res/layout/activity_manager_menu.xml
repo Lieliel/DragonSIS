@@ -64,7 +64,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/button"
-        android:text="@string/manage_transac"
+        android:text="@string/view_sales"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
