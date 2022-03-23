@@ -9,16 +9,16 @@ import android.widget.ImageView;
 
 public class EmployeeViewInventory extends AppCompatActivity {
 
-    ImageView img_back_user_inventory;
+    ImageView img_back_employee_inventory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_view_inventory);
 
-        img_back_user_inventory = findViewById(R.id.img_back_user_inventory);
+        img_back_employee_inventory = findViewById(R.id.img_back_employee_inventory);
 
-        img_back_user_inventory.setOnClickListener(new View.OnClickListener() {
+        img_back_employee_inventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(EmployeeViewInventory.this, EmployeeMenu.class);

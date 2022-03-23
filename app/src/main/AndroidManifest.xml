@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppStyle">
         <activity
+            android:name=".ManagerViewSales"
+            android:exported="false" />
+        <activity
+            android:name=".ManagerUpdateInventory"
+            android:exported="true" />
+        <activity
             android:name=".ManagerUpdateProducts"
             android:exported="true" />
         <activity
@@ -55,7 +61,7 @@
             android:exported="true"
             android:windowSoftInputMode="adjustNothing"/>
         <activity
-            android:name=".UserViewInventoryUpdates"
+            android:name=".EmployeeInventoryUpdates"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing"/>
         <activity
@@ -63,7 +69,7 @@
             android:exported="true"
             android:windowSoftInputMode="adjustNothing"/>
         <activity
-            android:name=".ViewInventoryUpdates"
+            android:name=".ManagerInventoryUpdates"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing"/>
         <activity

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
@@ -25,6 +26,7 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
     Button btn_gnr_sales;
     Button btn_gnr_inv;
     Button btn_gnr_full;
+    Button btn_back_report;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
         btn_gnr_sales = findViewById(R.id.btn_gnr_sales);
         btn_gnr_inv = findViewById(R.id.btn_gnr_inv);
         btn_gnr_full = findViewById(R.id.btn_gnr_full);
+        btn_back_report = findViewById(R.id.btn_back_report);
 
         btn_gnr_sales.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +64,16 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
                 //create Full Report
                 createFullPdf();
                 Toast.makeText(ManagerGeneratePdfReport.this, "Full Report Generated", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Back to Manager Menu
+        btn_back_report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ManagerGeneratePdfReport.this, ManagerMenu.class);
+                startActivity(i);
+                finish();
             }
         });
     }

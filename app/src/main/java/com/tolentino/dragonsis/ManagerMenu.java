@@ -21,6 +21,7 @@ public class ManagerMenu extends AppCompatActivity {
     Button btn_logout;
     Button btn_viewinvupd;
     BroadcastReceiver broadcastReceiver1;
+    Button btn_man_trans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class ManagerMenu extends AppCompatActivity {
         btn_pdf = findViewById(R.id.btn_pdf);
         btn_logout = findViewById(R.id.btn_logout);
         btn_viewinvupd = findViewById(R.id.btn_viewinvupd);
+        btn_man_trans = findViewById(R.id.btn_man_trans);
 
         //Redirect to User Accounts
         btn_useraccounts.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +86,15 @@ public class ManagerMenu extends AppCompatActivity {
         btn_viewinvupd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerMenu.this, ViewInventoryUpdates.class);
+                Intent i = new Intent(ManagerMenu.this, ManagerInventoryUpdates.class);
+                startActivity(i);
+            }
+        });
+
+        btn_man_trans.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ManagerMenu.this, ManagerViewSales.class);
                 startActivity(i);
             }
         });
@@ -102,6 +112,7 @@ public class ManagerMenu extends AppCompatActivity {
         };
         registerReceiver(broadcastReceiver1, new IntentFilter("finish_activity"));
     }
+
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)

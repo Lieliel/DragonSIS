@@ -26,14 +26,14 @@ public class DbManager extends SQLiteOpenHelper {
     private static final String PROD_COL1 = "prod_ID";
     private static final String PROD_COL2 = "prod_name";
     private static final String PROD_COL3 = "prod_critical_num";
-    private static final String PROD_COL4 = "prod_description";
+    private static final String PROD_COL4 = "prod_description"; //gawing total quantity de bale yung
     private static final String PROD_COL5 = "prod_price";
     private static final String PROD_COL6 = "prod_category";
 
     //Inventory
     private static final String INV_TABLE_NAME = "inventory_table";
     private static final String INV_COL1 = "inventory_ID";
-    private static final String INV_COL2 = "inventory_date";
+    private static final String INV_COL2 = "inventory_date"; //kung kelan stock in
     private static final String INV_COL3 = "inventory_quantity";
     private static final String INV_COL4 = "inventory_quantity_change";
     private static final String INV_COL5 = "inventory_remark";
@@ -56,8 +56,6 @@ public class DbManager extends SQLiteOpenHelper {
     private static final String SALES_COL3 = "items_sold";
     private static final String SALES_COL4 = "sales_dates";
     private static final String SALES_COL5 = "sales_time";
-
-
 
     public DbManager(Context context) {
         super(context, ACC_TABLE_NAME, null, 1);

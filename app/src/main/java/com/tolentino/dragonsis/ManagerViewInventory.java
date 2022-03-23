@@ -87,7 +87,7 @@ public class ManagerViewInventory extends AppCompatActivity {
             }
         });
 
-        //Select item from Product List then redirect to Update Products
+        //Select item from Inventory List then redirect to Update Inventory
         list_inventory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -106,7 +106,7 @@ public class ManagerViewInventory extends AppCompatActivity {
                 edit.putString("prod_name", inventorylist.get(i).get("prod_name"));
                 edit.commit();
 
-                Intent intent = new Intent(ManagerViewInventory.this, ManagerUpdateProducts.class);
+                Intent intent = new Intent(ManagerViewInventory.this, ManagerUpdateInventory.class);
                 startActivity(intent);
                 Intent endActivity = new Intent("finish_activity");
                 sendBroadcast(endActivity);
