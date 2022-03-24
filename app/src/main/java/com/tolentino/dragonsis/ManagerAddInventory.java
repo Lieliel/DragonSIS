@@ -56,13 +56,14 @@ public class ManagerAddInventory extends AppCompatActivity {
         btn_inv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Convert to EditText Values to String
+                //Convert EditText Values to String
                 String productDate = edit_add_date.getText().toString();
                 String spin_prodName = spin_add_inventory_productname.getSelectedItem().toString();
                 int invQuantity = Integer.parseInt(edit_inv_quantity.getText().toString());
 
-                //Use db function to add record to products table
+                //Use db function to add record to inventory table
                 db.insertInventory(spin_prodName, productDate, invQuantity);
+                db.addProductTotalQuant(spin_prodName,invQuantity);
                 Log.i("INVENTORY TABLE", "Inventory Inserted: " + spin_prodName + ", " + productDate + ", " + invQuantity);
 
                 Intent i = new Intent(ManagerAddInventory.this, ManagerViewInventory.class);

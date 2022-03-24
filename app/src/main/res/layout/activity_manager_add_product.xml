@@ -19,20 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></ImageView>
 
-    <EditText
-        android:id="@+id/edit_add_productname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-
-        android:layout_marginTop="150dp"
-        android:hint="Input new product name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></EditText>
-
-    <EditText
+    <!--<EditText
         android:id="@+id/edit_add_prod_total_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,22 +30,33 @@
         android:hint="Product Total Quantity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_add_productname"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/edit_add_productname"></EditText>-->
+
+    <EditText
+        android:id="@+id/edit_add_productname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="192dp"
+        android:hint="Input new product name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></EditText>
 
     <EditText
         android:id="@+id/edit_add_crit_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_add_prod_total_quantity"
         android:layout_centerHorizontal="true"
 
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="28dp"
         android:hint="Input crit num"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_add_prod_total_quantity"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/edit_add_productname"></EditText>
 
     <EditText
         android:id="@+id/edit_add_price"

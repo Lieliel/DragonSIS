@@ -135,7 +135,7 @@ public class ManagerUpdateInventory extends AppCompatActivity {
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
             String curr_date = df.format(d);
             db.insertInvHis(curr_date,"Added ", inv_quantity_change, pref.getString("prod_name", null));
-
+            db.addProductTotalQuant(pref.getString("prod_name", null),inv_quantity_change);
 
         }else if(radioText.equals("Sold")){
             fin_quantity = inv_curr_quan - inv_quantity_change;
@@ -144,7 +144,7 @@ public class ManagerUpdateInventory extends AppCompatActivity {
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
             String curr_date = df.format(d);
             db.insertInvHis(curr_date,"Sold ", inv_quantity_change, pref.getString("prod_name", null));
-
+            db.subtractProductTotalQuant(pref.getString("prod_name", null),inv_quantity_change);
         }else if(radioText.equals("Remove")){
             fin_quantity = inv_curr_quan - inv_quantity_change;
 
@@ -152,6 +152,7 @@ public class ManagerUpdateInventory extends AppCompatActivity {
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
             String curr_date = df.format(d);
             db.insertInvHis(curr_date,"Removed ", inv_quantity_change, pref.getString("prod_name", null));
+            db.subtractProductTotalQuant(pref.getString("prod_name", null),inv_quantity_change);
         }else{
             Toast.makeText(this, "Error in Quantity Change", Toast.LENGTH_SHORT).show();
         }
