@@ -66,6 +66,8 @@ public class ManagerUpdateInventory extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(ManagerUpdateInventory.this, ManagerViewInventory.class);
+                Intent endActivity = new Intent("finish_activity_man_view_inventory");
+                sendBroadcast(endActivity);
                 startActivity(i);
                 finish();
             }
@@ -102,8 +104,10 @@ public class ManagerUpdateInventory extends AppCompatActivity {
                 }
 
                 Intent i = new Intent(ManagerUpdateInventory.this, ManagerViewInventory.class);
+                Intent endActivity = new Intent("finish_activity_man_view_inventory");
+                sendBroadcast(endActivity);
                 startActivity(i);
-
+                finish();
             }
         });
 
@@ -113,8 +117,10 @@ public class ManagerUpdateInventory extends AppCompatActivity {
             public void onClick(View view) {
                 db.deleteInventory(pref.getString("inventory_ID", null));
                 Intent i = new Intent(ManagerUpdateInventory.this, ManagerViewInventory.class);
+                Intent endActivity = new Intent("finish_activity_man_view_inventory");
+                sendBroadcast(endActivity);
                 startActivity(i);
-
+                finish();
             }
         });
 

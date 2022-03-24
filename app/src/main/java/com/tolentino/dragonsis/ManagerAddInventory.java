@@ -42,6 +42,8 @@ public class ManagerAddInventory extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(ManagerAddInventory.this, ManagerViewInventory.class);
+                Intent endActivity = new Intent("finish_activity_man_view_inventory");
+                sendBroadcast(endActivity);
                 startActivity(i);
                 finish();
             }
@@ -66,6 +68,8 @@ public class ManagerAddInventory extends AppCompatActivity {
                 Log.i("INVENTORY TABLE", "Inventory Inserted: " + spin_prodName + ", " + productDate + ", " + invQuantity);
 
                 Intent i = new Intent(ManagerAddInventory.this, ManagerViewInventory.class);
+                Intent endActivity = new Intent("finish_activity_man_view_inventory");
+                sendBroadcast(endActivity);
                 startActivity(i);
                 finish();
             }

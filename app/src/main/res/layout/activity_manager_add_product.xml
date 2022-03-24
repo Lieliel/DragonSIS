@@ -17,7 +17,7 @@
         android:clickable="true"
         android:src="@drawable/back_img"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:id="@+id/edit_add_productname"
@@ -30,26 +30,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></EditText>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
-        android:id="@+id/edit_add_prod_total_quantity"
+        android:id="@+id/edit_add_product_descrip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edit_add_productname"
 
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:hint="Product Total Quantity"
+        android:hint="Input product description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_add_productname"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/edit_add_productname"/>
 
     <EditText
         android:id="@+id/edit_add_crit_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_add_prod_total_quantity"
+        android:layout_below="@+id/edit_add_product_descrip"
         android:layout_centerHorizontal="true"
 
         android:layout_marginTop="30dp"
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_add_prod_total_quantity"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/edit_add_product_descrip"/>
 
     <EditText
         android:id="@+id/edit_add_price"
@@ -72,7 +72,7 @@
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_add_crit_num"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/edit_add_crit_num"/>
 
     <Spinner
         android:id="@+id/spin_add_category"
@@ -84,7 +84,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_add_price"></Spinner>
+        app:layout_constraintTop_toBottomOf="@+id/edit_add_price"/>
 
     <Button
         android:id="@+id/btn_product_submit"
@@ -97,6 +97,6 @@
         android:text="Add Product"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spin_add_category"></Button>
+        app:layout_constraintTop_toBottomOf="@+id/spin_add_category"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

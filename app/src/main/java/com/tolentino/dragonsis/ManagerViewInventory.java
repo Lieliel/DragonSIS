@@ -2,7 +2,10 @@ package com.tolentino.dragonsis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +28,7 @@ public class ManagerViewInventory extends AppCompatActivity {
     SearchView srch_inventory;
     Spinner spin_view_inventory;
     Spinner spin_sort_inventory;
+    BroadcastReceiver broadcastReceiver2;
 
     DbManager db;
     ListView list_inventory;
@@ -60,8 +64,6 @@ public class ManagerViewInventory extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerViewInventory.this, ManagerAddInventory.class);
                 startActivity(i);
-                Intent endActivity = new Intent("finish_activity");
-                sendBroadcast(endActivity);
                 finish();
 
             }
@@ -109,10 +111,20 @@ public class ManagerViewInventory extends AppCompatActivity {
 
                 Intent intent = new Intent(ManagerViewInventory.this, ManagerUpdateInventory.class);
                 startActivity(intent);
-                Intent endActivity = new Intent("finish_activity");
-                sendBroadcast(endActivity);
-                finish();
             }
         });
+
+        broadcastReceiver2 = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity_man_view_inventory")) {
+                    finish();
+                    unregisterReceiver(broadcastReceiver2);
+                }
+            }
+        };
+        registerReceiver(broadcastReceiver2, new IntentFilter("finish_activity_man_view_inventory"));
     }
 }
