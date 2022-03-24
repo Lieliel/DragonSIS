@@ -26,7 +26,7 @@ public class DbManager extends SQLiteOpenHelper {
     private static final String PROD_COL1 = "prod_ID";
     private static final String PROD_COL2 = "prod_name";
     private static final String PROD_COL3 = "prod_critical_num";
-    private static final String PROD_COL4 = "prod_description";
+    private static final String PROD_COL4 = "prod_total_quantity";
     private static final String PROD_COL5 = "prod_price";
     private static final String PROD_COL6 = "prod_category";
 
@@ -75,7 +75,7 @@ public class DbManager extends SQLiteOpenHelper {
                 + PROD_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + PROD_COL2 + " TEXT,"
                 + PROD_COL3 + " INTEGER,"
-                + PROD_COL4 + " TEXT,"
+                + PROD_COL4 + " INTEGER,"
                 + PROD_COL5 + " INTEGER,"
                 + PROD_COL6 + " TEXT)";
         db.execSQL(create_Prod_Table);
@@ -236,14 +236,14 @@ public class DbManager extends SQLiteOpenHelper {
 
 
     // Adding New Product Details
-    void insertProduct(String prod_name, int prod_critical_num, String prod_description, int prod_price, String prod_category) {
+    void insertProduct(String prod_name, int prod_critical_num, String prod_total_quantity, int prod_price, String prod_category) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();
         cValues.put(PROD_COL2, prod_name);
         cValues.put(PROD_COL3, prod_critical_num);
-        cValues.put(PROD_COL4, prod_description);
+        cValues.put(PROD_COL4, prod_total_quantity);
         cValues.put(PROD_COL5, prod_price);
         cValues.put(PROD_COL6, prod_category);
         // Insert the new row, returning the primary key value of the new row
@@ -270,7 +270,7 @@ public class DbManager extends SQLiteOpenHelper {
             products.put("prod_ID", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1)));
             products.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2)));
             products.put("prod_critical_num", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3)));
-            products.put("prod_description", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4)));
+            products.put("prod_total_quantity", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4)));
             products.put("prod_price", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5)));
             products.put("prod_category", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
             productList.add(products);
@@ -316,7 +316,7 @@ public class DbManager extends SQLiteOpenHelper {
             product.put("prod_id", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1)));
             product.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2)));
             product.put("prod_critical_num", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3)));
-            product.put("prod_description", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4)));
+            product.put("prod_total_quantity", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4)));
             product.put("prod_price", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5)));
             product.put("prod_category", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
 
@@ -340,12 +340,12 @@ public class DbManager extends SQLiteOpenHelper {
     }
 
     // Update Product Details
-    void updateProduct(String prod_id, String prod_name, String prod_descrip, String prod_critnum, String prod_price, String prod_category){
+    void updateProduct(String prod_id, String prod_name, String prod_total_quantity, String prod_critnum, String prod_price, String prod_category){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(PROD_COL2, prod_name);
         values.put(PROD_COL3, prod_critnum);
-        values.put(PROD_COL4, prod_descrip);
+        values.put(PROD_COL4, prod_total_quantity);
         values.put(PROD_COL5, prod_price);
         values.put(PROD_COL6, prod_category);
 
@@ -476,30 +476,60 @@ public class DbManager extends SQLiteOpenHelper {
         db.close();
     }
 
+    ////////////////////////////////////////////////////////////////////
+    ///////////////// INVENTORY HISTORY FUNCTIONS //////////////////////
+    ////////////////////////////////////////////////////////////////////
+
     // Adding new Inventory History
-    void insertInvHis(Integer update_ID, String inventory_update_date, String inventory_action, Integer inventory_quantity_change, Integer inventory_ID, String inventory_name) {
+    void insertInvHis(/*Integer update_ID, */String inventory_update_date, String inventory_action, Integer inventory_quantity_change,/* Integer inventory_ID, */String inventory_name) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();
-        cValues.put(INV_HIS_COL1, inventory_ID);
+        //cValues.put(INV_HIS_COL1, inventory_ID);
         cValues.put(INV_HIS_COL2, inventory_update_date);
         cValues.put(INV_HIS_COL3, inventory_action);
         cValues.put(INV_HIS_COL4, inventory_quantity_change);
-        cValues.put(INV_HIS_COL5, inventory_ID);
+        //cValues.put(INV_HIS_COL5, inventory_ID);
         cValues.put(INV_HIS_COL6, inventory_name);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(INV_HIS_TABLE_NAME, null, cValues);
 
         if(newRowId == 1){
-            Log.i("INVENTORYHISTORY TABLE:", "Inventory History Added Correctly");
+            Log.i("INV HISTORY TABLE:", "Inventory History Added Correctly");
         }else{
-            Log.i("INVENTORYHISTORY TABLE:", "Inventory History not Added Correctly");
+            Log.i("INV HISTORY TABLE:", "Inventory History not Added Correctly");
         }
 
         db.close();
     }
+/*
+    private static final String INV_HIS_TABLE_NAME = "inventory_history_table";
+    private static final String INV_HIS_COL1 = "update_ID";
+    private static final String INV_HIS_COL2 = "inventory_update_date";
+    private static final String INV_HIS_COL3 = "inventory_action";
+    private static final String INV_HIS_COL4 = "inventory_quantity_change";
+    private static final String INV_HIS_COL5 = "inventory_ID";
+    private static final String INV_HIS_COL6 = "prod_name";*/
 
+    //Function to create Inventory Message ArrayList
+    public ArrayList<String> getInvMessage() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<String> invMessageList = new ArrayList<String>();
+        String query = "SELECT * FROM " + INV_HIS_TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()) {
+            do {
+                invMessageList.add(cursor.getString(2) + cursor.getString(3) + " " + cursor.getString(5) + " on " + cursor.getString(1));
+            } while (cursor.moveToNext());
+            cursor.close();
+            db.close();
+        }
+
+        return invMessageList;
+
+    }
 
     // Get All Inventory History Details
     public ArrayList<HashMap<String, String>> getInventoryHistory() {
@@ -556,7 +586,7 @@ public class DbManager extends SQLiteOpenHelper {
     }
 
     // Adding new Sales Details
-    void insertUser(Integer sales_ID, Integer sales_amount, Integer items_sold, String sales_dates, String sales_time) {
+    void insertSales(Integer sales_ID, Integer sales_amount, Integer items_sold, String sales_dates, String sales_time) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys

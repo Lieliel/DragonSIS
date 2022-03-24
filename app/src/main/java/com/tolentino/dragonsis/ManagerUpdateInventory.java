@@ -77,6 +77,7 @@ public class ManagerUpdateInventory extends AppCompatActivity {
         txt_man_upd_inv_quantity.setText(pref.getString("inventory_quantity", null));
         edit_man_upd_inv_remarks.setText(pref.getString("inventory_remark", null));
         txt_man_upd_inv_date.setText(pref.getString("inventory_date", null));
+        Log.i("Inv Quan Change Tag", pref.getString("inventory_quantity",null));
 
         //Update Inventory when pressed
         btn_man_upd_inv_update.setOnClickListener(new View.OnClickListener() {
@@ -86,17 +87,27 @@ public class ManagerUpdateInventory extends AppCompatActivity {
                 String inv_prod_name = pref.getString("prod_name", null);
                 String inv_remark = edit_man_upd_inv_remarks.getText().toString();
 
-                int inv_quantity_change = Integer.parseInt(edit_man_upd_inv_quantity_change.getText().toString());
-                int inv_curr_quantity = Integer.parseInt(pref.getString("inventory_quantity", null));
+                int inv_quantity_change;
+                int inv_curr_quantity;
 
-                String new_inv_quan = changeQuantity(view,inv_curr_quantity,inv_quantity_change);
-                db.updateInventory(inv_id,new_inv_quan,inv_remark,inv_prod_name);
+                //if merong laman yung quantity change, update quantity, kung wala edi skip
+                if(!edit_man_upd_inv_quantity_change.getText().toString().equals("")){
+                    inv_quantity_change = Integer.parseInt(edit_man_upd_inv_quantity_change.getText().toString());
+                    inv_curr_quantity = Integer.parseInt(pref.getString("inventory_quantity", null));
+                    String new_inv_quan = changeQuantity(view,inv_curr_quantity,inv_quantity_change);
+                    db.updateInventory(inv_id,new_inv_quan,inv_remark,inv_prod_name);
+                }else{
+                    String new_inv_quan = pref.getString("inventory_quantity", null);
+                    db.updateInventory(inv_id,new_inv_quan,inv_remark,inv_prod_name);
+                }
+
                 Intent i = new Intent(ManagerUpdateInventory.this, ManagerViewInventory.class);
                 startActivity(i);
 
             }
         });
 
+        //Delete Inventory Record
         btn_man_upd_inv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,15 +125,33 @@ public class ManagerUpdateInventory extends AppCompatActivity {
         int radioID = radiogr_man_upd_inv_action.getCheckedRadioButtonId();
         radioButton = findViewById(radioID);
         String radioText = radioButton.getText().toString();
-        Toast.makeText(this,radioText,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,radioText,Toast.LENGTH_SHORT).show();
         int fin_quantity = 0;
 
         if(radioText.equals("Add")){
             fin_quantity = inv_curr_quan + inv_quantity_change;
+
+            Date d = Calendar.getInstance().getTime();
+            SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+            String curr_date = df.format(d);
+            db.insertInvHis(curr_date,"Added ", inv_quantity_change, pref.getString("prod_name", null));
+
+
         }else if(radioText.equals("Sold")){
             fin_quantity = inv_curr_quan - inv_quantity_change;
+
+            Date d = Calendar.getInstance().getTime();
+            SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+            String curr_date = df.format(d);
+            db.insertInvHis(curr_date,"Sold ", inv_quantity_change, pref.getString("prod_name", null));
+
         }else if(radioText.equals("Remove")){
             fin_quantity = inv_curr_quan - inv_quantity_change;
+
+            Date d = Calendar.getInstance().getTime();
+            SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+            String curr_date = df.format(d);
+            db.insertInvHis(curr_date,"Removed ", inv_quantity_change, pref.getString("prod_name", null));
         }else{
             Toast.makeText(this, "Error in Quantity Change", Toast.LENGTH_SHORT).show();
         }
