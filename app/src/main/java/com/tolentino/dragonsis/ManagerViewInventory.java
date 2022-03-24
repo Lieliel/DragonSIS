@@ -82,6 +82,7 @@ public class ManagerViewInventory extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
+
                 ((SimpleAdapter) ManagerViewInventory.this.listAdapter).getFilter().filter(s);
                 return false;
             }

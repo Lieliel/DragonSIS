@@ -26,7 +26,7 @@ public class DbManager extends SQLiteOpenHelper {
     private static final String PROD_COL1 = "prod_ID";
     private static final String PROD_COL2 = "prod_name";
     private static final String PROD_COL3 = "prod_critical_num";
-    private static final String PROD_COL4 = "prod_description"; //gawing total quantity de bale yung
+    private static final String PROD_COL4 = "prod_description";
     private static final String PROD_COL5 = "prod_price";
     private static final String PROD_COL6 = "prod_category";
 
@@ -390,6 +390,26 @@ public class DbManager extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Update Inventory Details
+    void updateInventory(String inv_id, String inv_quantity, String inv_remark, String prod_name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(INV_COL3, inv_quantity);
+        values.put(INV_COL5, inv_remark);
+        values.put(INV_COL6, prod_name);
+
+        //Cursor cursor = db.rawQuery("Select * from " + ACC_TABLE_NAME + " where " + ACC_COL1 + "= ?",new String[]{username});
+
+        long newRowId = db.update(INV_TABLE_NAME, values, INV_COL1 + "=?", new String[]{inv_id});
+
+        if(newRowId == 1){
+            Log.i("INVENTORY TABLE:", "Product Updated Correctly");
+        }else{
+            Log.i("INVENTORY TABLE:", "Product not Updated Correctly");
+        }
+
+    }
+
     // Get All Inventory Details
     public ArrayList<HashMap<String, String>> getInventory() {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -456,10 +476,8 @@ public class DbManager extends SQLiteOpenHelper {
         db.close();
     }
 
-
-
     // Adding new Inventory History
-    void insertUser(Integer update_ID, String inventory_update_date, String inventory_action, Integer inventory_quantity_change, Integer inventory_ID, String inventory_name) {
+    void insertInvHis(Integer update_ID, String inventory_update_date, String inventory_action, Integer inventory_quantity_change, Integer inventory_ID, String inventory_name) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
