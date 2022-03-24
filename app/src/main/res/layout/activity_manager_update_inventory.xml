@@ -4,183 +4,193 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManagerUpdateInventory">
-
-    <TextView
-        android:id="@+id/txt_man_upd_inv_id_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="104dp"
-        android:text="Inventory ID: "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".ManagerUpdateInventory"
+    android:padding="25dp">
 
     <ImageView
         android:id="@+id/img_man_upd_inv_back"
-        android:layout_width="51dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back_img" />
+        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
     <TextView
-        android:id="@+id/txt_man_upd_inv_prod_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="24dp"
-        android:text="Product Name: "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_man_upd_inv_id_label" />
+        android:text="Update Inventory"
+        android:textSize="22sp"
+        app:layout_constraintLeft_toRightOf="@id/img_man_upd_inv_back"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="25dp"/>
 
-    <TextView
-        android:id="@+id/txt_man_upd_inv_quantity_label"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="24dp"
-        android:text="Quantity: "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_man_upd_inv_prod_name_label" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/txt_man_upd_inv_quantity_change_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="268dp"
-        android:text="Enter Quantity Change of this product"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edit_man_upd_inv_quantity_change"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_man_upd_inv_quantity_change_label" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <RadioGroup
-        android:id="@+id/radiogr_man_upd_inv_action"
-        android:layout_width="315dp"
-        android:layout_height="75dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_man_upd_inv_quantity_change">
+                <TextView
+                    android:id="@+id/txt_man_upd_inv_id_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Inventory ID: "/>
 
-        <RadioButton
-            android:id="@+id/radiobtn_man_upd_inv_add"
-            android:layout_width="85dp"
-            android:layout_height="103dp"
-            android:text="Add" />
+                <TextView
+                    android:id="@+id/txt_man_upd_inv_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sample ID" />
+            </LinearLayout>
 
-        <RadioButton
-            android:id="@+id/radiobtn_man_upd_inv_sold"
-            android:layout_width="107dp"
-            android:layout_height="103dp"
-            android:text="Sold" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/radiobtn_man_upd_inv_remove"
-            android:layout_width="121dp"
-            android:layout_height="103dp"
-            android:text="Remove" />
-    </RadioGroup>
+                <TextView
+                    android:id="@+id/txt_man_upd_inv_prod_name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Product Name: "/>
 
-    <EditText
-        android:id="@+id/edit_man_upd_inv_remarks"
-        android:layout_width="321dp"
-        android:layout_height="141dp"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:hint="Add Remarks/Comments"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radiogr_man_upd_inv_action" />
+                <TextView
+                    android:id="@+id/txt_man_upd_inv_prod_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Product Name" />
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_man_upd_inv_update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Update Item"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_man_upd_inv_remarks" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/txt_man_upd_inv_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="104dp"
-        android:text="Sample ID"
-        app:layout_constraintStart_toEndOf="@+id/txt_man_upd_inv_id_label"
-        app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/txt_man_upd_inv_quantity_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Quantity: " />
 
-    <TextView
-        android:id="@+id/txt_man_upd_inv_prod_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:text="Product Name"
-        app:layout_constraintStart_toEndOf="@+id/txt_man_upd_inv_prod_name_label"
-        app:layout_constraintTop_toBottomOf="@+id/txt_man_upd_inv_id" />
+                <TextView
+                    android:id="@+id/txt_man_upd_inv_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Quantity"/>
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/txt_man_upd_inv_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="24dp"
-        android:text="Quantity"
-        app:layout_constraintStart_toEndOf="@+id/txt_man_upd_inv_quantity_label"
-        app:layout_constraintTop_toBottomOf="@+id/txt_man_upd_inv_prod_name" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/txt_man_upd_inv_date_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Date Added: "
-        app:layout_constraintEnd_toStartOf="@+id/txt_man_upd_inv_date"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_man_upd_inv_quantity_label" />
+                <TextView
+                    android:id="@+id/txt_man_upd_inv_date_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Date Added: "/>
 
-    <TextView
-        android:id="@+id/txt_man_upd_inv_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Date Added"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_man_upd_inv_quantity" />
+                <TextView
+                    android:id="@+id/txt_man_upd_inv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Date Added"/>
+            </LinearLayout>
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_man_upd_inv_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="delete item"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
-        app:layout_constraintStart_toEndOf="@+id/btn_man_upd_inv_update"
-        app:layout_constraintTop_toBottomOf="@+id/edit_man_upd_inv_remarks" />
+        <TextView
+            android:id="@+id/txt_man_upd_inv_quantity_change_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Enter Quantity Change of this product"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <EditText
+            android:id="@+id/edit_man_upd_inv_quantity_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="number"/>
+
+        <RadioGroup
+            android:id="@+id/radiogr_man_upd_inv_action"
+            android:layout_width="337dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <RadioButton
+                android:id="@+id/radiobtn_man_upd_inv_add"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="Add" />
+
+            <RadioButton
+                android:id="@+id/radiobtn_man_upd_inv_sold"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="Sold" />
+
+            <RadioButton
+                android:id="@+id/radiobtn_man_upd_inv_remove"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="Remove" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/edit_man_upd_inv_remarks"
+            android:layout_width="321dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:lines="10"
+            android:minLines="5"
+            android:hint="Add Remarks/Comments"
+            android:inputType="textPersonName"/>
+
+        <Button
+            android:id="@+id/btn_man_upd_inv_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Update Item"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_man_upd_inv_remarks" />
+
+        <Button
+            android:id="@+id/btn_man_upd_inv_delete"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:text="delete item"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_man_upd_inv_update"
+            app:layout_constraintTop_toBottomOf="@+id/edit_man_upd_inv_remarks" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
