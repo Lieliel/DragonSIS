@@ -476,30 +476,60 @@ public class DbManager extends SQLiteOpenHelper {
         db.close();
     }
 
+    ////////////////////////////////////////////////////////////////////
+    ///////////////// INVENTORY HISTORY FUNCTIONS //////////////////////
+    ////////////////////////////////////////////////////////////////////
+
     // Adding new Inventory History
-    void insertInvHis(Integer update_ID, String inventory_update_date, String inventory_action, Integer inventory_quantity_change, Integer inventory_ID, String inventory_name) {
+    void insertInvHis(/*Integer update_ID, */String inventory_update_date, String inventory_action, Integer inventory_quantity_change,/* Integer inventory_ID, */String inventory_name) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();
-        cValues.put(INV_HIS_COL1, inventory_ID);
+        //cValues.put(INV_HIS_COL1, inventory_ID);
         cValues.put(INV_HIS_COL2, inventory_update_date);
         cValues.put(INV_HIS_COL3, inventory_action);
         cValues.put(INV_HIS_COL4, inventory_quantity_change);
-        cValues.put(INV_HIS_COL5, inventory_ID);
+        //cValues.put(INV_HIS_COL5, inventory_ID);
         cValues.put(INV_HIS_COL6, inventory_name);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(INV_HIS_TABLE_NAME, null, cValues);
 
         if(newRowId == 1){
-            Log.i("INVENTORYHISTORY TABLE:", "Inventory History Added Correctly");
+            Log.i("INV HISTORY TABLE:", "Inventory History Added Correctly");
         }else{
-            Log.i("INVENTORYHISTORY TABLE:", "Inventory History not Added Correctly");
+            Log.i("INV HISTORY TABLE:", "Inventory History not Added Correctly");
         }
 
         db.close();
     }
+/*
+    private static final String INV_HIS_TABLE_NAME = "inventory_history_table";
+    private static final String INV_HIS_COL1 = "update_ID";
+    private static final String INV_HIS_COL2 = "inventory_update_date";
+    private static final String INV_HIS_COL3 = "inventory_action";
+    private static final String INV_HIS_COL4 = "inventory_quantity_change";
+    private static final String INV_HIS_COL5 = "inventory_ID";
+    private static final String INV_HIS_COL6 = "prod_name";*/
 
+    //Function to create Inventory Message ArrayList
+    public ArrayList<String> getInvMessage() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<String> invMessageList = new ArrayList<String>();
+        String query = "SELECT * FROM " + INV_HIS_TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()) {
+            do {
+                invMessageList.add(cursor.getString(2) + cursor.getString(3) + " " + cursor.getString(5) + " on " + cursor.getString(1));
+            } while (cursor.moveToNext());
+            cursor.close();
+            db.close();
+        }
+
+        return invMessageList;
+
+    }
 
     // Get All Inventory History Details
     public ArrayList<HashMap<String, String>> getInventoryHistory() {
@@ -556,7 +586,7 @@ public class DbManager extends SQLiteOpenHelper {
     }
 
     // Adding new Sales Details
-    void insertUser(Integer sales_ID, Integer sales_amount, Integer items_sold, String sales_dates, String sales_time) {
+    void insertSales(Integer sales_ID, Integer sales_amount, Integer items_sold, String sales_dates, String sales_time) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
