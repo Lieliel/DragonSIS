@@ -5,12 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class ManagerUpdateInventory extends AppCompatActivity {
 
@@ -18,14 +26,18 @@ public class ManagerUpdateInventory extends AppCompatActivity {
     TextView txt_man_upd_inv_id;
     TextView txt_man_upd_inv_prod_name;
     TextView txt_man_upd_inv_quantity;
+    TextView txt_man_upd_inv_date;
     EditText edit_man_upd_inv_quantity_change;
     RadioButton radio_man_upd_inv_add;
     RadioButton radio_man_upd_inv_sold;
     RadioButton radio_man_upd_inv_remove;
+    RadioGroup radiogr_man_upd_inv_action;
     EditText edit_man_upd_inv_remarks;
     Button btn_man_upd_inv_update;
+    Button btn_man_upd_inv_delete;
     SharedPreferences pref;
     DbManager db;
+    RadioButton radioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +48,15 @@ public class ManagerUpdateInventory extends AppCompatActivity {
         txt_man_upd_inv_id = findViewById(R.id.txt_man_upd_inv_id);
         txt_man_upd_inv_prod_name = findViewById(R.id.txt_man_upd_inv_prod_name);
         txt_man_upd_inv_quantity = findViewById(R.id.txt_man_upd_inv_quantity);
+        txt_man_upd_inv_date = findViewById(R.id.txt_man_upd_inv_date);
         edit_man_upd_inv_quantity_change = findViewById(R.id.edit_man_upd_inv_quantity_change);
+        radiogr_man_upd_inv_action = findViewById(R.id.radiogr_man_upd_inv_action);
         radio_man_upd_inv_add = findViewById(R.id.radiobtn_man_upd_inv_add);
         radio_man_upd_inv_sold = findViewById(R.id.radiobtn_man_upd_inv_sold);
         radio_man_upd_inv_remove = findViewById(R.id.radiobtn_man_upd_inv_remove);
         edit_man_upd_inv_remarks = findViewById(R.id.edit_man_upd_inv_remarks);
         btn_man_upd_inv_update = findViewById(R.id.btn_man_upd_inv_update);
+        btn_man_upd_inv_delete = findViewById(R.id.btn_man_upd_inv_delete);
 
         db = new DbManager(this);
         pref = getSharedPreferences("inventory_list", MODE_PRIVATE);
@@ -61,6 +76,58 @@ public class ManagerUpdateInventory extends AppCompatActivity {
         txt_man_upd_inv_prod_name.setText(pref.getString("prod_name", null));
         txt_man_upd_inv_quantity.setText(pref.getString("inventory_quantity", null));
         edit_man_upd_inv_remarks.setText(pref.getString("inventory_remark", null));
+        txt_man_upd_inv_date.setText(pref.getString("inventory_date", null));
+
+        //Update Inventory when pressed
+        btn_man_upd_inv_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String inv_id = pref.getString("inventory_ID", null);
+                String inv_prod_name = pref.getString("prod_name", null);
+                String inv_remark = edit_man_upd_inv_remarks.getText().toString();
+
+                int inv_quantity_change = Integer.parseInt(edit_man_upd_inv_quantity_change.getText().toString());
+                int inv_curr_quantity = Integer.parseInt(pref.getString("inventory_quantity", null));
+
+                String new_inv_quan = changeQuantity(view,inv_curr_quantity,inv_quantity_change);
+                db.updateInventory(inv_id,new_inv_quan,inv_remark,inv_prod_name);
+                Intent i = new Intent(ManagerUpdateInventory.this, ManagerViewInventory.class);
+                startActivity(i);
+
+            }
+        });
+
+        btn_man_upd_inv_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.deleteInventory(pref.getString("inventory_ID", null));
+                Intent i = new Intent(ManagerUpdateInventory.this, ManagerViewInventory.class);
+                startActivity(i);
+
+            }
+        });
+
+
+    }
+
+    public String changeQuantity(View v, int inv_curr_quan, int inv_quantity_change){
+        int radioID = radiogr_man_upd_inv_action.getCheckedRadioButtonId();
+        radioButton = findViewById(radioID);
+        String radioText = radioButton.getText().toString();
+        Toast.makeText(this,radioText,Toast.LENGTH_SHORT).show();
+        int fin_quantity = 0;
+
+        if(radioText.equals("Add")){
+            fin_quantity = inv_curr_quan + inv_quantity_change;
+        }else if(radioText.equals("Sold")){
+            fin_quantity = inv_curr_quan - inv_quantity_change;
+        }else if(radioText.equals("Remove")){
+            fin_quantity = inv_curr_quan - inv_quantity_change;
+        }else{
+            Toast.makeText(this, "Error in Quantity Change", Toast.LENGTH_SHORT).show();
+        }
+
+        return String.valueOf(fin_quantity);
 
     }
 }
