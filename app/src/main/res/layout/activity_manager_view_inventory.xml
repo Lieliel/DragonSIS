@@ -26,7 +26,8 @@
         android:textSize="22sp"
         app:layout_constraintLeft_toRightOf="@id/img_back_view_inventory"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="25dp"/>
+        android:layout_marginStart="25dp"
+        android:fontFamily="@font/nexa_text_light"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
