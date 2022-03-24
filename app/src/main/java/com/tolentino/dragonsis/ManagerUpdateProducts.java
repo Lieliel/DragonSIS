@@ -19,7 +19,7 @@ public class ManagerUpdateProducts extends AppCompatActivity {
     ImageView img_back_upd_products;
     TextView txt_upd_prod_id;
     EditText edit_upd_prod_name;
-    EditText edit_upd_prod_descrip;
+    EditText edit_upd_prod_total_quantity;
     EditText edit_upd_prod_critnum;
     EditText edit_upd_prod_price;
     Spinner spin_upd_prod_category;
@@ -37,7 +37,7 @@ public class ManagerUpdateProducts extends AppCompatActivity {
         img_back_upd_products = findViewById(R.id.img_back_upd_products);
         txt_upd_prod_id = findViewById(R.id.txt_upd_prod_id);
         edit_upd_prod_name = findViewById(R.id.edit_upd_prod_name);
-        edit_upd_prod_descrip = findViewById(R.id.edit_upd_prod_descrip);
+        edit_upd_prod_total_quantity = findViewById(R.id.edit_upd_prod_total_quantity);
         edit_upd_prod_critnum = findViewById(R.id.edit_upd_prod_critnum);
         edit_upd_prod_price = findViewById(R.id.edit_upd_prod_price);
         spin_upd_prod_category = findViewById(R.id.spin_upd_prod_category);
@@ -62,7 +62,7 @@ public class ManagerUpdateProducts extends AppCompatActivity {
 
         txt_upd_prod_id.setText("Product ID: " + pref.getString("prod_id", null));
         edit_upd_prod_name.setText(pref.getString("prod_name", null));
-        edit_upd_prod_descrip.setText(pref.getString("prod_description", null));
+        edit_upd_prod_total_quantity.setText(pref.getString("prod_total_quantity", null));
         edit_upd_prod_price.setText(pref.getString("prod_price", null));
         edit_upd_prod_critnum.setText(pref.getString("prod_critical_num", null));
 
@@ -117,12 +117,12 @@ public class ManagerUpdateProducts extends AppCompatActivity {
                 //Add Values in input objects into String
                 String prod_id = pref.getString("prod_id", null);
                 String prod_name = edit_upd_prod_name.getText().toString();
-                String prod_descrip = edit_upd_prod_descrip.getText().toString();
+                String prod_total_quantity = edit_upd_prod_total_quantity.getText().toString();
                 String prod_critnum = edit_upd_prod_critnum.getText().toString();
                 String prod_price = edit_upd_prod_price.getText().toString();
                 String prod_category = spin_upd_prod_category.getSelectedItem().toString();
 
-                db.updateProduct(prod_id, prod_name, prod_descrip, prod_critnum, prod_price, prod_category);
+                db.updateProduct(prod_id, prod_name, prod_total_quantity, prod_critnum, prod_price, prod_category);
                 Intent i = new Intent(ManagerUpdateProducts.this, ManagerViewProducts.class);
                 startActivity(i);
             }

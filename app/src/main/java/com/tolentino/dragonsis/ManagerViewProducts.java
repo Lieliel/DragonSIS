@@ -62,7 +62,7 @@ public class ManagerViewProducts extends AppCompatActivity {
         //Adapt Products List
         list_products = findViewById(R.id.list_products);
         ArrayList<HashMap<String, String>> productList = db.getProducts();
-        listAdapter = new SimpleAdapter(ManagerViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_description"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category});
+        listAdapter = new SimpleAdapter(ManagerViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category});
         list_products.setAdapter(listAdapter);
 
         //Search Product Function
@@ -92,7 +92,7 @@ public class ManagerViewProducts extends AppCompatActivity {
                 edit.putString("prod_id", productList.get(i).get("prod_ID"));
                 edit.putString("prod_name", productList.get(i).get("prod_name"));
                 edit.putString("prod_critical_num", productList.get(i).get("prod_critical_num"));
-                edit.putString("prod_description", productList.get(i).get("prod_description"));
+                edit.putString("prod_total_quantity", productList.get(i).get("prod_total_quantity"));
                 edit.putString("prod_price", productList.get(i).get("prod_price"));
                 edit.putString("prod_category", productList.get(i).get("prod_category"));
                 edit.commit();
