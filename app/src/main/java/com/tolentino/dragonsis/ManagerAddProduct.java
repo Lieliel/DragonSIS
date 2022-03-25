@@ -16,7 +16,6 @@ public class ManagerAddProduct extends AppCompatActivity {
 
     ImageView img_back_add_product;
     EditText edit_add_productname;
-    EditText edit_add_product_descrip;
     EditText edit_add_crit_num;
     EditText edit_add_price;
     Spinner spin_add_category;
@@ -31,7 +30,6 @@ public class ManagerAddProduct extends AppCompatActivity {
 
         img_back_add_product = findViewById(R.id.img_back_add_product);
         edit_add_productname = findViewById(R.id.edit_add_productname);
-        edit_add_product_descrip = findViewById(R.id.edit_add_product_descrip);
         edit_add_crit_num = findViewById(R.id.edit_add_crit_num);
         edit_add_price = findViewById(R.id.edit_add_price);
         spin_add_category = findViewById(R.id.spin_add_category);
@@ -56,14 +54,13 @@ public class ManagerAddProduct extends AppCompatActivity {
 
                 //Convert to EditText Values to String
                 String txt_prod_name = edit_add_productname.getText().toString();
-                String txt_prod_descrip = edit_add_product_descrip.getText().toString();
                 int txt_prod_crit_num = Integer.parseInt(edit_add_crit_num.getText().toString());
                 int txt_prod_price = Integer.parseInt(edit_add_price.getText().toString());
                 String spin_category = spin_add_category.getSelectedItem().toString();
 
                 //Use db function to add record to products table
-                db.insertProduct(txt_prod_name,txt_prod_crit_num,txt_prod_descrip,txt_prod_price,spin_category);
-                Log.i("ACCOUNTS TABLE", "User Inserted: " + txt_prod_name + ", " + txt_prod_descrip + ", " + txt_prod_crit_num + ", " + txt_prod_price + ", " + spin_category);
+                db.insertProduct(txt_prod_name,0,txt_prod_crit_num,txt_prod_price,spin_category);
+                Log.i("ACCOUNTS TABLE", "User Inserted: " + txt_prod_name + ", " + txt_prod_crit_num + ", " + txt_prod_price + ", " + spin_category);
 
                 Intent i = new Intent(ManagerAddProduct.this, ManagerViewProducts.class);
                 Intent endActivity = new Intent("finish_activity");

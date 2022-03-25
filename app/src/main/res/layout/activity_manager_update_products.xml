@@ -13,7 +13,7 @@
         android:layout_alignParentLeft="true"
         android:clickable="true"
 
-        android:src="@drawable/back_img"></ImageView>
+        android:src="@drawable/back_img"/>
 
     <TextView
         android:id="@+id/txt_upd_prod_id"
@@ -33,34 +33,35 @@
 
         android:layout_below="@+id/txt_upd_prod_id"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"></TextView>
+        android:layout_marginTop="20dp"/>
 
     <EditText
         android:id="@+id/edit_upd_prod_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Sample prod Name"
+        android:layout_below="@id/txt_upd_prod_name_label"
 
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/txt_upd_prod_name_label"></EditText>
+        android:hint="Sample prod Name"/>
 
     <TextView
-        android:id="@+id/txt_upd_prod_descrip_label"
+        android:id="@+id/txt_upd_prod_total_quantity_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Product Description"
         android:layout_below="@+id/edit_upd_prod_name"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"></TextView>
+        android:layout_marginTop="20dp"/>
 
-    <EditText
-        android:id="@+id/edit_upd_prod_descrip"
+    <TextView
+        android:id="@+id/txt_upd_prod_total_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Sample prod descrip"
+        android:layout_below="@id/txt_upd_prod_total_quantity_label"
 
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/txt_upd_prod_descrip_label"></EditText>
+        android:text="0"/>
 
     <TextView
         android:id="@+id/txt_upd_prod_critnum_label"
@@ -68,9 +69,9 @@
         android:layout_height="wrap_content"
         android:text="Product Critical Number"
 
-        android:layout_below="@+id/edit_upd_prod_descrip"
+        android:layout_below="@+id/txt_upd_prod_total_quantity"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"></TextView>
+        android:layout_marginTop="20dp"/>
 
     <EditText
         android:id="@+id/edit_upd_prod_critnum"
@@ -80,7 +81,7 @@
 
         android:layout_below="@id/txt_upd_prod_critnum_label"
         android:layout_centerHorizontal="true"
-        android:hint="Sample Crit number"></EditText>
+        android:hint="Sample Crit number"/>
 
     <TextView
         android:id="@+id/txt_upd_prod_price_label"
@@ -90,7 +91,7 @@
 
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Product price"></TextView>
+        android:text="Product price"/>
 
     <EditText
         android:id="@+id/edit_upd_prod_price"
@@ -100,7 +101,7 @@
 
         android:layout_centerHorizontal="true"
         android:hint="Sample price"
-        android:inputType="number"></EditText>
+        android:inputType="number"/>
 
     <TextView
         android:id="@+id/txt_upd_prod_category_label"
@@ -110,7 +111,7 @@
 
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Product Category"></TextView>
+        android:text="Product Category"/>
 
     <Spinner
         android:id="@+id/spin_upd_prod_category"
@@ -119,7 +120,7 @@
 
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/txt_upd_prod_category_label"></Spinner>
+        android:layout_below="@+id/txt_upd_prod_category_label"/>
 
     <Button
         android:id="@+id/btn_upd_prod_update"
@@ -127,7 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/spin_upd_prod_category"
-        android:text="Update"></Button>
+        android:text="Update"/>
 
     <Button
         android:id="@+id/btn_upd_prod_remove"
@@ -135,5 +136,5 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/btn_upd_prod_update"
-        android:text="Remove"></Button>
+        android:text="Remove"/>
 </RelativeLayout>
