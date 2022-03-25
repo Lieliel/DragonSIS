@@ -21,9 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="85dp"
-        android:text="Product ID: ##"
-
-        ></TextView>
+        android:text="Product ID: ##" />
 
     <TextView
         android:id="@+id/txt_upd_prod_name_label"
@@ -39,29 +37,29 @@
         android:id="@+id/edit_upd_prod_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txt_upd_prod_name_label"
+        android:hint="Sample prod Name"
 
         android:layout_centerHorizontal="true"
-        android:hint="Sample prod Name"/>
+        android:layout_below="@id/txt_upd_prod_name_label"/>
 
     <TextView
         android:id="@+id/txt_upd_prod_total_quantity_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Product Description"
+        android:text="Product Total Quantity"
+
         android:layout_below="@+id/edit_upd_prod_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"/>
 
-    <TextView
-        android:id="@+id/txt_upd_prod_total_quantity"
+    <EditText
+        android:id="@+id/edit_upd_prod_total_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txt_upd_prod_total_quantity_label"
+        android:hint="Sample prod total quatity"
 
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:text="0"/>
+        android:layout_below="@id/txt_upd_prod_total_quantity_label"/>
 
     <TextView
         android:id="@+id/txt_upd_prod_critnum_label"
@@ -69,7 +67,7 @@
         android:layout_height="wrap_content"
         android:text="Product Critical Number"
 
-        android:layout_below="@+id/txt_upd_prod_total_quantity"
+        android:layout_below="@+id/edit_upd_prod_total_quantity"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"/>
 

@@ -63,6 +63,8 @@ public class ManagerAddUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(ManagerAddUser.this, ManagerUserAccounts.class);
+                Intent endActivity = new Intent("finish_activity_man_accounts");
+                sendBroadcast(endActivity);
                 startActivity(i);
                 finish();
             }
@@ -81,12 +83,11 @@ public class ManagerAddUser extends AppCompatActivity {
                     Log.i("ACCOUNTS TABLE", "User Inserted: " + txt_username + ", " + txt_password + ", " + txt_confirm + ", " + spin_usertype);
 
                     Intent i = new Intent(ManagerAddUser.this, ManagerUserAccounts.class);
+                    Intent endActivity = new Intent("finish_activity_man_accounts");
+                    sendBroadcast(endActivity);
                     startActivity(i);
                     finish();
-
                 }
-
-
             }
         });
 

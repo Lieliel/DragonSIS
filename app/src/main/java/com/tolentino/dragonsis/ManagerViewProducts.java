@@ -2,7 +2,10 @@ package com.tolentino.dragonsis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +26,7 @@ public class ManagerViewProducts extends AppCompatActivity {
     ImageView img_back_view_products;
     Button img_add_product;
     SearchView srch_product;
+    BroadcastReceiver broadcastReceiver3;
 
     DbManager db;
     ListView list_products;
@@ -57,16 +61,13 @@ public class ManagerViewProducts extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerViewProducts.this, ManagerAddProduct.class);
                 startActivity(i);
-                Intent endActivity = new Intent("finish_activity");
-                sendBroadcast(endActivity);
-                finish();
             }
         });
 
         //Adapt Products List
         list_products = findViewById(R.id.list_products);
         ArrayList<HashMap<String, String>> productList = db.getProducts();
-        listAdapter = new SimpleAdapter(ManagerViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name","prod_description","prod_price","prod_category"}, new int[]{R.id.row_product_name, R.id.row_product_description, R.id.row_product_price, R.id.row_product_category});
+        listAdapter = new SimpleAdapter(ManagerViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category});
         list_products.setAdapter(listAdapter);
 
         //Search Product Function
@@ -96,17 +97,27 @@ public class ManagerViewProducts extends AppCompatActivity {
                 edit.putString("prod_id", productList.get(i).get("prod_ID"));
                 edit.putString("prod_name", productList.get(i).get("prod_name"));
                 edit.putString("prod_critical_num", productList.get(i).get("prod_critical_num"));
-                edit.putString("prod_description", productList.get(i).get("prod_description"));
+                edit.putString("prod_total_quantity", productList.get(i).get("prod_total_quantity"));
                 edit.putString("prod_price", productList.get(i).get("prod_price"));
                 edit.putString("prod_category", productList.get(i).get("prod_category"));
                 edit.commit();
 
                 Intent intent = new Intent(ManagerViewProducts.this, ManagerUpdateProducts.class);
-                Intent endActivity = new Intent("finish_activity");
-                sendBroadcast(endActivity);
                 startActivity(intent);
-                finish();
             }
         });
+
+        broadcastReceiver3 = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity_man_view_products")) {
+                    finish();
+                    unregisterReceiver(broadcastReceiver3);
+                }
+            }
+        };
+        registerReceiver(broadcastReceiver3, new IntentFilter("finish_activity_man_view_products"));
     }
 }

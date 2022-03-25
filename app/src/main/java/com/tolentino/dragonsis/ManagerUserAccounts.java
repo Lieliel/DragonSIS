@@ -2,7 +2,10 @@ package com.tolentino.dragonsis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +25,7 @@ public class ManagerUserAccounts extends AppCompatActivity {
     Button img_add_user;
     DbManager db;
     ListView list_users;
+    BroadcastReceiver broadcastReceiver4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,12 +82,21 @@ public class ManagerUserAccounts extends AppCompatActivity {
 
                 Intent intent = new Intent(ManagerUserAccounts.this, ManagerUpdateAccount.class);
                 startActivity(intent);
-                Intent endActivity = new Intent("finish_activity");
-                sendBroadcast(endActivity);
-                finish();
 
             }
         });
-    }
 
+        broadcastReceiver4 = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity_man_accounts")) {
+                    finish();
+                    unregisterReceiver(broadcastReceiver4);
+                }
+            }
+        };
+        registerReceiver(broadcastReceiver4, new IntentFilter("finish_activity_man_accounts"));
+    }
 }
