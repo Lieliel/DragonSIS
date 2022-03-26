@@ -36,14 +36,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
-        android:id="@+id/row_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/row_usertype"
-
-        android:layout_alignParentEnd="true"
-        android:text="sample email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/row_usertype"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

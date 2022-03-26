@@ -49,9 +49,11 @@ public class ManagerAddUser extends AppCompatActivity {
                     edit_add_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     //Change Icon
                     imageViewShowHidePwd.setImageResource(R.drawable.hide_pass);
-                } else
+                }
+                else {
                     edit_add_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                imageViewShowHidePwd.setImageResource(R.drawable.show_pass);
+                    imageViewShowHidePwd.setImageResource(R.drawable.show_pass);
+                }
             }
         });
 

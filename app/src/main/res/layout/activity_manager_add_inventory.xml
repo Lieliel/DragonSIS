@@ -1,91 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManagerAddInventory">
+    tools:context=".ManagerAddInventory"
+    android:padding="25dp">
 
     <ImageView
         android:id="@+id/img_back_add_inventory"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:clickable="true"
-
-        android:src="@drawable/back_img"></ImageView>
-
-    <TextView
-        android:id="@+id/txt_inv_name_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Choose Product"
-
-        android:layout_marginTop="100dp"
-        ></TextView>
-
-    <Spinner
-        android:id="@+id/spin_add_inventory_productname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txt_inv_name_label"
-
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"></Spinner>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_24"
+        android:background="?android:attr/selectableItemBackground"
+        android:focusable="true" />
 
     <TextView
-        android:id="@+id/txt_inv_date_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spin_add_inventory_productname"
-
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Product Date Added"></TextView>
-
-    <EditText
-        android:id="@+id/edit_add_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txt_inv_date_label"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:hint="MM/DD/YYYY"></EditText>
-
-    <TextView
-        android:id="@+id/txt_inv_quantity_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edit_add_date"
-        android:layout_centerHorizontal="true"
-
-        android:layout_marginTop="10dp"
-        android:text="Quantity"></TextView>
-
-    <EditText
-        android:id="@+id/edit_inv_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txt_inv_quantity_label"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:inputType="number"
-        android:hint="Sample Quantity"></EditText>
-
-    <Button
-        android:id="@+id/btn_inv_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:text="Add Inventory"
+        android:textSize="22sp"
+        app:layout_constraintLeft_toRightOf="@id/img_back_add_inventory"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="25dp"/>
 
-        android:layout_below="@id/edit_inv_quantity"
-        android:layout_marginTop="10dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/txt_inv_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Choose Product"/>
 
-        ></Button>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/line_border">
 
+            <Spinner
+                android:id="@+id/spin_add_inventory_productname"
+                android:layout_width="200dp"
+                android:layout_height="60dp"/>
+        </LinearLayout>
 
+        <TextView
+            android:id="@+id/txt_inv_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:text="Product Date Added"/>
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/edit_add_date"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+
+            android:layout_marginTop="10dp"
+            android:hint="MM/DD/YYYY"/>
+
+        <TextView
+            android:id="@+id/txt_inv_quantity_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:text="Quantity"/>
+
+        <EditText
+            android:id="@+id/edit_inv_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/txt_inv_quantity_label"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:inputType="number"
+            android:hint="Sample Quantity"/>
+
+        <Button
+            android:id="@+id/btn_inv_submit"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:text="Add Inventory"
+            android:layout_below="@id/edit_inv_quantity"
+            android:layout_marginTop="12dp"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

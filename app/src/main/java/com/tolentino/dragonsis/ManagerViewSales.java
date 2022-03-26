@@ -26,6 +26,8 @@ public class ManagerViewSales extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(ManagerViewSales.this, ManagerMenu.class);
+                Intent endActivity = new Intent("finish_activity");
+                sendBroadcast(endActivity);
                 startActivity(i);
                 finish();
             }

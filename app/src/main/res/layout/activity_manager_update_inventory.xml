@@ -13,7 +13,8 @@
         android:layout_height="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+        app:srcCompat="@drawable/ic_baseline_arrow_back_24"
+        android:background="?android:attr/selectableItemBackground"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,78 +43,108 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
 
-                <TextView
-                    android:id="@+id/txt_man_upd_inv_id_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Inventory ID: "/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_margin="10dp">
 
-                <TextView
-                    android:id="@+id/txt_man_upd_inv_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sample ID" />
+                    <TextView
+                        android:id="@+id/txt_man_upd_inv_id_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Inventory ID:"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/txt_man_upd_inv_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Sample ID"
+                        android:layout_gravity="center"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_margin="10dp">
+
+                    <TextView
+                        android:id="@+id/txt_man_upd_inv_prod_name_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Product Name:"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/txt_man_upd_inv_prod_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Product Name"
+                        android:layout_gravity="center"/>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
 
-                <TextView
-                    android:id="@+id/txt_man_upd_inv_prod_name_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Product Name: "/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_margin="10dp">
 
-                <TextView
-                    android:id="@+id/txt_man_upd_inv_prod_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Product Name" />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/txt_man_upd_inv_quantity_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Quantity:"
+                        android:layout_gravity="center_horizontal"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:gravity="center">
+                    <TextView
+                        android:id="@+id/txt_man_upd_inv_quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Quantity"
+                        android:layout_gravity="center"/>
+                </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/txt_man_upd_inv_quantity_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Quantity: " />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_margin="10dp">
 
-                <TextView
-                    android:id="@+id/txt_man_upd_inv_quantity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Quantity"/>
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/txt_man_upd_inv_date_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Date Added:"
+                        android:layout_gravity="center_horizontal"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/txt_man_upd_inv_date_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Date Added: "/>
-
-                <TextView
-                    android:id="@+id/txt_man_upd_inv_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Date Added"/>
+                    <TextView
+                        android:id="@+id/txt_man_upd_inv_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Date Added"
+                        android:layout_gravity="center"/>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
         </LinearLayout>
 
@@ -165,15 +196,13 @@
             android:layout_width="321dp"
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
-            android:lines="10"
-            android:minLines="5"
             android:hint="Add Remarks/Comments"
-            android:inputType="textPersonName"/>
+            android:inputType="textMultiLine"/>
 
         <Button
             android:id="@+id/btn_man_upd_inv_update"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginTop="20dp"
             android:text="Update Item"
             app:layout_constraintEnd_toEndOf="parent"
@@ -185,7 +214,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
-            android:text="delete item"
+            android:text="Delete item"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btn_man_upd_inv_update"
             app:layout_constraintTop_toBottomOf="@+id/edit_man_upd_inv_remarks" />

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ public class ManagerUpdateAccount extends AppCompatActivity {
     TextView txt_upd_acc_password;
     DbManager db;
 
+    ImageView img_back_user_update;
     EditText edit_upd_acc_username;
     EditText edit_upd_acc_password;
     Spinner spin_upd_acc_usertype;
@@ -38,12 +40,25 @@ public class ManagerUpdateAccount extends AppCompatActivity {
         edit_upd_acc_password = findViewById(R.id.edit_upd_acc_password);
         spin_upd_acc_usertype = findViewById(R.id.spin_upd_acc_usertype);
 
+        img_back_user_update = findViewById(R.id.img_back_update_user);
         btn_upd_acc_remove = findViewById(R.id.btn_upd_acc_remove);
         btn_upd_acc_update = findViewById(R.id.btn_upd_acc_update);
 
         pref = getSharedPreferences("user_list", MODE_PRIVATE);
         edit_upd_acc_username.setText(pref.getString("username",null));
         edit_upd_acc_password.setText(pref.getString("password",null));
+
+        //Back to Manager View Inventory Page
+        img_back_user_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ManagerUpdateAccount.this, ManagerUserAccounts.class);
+                Intent endActivity = new Intent("finish_activity_man_accounts");
+                sendBroadcast(endActivity);
+                startActivity(i);
+                finish();
+            }
+        });
 
         //Adapter for the user type spinner
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, userTypeArray);
