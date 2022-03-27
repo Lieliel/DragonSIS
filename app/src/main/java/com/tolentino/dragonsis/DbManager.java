@@ -48,6 +48,8 @@ public class DbManager extends SQLiteOpenHelper {
     private static final String INV_HIS_COL4 = "inventory_quantity_change";
     private static final String INV_HIS_COL5 = "inventory_ID";
     private static final String INV_HIS_COL6 = "prod_name";
+    private static final String INV_HIS_COL7 = "inventory_update_time";
+
 
     //Sales History
     private static final String SALES_TABLE_NAME = "sales_table";
@@ -56,6 +58,7 @@ public class DbManager extends SQLiteOpenHelper {
     private static final String SALES_COL3 = "items_sold";
     private static final String SALES_COL4 = "sales_dates";
     private static final String SALES_COL5 = "sales_time";
+    private static final String SALES_COL6 = "product_sold";
 
     public DbManager(Context context) {
         super(context, ACC_TABLE_NAME, null, 1);
@@ -97,7 +100,8 @@ public class DbManager extends SQLiteOpenHelper {
                 + SALES_COL2 + " TEXT,"
                 + SALES_COL3 + " TEXT,"
                 + SALES_COL4 + " TEXT,"
-                + SALES_COL5 + " TEXT)";
+                + SALES_COL5 + " TEXT,"
+                + SALES_COL6 + " TEXT)";
         db.execSQL(create_Sales_Table);
 
         //create_InvHis_Table
@@ -107,7 +111,8 @@ public class DbManager extends SQLiteOpenHelper {
                 + INV_HIS_COL3 + " TEXT,"
                 + INV_HIS_COL4 + " INTEGER,"
                 + INV_HIS_COL5 + " TEXT,"
-                + INV_HIS_COL6 + " TEXT)";
+                + INV_HIS_COL6 + " TEXT,"
+                + INV_HIS_COL7 + " TEXT)";
         db.execSQL(create_Inv_His_Table);
 
     }
@@ -549,7 +554,7 @@ public class DbManager extends SQLiteOpenHelper {
     ////////////////////////////////////////////////////////////////////
 
     // Adding new Inventory History
-    void insertInvHis(/*Integer update_ID, */String inventory_update_date, String inventory_action, Integer inventory_quantity_change,/* Integer inventory_ID, */String inventory_name) {
+    void insertInvHis(/*Integer update_ID, */String inventory_update_date, String inventory_action, Integer inventory_quantity_change,/* Integer inventory_ID, */String inventory_name, String inventory_update_time) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
@@ -560,6 +565,7 @@ public class DbManager extends SQLiteOpenHelper {
         cValues.put(INV_HIS_COL4, inventory_quantity_change);
         //cValues.put(INV_HIS_COL5, inventory_ID);
         cValues.put(INV_HIS_COL6, inventory_name);
+        cValues.put(INV_HIS_COL7, inventory_update_time);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(INV_HIS_TABLE_NAME, null, cValues);
 
@@ -581,7 +587,7 @@ public class DbManager extends SQLiteOpenHelper {
 
         if(cursor.moveToFirst()) {
             do {
-                invMessageList.add(cursor.getString(2) + cursor.getString(3) + " " + cursor.getString(5) + " on " + cursor.getString(1));
+                invMessageList.add(cursor.getString(2) + cursor.getString(3) + " " + cursor.getString(5) + " on " + cursor.getString(1) + " at " + cursor.getString(6));
             } while (cursor.moveToNext());
             cursor.close();
             db.close();
@@ -605,6 +611,7 @@ public class DbManager extends SQLiteOpenHelper {
             history.put("inventory_quantity_change", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL4)));
             history.put("inventory_ID", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL5)));
             history.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL6)));
+            history.put("inventory_update_time", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL7)));
             historyList.add(history);
 
             Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL1))
@@ -645,17 +652,22 @@ public class DbManager extends SQLiteOpenHelper {
         return historyList;
     }
 
+    ////////////////////////////////////////////////////////////////////
+    ///////////////////////// SALES FUNCTIONS //////////////////////////
+    ////////////////////////////////////////////////////////////////////
+
     // Adding new Sales Details
-    void insertSales(Integer sales_ID, Integer sales_amount, Integer items_sold, String sales_dates, String sales_time) {
+    void insertSales(int sales_amount, int items_sold, String sales_dates, String sales_time, String product_sold) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();
-        cValues.put(SALES_COL1, sales_ID);
+        //cValues.put(SALES_COL1, sales_ID);
         cValues.put(SALES_COL2, sales_amount);
         cValues.put(SALES_COL3, items_sold);
         cValues.put(SALES_COL4, sales_dates);
         cValues.put(SALES_COL5, sales_time);
+        cValues.put(SALES_COL6, product_sold);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(SALES_TABLE_NAME, null, cValues);
 
@@ -668,6 +680,23 @@ public class DbManager extends SQLiteOpenHelper {
         db.close();
     }
 
+    //Function to create Inventory Message ArrayList
+    public ArrayList<String> getSalesMessage() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<String> salesMessageList = new ArrayList<String>();
+        String query = "SELECT * FROM " + SALES_TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                salesMessageList.add("Sold " + cursor.getString(2) + " " + cursor.getString(5) + " for " + cursor.getString(1) + "php on " + cursor.getString(3) + " at " + cursor.getString(4));
+            } while (cursor.moveToNext());
+            cursor.close();
+            db.close();
+        }
+
+        return salesMessageList;
+    }
 
 
     // Get All Sales Details
