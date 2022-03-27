@@ -139,25 +139,35 @@ public class ManagerUpdateInventory extends AppCompatActivity {
 
             Date d = Calendar.getInstance().getTime();
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+            SimpleDateFormat tf = new SimpleDateFormat("KK:mm:ss a", Locale.getDefault());
             String curr_date = df.format(d);
-            db.insertInvHis(curr_date,"Added ", inv_quantity_change, pref.getString("prod_name", null));
-
+            String curr_time = tf.format(d);
+            db.insertInvHis(curr_date,"Added ", inv_quantity_change, pref.getString("prod_name", null), curr_time);
+            db.addProductTotalQuant(pref.getString("prod_name", null),inv_quantity_change);
 
         }else if(radioText.equals("Sold")){
             fin_quantity = inv_curr_quan - inv_quantity_change;
 
             Date d = Calendar.getInstance().getTime();
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+            SimpleDateFormat tf = new SimpleDateFormat("KK:mm:ss a", Locale.getDefault());
             String curr_date = df.format(d);
-            db.insertInvHis(curr_date,"Sold ", inv_quantity_change, pref.getString("prod_name", null));
-
+            String curr_time = tf.format(d);
+            db.insertInvHis(curr_date,"Sold ", inv_quantity_change, pref.getString("prod_name", null),curr_time);
+            int prod_sales_amount = Integer.parseInt(db.getProductByProductName(pref.getString("prod_name",null)).get(0).get("prod_price"));
+            int sales_amount = inv_quantity_change * prod_sales_amount;
+            db.subtractProductTotalQuant(pref.getString("prod_name", null),inv_quantity_change);
+            db.insertSales(sales_amount,inv_quantity_change,curr_date,curr_time, pref.getString("prod_name",null));
         }else if(radioText.equals("Remove")){
             fin_quantity = inv_curr_quan - inv_quantity_change;
 
             Date d = Calendar.getInstance().getTime();
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+            SimpleDateFormat tf = new SimpleDateFormat("KK:mm:ss a", Locale.getDefault());
             String curr_date = df.format(d);
-            db.insertInvHis(curr_date,"Removed ", inv_quantity_change, pref.getString("prod_name", null));
+            String curr_time = tf.format(d);
+            db.insertInvHis(curr_date,"Removed ", inv_quantity_change, pref.getString("prod_name", null),curr_time);
+            db.subtractProductTotalQuant(pref.getString("prod_name", null),inv_quantity_change);
         }else{
             Toast.makeText(this, "Error in Quantity Change", Toast.LENGTH_SHORT).show();
         }
