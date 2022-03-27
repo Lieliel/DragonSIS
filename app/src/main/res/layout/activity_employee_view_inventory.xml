@@ -6,112 +6,118 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    tools:context=".EmployeeViewInventory">
+    tools:context=".EmployeeViewInventory"
+    android:padding="25dp">
 
     <ImageView
         android:id="@+id/img_back_employee_inventory"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
         android:clickable="true"
-        android:src="@drawable/back_img"
+        android:src="@drawable/ic_baseline_arrow_back_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
-
-    <ImageView
-        android:id="@+id/img_back_user_inventory2"
-        android:layout_width="59dp"
-        android:layout_height="59dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="92dp"
-        android:clickable="true"
-        android:src="@drawable/ic_baseline_add_circle_outline_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_back_employee_inventory"></ImageView>
-
-    <EditText
-        android:id="@+id/editTextTextPersonName3"
-        android:layout_width="208dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/my_border"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Quantity Demand"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="?android:attr/selectableItemBackground"
+        android:focusable="true" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="90dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/black"
-        android:backgroundTint="@color/black"
-        android:gravity="center"
-        android:text="Sort By"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <SearchView
-        android:id="@+id/search_inventory"
-        android:layout_height="58dp"
         android:layout_width="wrap_content"
-        android:maxWidth="215dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="28dp"
-        android:ems="10"
-        android:iconifiedByDefault="false"
-        android:queryHint="Search Products"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:text="Inventory"
+        android:textSize="22sp"
+        app:layout_constraintLeft_toRightOf="@id/img_back_employee_inventory"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="25dp"/>
 
-    <EditText
-        android:id="@+id/editTextTextPersonName2"
-        android:layout_width="208dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/my_border"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Category"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_inventory" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="90dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="64dp"
-        android:background="@color/black"
-        android:backgroundTint="@color/black"
-        android:gravity="center"
-        android:text="View By"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_inventory" />
-
-    <ListView
-        android:layout_width="422dp"
-        android:layout_height="497dp"
-        android:layout_marginTop="80dp"
-        android:background="@color/black"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <SearchView
+            android:id="@+id/search_inventory"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:iconifiedByDefault="false"
+            android:queryHint="Search Inventory"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:text="Choose Category"
+                android:textAlignment="center"/>
+
+            <Spinner
+                android:id="@+id/editTextTextPersonName2"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:text="Sort By"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <Spinner
+                android:id="@+id/editTextTextPersonName3"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:ems="10"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/img_add_emp_inventory"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:text="Add Inventory"
+            android:textAlignment="center"
+            android:focusable="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ListView
+                android:id="@+id/list_emp_inventory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

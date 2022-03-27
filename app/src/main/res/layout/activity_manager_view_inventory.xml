@@ -18,7 +18,8 @@
         android:src="@drawable/ic_baseline_arrow_back_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="?android:attr/selectableItemBackground"/>
+        android:background="?android:attr/selectableItemBackground"
+        android:focusable="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,7 +70,6 @@
                 android:id="@+id/spin_view_inventory"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:inputType="textPersonName"
                 android:text="Category"
                 android:textAlignment="center" />
         </LinearLayout>
@@ -95,7 +95,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:ems="10"
-                android:inputType="textPersonName"
                 android:text="Quantity Demand"
                 android:textAlignment="center"/>
         </LinearLayout>

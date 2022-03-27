@@ -4,71 +4,110 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManagerInventoryUpdates">
+    tools:context=".ManagerInventoryUpdates"
+    android:padding="25dp">
 
     <ImageView
         android:id="@+id/img_back_emp_inv_upd"
-        android:layout_width="51dp"
-        android:layout_height="57dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
         android:clickable="true"
-        android:src="@drawable/back_img"
+        android:src="@drawable/ic_baseline_arrow_back_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
-
-    <EditText
-        android:id="@+id/srch_inventory_history"
-        android:layout_width="216dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/my_border"
-        android:ems="10"
-        android:hint="Search Employee History"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground"/>
 
     <TextView
-        android:id="@+id/txt_emp_inv_upd_sortby_label"
-        android:layout_width="80dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="80dp"
-        android:background="@color/black"
-        android:backgroundTint="@color/black"
-        android:gravity="center"
-        android:text="Sort By"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/srch_inventory_history" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inventory Updates"
+        android:textSize="22sp"
+        app:layout_constraintLeft_toRightOf="@id/img_back_emp_inv_upd"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="25dp"/>
 
-    <!--Dapat Spinner toh-->
-    <EditText
-        android:id="@+id/editTextTextPersonName8"
-        android:layout_width="212dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/my_border"
-        android:ems="10"
-        android:hint="Newest, Oldest"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/srch_inventory_history" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <ListView
-        android:layout_width="426dp"
-        android:layout_height="526dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName8" />
+        <SearchView
+            android:id="@+id/srch_inventory_history"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:ems="10"
+            android:iconifiedByDefault="false"
+            android:queryHint="Search Inventory Update"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:text="View By"
+                android:textAlignment="center"/>
+
+            <Spinner
+                android:id="@+id/editTextTextPersonName5"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:inputType="textPersonName"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:text="Sort By"
+                android:textAlignment="center" />
+
+            <Spinner
+                android:id="@+id/editTextTextPersonName8"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:inputType="textPersonName"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp">
+
+            <ListView
+                android:id="@+id/list_emp_inv_upd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

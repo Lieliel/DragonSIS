@@ -3,8 +3,11 @@ package com.tolentino.dragonsis;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +18,7 @@ public class EmployeeMenu extends AppCompatActivity {
     Button btn_invupd;
     Button btn_prodlist;
     Button btn_log;
+    BroadcastReceiver empbroadcastReceiver1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,19 @@ public class EmployeeMenu extends AppCompatActivity {
                 finish();
             }
         });
+
+        empbroadcastReceiver1 = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("emp_finish_activity")) {
+                    finish();
+                    unregisterReceiver(empbroadcastReceiver1);
+                }
+            }
+        };
+        registerReceiver(empbroadcastReceiver1, new IntentFilter("emp_finish_activity"));
     }
 
     @Override

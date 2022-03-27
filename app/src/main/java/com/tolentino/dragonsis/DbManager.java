@@ -241,7 +241,7 @@ public class DbManager extends SQLiteOpenHelper {
 
 
     // Adding New Product Details
-    void insertProduct(String prod_name, int prod_critical_num, String prod_total_quantity, int prod_price, String prod_category) {
+    void insertProduct(String prod_name, int prod_total_quantity, int prod_critical_num, int prod_price, String prod_category) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
@@ -336,6 +336,32 @@ public class DbManager extends SQLiteOpenHelper {
         return productList;
     }
 
+    // Get Product Details based on Product Name
+    public ArrayList<HashMap<String, String>> getProductByProductName(String product_name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> productList = new ArrayList<>();
+        String query = "SELECT * FROM " + PROD_TABLE_NAME;
+        Cursor cursor = db.query(PROD_TABLE_NAME, new String[]{PROD_COL1, PROD_COL2, PROD_COL3, PROD_COL4, PROD_COL5, PROD_COL6}, PROD_COL2 + "=?", new String[]{String.valueOf(product_name)}, null, null, null, null);
+        if (cursor.moveToNext()) {
+            HashMap<String, String> product = new HashMap<>();
+            product.put("prod_id", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1)));
+            product.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2)));
+            product.put("prod_critical_num", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3)));
+            product.put("prod_total_quantity", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4)));
+            product.put("prod_price", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5)));
+            product.put("prod_category", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
+
+            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
+
+            productList.add(product);
+        }
+        return productList;
+    }
+
 
     // Delete Product Details
     public void deleteProduct(String prod_ID) {
@@ -362,6 +388,48 @@ public class DbManager extends SQLiteOpenHelper {
             Log.i("PRODUCT TABLE:", "Product Updated Correctly");
         }else{
             Log.i("PRODUCT TABLE:", "Product not Updated Correctly");
+        }
+
+    }
+
+    // Subtract Product Total Quantity when Inventory changes are made
+    void subtractProductTotalQuant(String prod_name, int prod_quantity_change){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(PROD_COL2, prod_name);
+        int prod_curr_total_prod_quantity = Integer.parseInt(getProductByProductName(prod_name).get(0).get("prod_total_quantity"));
+        int prod_new_total_prod_quantity = prod_curr_total_prod_quantity - prod_quantity_change;
+        values.put(PROD_COL4, prod_new_total_prod_quantity);
+
+        //Cursor cursor = db.rawQuery("Select * from " + ACC_TABLE_NAME + " where " + ACC_COL1 + "= ?",new String[]{username});
+
+        long newRowId = db.update(PROD_TABLE_NAME, values, PROD_COL2 + "=?", new String[]{prod_name});
+
+        if(newRowId == 1){
+            Log.i("PRODUCT TABLE:", "Product Quantity Updated Correctly");
+        }else{
+            Log.i("PRODUCT TABLE:", "Product Quantity not Updated Correctly");
+        }
+
+    }
+
+    // Add Product Total Quantity when Inventory changes are made
+    void addProductTotalQuant(String prod_name, int prod_quantity_change){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(PROD_COL2, prod_name);
+        int prod_curr_total_prod_quantity = Integer.parseInt(getProductByProductName(prod_name).get(0).get("prod_total_quantity"));
+        int prod_new_total_prod_quantity = prod_curr_total_prod_quantity + prod_quantity_change;
+        values.put(PROD_COL4, prod_new_total_prod_quantity);
+
+        //Cursor cursor = db.rawQuery("Select * from " + ACC_TABLE_NAME + " where " + ACC_COL1 + "= ?",new String[]{username});
+
+        long newRowId = db.update(PROD_TABLE_NAME, values, PROD_COL2 + "=?", new String[]{prod_name});
+
+        if(newRowId == 1){
+            Log.i("PRODUCT TABLE:", "Product Quantity Updated Correctly");
+        }else{
+            Log.i("PRODUCT TABLE:", "Product Quantity not Updated Correctly");
         }
 
     }
@@ -509,14 +577,6 @@ public class DbManager extends SQLiteOpenHelper {
 
         db.close();
     }
-/*
-    private static final String INV_HIS_TABLE_NAME = "inventory_history_table";
-    private static final String INV_HIS_COL1 = "update_ID";
-    private static final String INV_HIS_COL2 = "inventory_update_date";
-    private static final String INV_HIS_COL3 = "inventory_action";
-    private static final String INV_HIS_COL4 = "inventory_quantity_change";
-    private static final String INV_HIS_COL5 = "inventory_ID";
-    private static final String INV_HIS_COL6 = "prod_name";*/
 
     //Function to create Inventory Message ArrayList
     public ArrayList<String> getInvMessage() {

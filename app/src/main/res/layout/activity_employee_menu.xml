@@ -4,59 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     tools:context=".EmployeeMenu">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_viewinv"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="200dp"
-        android:background="@drawable/button"
-        android:text="@string/view_inv"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></Button>
+        <Button
+            android:id="@+id/btn_viewinv"
+            android:layout_width="260dp"
+            android:layout_height="60dp"
+            android:text="@string/view_inv"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-    <Button
-        android:id="@+id/btn_invupd"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button"
-        android:text="@string/view_inv_updates"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_viewinv"></Button>
+        <Button
+            android:id="@+id/btn_invupd"
+            android:layout_width="260dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/view_inv_updates"/>
 
-    <Button
-        android:id="@+id/btn_prodlist"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button"
-        android:text="@string/view_product_list"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_invupd"></Button>
+        <Button
+            android:id="@+id/btn_prodlist"
+            android:layout_width="260dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/view_product_list"/>
 
-    <Button
-        android:id="@+id/btn_log"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button"
-        android:text="@string/logout"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_prodlist"></Button>
-
+        <Button
+            android:id="@+id/btn_log"
+            android:layout_width="260dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/logout" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

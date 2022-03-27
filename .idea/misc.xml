@@ -11,13 +11,15 @@
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/drawable/image_button_click_state.xml" value="0.329" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/drawable/line_border.xml" value="0.192" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/drawable/my_border.xml" value="0.331" />
-        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_employee_menu.xml" value="0.1274062816616008" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_employee_inventory_updates.xml" value="0.33" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_employee_menu.xml" value="0.33" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_employee_view_inventory.xml" value="0.26197916666666665" />
-        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_employee_view_products.xml" value="0.26197916666666665" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_employee_view_products.xml" value="0.33" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_add_inventory.xml" value="0.33" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_add_product.xml" value="0.33" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_add_user.xml" value="0.5" />
+        <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_generate_pdf_report.xml" value="0.3692708333333333" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_menu.xml" value="0.33" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_update_account.xml" value="0.33" />
         <entry key="..\:/3IT Files/ICS26011/Android Projects/DragonSIS/app/src/main/res/layout/activity_manager_update_inventory.xml" value="0.33" />

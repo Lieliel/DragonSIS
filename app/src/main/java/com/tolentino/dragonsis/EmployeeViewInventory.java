@@ -22,6 +22,8 @@ public class EmployeeViewInventory extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(EmployeeViewInventory.this, EmployeeMenu.class);
+                Intent endActivity = new Intent("emp_finish_activity");
+                sendBroadcast(endActivity);
                 startActivity(i);
                 finish();
             }

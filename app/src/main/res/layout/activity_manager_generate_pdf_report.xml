@@ -8,46 +8,63 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <Button
-        android:id="@+id/btn_gnr_sales"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
-        android:text="@string/pdf_gen_sales"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></Button>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="50dp">
 
-    <Button
-        android:id="@+id/btn_gnr_inv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/pdf_gen_inv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_gnr_sales"></Button>
+        <androidx.cardview.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            app:cardBackgroundColor="@color/blue_munsell"
+            app:cardCornerRadius="10dp">
 
-    <Button
-        android:id="@+id/btn_gnr_full"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/pdf_gen_full"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_gnr_inv"></Button>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="25dp"
+                android:text="@string/location"
+                android:textSize="20sp"
+                android:textColor="@color/snow"
+                android:textAlignment="center"/>
+        </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/btn_back_report"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/gnr_back_to_menu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_gnr_full"></Button>
+        <Button
+            android:id="@+id/btn_gnr_sales"
+            android:layout_width="260dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/pdf_gen_sales"
+            />
 
+        <Button
+            android:id="@+id/btn_gnr_inv"
+            android:layout_width="260dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/pdf_gen_inv"
+            />
 
+        <Button
+            android:id="@+id/btn_gnr_full"
+            android:layout_width="260dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/pdf_gen_full"
+            />
+
+        <Button
+            android:id="@+id/btn_back_report"
+            android:layout_width="260dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/gnr_back_to_menu"
+            />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
