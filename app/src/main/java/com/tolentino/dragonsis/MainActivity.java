@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
         a2=(EditText)findViewById(R.id.mainpassword);
         db=new DbManager(this);
 
-        DbManager db = new DbManager(MainActivity.this);
-
         /*Add dummy account if no manager record exists
         boolean managerExists = db.checkUserValues("manager");
         if(!managerExists) {

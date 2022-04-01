@@ -6,19 +6,35 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Paint;
-import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.geom.Rectangle;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.AreaBreak;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.property.TextAlignment;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class ManagerGeneratePdfReport extends AppCompatActivity {
@@ -27,6 +43,7 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
     Button btn_gnr_inv;
     Button btn_gnr_full;
     Button btn_back_report;
+    DbManager db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +56,17 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
         btn_gnr_inv = findViewById(R.id.btn_gnr_inv);
         btn_gnr_full = findViewById(R.id.btn_gnr_full);
         btn_back_report = findViewById(R.id.btn_back_report);
+        db = new DbManager(this);
 
         btn_gnr_sales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //create Sales Report
-                createSalesPdf();
-                Toast.makeText(ManagerGeneratePdfReport.this, "Sales Report Generated", Toast.LENGTH_SHORT).show();
+                try {
+                    createSalesPdf();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -53,8 +74,12 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //create Inventory Report
-                createInvPdf();
-                Toast.makeText(ManagerGeneratePdfReport.this, "Inventory Report Generated", Toast.LENGTH_SHORT).show();
+                try {
+                    createInvPdf();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 
@@ -62,8 +87,12 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //create Full Report
-                createFullPdf();
-                Toast.makeText(ManagerGeneratePdfReport.this, "Full Report Generated", Toast.LENGTH_SHORT).show();
+                try {
+                    createFullPdf();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 
@@ -78,106 +107,216 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
         });
     }
 
-    private void createFullPdf() {
-        PdfDocument myPdf = new PdfDocument();
-        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
-        PdfDocument.Page myPage = myPdf.startPage(myPageInfo);
+    private void createFullPdf() throws FileNotFoundException {
 
-        Paint myPaint = new Paint();
-        String reportTitle = "Dragon M Full Report";
-        int x = 85;
-        int y = 25;
-        myPage.getCanvas().drawText(reportTitle, 93, 25, myPaint);
-
-        String cTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        //Specifying where to put and what File Name to use
+        String cTime = new SimpleDateFormat("HH:mm a", Locale.getDefault()).format(new Date());
         String cDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-        Log.i("Current Time", cTime.toString());
-        Log.i("Current Time", cDate.toString());
-        myPage.getCanvas().drawText(cDate+", "+cTime, 95, 45, myPaint);
+        String myFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
+        //Log.i("AYO", myFilePath);
+        File myFile = new File(myFilePath, "DMFull_"+cDate+"_"+cTime+".pdf");
+        OutputStream outputStream = new FileOutputStream(myFile);
 
-        myPdf.finishPage(myPage);
+        PdfWriter writer = new PdfWriter(myFile);
+        PdfDocument pdfDocument = new PdfDocument(writer);
+        pdfDocument.setDefaultPageSize(PageSize.LETTER);
+        Rectangle pageSize = pdfDocument.getDefaultPageSize();
+        Document doc = new Document(pdfDocument);
 
-        String myFilePath = Environment.getExternalStorageDirectory().getPath() + "/DMFull_"+cDate+"_"+cTime+".pdf";
-        File myFile = new File(myFilePath);
+        //Header Texts
+        Text Title = new Text("Dragon M Inventory and Sales Report");
+        Text dateAndTime = new Text(cDate + ", " + cTime);
+        Paragraph titleP = new Paragraph();
+        Paragraph dateAndTimeP = new Paragraph();
+        titleP.add(Title).setBold().setFontSize(35);
+        dateAndTimeP.add(dateAndTime).setItalic().setFontSize(29);
 
-        try {
-            myPdf.writeTo(new FileOutputStream(myFile));
-        }catch (Exception e){
-            String filePath = Environment.getExternalStorageDirectory().getPath().toString();
-            Log.i("External Storage Path", filePath);
-            Toast.makeText(ManagerGeneratePdfReport.this, "Report Generation Unsuccessful", Toast.LENGTH_SHORT).show();
+        doc.showTextAligned(titleP,pageSize.getWidth()/2, pageSize.getHeight() - 70, TextAlignment.CENTER);
+        doc.showTextAligned(dateAndTimeP,pageSize.getWidth()/2,pageSize.getHeight() - 110, TextAlignment.CENTER);
 
+        //Start of Inventory Table
+        float invColWidth[] = {80f, 420f, 200f, 150f, 170f, 180f};
+        Table invTable = new Table(invColWidth);
+        invTable.addCell("ID");
+        invTable.addCell("NAME");
+        invTable.addCell("CATEGORY");
+        invTable.addCell("CRITICAL NUMBER");
+        invTable.addCell("TOTAL QUANTITY");
+        invTable.addCell("PRICE IN PHP");
+
+        ArrayList<HashMap<String, String>> inventoryList = db.getProducts();
+
+        int tablePosition = 200;
+        for (int i = 0; i < inventoryList.size(); i++) {
+            HashMap<String, String> inventoryRecord = inventoryList.get(i);
+            if(Integer.parseInt(inventoryRecord.get("prod_total_quantity"))>=Integer.parseInt(inventoryRecord.get("prod_critical_num"))){
+                invTable.addCell(inventoryRecord.get("prod_ID")).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_name")).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_category")).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_critical_num")).setPadding(10);
+                invTable.addCell(new Cell().setBackgroundColor(ColorConstants.GREEN).add(new Paragraph(inventoryRecord.get("prod_total_quantity")))).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_price")).setPadding(10);
+                tablePosition += 18;
+            }else{
+                invTable.addCell(inventoryRecord.get("prod_ID")).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_name")).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_category")).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_critical_num")).setPadding(10);
+                invTable.addCell(new Cell().setBackgroundColor(ColorConstants.RED).add(new Paragraph(inventoryRecord.get("prod_total_quantity")))).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_price")).setPadding(10);
+                tablePosition += 18;
+            }
+        }
+        invTable.setFixedPosition(25, pageSize.getTop() - tablePosition,pageSize.getWidth()-50);
+        doc.add(invTable);
+        doc.add(new AreaBreak());
+
+        //Start of Sales Table
+        float salesColWidth[] = {80f, 420f, 200f, 150f, 170f, 180f};
+        Table salTable = new Table(salesColWidth);
+        salTable.addCell("ID");
+        salTable.addCell("PRODUCT");
+        salTable.addCell("SALES DATE");
+        salTable.addCell("SALES TIME");
+        salTable.addCell("NO. OF ITEM");
+        salTable.addCell("SALES AMOUNT");
+
+        ArrayList<HashMap<String, String>> salesList = db.getSales();
+
+        for (int i = 0; i < salesList.size(); i++) {
+            HashMap<String, String> salesRecord = salesList.get(i);
+            salTable.addCell(salesRecord.get("sales_ID")).setPadding(10);
+            salTable.addCell(salesRecord.get("product_sold")).setPadding(10);
+            salTable.addCell(salesRecord.get("sales_dates")).setPadding(10);
+            salTable.addCell(salesRecord.get("sales_time")).setPadding(10);
+            salTable.addCell(salesRecord.get("items_sold")).setPadding(10);
+            salTable.addCell(salesRecord.get("sales_amount")).setPadding(10);
+            //tablePosition += 18;
         }
 
-        myPdf.close();
+        doc.add(salTable);
+        doc.close();
+        Toast.makeText(this, "Full Report Generated", Toast.LENGTH_SHORT).show();
     }
 
-    private void createInvPdf() {
-        PdfDocument myPdf = new PdfDocument();
-        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
-        PdfDocument.Page myPage = myPdf.startPage(myPageInfo);
-
-        Paint myPaint = new Paint();
-        String reportTitle = "Dragon M Inventory Report";
-        int x = 85;
-        int y = 25;
-        myPage.getCanvas().drawText(reportTitle, 75, 25, myPaint);
-
-        String cTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+    private void createInvPdf() throws FileNotFoundException{
+        //Specifying where to put and what File Name to use
+        String cTime = new SimpleDateFormat("HH:mm a", Locale.getDefault()).format(new Date());
         String cDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-        Log.i("Current Time", cTime.toString());
-        Log.i("Current Time", cDate.toString());
-        myPage.getCanvas().drawText(cDate+", "+cTime, 95, 45, myPaint);
+        String myFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
+        File myFile = new File(myFilePath, "DMInventory_"+cDate+"_"+cTime+".pdf");
+        OutputStream outputStream = new FileOutputStream(myFile);
 
-        myPdf.finishPage(myPage);
+        PdfWriter writer = new PdfWriter(myFile);
+        PdfDocument pdfDocument = new PdfDocument(writer);
+        pdfDocument.setDefaultPageSize(PageSize.LETTER);
+        Rectangle pageSize = pdfDocument.getDefaultPageSize();
+        Document doc = new Document(pdfDocument);
 
-        String myFilePath = Environment.getExternalStorageDirectory().getPath() + "/DMInventory_"+cDate+"_"+cTime+".pdf";
-        File myFile = new File(myFilePath);
+        //Header Texts
+        Text Title = new Text("Dragon M Inventory Report");
+        Text dateAndTime = new Text(cDate + ", " + cTime);
+        Paragraph titleP = new Paragraph();
+        Paragraph dateAndTimeP = new Paragraph();
+        titleP.add(Title).setBold().setFontSize(40);
+        dateAndTimeP.add(dateAndTime).setItalic().setFontSize(30);
 
-        try {
-            myPdf.writeTo(new FileOutputStream(myFile));
-        }catch (Exception e){
-            String filePath = Environment.getExternalStorageDirectory().getPath().toString();
-            Log.i("External Storage Path", filePath);
-            Toast.makeText(ManagerGeneratePdfReport.this, "Report Generation Unsuccessful", Toast.LENGTH_SHORT).show();
+        doc.showTextAligned(titleP,pageSize.getWidth()/2, pageSize.getHeight() - 70, TextAlignment.CENTER);
+        doc.showTextAligned(dateAndTimeP,pageSize.getWidth()/2,pageSize.getHeight() - 110, TextAlignment.CENTER);
 
+        float colWidth[] = {80f, 420f, 200f, 150f, 170f, 180f};
+        Table invTable = new Table(colWidth);
+        invTable.addCell("ID");
+        invTable.addCell("NAME");
+        invTable.addCell("CATEGORY");
+        invTable.addCell("CRITICAL NUMBER");
+        invTable.addCell("TOTAL QUANTITY");
+        invTable.addCell("PRICE IN PHP");
+
+        ArrayList<HashMap<String, String>> inventoryList = db.getProducts();
+
+        int tablePosition = 200;
+        for (int i = 0; i < inventoryList.size(); i++) {
+            HashMap<String, String> inventoryRecord = inventoryList.get(i);
+            if(Integer.parseInt(inventoryRecord.get("prod_total_quantity"))>=Integer.parseInt(inventoryRecord.get("prod_critical_num"))){
+                invTable.addCell(inventoryRecord.get("prod_ID")).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_name")).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_category")).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_critical_num")).setPadding(10);
+                invTable.addCell(new Cell().setBackgroundColor(ColorConstants.GREEN).add(new Paragraph(inventoryRecord.get("prod_total_quantity")))).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_price")).setPadding(10);
+                tablePosition += 18;
+            }else{
+                invTable.addCell(inventoryRecord.get("prod_ID")).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_name")).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_category")).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_critical_num")).setPadding(10);
+                invTable.addCell(new Cell().setBackgroundColor(ColorConstants.RED).add(new Paragraph(inventoryRecord.get("prod_total_quantity")))).setPadding(10);
+                invTable.addCell(inventoryRecord.get("prod_price")).setPadding(10);
+                tablePosition += 18;
+            }
         }
+        invTable.setFixedPosition(25, pageSize.getTop() - tablePosition,pageSize.getWidth()-50);
+        doc.add(invTable);
 
-        myPdf.close();
+        doc.close();
+        Toast.makeText(this, "Inventory Report Generated", Toast.LENGTH_SHORT).show();
     }
 
-    public void createSalesPdf() {
-        PdfDocument myPdf = new PdfDocument();
-        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
-        PdfDocument.Page myPage = myPdf.startPage(myPageInfo);
-
-        Paint myPaint = new Paint();
-        String reportTitle = "Dragon M Sales Report";
-        int x = 85;
-        int y = 25;
-        myPage.getCanvas().drawText(reportTitle, 85, 25, myPaint);
-
-        String cTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+    public void createSalesPdf() throws FileNotFoundException{
+        //Specifying where to put and what File Name to use
+        String cTime = new SimpleDateFormat("HH:mm a", Locale.getDefault()).format(new Date());
         String cDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-        Log.i("Current Time", cTime.toString());
-        Log.i("Current Time", cDate.toString());
-        myPage.getCanvas().drawText(cDate+", "+cTime, 95, 45, myPaint);
+        String myFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
+        //Log.i("AYO", myFilePath);
+        File myFile = new File(myFilePath, "DMSales_"+cDate+"_"+cTime+".pdf");
+        OutputStream outputStream = new FileOutputStream(myFile);
 
-        myPdf.finishPage(myPage);
+        PdfWriter writer = new PdfWriter(myFile);
+        PdfDocument pdfDocument = new PdfDocument(writer);
+        pdfDocument.setDefaultPageSize(PageSize.LETTER);
+        Rectangle pageSize = pdfDocument.getDefaultPageSize();
+        Document doc = new Document(pdfDocument);
 
-        String myFilePath = Environment.getExternalStorageDirectory().getPath() + "/DMSales_"+cDate+"_"+cTime+".pdf";
-        File myFile = new File(myFilePath);
+        //Header Texts
+        Text Title = new Text("Dragon M Sales Report");
+        Text dateAndTime = new Text(cDate + ", " + cTime);
+        Paragraph titleP = new Paragraph();
+        Paragraph dateAndTimeP = new Paragraph();
+        titleP.add(Title).setBold().setFontSize(40);
+        dateAndTimeP.add(dateAndTime).setItalic().setFontSize(30);
 
-        try {
-            myPdf.writeTo(new FileOutputStream(myFile));
-        }catch (Exception e){
-            String filePath = Environment.getExternalStorageDirectory().getPath().toString();
-            Log.i("External Storage Path", filePath);
-            Toast.makeText(ManagerGeneratePdfReport.this, "Report Generation Unsuccessful", Toast.LENGTH_SHORT).show();
+        doc.showTextAligned(titleP,pageSize.getWidth()/2, pageSize.getHeight() - 70, TextAlignment.CENTER);
+        doc.showTextAligned(dateAndTimeP,pageSize.getWidth()/2,pageSize.getHeight() - 110, TextAlignment.CENTER);
 
+        float salesColWidth[] = {80f, 420f, 200f, 150f, 170f, 180f};
+        Table salTable = new Table(salesColWidth);
+        salTable.addCell("ID");
+        salTable.addCell("PRODUCT");
+        salTable.addCell("SALES DATE");
+        salTable.addCell("SALES TIME");
+        salTable.addCell("NO. OF ITEM");
+        salTable.addCell("SALES AMOUNT");
+
+        ArrayList<HashMap<String, String>> salesList = db.getSales();
+
+        int tablePosition = 200;
+        for (int i = 0; i < salesList.size(); i++) {
+            HashMap<String, String> salesRecord = salesList.get(i);
+            salTable.addCell(salesRecord.get("sales_ID")).setPadding(10);
+            salTable.addCell(salesRecord.get("product_sold")).setPadding(10);
+            salTable.addCell(salesRecord.get("sales_dates")).setPadding(10);
+            salTable.addCell(salesRecord.get("sales_time")).setPadding(10);
+            salTable.addCell(salesRecord.get("items_sold")).setPadding(10);
+            salTable.addCell(salesRecord.get("sales_amount")).setPadding(10);
+            tablePosition += 18;
         }
 
-        myPdf.close();
+        salTable.setFixedPosition(25, pageSize.getTop() - tablePosition,pageSize.getWidth()-50);
+
+        doc.add(salTable);
+        doc.close();
+        Toast.makeText(this, "Sales Report Generated", Toast.LENGTH_SHORT).show();
 
     }
 }

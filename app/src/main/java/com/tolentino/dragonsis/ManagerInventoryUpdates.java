@@ -39,7 +39,7 @@ public class ManagerInventoryUpdates extends AppCompatActivity {
             }
         });
 
-        //Adapt Inventory Updates List
+        //Adapt Inventory Updates List 
         list_man_inv_upd = findViewById(R.id.list_man_inv_upd);
         ArrayList<String> inventoryHislist = db.getInvMessage();
         ArrayAdapter listAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, inventoryHislist);
