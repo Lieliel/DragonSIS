@@ -7,7 +7,7 @@
     tools:context=".ManagerInventoryUpdates">
 
 
-    <EditText
+    <!--<EditText
         android:id="@+id/editTextTextPersonName5"
         android:layout_width="212dp"
         android:layout_height="45dp"
@@ -19,9 +19,9 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />-->
 
-    <TextView
+    <!--<TextView
         android:id="@+id/textView8"
         android:layout_width="80dp"
         android:layout_height="45dp"
@@ -34,7 +34,7 @@
         android:textAlignment="center"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />-->
 
     <ImageView
         android:id="@+id/img_back_man_view_inventory_updates"
@@ -48,21 +48,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></ImageView>
 
-    <EditText
-        android:id="@+id/editTextTextPersonName7"
+    <SearchView
+        android:id="@+id/srch_man_view_inv_upd"
         android:layout_width="216dp"
         android:layout_height="49dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/my_border"
         android:ems="10"
-        android:hint="Search Inventory"
+        android:queryHint="Search Inventory Updates"
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/textView7"
         android:layout_width="80dp"
         android:layout_height="45dp"
@@ -75,9 +75,9 @@
         android:textAlignment="center"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />-->
 
-    <EditText
+    <!--<EditText
         android:id="@+id/editTextTextPersonName8"
         android:layout_width="212dp"
         android:layout_height="45dp"
@@ -89,15 +89,16 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />-->
 
     <ListView
         android:id="@+id/list_man_inv_upd"
-        android:layout_width="426dp"
-        android:layout_height="526dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="413dp"
+        android:layout_height="630dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName8" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

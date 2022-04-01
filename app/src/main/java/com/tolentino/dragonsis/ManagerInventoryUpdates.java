@@ -19,6 +19,8 @@ public class ManagerInventoryUpdates extends AppCompatActivity {
 
     ImageView img_back_man_view_inventory_updates;
     ListView list_man_inv_upd;
+    ListAdapter listAdapter;
+    SearchView srch_man_view_inv_upd;
     DbManager db;
 
     @Override
@@ -28,6 +30,7 @@ public class ManagerInventoryUpdates extends AppCompatActivity {
 
         img_back_man_view_inventory_updates = findViewById(R.id.img_back_man_view_inventory_updates);
         db = new DbManager(this);
+        srch_man_view_inv_upd = findViewById(R.id.srch_man_view_inv_upd);
 
         //Back to Manager Menu
         img_back_man_view_inventory_updates.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +47,21 @@ public class ManagerInventoryUpdates extends AppCompatActivity {
         ArrayList<String> inventoryHislist = db.getInvMessage();
         ArrayAdapter listAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, inventoryHislist);
         list_man_inv_upd.setAdapter(listAdapter);
+
+        //Search Inventory Updates Function
+        srch_man_view_inv_upd.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
+                listAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
 
     }
 }
