@@ -469,7 +469,7 @@ public class DbManager extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(INV_COL3, inv_quantity);
         values.put(INV_COL5, inv_remark);
-        values.put(INV_COL6, prod_name);
+        values.put(INV_COL7, prod_name);
 
         //Cursor cursor = db.rawQuery("Select * from " + ACC_TABLE_NAME + " where " + ACC_COL1 + "= ?",new String[]{username});
 
@@ -500,7 +500,7 @@ public class DbManager extends SQLiteOpenHelper {
             inventory.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL7)));
             inventoryList.add(inventory);
 
-            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(INV_COL1))
+            Log.i("ADDED TO INV TABLE",  cursor.getString(cursor.getColumnIndexOrThrow(INV_COL1))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL2))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL3))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL4))
@@ -614,7 +614,7 @@ public class DbManager extends SQLiteOpenHelper {
             history.put("inventory_update_time", cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL7)));
             historyList.add(history);
 
-            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL1))
+            Log.i("ADDED TO INVHIS TABLE",  cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL1))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL2))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL3))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_HIS_COL4))
@@ -709,16 +709,18 @@ public class DbManager extends SQLiteOpenHelper {
             HashMap<String, String> sales = new HashMap<>();
             sales.put("sales_ID", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL1)));
             sales.put("sales_amount", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL2)));
-            sales.put("sales_sold", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL3)));
+            sales.put("items_sold", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL3)));
             sales.put("sales_dates", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL4)));
             sales.put("sales_time", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL5)));
+            sales.put("product_sold", cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL6)));
             salesList.add(sales);
 
             Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL1))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL2))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL3))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL4))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL5)));
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL5))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(SALES_COL6)));
         }
         return salesList;
     }
