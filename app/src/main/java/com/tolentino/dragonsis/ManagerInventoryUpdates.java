@@ -13,6 +13,7 @@ import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class ManagerInventoryUpdates extends AppCompatActivity {
@@ -45,6 +46,7 @@ public class ManagerInventoryUpdates extends AppCompatActivity {
         //Adapt Inventory Updates List 
         list_man_inv_upd = findViewById(R.id.list_man_inv_upd);
         ArrayList<String> inventoryHislist = db.getInvMessage();
+        Collections.reverse(inventoryHislist);
         ArrayAdapter listAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, inventoryHislist);
         list_man_inv_upd.setAdapter(listAdapter);
 
