@@ -115,7 +115,7 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
         String myFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
         //Log.i("AYO", myFilePath);
         File myFile = new File(myFilePath, "DMFull_"+cDate+"_"+cTime+".pdf");
-        OutputStream outputStream = new FileOutputStream(myFile);
+        //OutputStream outputStream = new FileOutputStream(myFile);
 
         PdfWriter writer = new PdfWriter(myFile);
         PdfDocument pdfDocument = new PdfDocument(writer);
@@ -270,7 +270,7 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
         String myFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
         //Log.i("AYO", myFilePath);
         File myFile = new File(myFilePath, "DMSales_"+cDate+"_"+cTime+".pdf");
-        OutputStream outputStream = new FileOutputStream(myFile);
+        //OutputStream outputStream = new FileOutputStream(myFile);
 
         PdfWriter writer = new PdfWriter(myFile);
         PdfDocument pdfDocument = new PdfDocument(writer);

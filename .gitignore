@@ -1,4 +1,8 @@
 *.iml
+.idea/
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
 .gradle
 /local.properties
 /.idea/caches
