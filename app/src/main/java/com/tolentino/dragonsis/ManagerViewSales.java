@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ManagerViewSales extends AppCompatActivity {
 
@@ -41,6 +42,7 @@ public class ManagerViewSales extends AppCompatActivity {
         //Adapt Sales List
         list_man_view_sales = findViewById(R.id.list_man_view_sales);
         ArrayList<String> salesList = db.getSalesMessage();
+        Collections.reverse(salesList);
         ArrayAdapter listAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, salesList);
         list_man_view_sales.setAdapter(listAdapter);
     }
