@@ -11,6 +11,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class ManagerMenu extends AppCompatActivity {
 
@@ -22,6 +23,7 @@ public class ManagerMenu extends AppCompatActivity {
     Button btn_viewinvupd;
     BroadcastReceiver broadcastReceiver1;
     Button btn_man_trans;
+    TextView user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,11 @@ public class ManagerMenu extends AppCompatActivity {
         btn_logout = findViewById(R.id.btn_logout);
         btn_viewinvupd = findViewById(R.id.btn_viewinvupd);
         btn_man_trans = findViewById(R.id.btn_man_trans);
+
+        user_name = (TextView) findViewById(R.id.user_name);
+        Intent intentName = getIntent();
+        String userName = intentName.getStringExtra("user_name");
+        user_name.setText(userName);
 
         //Redirect to User Accounts
         btn_useraccounts.setOnClickListener(new View.OnClickListener() {
@@ -127,4 +134,5 @@ public class ManagerMenu extends AppCompatActivity {
 
                 }).create().show();
     }
+
 }

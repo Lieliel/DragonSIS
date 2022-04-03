@@ -4,44 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EmployeeMenu">
+    tools:context=".EmployeeMenu"
+    android:padding="25dp">
+
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/user_name_emp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="@string/user_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/welcome_text" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_name_emp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/btn_viewinv"
-            android:layout_width="260dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
             android:text="@string/view_inv"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/DSISButton"/>
 
         <Button
             android:id="@+id/btn_invupd"
-            android:layout_width="260dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/view_inv_updates"/>
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/view_inv_updates"
+            style="@style/DSISButton"/>
 
         <Button
             android:id="@+id/btn_prodlist"
-            android:layout_width="260dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/view_product_list"/>
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/view_product_list"
+            style="@style/DSISButton"/>
 
         <Button
             android:id="@+id/btn_log"
-            android:layout_width="260dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/logout" />
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/menu_logout_btn"
+            style="@style/DSISButton"
+            android:backgroundTint="@color/fiery_rose"
+            android:textColor="@color/white"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

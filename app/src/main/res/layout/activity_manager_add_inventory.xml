@@ -98,6 +98,7 @@
             android:layout_below="@id/edit_inv_quantity"
             android:layout_marginTop="12dp"
             android:backgroundTint="@color/blue_munsell"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            style="@style/DSISButton"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

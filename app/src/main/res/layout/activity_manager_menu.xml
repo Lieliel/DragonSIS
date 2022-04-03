@@ -6,65 +6,92 @@
     android:layout_height="match_parent"
     tools:context=".ManagerMenu"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="25dp">
+
+
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="@string/user_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/welcome_text" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_name"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/btn_inventory"
-            android:layout_width="260dp"
-            android:layout_height="60dp"
-            android:text="@string/menu_inventory_btn"/>
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="@string/menu_inventory_btn"
+            style="@style/DSISButton"/>
 
         <Button
             android:id="@+id/btn_viewinvupd"
-            android:layout_width="260dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/view_invupdates"/>
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/view_invupdates"
+            style="@style/DSISButton"/>
 
         <Button
             android:id="@+id/btn_products"
-            android:layout_width="260dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/view_productlist"/>
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/view_productlist"
+            style="@style/DSISButton"/>
 
         <Button
             android:id="@+id/btn_useraccounts"
-            android:layout_width="260dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/menu_useracc_btn"/>
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/menu_useracc_btn"
+            style="@style/DSISButton"/>
 
         <Button
             android:id="@+id/btn_man_trans"
-            android:layout_width="260dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/view_sales"/>
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/view_sales"
+            style="@style/DSISButton"/>
 
         <Button
             android:id="@+id/btn_pdf"
-            android:layout_width="260dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/menu_pdf_btn"/>
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/menu_pdf_btn"
+            style="@style/DSISButton"/>
 
         <Button
             android:id="@+id/btn_logout"
-            android:layout_width="260dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="5dp"
             android:text="@string/menu_logout_btn"
             android:backgroundTint="@color/fiery_rose"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            style="@style/DSISButton"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

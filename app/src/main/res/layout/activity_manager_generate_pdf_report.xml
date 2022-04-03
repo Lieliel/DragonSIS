@@ -61,25 +61,25 @@
         <Button
             android:id="@+id/btn_gnr_sales"
             android:layout_width="260dp"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:layout_marginTop="50dp"
             android:text="@string/pdf_gen_sales"
-            />
+            style="@style/DSISButton"/>
 
         <Button
             android:id="@+id/btn_gnr_inv"
             android:layout_width="260dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="5dp"
             android:text="@string/pdf_gen_inv"
-            />
+            style="@style/DSISButton"/>
 
         <Button
             android:id="@+id/btn_gnr_full"
             android:layout_width="260dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="5dp"
             android:text="@string/pdf_gen_full"
-            />
+            style="@style/DSISButton"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

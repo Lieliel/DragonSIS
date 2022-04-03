@@ -77,7 +77,8 @@
             android:hint="Type Password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_upd_acc_password_label"/>
+            app:layout_constraintTop_toBottomOf="@+id/txt_upd_acc_password_label"
+            />
 
         <TextView
             android:id="@+id/txt_upd_acc_usertype_label"
@@ -113,7 +114,8 @@
             android:layout_marginTop="20dp"
             android:text="Update"
             android:backgroundTint="@color/bud_green"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            style="@style/DSISButton"/>
 
         <Button
             android:id="@+id/btn_upd_acc_remove"
@@ -122,6 +124,7 @@
             android:layout_marginTop="5dp"
             android:text="Remove"
             android:backgroundTint="@color/fiery_rose"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            style="@style/DSISButton"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class EmployeeMenu extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class EmployeeMenu extends AppCompatActivity {
     Button btn_prodlist;
     Button btn_log;
     BroadcastReceiver empbroadcastReceiver1;
+    TextView user_name_emp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,11 @@ public class EmployeeMenu extends AppCompatActivity {
         btn_invupd = findViewById(R.id.btn_invupd);
         btn_prodlist = findViewById(R.id.btn_prodlist);
         btn_log = findViewById(R.id.btn_log);
+
+        user_name_emp = (TextView) findViewById(R.id.user_name);
+        Intent intentName = getIntent();
+        String userName = intentName.getStringExtra("user_name");
+        user_name_emp.setText(userName);
 
         //Redirect to Inventory List
         btn_viewinv.setOnClickListener(new View.OnClickListener() {

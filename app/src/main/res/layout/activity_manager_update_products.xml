@@ -131,7 +131,8 @@
                 android:layout_marginTop="20dp"
                 android:text="Update"
                 android:backgroundTint="@color/bud_green"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                style="@style/DSISButton"/>
 
             <Button
                 android:id="@+id/btn_upd_prod_remove"
@@ -140,7 +141,8 @@
                 android:layout_marginTop="5dp"
                 android:text="Remove"
                 android:backgroundTint="@color/fiery_rose"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                style="@style/DSISButton"/>
         </TableLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

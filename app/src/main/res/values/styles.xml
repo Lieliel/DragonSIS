@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppStyle" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:textColor">@color/eerie_black</item>
-    </style>
-    <style name="DSISButton" parent="android:Widget.Button">
+    <style name="DSISButton" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:textSize">20sp</item>
+        <item name="backgroundTint">@color/light_gray</item>
+        <item name="android:textColor">@color/eerie_black</item>
+        <item name="fontFamily">@font/nexa_text_bold</item>
     </style>
 </resources>

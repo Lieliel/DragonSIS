@@ -118,12 +118,20 @@
             android:clickable="true"
             android:text="Add Product"
             android:textAlignment="center"
-            android:focusable="true" />
+            android:focusable="true"
+            android:backgroundTint="@color/blue_munsell"
+            android:textColor="@color/white"
+            style="@style/DSISButton"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="20dp"
+            android:background="?android:attr/listDivider"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_add_product">

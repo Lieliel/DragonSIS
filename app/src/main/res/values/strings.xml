@@ -37,6 +37,8 @@
     <string name="view_invupdates">View Inventory Updates</string>
     <string name="view_productlist">View Product List</string>
     <string name="backbuttondescrip">BackButton</string>
+    <string name="welcome">Welcome,</string>
+    <string name="user_name">User Name</string>
 
 
 </resources>

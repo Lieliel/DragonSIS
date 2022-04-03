@@ -44,7 +44,6 @@
             android:id="@+id/img_add_user"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_alignParentStart="true"
             android:clickable="true"
             android:text="Add User Account"
             android:textAlignment="center"
@@ -52,7 +51,8 @@
             app:layout_constraintTop_toTopOf="parent"
             android:focusable="true"
             android:backgroundTint="@color/blue_munsell"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            style="@style/DSISButton"/>
 
         <TextView
             android:id="@+id/txt_userlist"

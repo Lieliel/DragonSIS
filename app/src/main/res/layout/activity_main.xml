@@ -55,7 +55,8 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:fontFamily="@font/nexa_text_bold"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            style="@style/DSISButton"/>
 
         <!-- <ImageView
             android:id="@+id/img_login_logo"
