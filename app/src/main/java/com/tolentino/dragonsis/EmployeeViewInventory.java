@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -20,13 +21,13 @@ import java.util.HashMap;
 public class EmployeeViewInventory extends AppCompatActivity {
 
     ImageView img_back_employee_inventory;
-    ImageView img_add_inventory;
-    SearchView srch_inventory;
+    Button img_add_inventory;
+    SearchView search_inventory_emp;
     Spinner spin_view_inventory;
     Spinner spin_sort_inventory;
 
     DbManager db;
-    ListView list_inventory;
+    ListView list_inventory_emp;
     ListAdapter listAdapter;
 
     @Override
@@ -36,7 +37,7 @@ public class EmployeeViewInventory extends AppCompatActivity {
 
         img_back_employee_inventory = findViewById(R.id.img_back_employee_inventory);
         img_add_inventory = findViewById(R.id.img_add_inventory);
-        srch_inventory = findViewById(R.id.srch_inventory);
+        search_inventory_emp = findViewById(R.id.search_inventory_emp);
         spin_sort_inventory = findViewById(R.id.spin_sort_inventory);
         spin_view_inventory = findViewById(R.id.spin_view_inventory);
         db = new DbManager(this);
@@ -54,13 +55,13 @@ public class EmployeeViewInventory extends AppCompatActivity {
         });
 
         //Adapt Inventory List
-        list_inventory = findViewById(R.id.list_inventory);
+        list_inventory_emp = findViewById(R.id.list_emp_inventory);
         ArrayList<HashMap<String, String>> inventorylist = db.getInventory();
         listAdapter = new SimpleAdapter(EmployeeViewInventory.this, inventorylist, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity});
-        list_inventory.setAdapter(listAdapter);
+        list_inventory_emp.setAdapter(listAdapter);
 
         //Search Inventory Function
-        srch_inventory.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        search_inventory_emp.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;
@@ -75,7 +76,7 @@ public class EmployeeViewInventory extends AppCompatActivity {
         });
 
         //Select item from Inventory List then redirect to Update Inventory
-        list_inventory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list_inventory_emp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast.makeText(UserAccounts.this, userList.get(i).toString(),Toast.LENGTH_LONG).show();

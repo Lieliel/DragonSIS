@@ -6,22 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".ManagerGeneratePdfReport"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:padding="25dp">
+
+    <ImageView
+        android:id="@+id/img_back_report"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:clickable="true"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Generate Report"
+        android:textSize="22sp"
+        app:layout_constraintLeft_toRightOf="@id/img_back_report"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="25dp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical"
-        android:gravity="center"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal">
 
         <androidx.cardview.widget.CardView
             android:layout_width="300dp"
             android:layout_height="150dp"
-            app:cardBackgroundColor="@color/blue_munsell"
+            app:cardBackgroundColor="@color/near_gray"
             app:cardCornerRadius="10dp">
 
             <TextView
@@ -57,14 +80,6 @@
             android:layout_height="60dp"
             android:layout_marginTop="20dp"
             android:text="@string/pdf_gen_full"
-            />
-
-        <Button
-            android:id="@+id/btn_back_report"
-            android:layout_width="260dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/gnr_back_to_menu"
             />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

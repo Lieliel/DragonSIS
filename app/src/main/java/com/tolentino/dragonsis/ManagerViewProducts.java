@@ -19,6 +19,9 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,6 +60,14 @@ public class ManagerViewProducts extends AppCompatActivity {
             }
         });
 
+        /*FloatingActionButton fab = findViewById(R.id.float_add_product);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ManagerViewProducts.this, ManagerAddProduct.class);
+                startActivity(i);
+            }
+        });*/
         //Redirect to Add Products Page
         img_add_product.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,14 +90,14 @@ public class ManagerViewProducts extends AppCompatActivity {
                 int prod_total_quant = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
                 int prod_crit_num = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
 
-                //Log.i("TOTALNUM TAG", String.valueOf(prod_total_quant));
-                //Log.i("CRITNUM TAG", String.valueOf(prod_crit_num));
-
                 //Compare Total Product Quantity to Product Critical Number
                 if(prod_total_quant <= prod_crit_num){
-                    view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                    ((TextView)view.findViewById(R.id.row_product_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    ((TextView)view.findViewById(R.id.row_product_price)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    ((TextView)view.findViewById(R.id.row_product_category)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    view.setBackgroundColor(Color.parseColor("#FFF45B69"));
                 }else{
-                    view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                    view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                 }
 
                 return view;

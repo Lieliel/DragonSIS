@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -18,9 +19,9 @@ import java.util.HashMap;
 
 public class EmployeeViewProducts extends AppCompatActivity {
 
-    ImageView img_back_user_inventory2;
-    ImageView img_add_product;
-    SearchView srch_product;
+    ImageView img_back_emp_products;
+    //Button img_add_product_emp = findViewById(R.id.img_add_product_emp);
+    SearchView search_product_emp;
 
     DbManager db;
     ListView list_products;
@@ -31,15 +32,13 @@ public class EmployeeViewProducts extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_view_products);
 
-        img_back_user_inventory2 = findViewById(R.id.img_back_user_inventory2);
-        srch_product = findViewById(R.id.srch_product);
-        img_add_product = findViewById(R.id.img_add_product);
         img_back_emp_products = findViewById(R.id.img_back_emp_products);
+        search_product_emp = findViewById(R.id.search_product_emp);
 
         db = new DbManager(this);
 
         //Back to Employee Menu
-        img_back_user_inventory2.setOnClickListener(new View.OnClickListener() {
+        img_back_emp_products.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(EmployeeViewProducts.this, EmployeeMenu.class);
@@ -57,7 +56,7 @@ public class EmployeeViewProducts extends AppCompatActivity {
         list_products.setAdapter(listAdapter);
 
         //Search Product Function
-        srch_product.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        search_product_emp.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;

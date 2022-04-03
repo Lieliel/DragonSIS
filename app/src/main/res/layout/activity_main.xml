@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:padding="50dp">
+    android:padding="25dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
             android:id="@+id/mainusername"
             android:layout_width="266dp"
             android:layout_height="55dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="60dp"
             android:hint="Enter Username"
             android:inputType="textPersonName"/>
 
@@ -47,10 +47,15 @@
 
         <Button
             android:id="@+id/mainlogin"
-            android:layout_width="218dp"
-            android:layout_height="55dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:layout_marginTop="32dp"
-            android:text="Login"/>
+            android:text="Login"
+            android:backgroundTint="@color/blue_munsell"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:fontFamily="@font/nexa_text_bold"
+            android:textAllCaps="false"/>
 
         <!-- <ImageView
             android:id="@+id/img_login_logo"

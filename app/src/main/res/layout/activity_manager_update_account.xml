@@ -101,7 +101,6 @@
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:textAlignment="center"
-                android:hint="Sample User Type"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -112,13 +111,17 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="20dp"
-            android:text="Update"/>
+            android:text="Update"
+            android:backgroundTint="@color/bud_green"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/btn_upd_acc_remove"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="5dp"
-            android:text="Remove"/>
+            android:text="Remove"
+            android:backgroundTint="@color/fiery_rose"
+            android:textColor="@color/white"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

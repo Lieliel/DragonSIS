@@ -124,12 +124,19 @@
             android:text="Add Product"
             android:textAlignment="center"
             app:layout_constraintTop_toBottomOf="@id/linearLayout2"
-            android:focusable="true" />
+            android:focusable="true"
+            android:backgroundTint="@color/blue_munsell"
+            android:textColor="@color/white"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="20dp"
+            android:background="?android:attr/listDivider"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_add_product">
@@ -137,8 +144,19 @@
             <ListView
                 android:id="@+id/list_products"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:dividerHeight="5dp"/>
         </LinearLayout>
     </LinearLayout>
+
+    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/float_add_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/ic_baseline_add_24"
+        android:contentDescription="Float Add Product Button"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

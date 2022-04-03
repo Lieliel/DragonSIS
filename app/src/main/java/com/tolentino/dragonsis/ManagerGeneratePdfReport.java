@@ -12,6 +12,7 @@ import android.preference.PreferenceActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.itextpdf.kernel.colors.ColorConstants;
@@ -22,6 +23,7 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.AreaBreak;
 import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Text;
@@ -43,6 +45,7 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
     Button btn_gnr_inv;
     Button btn_gnr_full;
     Button btn_back_report;
+    ImageView img_back_report;
     DbManager db;
 
     @Override
@@ -55,7 +58,7 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
         btn_gnr_sales = findViewById(R.id.btn_gnr_sales);
         btn_gnr_inv = findViewById(R.id.btn_gnr_inv);
         btn_gnr_full = findViewById(R.id.btn_gnr_full);
-        btn_back_report = findViewById(R.id.btn_back_report);
+        img_back_report = findViewById(R.id.img_back_report);
         db = new DbManager(this);
 
         btn_gnr_sales.setOnClickListener(new View.OnClickListener() {
@@ -97,11 +100,13 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
         });
 
         //Back to Manager Menu
-        btn_back_report.setOnClickListener(new View.OnClickListener() {
+        img_back_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(ManagerGeneratePdfReport.this, ManagerMenu.class);
                 startActivity(i);
+                Intent endActivity = new Intent("finish_activity");
+                sendBroadcast(endActivity);
                 finish();
             }
         });

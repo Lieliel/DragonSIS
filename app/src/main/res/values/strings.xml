@@ -23,7 +23,7 @@
     <string name="pdf_gen_sales">Generate Sales Report</string>
     <string name="pdf_gen_inv">Generate Inventory Report</string>
     <string name="pdf_gen_full">Generate Full Report</string>
-    <string name="location">The Report PDF File can be found on DragonSIS Documents</string>
+    <string name="location">The Report PDF File can be found on the phone\'s Downloads Folder</string>
     <!--generate pdf-->
 
 

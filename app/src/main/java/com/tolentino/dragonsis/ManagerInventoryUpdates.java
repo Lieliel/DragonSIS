@@ -20,7 +20,6 @@ public class ManagerInventoryUpdates extends AppCompatActivity {
 
     ImageView img_back_man_view_inventory_updates;
     ListView list_man_inv_upd;
-    ListAdapter listAdapter;
     SearchView srch_man_view_inv_upd;
     DbManager db;
 

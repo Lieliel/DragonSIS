@@ -50,7 +50,9 @@
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:focusable="true" />
+            android:focusable="true"
+            android:backgroundTint="@color/blue_munsell"
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/txt_userlist"
@@ -63,20 +65,22 @@
             app:layout_constraintTop_toBottomOf="@+id/img_add_user"
             tools:layout_editor_absoluteX="0dp"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="16dp"
+            android:background="?android:attr/listDivider"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent">
 
             <ListView
                 android:id="@+id/list_users"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_userlist"/>
+                android:dividerHeight="5dp"/>
         </LinearLayout>
     </LinearLayout>
 

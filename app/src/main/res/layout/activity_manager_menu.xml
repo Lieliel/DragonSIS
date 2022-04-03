@@ -63,6 +63,8 @@
             android:layout_width="260dp"
             android:layout_height="60dp"
             android:layout_marginTop="15dp"
-            android:text="@string/menu_logout_btn"/>
+            android:text="@string/menu_logout_btn"
+            android:backgroundTint="@color/fiery_rose"
+            android:textColor="@color/white"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

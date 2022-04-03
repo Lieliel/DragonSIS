@@ -124,6 +124,8 @@
             android:layout_height="60dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:text="Add User"/>
+            android:text="Add User"
+            android:backgroundTint="@color/blue_munsell"
+            android:textColor="@color/white"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

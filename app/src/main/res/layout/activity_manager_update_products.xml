@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="15dp"
-                android:hint="Sample prod Name" />
+                android:hint="Enter Product Name" />
 
             <TextView
                 android:id="@+id/txt_upd_prod_total_quantity_label"
@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="15dp"
-                android:hint="Sample prod total quatity" />
+                android:hint="Enter Total Quantity" />
 
             <TextView
                 android:id="@+id/txt_upd_prod_critnum_label"
@@ -91,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:hint="Sample Crit number"
+                android:hint="Enter Critical Number"
                 android:inputType="number" />
 
             <TextView
@@ -107,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:hint="Sample price"
+                android:hint="Enter Price"
                 android:inputType="number" />
 
             <TextView
@@ -129,14 +129,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="20dp"
-                android:text="Update" />
+                android:text="Update"
+                android:backgroundTint="@color/bud_green"
+                android:textColor="@color/white"/>
 
             <Button
                 android:id="@+id/btn_upd_prod_remove"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="5dp"
-                android:text="Remove" />
+                android:text="Remove"
+                android:backgroundTint="@color/fiery_rose"
+                android:textColor="@color/white"/>
         </TableLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
