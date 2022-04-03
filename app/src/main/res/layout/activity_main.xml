@@ -26,8 +26,7 @@
             android:text="Dragon M Inventory System"
             android:textAlignment="center"
             android:textSize="50sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/nexa_text_bold"/>
+            style="@style/TitleScreenTitle"/>
 
         <EditText
             android:id="@+id/mainusername"

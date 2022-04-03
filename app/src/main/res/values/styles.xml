@@ -6,4 +6,9 @@
         <item name="android:textColor">@color/eerie_black</item>
         <item name="fontFamily">@font/nexa_text_bold</item>
     </style>
+
+    <style name="TitleScreenTitle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textSize">50sp</item>
+        <item name="fontFamily">@font/nexa_text_bold</item>
+    </style>
 </resources>
