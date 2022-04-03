@@ -7,7 +7,9 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     tools:context=".EmployeeViewInventory"
-    android:padding="25dp">
+    android:padding="25dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <ImageView
         android:id="@+id/img_back_employee_inventory"

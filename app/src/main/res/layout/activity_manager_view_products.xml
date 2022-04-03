@@ -7,7 +7,9 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     tools:context=".ManagerViewProducts"
-    android:padding="25dp">
+    android:padding="25dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
 
     <ImageView

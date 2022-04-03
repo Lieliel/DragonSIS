@@ -18,28 +18,22 @@
             android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".ManagerUpdateInventory"
-            android:exported="true"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:exported="true"/>
         <activity
             android:name=".ManagerUpdateProducts"
-            android:exported="true"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:exported="true" />
         <activity
             android:name=".ManagerAddInventory"
-            android:exported="true"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:exported="true" />
         <activity
             android:name=".ManagerAddProduct"
-            android:exported="true"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:exported="true" />
         <activity
             android:name=".ManagerUpdateAccount"
-            android:exported="true"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:exported="true" />
         <activity
             android:name=".ManagerAddUser"
-            android:exported="true"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:exported="true" />
         <activity
             android:name=".ManagerViewProducts"
             android:exported="false"
@@ -58,12 +52,10 @@
             android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".EmployeeMenu"
-            android:exported="true"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:exported="true" />
         <activity
             android:name=".ManagerMenu"
-            android:exported="true"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:exported="true"/>
         <activity
             android:name=".EmployeeViewProducts"
             android:exported="true"
@@ -82,8 +74,7 @@
             android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustNothing">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -7,7 +7,9 @@
     tools:context=".ManagerMenu"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="25dp">
+    android:padding="25dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
 
     <TextView

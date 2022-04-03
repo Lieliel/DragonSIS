@@ -43,7 +43,6 @@
             android:id="@+id/search_product_emp"
             android:layout_height="58dp"
             android:layout_width="match_parent"
-            android:ems="10"
             android:iconifiedByDefault="false"
             android:queryHint="Search Products"
             android:textAlignment="center"
