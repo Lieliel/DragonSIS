@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -65,7 +68,30 @@ public class ManagerViewInventory extends AppCompatActivity {
         //Adapt Inventory List
         list_inventory = findViewById(R.id.list_inventory);
         ArrayList<HashMap<String, String>> inventorylist = db.getInventory();
-        listAdapter = new SimpleAdapter(ManagerViewInventory.this, inventorylist, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity});
+        listAdapter = new SimpleAdapter(ManagerViewInventory.this, inventorylist, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity}){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                // Get Current View
+                View view = super.getView(position, convertView, parent);
+
+                // Initialize Values
+                int prod_total_quant = Integer.parseInt(db.getProductByProductName(inventorylist.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
+                int prod_crit_num = Integer.parseInt(db.getProductByProductName(inventorylist.get(position).get("prod_name")).get(0).get("prod_critical_num"));
+
+                //Log.i("TOTALNUM TAG", String.valueOf(prod_total_quant));
+                //Log.i("CRITNUM TAG", String.valueOf(prod_crit_num));
+
+                //Compare Total Product Quantity to Product Critical Number
+                if(prod_total_quant <= prod_crit_num){
+                    view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                }else{
+                    view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                }
+
+                return view;
+
+            }
+        };
         list_inventory.setAdapter(listAdapter);
 
         //Search Inventory Function
