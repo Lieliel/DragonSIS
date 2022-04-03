@@ -7,9 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -67,7 +69,30 @@ public class ManagerViewProducts extends AppCompatActivity {
         //Adapt Products List
         list_products = findViewById(R.id.list_products);
         ArrayList<HashMap<String, String>> productList = db.getProducts();
-        listAdapter = new SimpleAdapter(ManagerViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category});
+        listAdapter = new SimpleAdapter(ManagerViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category}){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                // Get Current View
+                View view = super.getView(position, convertView, parent);
+
+                // Initialize Values
+                int prod_total_quant = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
+                int prod_crit_num = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
+
+                //Log.i("TOTALNUM TAG", String.valueOf(prod_total_quant));
+                //Log.i("CRITNUM TAG", String.valueOf(prod_crit_num));
+
+                //Compare Total Product Quantity to Product Critical Number
+                if(prod_total_quant <= prod_crit_num){
+                    view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                }else{
+                    view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                }
+
+                return view;
+
+            }
+        };
         list_products.setAdapter(listAdapter);
 
         //Search Product Function
