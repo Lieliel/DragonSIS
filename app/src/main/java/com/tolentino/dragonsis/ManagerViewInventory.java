@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -30,10 +31,12 @@ public class ManagerViewInventory extends AppCompatActivity {
     ImageView img_back_view_inventory;
     Button img_add_inventory;
     SearchView srch_inventory;
-    Spinner spin_view_inventory;
-    Spinner spin_sort_inventory;
     BroadcastReceiver broadcastReceiver2;
 
+    Spinner spin_view_inventory;
+    String[] categoryArray = {"None","Lumber", "Nails", "Screws", "Cement", "Gravel", "Sand", "Steel Bars", "Varnish", "Paint", "Brush/Roller", "PVC", "Special"};
+    Spinner spin_sort_inventory;
+    String[] sortInvChoices = {"None","A-Z","Z-A","Low Quantity First","High Quantity First"};
     DbManager db;
     ListView list_inventory;
     ListAdapter listAdapter;
@@ -62,6 +65,14 @@ public class ManagerViewInventory extends AppCompatActivity {
             }
         });
 
+        //Adapt Spinner for Category
+        ArrayAdapter categoryAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, categoryArray);
+        spin_view_inventory.setAdapter(categoryAdapter);
+
+        //Adapt Spinner for Sorting
+        ArrayAdapter sortAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, sortInvChoices);
+        spin_sort_inventory.setAdapter(sortAdapter);
+
         //redirect to Add Inventory Activity
         img_add_inventory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,16 +85,16 @@ public class ManagerViewInventory extends AppCompatActivity {
 
         //Adapt Inventory List
         list_inventory = findViewById(R.id.list_inventory);
-        ArrayList<HashMap<String, String>> inventorylist = db.getInventory();
-        listAdapter = new SimpleAdapter(ManagerViewInventory.this, inventorylist, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity}){
+        ArrayList<HashMap<String, String>> inventoryList = db.getInventory();
+        listAdapter = new SimpleAdapter(ManagerViewInventory.this, inventoryList, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity}){
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 // Get Current View
                 View view = super.getView(position, convertView, parent);
 
                 // Initialize Values
-                int prod_total_quant = Integer.parseInt(db.getProductByProductName(inventorylist.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
-                int prod_crit_num = Integer.parseInt(db.getProductByProductName(inventorylist.get(position).get("prod_name")).get(0).get("prod_critical_num"));
+                int prod_total_quant = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
+                int prod_crit_num = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
 
                 //Compare Total Product Quantity to Product Critical Number
                 if(prod_total_quant <= prod_crit_num){
@@ -111,7 +122,6 @@ public class ManagerViewInventory extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-
                 ((SimpleAdapter) ManagerViewInventory.this.listAdapter).getFilter().filter(s);
                 return false;
             }
@@ -127,17 +137,101 @@ public class ManagerViewInventory extends AppCompatActivity {
 
                 //Add information of selected item to Shared Preferences
                 SharedPreferences.Editor edit = pref.edit();
-                edit.putString("inventory_ID", inventorylist.get(i).get("inventory_ID"));
-                edit.putString("inventory_date", inventorylist.get(i).get("inventory_date"));
-                edit.putString("inventory_quantity", inventorylist.get(i).get("inventory_quantity"));
-                edit.putString("inventory_quantity_change", inventorylist.get(i).get("inventory_quantity_chang"));
-                edit.putString("inventory_remark", inventorylist.get(i).get("inventory_remark"));
-                edit.putString("inventory_date_updated", inventorylist.get(i).get("inventory_date_updated"));
-                edit.putString("prod_name", inventorylist.get(i).get("prod_name"));
+                edit.putString("inventory_ID", inventoryList.get(i).get("inventory_ID"));
+                edit.putString("inventory_date", inventoryList.get(i).get("inventory_date"));
+                edit.putString("inventory_quantity", inventoryList.get(i).get("inventory_quantity"));
+                edit.putString("inventory_quantity_change", inventoryList.get(i).get("inventory_quantity_chang"));
+                edit.putString("inventory_remark", inventoryList.get(i).get("inventory_remark"));
+                edit.putString("inventory_date_updated", inventoryList.get(i).get("inventory_date_updated"));
+                edit.putString("prod_name", inventoryList.get(i).get("prod_name"));
                 edit.commit();
 
                 Intent intent = new Intent(ManagerViewInventory.this, ManagerUpdateInventory.class);
                 startActivity(intent);
+            }
+        });
+
+        //Filter List According to Category
+        spin_view_inventory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            String prodCategory;
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                //get Category Selected in the Spinner
+                prodCategory = spin_view_inventory.getSelectedItem().toString();
+
+                //default Category
+                if(prodCategory.equals("None")){
+                    list_inventory = findViewById(R.id.list_inventory);
+                    ArrayList<HashMap<String, String>> inventoryList = db.getInventory();
+                    listAdapter = new SimpleAdapter(ManagerViewInventory.this, inventoryList, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity}){
+                        @Override
+                        public View getView(int position, View convertView, ViewGroup parent) {
+                            // Get Current View
+                            View view = super.getView(position, convertView, parent);
+
+                            // Initialize Values
+                            int prod_total_quant = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
+                            int prod_crit_num = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
+
+                            //Compare Total Product Quantity to Product Critical Number
+                            if(prod_total_quant <= prod_crit_num){
+                                view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                            }else{
+                                view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                            }
+
+                            return view;
+
+                        }
+                    };
+                    list_inventory.setAdapter(listAdapter);
+                }else{
+                    //Adapt Categorized Inventory to the List View
+                    ArrayList<HashMap<String, String>> inventoryList = db.getCategorizedInventory(prodCategory);
+                    listAdapter = new SimpleAdapter(ManagerViewInventory.this, inventoryList, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity}){
+                        @Override
+                        public View getView(int position, View convertView, ViewGroup parent) {
+                            // Get Current View
+                            View view = super.getView(position, convertView, parent);
+
+                            // Initialize Values
+                            int prod_total_quant = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
+                            int prod_crit_num = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
+
+                            //Compare Total Product Quantity to Product Critical Number
+                            if(prod_total_quant <= prod_crit_num){
+                                view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                            }else{
+                                view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                            }
+
+                            return view;
+
+                        }
+                    };
+                    list_inventory.setAdapter(listAdapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        //Sort List According to Chosen Option
+        spin_sort_inventory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            String invSort;
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                invSort = spin_sort_inventory.getSelectedItem().toString();
+                Log.i("CATEGORY TAG", invSort);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
@@ -153,5 +247,6 @@ public class ManagerViewInventory extends AppCompatActivity {
             }
         };
         registerReceiver(broadcastReceiver2, new IntentFilter("finish_activity_man_view_inventory"));
+
     }
 }

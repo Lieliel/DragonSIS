@@ -36,9 +36,11 @@ public class ManagerAddProduct extends AppCompatActivity {
         btn_product_submit = findViewById((R.id.btn_product_submit));
         db = new DbManager(this);
 
+        //Adapt Array to Spinner
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, productCategoryArray);
         spin_add_category.setAdapter(adapter);
 
+        //Back to Manager View Products
         img_back_add_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

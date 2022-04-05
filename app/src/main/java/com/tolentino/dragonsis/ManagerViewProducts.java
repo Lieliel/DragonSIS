@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -22,6 +23,8 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +35,11 @@ public class ManagerViewProducts extends AppCompatActivity {
     Button img_add_product;
     SearchView srch_product;
     BroadcastReceiver broadcastReceiver3;
+
+    Spinner spin_man_view_prod_category;
+    String[] categoryArray = {"None","Lumber", "Nails", "Screws", "Cement", "Gravel", "Sand", "Steel Bars", "Varnish", "Paint", "Brush/Roller", "PVC", "Special"};
+    Spinner spin_man_sort_products;
+    String[] sortProdChoices = {"None","A-Z","Z-A","Low Quantity First","High Quantity First"};
 
     DbManager db;
     ListView list_products;
@@ -45,7 +53,8 @@ public class ManagerViewProducts extends AppCompatActivity {
         img_back_view_products = findViewById(R.id.img_back_view_products);
         srch_product = findViewById(R.id.srch_product);
         img_add_product = findViewById(R.id.img_add_product);
-
+        spin_man_view_prod_category = findViewById(R.id.spin_prod_category);
+        spin_man_sort_products = findViewById(R.id.spin_prod_sort);
         db = new DbManager(this);
 
         //Back to Manager Menu
@@ -68,6 +77,7 @@ public class ManagerViewProducts extends AppCompatActivity {
                 startActivity(i);
             }
         });*/
+
         //Redirect to Add Products Page
         img_add_product.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +86,14 @@ public class ManagerViewProducts extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        //Adapt Spinner for Category
+        ArrayAdapter categoryAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, categoryArray);
+        spin_man_view_prod_category.setAdapter(categoryAdapter);
+
+        //Adapt Spinner for Sorting
+        ArrayAdapter sortAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, sortProdChoices);
+        spin_man_sort_products.setAdapter(sortAdapter);
 
         //Adapt Products List
         list_products = findViewById(R.id.list_products);
@@ -124,7 +142,6 @@ public class ManagerViewProducts extends AppCompatActivity {
         list_products.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Toast.makeText(UserAccounts.this, userList.get(i).toString(),Toast.LENGTH_LONG).show();
 
                 SharedPreferences pref = getSharedPreferences("product_list", MODE_PRIVATE);
 
@@ -140,6 +157,94 @@ public class ManagerViewProducts extends AppCompatActivity {
 
                 Intent intent = new Intent(ManagerViewProducts.this, ManagerUpdateProducts.class);
                 startActivity(intent);
+
+            }
+        });
+
+        //Filter List According to Category
+        spin_man_view_prod_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            String prodCategory;
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                //get Category Selected in the Spinner
+                prodCategory = spin_man_view_prod_category.getSelectedItem().toString();
+
+                //default Category
+                if(prodCategory.equals("None")){
+                    list_products = findViewById(R.id.list_products);
+                    ArrayList<HashMap<String, String>> productList = db.getProducts();
+                    listAdapter = new SimpleAdapter(ManagerViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category}){
+                        @Override
+                        public View getView(int position, View convertView, ViewGroup parent) {
+                            // Get Current View
+                            View view = super.getView(position, convertView, parent);
+
+                            // Initialize Values
+                            int prod_total_quant = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
+                            int prod_crit_num = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
+
+                            //Compare Total Product Quantity to Product Critical Number
+                            if(prod_total_quant <= prod_crit_num){
+                                view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                            }else{
+                                view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                            }
+
+                            return view;
+
+                        }
+                    };
+                    list_products.setAdapter(listAdapter);
+                }else{
+                    //Adapt Categorized Products to the List View
+                    ArrayList<HashMap<String, String>> productList = db.getCategorizedProducts(prodCategory);
+                    listAdapter = new SimpleAdapter(ManagerViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category}){
+                        @Override
+                        public View getView(int position, View convertView, ViewGroup parent) {
+                            // Get Current View
+                            View view = super.getView(position, convertView, parent);
+
+                            // Initialize Values
+                            int prod_total_quant = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
+                            int prod_crit_num = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
+
+                            //Log.i("TOTALNUM TAG", String.valueOf(prod_total_quant));
+                            //Log.i("CRITNUM TAG", String.valueOf(prod_crit_num));
+
+                            //Compare Total Product Quantity to Product Critical Number
+                            if(prod_total_quant <= prod_crit_num){
+                                view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                            }else{
+                                view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                            }
+
+                            return view;
+
+                        }
+                    };
+                    list_products.setAdapter(listAdapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        //Sort List According to Chosen Option
+        spin_man_sort_products.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            String prodSort;
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                prodSort = spin_man_sort_products.getSelectedItem().toString();
+                Log.i("CATEGORY TAG", prodSort);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 

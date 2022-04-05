@@ -290,6 +290,32 @@ public class DbManager extends SQLiteOpenHelper {
         return productList;
     }
 
+    // Get All Product Details
+    public ArrayList<HashMap<String, String>> getCategorizedProducts(String category) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> productList = new ArrayList<>();
+        String query = "SELECT * FROM " + PROD_TABLE_NAME + " WHERE " + PROD_COL6 + "='" + category + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            HashMap<String, String> products = new HashMap<>();
+            products.put("prod_ID", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1)));
+            products.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2)));
+            products.put("prod_critical_num", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3)));
+            products.put("prod_total_quantity", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4)));
+            products.put("prod_price", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5)));
+            products.put("prod_category", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
+            productList.add(products);
+
+            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
+        }
+        return productList;
+    }
+
     //Function to add Products List to Inventory Spinner
     public ArrayList<String> getProductsName() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -484,6 +510,48 @@ public class DbManager extends SQLiteOpenHelper {
     }
 
     // Get All Inventory Details
+    public ArrayList<HashMap<String, String>> getCategorizedInventory(String category) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> inventoryList = new ArrayList<>();
+        String query = "SELECT "
+                + INV_TABLE_NAME + "." + INV_COL1 + ", "
+                + INV_TABLE_NAME + "." + INV_COL2 + ", "
+                + INV_TABLE_NAME + "." + INV_COL3 + ", "
+                + INV_TABLE_NAME + "." + INV_COL4 + ", "
+                + INV_TABLE_NAME + "." + INV_COL5 + ", "
+                + INV_TABLE_NAME + "." + INV_COL6 + ", "
+                + INV_TABLE_NAME + "." + INV_COL7 + ", "
+                + PROD_TABLE_NAME + "." + PROD_COL2 + ", "
+                + PROD_TABLE_NAME + "." + PROD_COL6
+                + " FROM " + INV_TABLE_NAME
+                + " INNER JOIN " + PROD_TABLE_NAME + " ON "
+                + INV_TABLE_NAME + "." + INV_COL7 + " = "
+                + PROD_TABLE_NAME + "." + PROD_COL2
+                + " WHERE " + PROD_TABLE_NAME + "." + PROD_COL6 + "='" + category + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            HashMap<String, String> inventory = new HashMap<>();
+            inventory.put("inventory_ID", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL1)));
+            inventory.put("inventory_date", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL2)));
+            inventory.put("inventory_quantity", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL3)));
+            inventory.put("inventory_quantity_change", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL4)));
+            inventory.put("inventory_remark", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL5)));
+            inventory.put("inventory_date_updated", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL6)));
+            inventory.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL7)));
+            inventoryList.add(inventory);
+
+            Log.i("ADDED TO INV TABLE",  cursor.getString(cursor.getColumnIndexOrThrow(INV_COL1))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL2))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL3))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL4))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL5))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL6))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL7)));
+        }
+        return inventoryList;
+    }
+
+    // Get Filtered by Category Inventory Details
     public ArrayList<HashMap<String, String>> getInventory() {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> inventoryList = new ArrayList<>();

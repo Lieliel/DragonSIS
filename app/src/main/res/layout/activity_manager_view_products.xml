@@ -76,7 +76,7 @@
                 android:background="@drawable/line_border">
 
                 <Spinner
-                    android:id="@+id/edit_prod_category"
+                    android:id="@+id/spin_prod_category"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:ems="10"
@@ -106,7 +106,7 @@
                 android:background="@drawable/line_border">
 
                 <Spinner
-                    android:id="@+id/editTextTextPersonName6"
+                    android:id="@+id/spin_prod_sort"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:ems="10"

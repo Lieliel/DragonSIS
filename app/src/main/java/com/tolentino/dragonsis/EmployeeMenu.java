@@ -32,7 +32,7 @@ public class EmployeeMenu extends AppCompatActivity {
         btn_prodlist = findViewById(R.id.btn_prodlist);
         btn_log = findViewById(R.id.btn_log);
 
-        user_name_emp = (TextView) findViewById(R.id.user_name);
+        user_name_emp = (TextView) findViewById(R.id.user_name_emp);
         Intent intentName = getIntent();
         String userName = intentName.getStringExtra("user_name");
         user_name_emp.setText(userName);
