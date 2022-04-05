@@ -21,7 +21,7 @@
         app:layout_constraintTop_toBottomOf="@+id/img_back_view_inventory"></ImageView>
 
     <Spinner
-        android:id="@+id/spin_sort_inventory"
+        android:id="@+id/spin_man_sort_inventory"
         android:layout_width="208dp"
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
@@ -32,7 +32,7 @@
         android:text="Quantity Demand"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spin_view_inventory" />
+        app:layout_constraintTop_toBottomOf="@+id/spin_man_view_inv_category" />
 
     <TextView
         android:id="@+id/textView4"
@@ -76,7 +76,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spin_view_inventory"
+        android:id="@+id/spin_man_view_inv_category"
         android:layout_width="208dp"
         android:layout_height="45dp"
         android:layout_marginTop="64dp"
@@ -112,6 +112,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spin_sort_inventory" />
+        app:layout_constraintTop_toBottomOf="@+id/spin_man_sort_inventory" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

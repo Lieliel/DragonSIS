@@ -75,7 +75,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_view_prod_label" />
 
     <EditText
-        android:id="@+id/edit_prod_category"
+        android:id="@+id/spin_man_view_prod_category"
         android:layout_width="193dp"
         android:layout_height="45dp"
         android:layout_marginTop="50dp"
@@ -89,7 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/srch_product" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName6"
+        android:id="@+id/spin_man_sort_products"
         android:layout_width="192dp"
         android:layout_height="45dp"
         android:layout_marginTop="16dp"
@@ -100,7 +100,7 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_prod_category" />
+        app:layout_constraintTop_toBottomOf="@+id/spin_man_view_prod_category" />
 
     <ListView
         android:layout_width="422dp"
@@ -109,6 +109,6 @@
         android:background="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />
+        app:layout_constraintTop_toBottomOf="@+id/spin_man_sort_products" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

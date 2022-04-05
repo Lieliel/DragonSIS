@@ -37,8 +37,8 @@ public class EmployeeViewInventory extends AppCompatActivity {
         img_back_employee_inventory = findViewById(R.id.img_back_employee_inventory);
         img_add_inventory = findViewById(R.id.img_add_inventory);
         srch_inventory = findViewById(R.id.srch_inventory);
-        spin_sort_inventory = findViewById(R.id.spin_sort_inventory);
-        spin_view_inventory = findViewById(R.id.spin_view_inventory);
+        //spin_sort_inventory = findViewById(R.id.spin_man_sort_inventory);
+        //spin_view_inventory = findViewById(R.id.spin_man_view_inv_category);
         db = new DbManager(this);
 
         //back to main menu
