@@ -16,16 +16,16 @@
             android:name=".ManagerViewSales"
             android:exported="false" />
         <activity
-            android:name=".ManagerUpdateInventory"
+            android:name=".UserUpdateInventory"
             android:exported="true" />
         <activity
-            android:name=".ManagerUpdateProducts"
+            android:name=".UserUpdateProducts"
             android:exported="true" />
         <activity
-            android:name=".ManagerAddInventory"
+            android:name=".UserAddInventory"
             android:exported="true" />
         <activity
-            android:name=".ManagerAddProduct"
+            android:name=".UserAddProduct"
             android:exported="true" />
         <activity
             android:name=".ManagerUpdateAccount"

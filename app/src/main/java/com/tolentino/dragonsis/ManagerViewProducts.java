@@ -17,7 +17,6 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,7 +62,7 @@ public class ManagerViewProducts extends AppCompatActivity {
         img_add_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerViewProducts.this, ManagerAddProduct.class);
+                Intent i = new Intent(ManagerViewProducts.this, UserAddProduct.class);
                 startActivity(i);
                 finish();
 
@@ -135,7 +134,7 @@ public class ManagerViewProducts extends AppCompatActivity {
                 edit.putString("prod_category", productList.get(i).get("prod_category"));
                 edit.commit();
 
-                Intent intent = new Intent(ManagerViewProducts.this, ManagerUpdateProducts.class);
+                Intent intent = new Intent(ManagerViewProducts.this, UserUpdateProducts.class);
                 startActivity(intent);
 
             }

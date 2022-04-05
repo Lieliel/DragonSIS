@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class ManagerUpdateProducts extends AppCompatActivity {
+public class UserUpdateProducts extends AppCompatActivity {
 
     ImageView img_back_upd_products;
     TextView txt_upd_prod_id;
@@ -27,12 +27,13 @@ public class ManagerUpdateProducts extends AppCompatActivity {
     Button btn_upd_prod_update;
     Button btn_upd_prod_remove;
     SharedPreferences pref;
+    SharedPreferences user_pref;
     DbManager db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manager_update_products);
+        setContentView(R.layout.activity_user_update_products);
 
         img_back_upd_products = findViewById(R.id.img_back_upd_products);
         txt_upd_prod_id = findViewById(R.id.txt_upd_prod_id);
@@ -47,14 +48,22 @@ public class ManagerUpdateProducts extends AppCompatActivity {
         db = new DbManager(this);
         //Get Data passed from previous activity
         pref = getSharedPreferences("product_list", MODE_PRIVATE);
+        user_pref = getSharedPreferences("acc_details", MODE_PRIVATE);
         Log.i("Product Shared Pref", pref.getString("prod_id", null) + ", " + pref.getString("prod_name", null) + ", " + pref.getString("prod_description", null) + ", " + pref.getString("prod_critical_num", null) + ", " + pref.getString("prod_price", null) + ", " + pref.getString("prod_category", null));
 
         //Back to Manager View Products
         img_back_upd_products.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerUpdateProducts.this, ManagerViewProducts.class);
-                startActivity(i);
+                if(user_pref.getString("user_type", null).equals("Manager")){
+                    Intent i = new Intent(UserUpdateProducts.this, ManagerViewProducts.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(UserUpdateProducts.this, EmployeeViewProducts.class);
+                    startActivity(i);
+                    finish();
+                }
             }
         });
 
@@ -104,7 +113,7 @@ public class ManagerUpdateProducts extends AppCompatActivity {
                 db.deleteProduct(pref.getString("prod_id", null));
                 //Log.i("PRODUCT TABLE", pref.getString("prod_id", null));
                 Log.i("PRODUCT TABLE:", "Successfully deleted Product");
-                Intent i = new Intent(ManagerUpdateProducts.this, ManagerViewProducts.class);
+                Intent i = new Intent(UserUpdateProducts.this, ManagerViewProducts.class);
                 startActivity(i);
             }
         });
@@ -123,7 +132,7 @@ public class ManagerUpdateProducts extends AppCompatActivity {
                 String prod_category = spin_upd_prod_category.getSelectedItem().toString();
 
                 db.updateProduct(prod_id, prod_name, prod_total_quantity, prod_critnum, prod_price, prod_category);
-                Intent i = new Intent(ManagerUpdateProducts.this, ManagerViewProducts.class);
+                Intent i = new Intent(UserUpdateProducts.this, ManagerViewProducts.class);
                 startActivity(i);
             }
         });

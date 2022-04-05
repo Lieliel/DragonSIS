@@ -3,6 +3,7 @@ package com.tolentino.dragonsis;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +15,7 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
-public class ManagerAddInventory extends AppCompatActivity {
+public class UserAddInventory extends AppCompatActivity {
 
     ImageView img_back_add_inventory;
     Spinner spin_add_inventory_productname;
@@ -22,12 +23,13 @@ public class ManagerAddInventory extends AppCompatActivity {
     EditText edit_inv_quantity;
     Button btn_inv_submit;
     DbManager db;
+    SharedPreferences user_pref;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manager_add_inventory);
+        setContentView(R.layout.activity_user_add_inventory);
 
         img_back_add_inventory = findViewById(R.id.img_back_add_inventory);
         spin_add_inventory_productname = findViewById(R.id.spin_add_inventory_productname);
@@ -35,15 +37,23 @@ public class ManagerAddInventory extends AppCompatActivity {
         edit_inv_quantity = findViewById(R.id.edit_inv_quantity);
         btn_inv_submit = findViewById(R.id.btn_inv_submit);
         db = new DbManager(this);
+        user_pref = getSharedPreferences("acc_details", MODE_PRIVATE);
 
 
-        //Back to Manager View Inventory
+        //Back to Respective Parent Class
         img_back_add_inventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerAddInventory.this, ManagerViewInventory.class);
-                startActivity(i);
-                finish();
+
+                if(user_pref.getString("user_type", null).equals("Manager")){
+                    Intent i = new Intent(UserAddInventory.this, ManagerViewProducts.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(UserAddInventory.this, EmployeeViewProducts.class);
+                    startActivity(i);
+                    finish();
+                }
             }
         });
 
@@ -66,7 +76,7 @@ public class ManagerAddInventory extends AppCompatActivity {
                 db.addProductTotalQuant(spin_prodName,invQuantity);
                 Log.i("INVENTORY TABLE", "Inventory Inserted: " + spin_prodName + ", " + productDate + ", " + invQuantity);
 
-                Intent i = new Intent(ManagerAddInventory.this, ManagerViewInventory.class);
+                Intent i = new Intent(UserAddInventory.this, ManagerViewInventory.class);
                 startActivity(i);
                 finish();
             }

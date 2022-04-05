@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class ManagerUpdateInventory extends AppCompatActivity {
+public class UserUpdateInventory extends AppCompatActivity {
 
     ImageView img_man_upd_inv_back;
     TextView txt_man_upd_inv_id;
@@ -36,13 +36,14 @@ public class ManagerUpdateInventory extends AppCompatActivity {
     Button btn_man_upd_inv_update;
     Button btn_man_upd_inv_delete;
     SharedPreferences pref;
+    SharedPreferences user_pref;
     DbManager db;
     RadioButton radioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manager_update_inventory);
+        setContentView(R.layout.activity_user_update_inventory);
 
         img_man_upd_inv_back = findViewById(R.id.img_man_upd_inv_back);
         txt_man_upd_inv_id = findViewById(R.id.txt_man_upd_inv_id);
@@ -60,14 +61,21 @@ public class ManagerUpdateInventory extends AppCompatActivity {
 
         db = new DbManager(this);
         pref = getSharedPreferences("inventory_list", MODE_PRIVATE);
+        user_pref = getSharedPreferences("acc_details", MODE_PRIVATE);
 
-        //Back to Manager View Inventory Page
+        //Back to View Inventory Page
         img_man_upd_inv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerUpdateInventory.this, ManagerViewInventory.class);
-                startActivity(i);
-                finish();
+                if(user_pref.getString("user_type", null).equals("Manager")){
+                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewProducts.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewProducts.class);
+                    startActivity(i);
+                    finish();
+                }
             }
         });
 
@@ -101,7 +109,7 @@ public class ManagerUpdateInventory extends AppCompatActivity {
                     db.updateInventory(inv_id,new_inv_quan,inv_remark,inv_prod_name);
                 }
 
-                Intent i = new Intent(ManagerUpdateInventory.this, ManagerViewInventory.class);
+                Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
                 startActivity(i);
 
             }
@@ -112,7 +120,7 @@ public class ManagerUpdateInventory extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 db.deleteInventory(pref.getString("inventory_ID", null));
-                Intent i = new Intent(ManagerUpdateInventory.this, ManagerViewInventory.class);
+                Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
                 startActivity(i);
 
             }

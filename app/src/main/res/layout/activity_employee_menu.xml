@@ -10,7 +10,7 @@
 
 
     <Button
-        android:id="@+id/btn_viewinv"
+        android:id="@+id/btn_emp_viewinv"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="200dp"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"></Button>
 
     <Button
-        android:id="@+id/btn_invupd"
+        android:id="@+id/btn_emp_invupd"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -32,10 +32,10 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_viewinv"></Button>
+        app:layout_constraintTop_toBottomOf="@+id/btn_emp_viewinv"></Button>
 
     <Button
-        android:id="@+id/btn_prodlist"
+        android:id="@+id/btn_emp_prodlist"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -44,10 +44,10 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_invupd"></Button>
+        app:layout_constraintTop_toBottomOf="@+id/btn_emp_invupd"></Button>
 
     <Button
-        android:id="@+id/btn_log"
+        android:id="@+id/btn_emp_log"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -56,7 +56,7 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_prodlist"></Button>
+        app:layout_constraintTop_toBottomOf="@+id/btn_emp_prodlist"></Button>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

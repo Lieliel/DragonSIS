@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManagerUpdateInventory">
+    tools:context=".UserUpdateInventory">
 
     <TextView
         android:id="@+id/txt_man_upd_inv_id_label"
