@@ -176,9 +176,13 @@ public class ManagerViewInventory extends AppCompatActivity {
 
                             //Compare Total Product Quantity to Product Critical Number
                             if(prod_total_quant <= prod_crit_num){
-                                view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                                ((TextView)view.findViewById(R.id.row_inventory_product_ID)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_inventory_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_inventory_date)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_inventory_quantity)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                view.setBackgroundColor(Color.parseColor("#FFF45B69"));
                             }else{
-                                view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                                view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                             }
 
                             return view;
@@ -200,10 +204,15 @@ public class ManagerViewInventory extends AppCompatActivity {
                             int prod_crit_num = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
 
                             //Compare Total Product Quantity to Product Critical Number
+                            //Compare Total Product Quantity to Product Critical Number
                             if(prod_total_quant <= prod_crit_num){
-                                view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                                ((TextView)view.findViewById(R.id.row_inventory_product_ID)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_inventory_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_inventory_date)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_inventory_quantity)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                view.setBackgroundColor(Color.parseColor("#FFF45B69"));
                             }else{
-                                view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                                view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                             }
 
                             return view;

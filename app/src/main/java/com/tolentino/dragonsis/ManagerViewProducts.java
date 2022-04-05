@@ -186,9 +186,12 @@ public class ManagerViewProducts extends AppCompatActivity {
 
                             //Compare Total Product Quantity to Product Critical Number
                             if(prod_total_quant <= prod_crit_num){
-                                view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                                ((TextView)view.findViewById(R.id.row_product_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_product_price)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_product_category)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                view.setBackgroundColor(Color.parseColor("#FFF45B69"));
                             }else{
-                                view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                                view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                             }
 
                             return view;
@@ -214,9 +217,12 @@ public class ManagerViewProducts extends AppCompatActivity {
 
                             //Compare Total Product Quantity to Product Critical Number
                             if(prod_total_quant <= prod_crit_num){
-                                view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                                ((TextView)view.findViewById(R.id.row_product_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_product_price)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_product_category)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                view.setBackgroundColor(Color.parseColor("#FFF45B69"));
                             }else{
-                                view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                                view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                             }
 
                             return view;
