@@ -70,6 +70,7 @@ public class UserUpdateInventory extends AppCompatActivity {
         img_man_upd_inv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
                 if(user_pref.getString("user_type", null).equals("Manager")){
                     Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
                     Intent endActivity = new Intent("finish_activity_man_view_inventory");
@@ -82,7 +83,8 @@ public class UserUpdateInventory extends AppCompatActivity {
                     sendBroadcast(endActivity);
                     startActivity(i);
                     finish();
-                }
+                }*/
+                finish();
             }
         });
 
@@ -130,7 +132,6 @@ public class UserUpdateInventory extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 }
-
             }
         });
 

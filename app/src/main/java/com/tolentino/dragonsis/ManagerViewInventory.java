@@ -57,10 +57,6 @@ public class ManagerViewInventory extends AppCompatActivity {
         img_back_view_inventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerViewInventory.this, ManagerMenu.class);
-                startActivity(i);
-                Intent endActivity = new Intent("finish_activity");
-                sendBroadcast(endActivity);
                 finish();
             }
         });

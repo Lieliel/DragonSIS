@@ -114,19 +114,6 @@ public class ManagerMenu extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-        broadcastReceiverManMenu = new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context arg0, Intent intent) {
-                String action = intent.getAction();
-                if (action.equals("finish_activity")) {
-                    finish();
-                    unregisterReceiver(broadcastReceiverManMenu);
-                }
-            }
-        };
-        registerReceiver(broadcastReceiverManMenu, new IntentFilter("finish_activity"));
     }
 
     @Override

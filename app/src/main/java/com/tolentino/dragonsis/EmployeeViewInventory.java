@@ -59,10 +59,6 @@ public class EmployeeViewInventory extends AppCompatActivity {
         img_back_emp_view_inventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(EmployeeViewInventory.this, EmployeeMenu.class);
-                Intent endActivity = new Intent("emp_finish_activity");
-                sendBroadcast(endActivity);
-                startActivity(i);
                 finish();
             }
         });

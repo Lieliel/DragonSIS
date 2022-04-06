@@ -41,10 +41,6 @@ public class ManagerUserAccounts extends AppCompatActivity {
         img_back_user_accounts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerUserAccounts.this, ManagerMenu.class);
-                startActivity(i);
-                Intent endActivity = new Intent("finish_activity");
-                sendBroadcast(endActivity);
                 finish();
             }
         });
@@ -55,7 +51,6 @@ public class ManagerUserAccounts extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerUserAccounts.this, ManagerAddUser.class);
                 startActivity(i);
-                finish();
             }
         });
 

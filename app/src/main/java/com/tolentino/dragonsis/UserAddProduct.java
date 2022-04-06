@@ -48,7 +48,7 @@ public class UserAddProduct extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(user_pref.getString("user_type", null).equals("Manager")){
+                /*if(user_pref.getString("user_type", null).equals("Manager")){
                     Intent i = new Intent(UserAddProduct.this, ManagerViewProducts.class);
                     Intent endActivity = new Intent("finish_activity_man_view_products");
                     sendBroadcast(endActivity);
@@ -60,8 +60,8 @@ public class UserAddProduct extends AppCompatActivity {
                     sendBroadcast(endActivity);
                     startActivity(i);
                     finish();
-                }
-
+                }*/
+                finish();
             }
         });
 
@@ -93,6 +93,7 @@ public class UserAddProduct extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 }
+
             }
         });
 

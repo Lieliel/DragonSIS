@@ -1,7 +1,9 @@
 package com.tolentino.dragonsis;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -52,10 +54,6 @@ public class ManagerUpdateAccount extends AppCompatActivity {
         img_back_user_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerUpdateAccount.this, ManagerUserAccounts.class);
-                Intent endActivity = new Intent("finish_activity_man_accounts");
-                sendBroadcast(endActivity);
-                startActivity(i);
                 finish();
             }
         });
@@ -75,13 +73,23 @@ public class ManagerUpdateAccount extends AppCompatActivity {
         btn_upd_acc_remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db.deleteUser(pref.getString("username", null));
-                Log.i("USER TABLE:", "Successfully deleted Account");
-                Intent i = new Intent(ManagerUpdateAccount.this, ManagerUserAccounts.class);
-                Intent endActivity = new Intent("finish_activity_man_accounts");
-                sendBroadcast(endActivity);
-                startActivity(i);
-                finish();
+                new AlertDialog.Builder(ManagerUpdateAccount.this)
+                        .setTitle("Remove Account")
+                        .setMessage("Are you sure you want to remove this account?")
+                        .setNegativeButton(android.R.string.no, null)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int arg1) {
+                                        db.deleteUser(pref.getString("username", null));
+                                        Log.i("USER TABLE:", "Successfully deleted Account");
+                                        Intent i = new Intent(ManagerUpdateAccount.this, ManagerUserAccounts.class);
+                                        Intent endActivity = new Intent("finish_activity_man_accounts");
+                                        sendBroadcast(endActivity);
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                }).create().show();
+
             }
         });
 

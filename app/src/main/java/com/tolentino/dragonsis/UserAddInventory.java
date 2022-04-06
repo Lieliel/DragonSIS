@@ -45,7 +45,7 @@ public class UserAddInventory extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(user_pref.getString("user_type", null).equals("Manager")){
+                /*if(user_pref.getString("user_type", null).equals("Manager")){
                     Intent i = new Intent(UserAddInventory.this, ManagerViewInventory.class);
                     Intent endActivity = new Intent("finish_activity_man_view_inventory");
                     sendBroadcast(endActivity);
@@ -57,7 +57,9 @@ public class UserAddInventory extends AppCompatActivity {
                     sendBroadcast(endActivity);
                     startActivity(i);
                     finish();
-                }
+                }*/
+
+                finish();
             }
         });
 

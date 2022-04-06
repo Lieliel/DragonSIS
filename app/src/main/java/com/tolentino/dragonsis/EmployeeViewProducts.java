@@ -57,10 +57,6 @@ public class EmployeeViewProducts extends AppCompatActivity {
         img_emp_back_view_prod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(EmployeeViewProducts.this, EmployeeMenu.class);
-                Intent endActivity = new Intent("emp_finish_activity");
-                sendBroadcast(endActivity);
-                startActivity(i);
                 finish();
             }
         });
@@ -150,10 +146,9 @@ public class EmployeeViewProducts extends AppCompatActivity {
 
                             //Compare Total Product Quantity to Product Critical Number
                             if(prod_total_quant <= prod_crit_num){
-                                ((TextView)view.findViewById(R.id.row_inventory_product_ID)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                                ((TextView)view.findViewById(R.id.row_inventory_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                                ((TextView)view.findViewById(R.id.row_inventory_date)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                                ((TextView)view.findViewById(R.id.row_inventory_quantity)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_product_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_product_price)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_product_category)).setTextColor(Color.parseColor("#FFFFFFFF"));
                                 view.setBackgroundColor(Color.parseColor("#FFF45B69"));
                             }else{
                                 view.setBackgroundColor(Color.parseColor("#00FFFFFF"));

@@ -36,10 +36,6 @@ public class ManagerInventoryUpdates extends AppCompatActivity {
         img_back_man_view_inventory_updates.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerInventoryUpdates.this, ManagerMenu.class);
-                startActivity(i);
-                Intent endActivity = new Intent("finish_activity");
-                sendBroadcast(endActivity);
                 finish();
             }
         });

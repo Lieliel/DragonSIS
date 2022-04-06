@@ -60,10 +60,6 @@ public class ManagerViewProducts extends AppCompatActivity {
         img_back_view_products.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerViewProducts.this, ManagerMenu.class);
-                startActivity(i);
-                Intent endActivity = new Intent("finish_activity");
-                sendBroadcast(endActivity);
                 finish();
             }
         });

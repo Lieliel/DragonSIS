@@ -31,10 +31,6 @@ public class ManagerViewSales extends AppCompatActivity {
         btn_man_view_sales_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerViewSales.this, ManagerMenu.class);
-                Intent endActivity = new Intent("finish_activity");
-                sendBroadcast(endActivity);
-                startActivity(i);
                 finish();
             }
         });

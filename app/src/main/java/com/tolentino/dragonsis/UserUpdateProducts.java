@@ -57,7 +57,7 @@ public class UserUpdateProducts extends AppCompatActivity {
         img_back_upd_products.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(user_pref.getString("user_type", null).equals("Manager")){
+                /*if(user_pref.getString("user_type", null).equals("Manager")){
                     Intent i = new Intent(UserUpdateProducts.this, ManagerViewProducts.class);
                     Intent endActivity = new Intent("finish_activity_man_view_products");
                     sendBroadcast(endActivity);
@@ -69,7 +69,8 @@ public class UserUpdateProducts extends AppCompatActivity {
                     sendBroadcast(endActivity);
                     startActivity(i);
                     finish();
-                }
+                }*/
+                finish();
             }
         });
 
