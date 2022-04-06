@@ -117,11 +117,20 @@ public class UserUpdateProducts extends AppCompatActivity {
                 db.deleteProduct(pref.getString("prod_id", null));
                 //Log.i("PRODUCT TABLE", pref.getString("prod_id", null));
                 Log.i("PRODUCT TABLE:", "Successfully deleted Product");
-                Intent i = new Intent(UserUpdateProducts.this, ManagerViewProducts.class);
-                Intent endActivity = new Intent("finish_activity_man_view_products");
-                sendBroadcast(endActivity);
-                startActivity(i);
-                finish();
+
+                if(user_pref.getString("user_type", null).equals("Manager")){
+                    Intent i = new Intent(UserUpdateProducts.this, ManagerViewProducts.class);
+                    Intent endActivity = new Intent("finish_activity_man_view_products");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(UserUpdateProducts.this, EmployeeViewProducts.class);
+                    Intent endActivity = new Intent("finish_activity_emp_view_products");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }
             }
         });
 
@@ -139,11 +148,20 @@ public class UserUpdateProducts extends AppCompatActivity {
                 String prod_category = spin_upd_prod_category.getSelectedItem().toString();
 
                 db.updateProduct(prod_id, prod_name, prod_total_quantity, prod_critnum, prod_price, prod_category);
-                Intent i = new Intent(UserUpdateProducts.this, ManagerViewProducts.class);
-                Intent endActivity = new Intent("finish_activity_man_view_products");
-                sendBroadcast(endActivity);
-                startActivity(i);
-                finish();
+
+                if(user_pref.getString("user_type", null).equals("Manager")){
+                    Intent i = new Intent(UserUpdateProducts.this, ManagerViewProducts.class);
+                    Intent endActivity = new Intent("finish_activity_man_view_products");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(UserUpdateProducts.this, EmployeeViewProducts.class);
+                    Intent endActivity = new Intent("finish_activity_emp_view_products");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }
             }
         });
 

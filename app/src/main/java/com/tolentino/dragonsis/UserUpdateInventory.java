@@ -114,11 +114,21 @@ public class UserUpdateInventory extends AppCompatActivity {
                     db.updateInventory(inv_id,new_inv_quan,inv_remark,inv_prod_name);
                 }
 
-                Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
-                Intent endActivity = new Intent("finish_activity_man_view_inventory");
-                sendBroadcast(endActivity);
-                startActivity(i);
-                finish();
+                //Back to Inventory
+                if(user_pref.getString("user_type", null).equals("Manager")){
+                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
+                    Intent endActivity = new Intent("finish_activity_man_view_inventory");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
+                    Intent endActivity = new Intent("finish_activity_emp_view_inventory");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }
+
             }
         });
 
@@ -127,11 +137,22 @@ public class UserUpdateInventory extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 db.deleteInventory(pref.getString("inventory_ID", null));
-                Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
-                Intent endActivity = new Intent("finish_activity_man_view_inventory");
-                sendBroadcast(endActivity);
-                startActivity(i);
-                finish();
+
+                //Back to View Inventory
+                if(user_pref.getString("user_type", null).equals("Manager")){
+                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
+                    Intent endActivity = new Intent("finish_activity_man_view_inventory");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
+                    Intent endActivity = new Intent("finish_activity_emp_view_inventory");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }
+
             }
         });
 

@@ -43,7 +43,7 @@ public class UserAddProduct extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, productCategoryArray);
         spin_add_category.setAdapter(adapter);
 
-        //Back to Manager View Products
+        //Back to View Products
         img_back_add_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +65,7 @@ public class UserAddProduct extends AppCompatActivity {
             }
         });
 
+        //Add Product
         btn_product_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,11 +80,19 @@ public class UserAddProduct extends AppCompatActivity {
                 db.insertProduct(txt_prod_name,0,txt_prod_crit_num,txt_prod_price,spin_category);
                 Log.i("ACCOUNTS TABLE", "User Inserted: " + txt_prod_name + ", " + txt_prod_crit_num + ", " + txt_prod_price + ", " + spin_category);
 
-                Intent i = new Intent(UserAddProduct.this, ManagerViewProducts.class);
-                Intent endActivity = new Intent("finish_activity_man_view_products");
-                sendBroadcast(endActivity);
-                startActivity(i);
-                finish();
+                if(user_pref.getString("user_type", null).equals("Manager")){
+                    Intent i = new Intent(UserAddProduct.this, ManagerViewProducts.class);
+                    Intent endActivity = new Intent("finish_activity_man_view_products");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(UserAddProduct.this, EmployeeViewProducts.class);
+                    Intent endActivity = new Intent("finish_activity_emp_view_products");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }
             }
         });
 
