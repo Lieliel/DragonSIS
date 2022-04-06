@@ -19,7 +19,7 @@ public class EmployeeMenu extends AppCompatActivity {
     Button btn_emp_invupd;
     Button btn_emp_prodlist;
     Button btn_emp_log;
-    BroadcastReceiver empbroadcastReceiver1;
+    BroadcastReceiver broadcastReceiverEmpMenu;
     TextView user_name_emp;
 
     @Override
@@ -74,18 +74,18 @@ public class EmployeeMenu extends AppCompatActivity {
             }
         });
 
-        empbroadcastReceiver1 = new BroadcastReceiver() {
+        broadcastReceiverEmpMenu = new BroadcastReceiver() {
 
             @Override
             public void onReceive(Context arg0, Intent intent) {
                 String action = intent.getAction();
                 if (action.equals("emp_finish_activity")) {
                     finish();
-                    unregisterReceiver(empbroadcastReceiver1);
+                    unregisterReceiver(broadcastReceiverEmpMenu);
                 }
             }
         };
-        registerReceiver(empbroadcastReceiver1, new IntentFilter("emp_finish_activity"));
+        registerReceiver(broadcastReceiverEmpMenu, new IntentFilter("emp_finish_activity"));
     }
 
     @Override

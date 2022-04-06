@@ -47,10 +47,14 @@ public class UserAddInventory extends AppCompatActivity {
 
                 if(user_pref.getString("user_type", null).equals("Manager")){
                     Intent i = new Intent(UserAddInventory.this, ManagerViewProducts.class);
+                    Intent endActivity = new Intent("finish_activity_man_view_inventory");
+                    sendBroadcast(endActivity);
                     startActivity(i);
                     finish();
                 }else{
                     Intent i = new Intent(UserAddInventory.this, EmployeeViewProducts.class);
+                    Intent endActivity = new Intent("finish_activity_emp_view_inventory");
+                    sendBroadcast(endActivity);
                     startActivity(i);
                     finish();
                 }

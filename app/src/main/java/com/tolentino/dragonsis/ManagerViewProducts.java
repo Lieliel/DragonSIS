@@ -33,7 +33,7 @@ public class ManagerViewProducts extends AppCompatActivity {
     ImageView img_back_view_products;
     Button img_add_product;
     SearchView srch_product;
-    BroadcastReceiver broadcastReceiver3;
+    BroadcastReceiver broadcastReceiverManProd;
 
     Spinner spin_man_view_prod_category;
     String[] categoryArray = {"None","Lumber", "Nails", "Screws", "Cement", "Gravel", "Sand", "Steel Bars", "Varnish", "Paint", "Brush/Roller", "PVC", "Special"};
@@ -253,17 +253,17 @@ public class ManagerViewProducts extends AppCompatActivity {
             }
         });
 
-        broadcastReceiver3 = new BroadcastReceiver() {
+        broadcastReceiverManProd = new BroadcastReceiver() {
 
             @Override
             public void onReceive(Context arg0, Intent intent) {
                 String action = intent.getAction();
                 if (action.equals("finish_activity_man_view_products")) {
                     finish();
-                    unregisterReceiver(broadcastReceiver3);
+                    unregisterReceiver(broadcastReceiverManProd);
                 }
             }
         };
-        registerReceiver(broadcastReceiver3, new IntentFilter("finish_activity_man_view_products"));
+        registerReceiver(broadcastReceiverManProd, new IntentFilter("finish_activity_man_view_products"));
     }
 }

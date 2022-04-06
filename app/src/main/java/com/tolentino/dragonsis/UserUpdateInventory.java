@@ -69,14 +69,14 @@ public class UserUpdateInventory extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(user_pref.getString("user_type", null).equals("Manager")){
-                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewProducts.class);
+                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
                     Intent endActivity = new Intent("finish_activity_man_view_inventory");
                     sendBroadcast(endActivity);
                     startActivity(i);
                     finish();
                 }else{
-                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewProducts.class);
-                    Intent endActivity = new Intent("finish_activity_man_view_inventory");
+                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
+                    Intent endActivity = new Intent("finish_activity_emp_view_inventory");
                     sendBroadcast(endActivity);
                     startActivity(i);
                     finish();

@@ -31,7 +31,7 @@ public class ManagerViewInventory extends AppCompatActivity {
     ImageView img_back_view_inventory;
     Button img_add_inventory;
     SearchView srch_inventory;
-    BroadcastReceiver broadcastReceiver2;
+    BroadcastReceiver broadcastReceiverManInv;
 
     Spinner spin_view_inventory;
     String[] categoryArray = {"None","Lumber", "Nails", "Screws", "Cement", "Gravel", "Sand", "Steel Bars", "Varnish", "Paint", "Brush/Roller", "PVC", "Special"};
@@ -244,18 +244,18 @@ public class ManagerViewInventory extends AppCompatActivity {
             }
         });
 
-        broadcastReceiver2 = new BroadcastReceiver() {
+        broadcastReceiverManInv = new BroadcastReceiver() {
 
             @Override
             public void onReceive(Context arg0, Intent intent) {
                 String action = intent.getAction();
                 if (action.equals("finish_activity_man_view_inventory")) {
                     finish();
-                    unregisterReceiver(broadcastReceiver2);
+                    unregisterReceiver(broadcastReceiverManInv);
                 }
             }
         };
-        registerReceiver(broadcastReceiver2, new IntentFilter("finish_activity_man_view_inventory"));
+        registerReceiver(broadcastReceiverManInv, new IntentFilter("finish_activity_man_view_inventory"));
 
     }
 }

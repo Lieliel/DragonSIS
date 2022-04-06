@@ -2,7 +2,10 @@ package com.tolentino.dragonsis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -36,6 +39,7 @@ public class EmployeeViewInventory extends AppCompatActivity {
     DbManager db;
     ListView list_inventory_emp;
     ListAdapter listAdapter;
+    BroadcastReceiver broadcastReceiverEmpInv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,5 +214,18 @@ public class EmployeeViewInventory extends AppCompatActivity {
 
             }
         });
+
+        broadcastReceiverEmpInv = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity_emp_view_inventory")) {
+                    finish();
+                    unregisterReceiver(broadcastReceiverEmpInv);
+                }
+            }
+        };
+        registerReceiver(broadcastReceiverEmpInv, new IntentFilter("finish_activity_emp_view_inventory"));
     }
 }

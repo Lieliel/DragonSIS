@@ -21,7 +21,7 @@ public class ManagerMenu extends AppCompatActivity {
     Button btn_pdf;
     Button btn_logout;
     Button btn_viewinvupd;
-    BroadcastReceiver broadcastReceiver1;
+    BroadcastReceiver broadcastReceiverManMenu;
     Button btn_man_trans;
     TextView user_name;
 
@@ -106,18 +106,18 @@ public class ManagerMenu extends AppCompatActivity {
             }
         });
 
-        broadcastReceiver1 = new BroadcastReceiver() {
+        broadcastReceiverManMenu = new BroadcastReceiver() {
 
             @Override
             public void onReceive(Context arg0, Intent intent) {
                 String action = intent.getAction();
                 if (action.equals("finish_activity")) {
                     finish();
-                    unregisterReceiver(broadcastReceiver1);
+                    unregisterReceiver(broadcastReceiverManMenu);
                 }
             }
         };
-        registerReceiver(broadcastReceiver1, new IntentFilter("finish_activity"));
+        registerReceiver(broadcastReceiverManMenu, new IntentFilter("finish_activity"));
     }
 
     @Override

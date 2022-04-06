@@ -63,7 +63,7 @@ public class UserUpdateProducts extends AppCompatActivity {
                     finish();
                 }else{
                     Intent i = new Intent(UserUpdateProducts.this, EmployeeViewProducts.class);
-                    Intent endActivity = new Intent("finish_activity_man_view_products");
+                    Intent endActivity = new Intent("finish_activity_emp_view_products");
                     sendBroadcast(endActivity);
                     startActivity(i);
                     finish();

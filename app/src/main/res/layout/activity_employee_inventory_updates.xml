@@ -43,7 +43,7 @@
         android:gravity="center">
 
         <SearchView
-            android:id="@+id/srch_inventory_history"
+            android:id="@+id/srch_emp_inv_upd"
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:ems="10"

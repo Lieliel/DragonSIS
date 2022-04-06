@@ -12,7 +12,7 @@
     android:focusableInTouchMode="true">
 
     <ImageView
-        android:id="@+id/img_back_employee_inventory"
+        android:id="@+id/img_back_emp_view_inventory"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentStart="true"
@@ -23,24 +23,12 @@
         android:background="?android:attr/selectableItemBackground"
         android:focusable="true" />
 
-    <ImageView
-        android:id="@+id/img_emp_add_inv"
-        android:layout_width="59dp"
-        android:layout_height="59dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="92dp"
-        android:clickable="true"
-        android:src="@drawable/ic_baseline_add_circle_outline_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_back_employee_inventory"></ImageView>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Inventory"
         android:textSize="22sp"
-        app:layout_constraintLeft_toRightOf="@id/img_back_employee_inventory"
+        app:layout_constraintLeft_toRightOf="@id/img_back_emp_view_inventory"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="25dp"/>
 
@@ -56,7 +44,7 @@
         android:gravity="center">
 
         <SearchView
-            android:id="@+id/search_inventory_emp"
+            android:id="@+id/search_emp_inv"
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:iconifiedByDefault="false"
@@ -80,7 +68,7 @@
                 android:textAlignment="center"/>
 
             <Spinner
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/spin_emp_inv_category"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:textAlignment="center" />
@@ -102,7 +90,7 @@
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <Spinner
-                android:id="@+id/editTextTextPersonName3"
+                android:id="@+id/spin_emp_inv_sort"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:ems="10"
@@ -110,7 +98,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/img_add_emp_inventory"
+            android:id="@+id/img_emp_add_inv"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="16dp"
@@ -134,7 +122,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <ListView
-                android:id="@+id/list_emp_inventory"
+                android:id="@+id/list_emp_view_inv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:dividerHeight="5dp"/>
