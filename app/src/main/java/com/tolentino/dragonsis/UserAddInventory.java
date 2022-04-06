@@ -46,11 +46,11 @@ public class UserAddInventory extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(user_pref.getString("user_type", null).equals("Manager")){
-                    Intent i = new Intent(UserAddInventory.this, ManagerViewProducts.class);
+                    Intent i = new Intent(UserAddInventory.this, ManagerViewInventory.class);
                     startActivity(i);
                     finish();
                 }else{
-                    Intent i = new Intent(UserAddInventory.this, EmployeeViewProducts.class);
+                    Intent i = new Intent(UserAddInventory.this, EmployeeViewInventory.class);
                     startActivity(i);
                     finish();
                 }
@@ -63,6 +63,7 @@ public class UserAddInventory extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, prod_name_spinner);
         spin_add_inventory_productname.setAdapter(adapter);
 
+        //Add Inventory
         btn_inv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,9 +77,16 @@ public class UserAddInventory extends AppCompatActivity {
                 db.addProductTotalQuant(spin_prodName,invQuantity);
                 Log.i("INVENTORY TABLE", "Inventory Inserted: " + spin_prodName + ", " + productDate + ", " + invQuantity);
 
-                Intent i = new Intent(UserAddInventory.this, ManagerViewInventory.class);
-                startActivity(i);
-                finish();
+                //Back to View Inventory
+                if(user_pref.getString("user_type", null).equals("Manager")){
+                    Intent i = new Intent(UserAddInventory.this, ManagerViewInventory.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(UserAddInventory.this, EmployeeViewInventory.class);
+                    startActivity(i);
+                    finish();
+                }
             }
         });
 

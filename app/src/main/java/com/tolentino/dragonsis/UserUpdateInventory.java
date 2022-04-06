@@ -68,11 +68,11 @@ public class UserUpdateInventory extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(user_pref.getString("user_type", null).equals("Manager")){
-                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewProducts.class);
+                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
                     startActivity(i);
                     finish();
                 }else{
-                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewProducts.class);
+                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
                     startActivity(i);
                     finish();
                 }
@@ -109,8 +109,16 @@ public class UserUpdateInventory extends AppCompatActivity {
                     db.updateInventory(inv_id,new_inv_quan,inv_remark,inv_prod_name);
                 }
 
-                Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
-                startActivity(i);
+                //Back to Inventory
+                if(user_pref.getString("user_type", null).equals("Manager")){
+                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
+                    startActivity(i);
+                    finish();
+                }
 
             }
         });
@@ -120,8 +128,17 @@ public class UserUpdateInventory extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 db.deleteInventory(pref.getString("inventory_ID", null));
-                Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
-                startActivity(i);
+
+                //Back to View Inventory
+                if(user_pref.getString("user_type", null).equals("Manager")){
+                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
+                    startActivity(i);
+                    finish();
+                }
 
             }
         });
