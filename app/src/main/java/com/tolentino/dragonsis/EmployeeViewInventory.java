@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,8 +81,6 @@ public class EmployeeViewInventory extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(EmployeeViewInventory.this, UserAddInventory.class);
                 startActivity(i);
-                finish();
-
             }
         });
 
@@ -156,9 +155,13 @@ public class EmployeeViewInventory extends AppCompatActivity {
 
                             //Compare Total Product Quantity to Product Critical Number
                             if(prod_total_quant <= prod_crit_num){
-                                view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                                ((TextView)view.findViewById(R.id.row_inventory_product_ID)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_inventory_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_inventory_date)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                ((TextView)view.findViewById(R.id.row_inventory_quantity)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                                view.setBackgroundColor(Color.parseColor("#FFF45B69"));
                             }else{
-                                view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                                view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                             }
 
                             return view;

@@ -1,7 +1,9 @@
 package com.tolentino.dragonsis;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -136,27 +138,33 @@ public class UserUpdateInventory extends AppCompatActivity {
         btn_man_upd_inv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db.deleteInventory(pref.getString("inventory_ID", null));
+                new AlertDialog.Builder(UserUpdateInventory.this)
+                        .setTitle("Remove Inventory")
+                        .setMessage("Are you sure you want to remove this item inventory?")
+                        .setNegativeButton(android.R.string.no, null)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int arg1) {
+                                        db.deleteInventory(pref.getString("inventory_ID", null));
 
-                //Back to View Inventory
-                if(user_pref.getString("user_type", null).equals("Manager")){
-                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
-                    Intent endActivity = new Intent("finish_activity_man_view_inventory");
-                    sendBroadcast(endActivity);
-                    startActivity(i);
-                    finish();
-                }else{
-                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
-                    Intent endActivity = new Intent("finish_activity_emp_view_inventory");
-                    sendBroadcast(endActivity);
-                    startActivity(i);
-                    finish();
-                }
-
+                                        //Back to View Inventory
+                                        if(user_pref.getString("user_type", null).equals("Manager")){
+                                            Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
+                                            Intent endActivity = new Intent("finish_activity_man_view_inventory");
+                                            sendBroadcast(endActivity);
+                                            startActivity(i);
+                                            finish();
+                                        }else{
+                                            Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
+                                            Intent endActivity = new Intent("finish_activity_emp_view_inventory");
+                                            sendBroadcast(endActivity);
+                                            startActivity(i);
+                                            finish();
+                                        }
+                                    }
+                        }).create().show();
             }
         });
-
-
     }
 
     public String changeQuantity(View v, int inv_curr_quan, int inv_quantity_change){

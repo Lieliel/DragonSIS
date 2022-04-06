@@ -1,7 +1,9 @@
 package com.tolentino.dragonsis;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -114,23 +116,32 @@ public class UserUpdateProducts extends AppCompatActivity {
         btn_upd_prod_remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db.deleteProduct(pref.getString("prod_id", null));
-                //Log.i("PRODUCT TABLE", pref.getString("prod_id", null));
-                Log.i("PRODUCT TABLE:", "Successfully deleted Product");
+                new AlertDialog.Builder(UserUpdateProducts.this)
+                        .setTitle("Remove Product")
+                        .setMessage("Are you sure you want to remove this product?")
+                        .setNegativeButton(android.R.string.no, null)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int arg1) {
+                                        db.deleteProduct(pref.getString("prod_id", null));
+                                        //Log.i("PRODUCT TABLE", pref.getString("prod_id", null));
+                                        Log.i("PRODUCT TABLE:", "Successfully deleted Product");
 
-                if(user_pref.getString("user_type", null).equals("Manager")){
-                    Intent i = new Intent(UserUpdateProducts.this, ManagerViewProducts.class);
-                    Intent endActivity = new Intent("finish_activity_man_view_products");
-                    sendBroadcast(endActivity);
-                    startActivity(i);
-                    finish();
-                }else{
-                    Intent i = new Intent(UserUpdateProducts.this, EmployeeViewProducts.class);
-                    Intent endActivity = new Intent("finish_activity_emp_view_products");
-                    sendBroadcast(endActivity);
-                    startActivity(i);
-                    finish();
-                }
+                                        if(user_pref.getString("user_type", null).equals("Manager")){
+                                            Intent i = new Intent(UserUpdateProducts.this, ManagerViewProducts.class);
+                                            Intent endActivity = new Intent("finish_activity_man_view_products");
+                                            sendBroadcast(endActivity);
+                                            startActivity(i);
+                                            finish();
+                                        }else{
+                                            Intent i = new Intent(UserUpdateProducts.this, EmployeeViewProducts.class);
+                                            Intent endActivity = new Intent("finish_activity_emp_view_products");
+                                            sendBroadcast(endActivity);
+                                            startActivity(i);
+                                            finish();
+                                        }
+                                    }
+                                }).create().show();
             }
         });
 

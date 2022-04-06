@@ -16,5 +16,21 @@
         <item name="backgroundTint">@color/light_gray</item>
         <item name="android:buttonStyle">@style/DSISButton</item>
         <item name="fontFamily">@font/nexa_regular</item>
+        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+    </style>
+    
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/fiery_rose</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/bud_green</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

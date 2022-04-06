@@ -83,9 +83,18 @@ public class ManagerMenu extends AppCompatActivity {
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerMenu.this, MainActivity.class);
-                startActivity(i);
-                finish();
+                new AlertDialog.Builder(ManagerMenu.this)
+                        .setTitle("Log out")
+                        .setMessage("Are you sure you want to log out?")
+                        .setNegativeButton(android.R.string.no, null)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int arg1) {
+                                Intent i = new Intent(ManagerMenu.this, MainActivity.class);
+                                startActivity(i);
+                                finish();
+                            }
+                        }).create().show();
             }
         });
 
