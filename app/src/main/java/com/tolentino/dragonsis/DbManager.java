@@ -83,7 +83,7 @@ public class DbManager extends SQLiteOpenHelper {
                 + PROD_COL6 + " TEXT)";
         db.execSQL(create_Prod_Table);
 
-        //create_Inv_Table
+        //create Inventory Table
         String create_Inv_Table = "CREATE TABLE " + INV_TABLE_NAME + "("
                 + INV_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + INV_COL2 + " TEXT,"
@@ -509,10 +509,25 @@ public class DbManager extends SQLiteOpenHelper {
 
     }
 
-    // Get All Inventory Details
-    public ArrayList<HashMap<String, String>> getCategorizedInventory(String category) {
+    // Get Categorized Inventory Details
+    public ArrayList<HashMap<String, String>> getCategorizedInventory(String category, String sort) {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> inventoryList = new ArrayList<>();
+        String inv_sort_query_ext = null;
+
+        //SQL query according to kung ano yung gusto ni user na sort, naubusan ako ng english
+        if(sort.equals("A-Z")){
+            inv_sort_query_ext = " ORDER BY " + INV_TABLE_NAME + "." + INV_COL7;
+        }else if(sort.equals("Z-A")){
+            inv_sort_query_ext = " ORDER BY " + INV_TABLE_NAME + "." + INV_COL7 + " DESC";
+        }else if(sort.equals("Low Quantity First")){
+            inv_sort_query_ext = " ORDER BY " + INV_TABLE_NAME + "." + INV_COL3;
+        }else if(sort.equals("High Quantity First")){
+            inv_sort_query_ext = " ORDER BY " + INV_TABLE_NAME + "." + INV_COL3 + " DESC";
+        }else if(sort.equals("None")){
+            inv_sort_query_ext = "";
+        }
+
         String query = "SELECT "
                 + INV_TABLE_NAME + "." + INV_COL1 + ", "
                 + INV_TABLE_NAME + "." + INV_COL2 + ", "
@@ -527,7 +542,8 @@ public class DbManager extends SQLiteOpenHelper {
                 + " INNER JOIN " + PROD_TABLE_NAME + " ON "
                 + INV_TABLE_NAME + "." + INV_COL7 + " = "
                 + PROD_TABLE_NAME + "." + PROD_COL2
-                + " WHERE " + PROD_TABLE_NAME + "." + PROD_COL6 + "='" + category + "'";
+                + " WHERE " + PROD_TABLE_NAME + "." + PROD_COL6 + "='" + category + "'"
+                + inv_sort_query_ext;
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
             HashMap<String, String> inventory = new HashMap<>();
@@ -551,7 +567,7 @@ public class DbManager extends SQLiteOpenHelper {
         return inventoryList;
     }
 
-    // Get Filtered by Category Inventory Details
+    // Get Inventory Details
     public ArrayList<HashMap<String, String>> getInventory() {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> inventoryList = new ArrayList<>();
@@ -579,6 +595,46 @@ public class DbManager extends SQLiteOpenHelper {
         return inventoryList;
     }
 
+    // Get Inventory Details
+    public ArrayList<HashMap<String, String>> getSortedInventory(String sort) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> inventoryList = new ArrayList<>();
+        String inv_sort_query_ext = null;
+        //SQL query according to kung ano yung gusto ni user na sort, naubusan ako ng english
+        if(sort.equals("A-Z")){
+            inv_sort_query_ext = " ORDER BY " + INV_TABLE_NAME + "." + INV_COL7;
+        }else if(sort.equals("Z-A")){
+            inv_sort_query_ext = " ORDER BY " + INV_TABLE_NAME + "." + INV_COL7 + " DESC";
+        }else if(sort.equals("Low Quantity First")){
+            inv_sort_query_ext = " ORDER BY " + INV_TABLE_NAME + "." + INV_COL3;
+        }else if(sort.equals("High Quantity First")){
+            inv_sort_query_ext = " ORDER BY " + INV_TABLE_NAME + "." + INV_COL3 + " DESC";
+        }else if(sort.equals("None")){
+            inv_sort_query_ext = "";
+        }
+        String query = "SELECT * FROM " + INV_TABLE_NAME + inv_sort_query_ext;
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            HashMap<String, String> inventory = new HashMap<>();
+            inventory.put("inventory_ID", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL1)));
+            inventory.put("inventory_date", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL2)));
+            inventory.put("inventory_quantity", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL3)));
+            inventory.put("inventory_quantity_change", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL4)));
+            inventory.put("inventory_remark", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL5)));
+            inventory.put("inventory_date_updated", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL6)));
+            inventory.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL7)));
+            inventoryList.add(inventory);
+
+            Log.i("ADDED TO INV TABLE",  cursor.getString(cursor.getColumnIndexOrThrow(INV_COL1))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL2))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL3))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL4))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL5))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL6))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL7)));
+        }
+        return inventoryList;
+    }
 
     // Get Inventory Details based on Inventory ID
     public ArrayList<HashMap<String, String>> getInventoryByInventoryID(String inventoryID) {

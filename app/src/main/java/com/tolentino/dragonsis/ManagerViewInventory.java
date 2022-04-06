@@ -119,7 +119,6 @@ public class ManagerViewInventory extends AppCompatActivity {
         list_inventory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Toast.makeText(UserAccounts.this, userList.get(i).toString(),Toast.LENGTH_LONG).show();
 
                 SharedPreferences pref = getSharedPreferences("inventory_list", MODE_PRIVATE);
 
@@ -143,85 +142,94 @@ public class ManagerViewInventory extends AppCompatActivity {
         //Filter List According to Category
         spin_man_view_inv_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             String prodCategory;
+            String invSort;
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 //get Category Selected in the Spinner
                 prodCategory = spin_man_view_inv_category.getSelectedItem().toString();
+                invSort = spin_man_sort_inventory.getSelectedItem().toString();
+                OnCategoryOrSortSelected(prodCategory, invSort);
 
-                //default Category
-                if(prodCategory.equals("None")){
-                    list_inventory = findViewById(R.id.list_inventory);
-                    ArrayList<HashMap<String, String>> inventoryList = db.getInventory();
-                    listAdapter = new SimpleAdapter(ManagerViewInventory.this, inventoryList, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity}){
-                        @Override
-                        public View getView(int position, View convertView, ViewGroup parent) {
-                            // Get Current View
-                            View view = super.getView(position, convertView, parent);
-
-                            // Initialize Values
-                            int prod_total_quant = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
-                            int prod_crit_num = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
-
-                            //Compare Total Product Quantity to Product Critical Number
-                            if(prod_total_quant <= prod_crit_num){
-                                view.setBackgroundColor(Color.parseColor("#FFB6B546"));
-                            }else{
-                                view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
-                            }
-
-                            return view;
-
-                        }
-                    };
-                    list_inventory.setAdapter(listAdapter);
-                }else{
-                    //Adapt Categorized Inventory to the List View
-                    ArrayList<HashMap<String, String>> inventoryList = db.getCategorizedInventory(prodCategory);
-                    listAdapter = new SimpleAdapter(ManagerViewInventory.this, inventoryList, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity}){
-                        @Override
-                        public View getView(int position, View convertView, ViewGroup parent) {
-                            // Get Current View
-                            View view = super.getView(position, convertView, parent);
-
-                            // Initialize Values
-                            int prod_total_quant = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
-                            int prod_crit_num = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
-
-                            //Compare Total Product Quantity to Product Critical Number
-                            if(prod_total_quant <= prod_crit_num){
-                                view.setBackgroundColor(Color.parseColor("#FFB6B546"));
-                            }else{
-                                view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
-                            }
-
-                            return view;
-
-                        }
-                    };
-                    list_inventory.setAdapter(listAdapter);
-                }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
 
         //Sort List According to Chosen Option
         spin_man_sort_inventory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            String prodCategory;
             String invSort;
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                prodCategory = spin_man_view_inv_category.getSelectedItem().toString();
                 invSort = spin_man_sort_inventory.getSelectedItem().toString();
-                Log.i("CATEGORY TAG", invSort);
+                OnCategoryOrSortSelected(prodCategory, invSort);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
     }
+
+    public void OnCategoryOrSortSelected(String prodCategory, String invSort){
+
+        //default Category
+        if(prodCategory.equals("None")){
+            list_inventory = findViewById(R.id.list_inventory);
+            ArrayList<HashMap<String, String>> inventoryList = db.getSortedInventory(invSort);
+
+            listAdapter = new SimpleAdapter(ManagerViewInventory.this, inventoryList, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity}){
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    // Get Current View
+                    View view = super.getView(position, convertView, parent);
+
+                    // Initialize Values
+                    int prod_total_quant = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
+                    int prod_crit_num = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
+
+                    //Compare Total Product Quantity to Product Critical Number
+                    if(prod_total_quant <= prod_crit_num){
+                        view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                    }else{
+                        view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                    }
+
+                    return view;
+                }
+            };
+            list_inventory.setAdapter(listAdapter);
+        }else{
+            //Adapt Categorized Inventory to the List View
+            ArrayList<HashMap<String, String>> inventoryList = db.getCategorizedInventory(prodCategory, invSort);
+            Log.i("CATEGORY TAG", String.valueOf(inventoryList.toString()));
+            listAdapter = new SimpleAdapter(ManagerViewInventory.this, inventoryList, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity}){
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    // Get Current View
+                    View view = super.getView(position, convertView, parent);
+
+                    // Initialize Values
+                    int prod_total_quant = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
+                    int prod_crit_num = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
+
+                    //Compare Total Product Quantity to Product Critical Number
+                    if(prod_total_quant <= prod_crit_num){
+                        view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                    }else{
+                        view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                    }
+
+                    return view;
+
+                }
+            };
+            list_inventory.setAdapter(listAdapter);
+        }
+
+    }
 }
+
