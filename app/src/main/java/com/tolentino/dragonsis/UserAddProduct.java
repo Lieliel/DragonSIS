@@ -3,6 +3,7 @@ package com.tolentino.dragonsis;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-public class ManagerAddProduct extends AppCompatActivity {
+public class UserAddProduct extends AppCompatActivity {
 
     ImageView img_back_add_product;
     EditText edit_add_productname;
@@ -22,11 +23,12 @@ public class ManagerAddProduct extends AppCompatActivity {
     String[] productCategoryArray = {"Lumber", "Nails", "Screws", "Cement", "Gravel", "Sand", "Steel Bars", "Varnish", "Paint", "Brush/Roller", "PVC", "Special"};
     Button btn_product_submit;
     DbManager db;
+    SharedPreferences user_pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manager_add_product);
+        setContentView(R.layout.activity_user_add_product);
 
         img_back_add_product = findViewById(R.id.img_back_add_product);
         edit_add_productname = findViewById(R.id.edit_add_productname);
@@ -35,6 +37,7 @@ public class ManagerAddProduct extends AppCompatActivity {
         spin_add_category = findViewById(R.id.spin_add_category);
         btn_product_submit = findViewById((R.id.btn_product_submit));
         db = new DbManager(this);
+        user_pref = getSharedPreferences("acc_details", MODE_PRIVATE);
 
         //Adapt Array to Spinner
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, productCategoryArray);
@@ -44,11 +47,21 @@ public class ManagerAddProduct extends AppCompatActivity {
         img_back_add_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerAddProduct.this, ManagerViewProducts.class);
-                Intent endActivity = new Intent("finish_activity_man_view_products");
-                sendBroadcast(endActivity);
-                startActivity(i);
-                finish();
+
+                if(user_pref.getString("user_type", null).equals("Manager")){
+                    Intent i = new Intent(UserAddProduct.this, ManagerViewProducts.class);
+                    Intent endActivity = new Intent("finish_activity_man_view_products");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(UserAddProduct.this, EmployeeViewProducts.class);
+                    Intent endActivity = new Intent("finish_activity_man_view_products");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }
+
             }
         });
 
@@ -66,7 +79,7 @@ public class ManagerAddProduct extends AppCompatActivity {
                 db.insertProduct(txt_prod_name,0,txt_prod_crit_num,txt_prod_price,spin_category);
                 Log.i("ACCOUNTS TABLE", "User Inserted: " + txt_prod_name + ", " + txt_prod_crit_num + ", " + txt_prod_price + ", " + spin_category);
 
-                Intent i = new Intent(ManagerAddProduct.this, ManagerViewProducts.class);
+                Intent i = new Intent(UserAddProduct.this, ManagerViewProducts.class);
                 Intent endActivity = new Intent("finish_activity_man_view_products");
                 sendBroadcast(endActivity);
                 startActivity(i);

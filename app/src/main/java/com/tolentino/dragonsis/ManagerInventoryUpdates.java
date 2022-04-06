@@ -29,8 +29,8 @@ public class ManagerInventoryUpdates extends AppCompatActivity {
         setContentView(R.layout.activity_manager_view_inventory_updates);
 
         img_back_man_view_inventory_updates = findViewById(R.id.img_back_man_view_inventory_updates);
-        db = new DbManager(this);
         srch_man_view_inv_upd = findViewById(R.id.srch_man_view_inv_upd);
+        db = new DbManager(this);
 
         //Back to Manager Menu
         img_back_man_view_inventory_updates.setOnClickListener(new View.OnClickListener() {

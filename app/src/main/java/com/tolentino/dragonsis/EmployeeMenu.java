@@ -15,10 +15,10 @@ import android.widget.TextView;
 
 public class EmployeeMenu extends AppCompatActivity {
 
-    Button btn_viewinv;
-    Button btn_invupd;
-    Button btn_prodlist;
-    Button btn_log;
+    Button btn_emp_viewinv;
+    Button btn_emp_invupd;
+    Button btn_emp_prodlist;
+    Button btn_emp_log;
     BroadcastReceiver empbroadcastReceiver1;
     TextView user_name_emp;
 
@@ -27,10 +27,10 @@ public class EmployeeMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_menu);
 
-        btn_viewinv = findViewById(R.id.btn_viewinv);
-        btn_invupd = findViewById(R.id.btn_invupd);
-        btn_prodlist = findViewById(R.id.btn_prodlist);
-        btn_log = findViewById(R.id.btn_log);
+        btn_emp_viewinv = findViewById(R.id.btn_emp_viewinv);
+        btn_emp_invupd = findViewById(R.id.btn_emp_invupd);
+        btn_emp_prodlist = findViewById(R.id.btn_emp_prodlist);
+        btn_emp_log = findViewById(R.id.btn_emp_log);
 
         user_name_emp = (TextView) findViewById(R.id.user_name_emp);
         Intent intentName = getIntent();
@@ -38,7 +38,7 @@ public class EmployeeMenu extends AppCompatActivity {
         user_name_emp.setText(userName);
 
         //Redirect to Inventory List
-        btn_viewinv.setOnClickListener(new View.OnClickListener() {
+        btn_emp_viewinv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(EmployeeMenu.this, EmployeeViewInventory.class);
@@ -47,7 +47,7 @@ public class EmployeeMenu extends AppCompatActivity {
         });
 
         //Redirect to Products List
-        btn_prodlist.setOnClickListener(new View.OnClickListener() {
+        btn_emp_prodlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(EmployeeMenu.this, EmployeeViewProducts.class);
@@ -56,7 +56,7 @@ public class EmployeeMenu extends AppCompatActivity {
         });
 
         //Redirect to View Inventory
-        btn_invupd.setOnClickListener(new View.OnClickListener() {
+        btn_emp_invupd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(EmployeeMenu.this, EmployeeInventoryUpdates.class);
@@ -65,7 +65,7 @@ public class EmployeeMenu extends AppCompatActivity {
         });
 
         //Log out
-        btn_log.setOnClickListener(new View.OnClickListener() {
+        btn_emp_log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(EmployeeMenu.this, MainActivity.class);

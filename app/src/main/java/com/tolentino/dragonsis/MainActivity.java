@@ -3,6 +3,7 @@ package com.tolentino.dragonsis;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_login;
     EditText a1,a2;
     DbManager db;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +30,7 @@ public class MainActivity extends AppCompatActivity {
         a1=(EditText)findViewById(R.id.mainusername);
         a2=(EditText)findViewById(R.id.mainpassword);
         db=new DbManager(this);
-
-        /*Add dummy account if no manager record exists
-        boolean managerExists = db.checkUserValues("manager");
-        if(!managerExists) {
-            Log.i("DATABASE TAG", String.valueOf(managerExists));
-            db.insertUser("manager123", "manager", "manager@gmail.com", "Manager");
-         }*/
+        pref = getSharedPreferences("acc_details", MODE_PRIVATE);
 
         //Login to the app
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +63,15 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(this, EmployeeMenu.class);
                     intent.putExtra("user_name",user);
+
+                    //store user type for later use
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("user_name",db.getUserByUsername(user).get(0).get("user_name").toString());
+                    editor.putString("user_type",db.getUserByUsername(user).get(0).get("user_type").toString());
+                    editor.commit();
+                    Log.i("LOGIN TAG", pref.getString("user_name", null));
+                    Log.i("LOGIN TAG", pref.getString("user_type", null));
+
                     startActivity(intent);
                     finish();
                 }else if(db.getUserByUsername(user).get(0).get("user_type").toString().equals("Manager")){
@@ -74,6 +79,15 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(this, ManagerMenu.class);
                     intent.putExtra("user_name",user);
+
+                    //store user type for later use
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("user_name",db.getUserByUsername(user).get(0).get("user_name").toString());
+                    editor.putString("user_type",db.getUserByUsername(user).get(0).get("user_type").toString());
+                    editor.commit();
+                    Log.i("LOGIN TAG", pref.getString("user_name", null));
+                    Log.i("LOGIN TAG", pref.getString("user_type", null));
+
                     startActivity(intent);
                     finish();
                 }else{
@@ -90,6 +104,15 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(this, ManagerMenu.class);
                     intent.putExtra("user_ID",user);
+
+                    //store user type for later use
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("user_name","mandev");
+                    editor.putString("user_type","Manager");
+                    editor.commit();
+                    Log.i("LOGIN TAG", pref.getString("user_name", null));
+                    Log.i("LOGIN TAG", pref.getString("user_type", null));
+
                     startActivity(intent);
                     finish();
                 }else if(user.equals("empdev")&&pass.equals("empdev123")) {
@@ -97,6 +120,15 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(this, EmployeeMenu.class);
                     intent.putExtra("user_ID", user);
+
+                    //store user type for later use
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("user_name","empdev");
+                    editor.putString("user_type","Employee");
+                    editor.commit();
+                    Log.i("LOGIN TAG", pref.getString("user_name", null));
+                    Log.i("LOGIN TAG", pref.getString("user_type", null));
+
                     startActivity(intent);
                     finish();
                 }else{

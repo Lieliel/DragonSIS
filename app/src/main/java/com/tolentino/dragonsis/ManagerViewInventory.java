@@ -77,7 +77,7 @@ public class ManagerViewInventory extends AppCompatActivity {
         img_add_inventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ManagerViewInventory.this, ManagerAddInventory.class);
+                Intent i = new Intent(ManagerViewInventory.this, UserAddInventory.class);
                 startActivity(i);
 
             }
@@ -146,7 +146,7 @@ public class ManagerViewInventory extends AppCompatActivity {
                 edit.putString("prod_name", inventoryList.get(i).get("prod_name"));
                 edit.commit();
 
-                Intent intent = new Intent(ManagerViewInventory.this, ManagerUpdateInventory.class);
+                Intent intent = new Intent(ManagerViewInventory.this, UserUpdateInventory.class);
                 startActivity(intent);
             }
         });

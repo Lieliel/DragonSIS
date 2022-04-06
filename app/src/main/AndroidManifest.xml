@@ -17,16 +17,18 @@
             android:exported="false"
             android:windowSoftInputMode="adjustNothing"/>
         <activity
+            android:name=".UserUpdateInventory"
+            android:exported="true" />
             android:name=".ManagerUpdateInventory"
             android:exported="true"/>
         <activity
-            android:name=".ManagerUpdateProducts"
+            android:name=".UserUpdateProducts"
             android:exported="true" />
         <activity
-            android:name=".ManagerAddInventory"
+            android:name=".UserAddInventory"
             android:exported="true" />
         <activity
-            android:name=".ManagerAddProduct"
+            android:name=".UserAddProduct"
             android:exported="true" />
         <activity
             android:name=".ManagerUpdateAccount"
