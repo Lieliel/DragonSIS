@@ -143,69 +143,16 @@ public class ManagerViewProducts extends AppCompatActivity {
         //Filter List According to Category
         spin_man_view_prod_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             String prodCategory;
+            String invSort;
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 //get Category Selected in the Spinner
                 prodCategory = spin_man_view_prod_category.getSelectedItem().toString();
+                invSort = spin_man_sort_products.getSelectedItem().toString();
+                OnCategoryOrSortSelected(prodCategory, invSort);
 
-                //default Category
-                if(prodCategory.equals("None")){
-                    list_products = findViewById(R.id.list_products);
-                    ArrayList<HashMap<String, String>> productList = db.getProducts();
-                    listAdapter = new SimpleAdapter(ManagerViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category}){
-                        @Override
-                        public View getView(int position, View convertView, ViewGroup parent) {
-                            // Get Current View
-                            View view = super.getView(position, convertView, parent);
-
-                            // Initialize Values
-                            int prod_total_quant = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
-                            int prod_crit_num = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
-
-                            //Compare Total Product Quantity to Product Critical Number
-                            if(prod_total_quant <= prod_crit_num){
-                                view.setBackgroundColor(Color.parseColor("#FFB6B546"));
-                            }else{
-                                view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
-                            }
-
-                            return view;
-
-                        }
-                    };
-                    list_products.setAdapter(listAdapter);
-                }else{
-                    //Adapt Categorized Products to the List View
-                    ArrayList<HashMap<String, String>> productList = db.getCategorizedProducts(prodCategory);
-                    listAdapter = new SimpleAdapter(ManagerViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category}){
-                        @Override
-                        public View getView(int position, View convertView, ViewGroup parent) {
-                            // Get Current View
-                            View view = super.getView(position, convertView, parent);
-
-                            // Initialize Values
-                            int prod_total_quant = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
-                            int prod_crit_num = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
-
-                            //Log.i("TOTALNUM TAG", String.valueOf(prod_total_quant));
-                            //Log.i("CRITNUM TAG", String.valueOf(prod_crit_num));
-
-                            //Compare Total Product Quantity to Product Critical Number
-                            if(prod_total_quant <= prod_crit_num){
-                                view.setBackgroundColor(Color.parseColor("#FFB6B546"));
-                            }else{
-                                view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
-                            }
-
-                            return view;
-
-                        }
-                    };
-                    list_products.setAdapter(listAdapter);
-                }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -214,19 +161,79 @@ public class ManagerViewProducts extends AppCompatActivity {
 
         //Sort List According to Chosen Option
         spin_man_sort_products.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            String prodSort;
+            String prodCategory;
+            String invSort;
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                prodSort = spin_man_sort_products.getSelectedItem().toString();
-                Log.i("CATEGORY TAG", prodSort);
+                prodCategory = spin_man_view_prod_category.getSelectedItem().toString();
+                invSort = spin_man_sort_products.getSelectedItem().toString();
+                OnCategoryOrSortSelected(prodCategory, invSort);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
+    }
 
+    public void OnCategoryOrSortSelected(String prodCategory, String invSort){
+
+        //default Category
+        if(prodCategory.equals("None")){
+            list_products = findViewById(R.id.list_products);
+            ArrayList<HashMap<String, String>> productList = db.getSortedProduct(invSort);
+            Log.i("CATEG PROD TAG", productList.toString());
+
+            listAdapter = new SimpleAdapter(ManagerViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category}) {
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    // Get Current View
+                    View view = super.getView(position, convertView, parent);
+
+                    // Initialize Values
+                    int prod_total_quant = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
+                    int prod_crit_num = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
+
+                    //Compare Total Product Quantity to Product Critical Number
+                    if (prod_total_quant <= prod_crit_num) {
+                        view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                    } else {
+                        view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                    }
+
+                    return view;
+
+                }
+            };
+            list_products.setAdapter(listAdapter);
+        }else{
+            //Adapt Categorized Products to the List View
+            ArrayList<HashMap<String, String>> productList = db.getCategorizedProduct(prodCategory, invSort);
+            Log.i("CATEG PROD TAG", productList.toString());
+            listAdapter = new SimpleAdapter(ManagerViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category}){
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    // Get Current View
+                    View view = super.getView(position, convertView, parent);
+
+                    // Initialize Values
+                    int prod_total_quant = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
+                    int prod_crit_num = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
+
+                    //Compare Total Product Quantity to Product Critical Number
+                    if (prod_total_quant <= prod_crit_num) {
+                        view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                    } else {
+                        view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                    }
+
+                    return view;
+
+                }
+            };
+            list_products.setAdapter(listAdapter);
+        }
 
     }
+
 }

@@ -388,6 +388,88 @@ public class DbManager extends SQLiteOpenHelper {
         return productList;
     }
 
+    // Get Sorted Products Details
+    public ArrayList<HashMap<String, String>> getSortedProduct(String sort) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> productList = new ArrayList<>();
+        String inv_sort_query_ext = null;
+
+        //SQL query according to kung ano yung gusto ni user na sort, naubusan ako ng english
+        if(sort.equals("A-Z")){
+            inv_sort_query_ext = " ORDER BY " + PROD_TABLE_NAME + "." + PROD_COL2;
+        }else if(sort.equals("Z-A")){
+            inv_sort_query_ext = " ORDER BY " + PROD_TABLE_NAME + "." + PROD_COL2 + " DESC";
+        }else if(sort.equals("Low Quantity First")){
+            inv_sort_query_ext = " ORDER BY " + PROD_TABLE_NAME + "." + PROD_COL4;
+        }else if(sort.equals("High Quantity First")){
+            inv_sort_query_ext = " ORDER BY " + PROD_TABLE_NAME + "." + PROD_COL4 + " DESC";
+        }else if(sort.equals("None")){
+            inv_sort_query_ext = "";
+        }
+
+        String query = "SELECT * FROM " + PROD_TABLE_NAME + inv_sort_query_ext;
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            HashMap<String, String> products = new HashMap<>();
+            products.put("prod_ID", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1)));
+            products.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2)));
+            products.put("prod_critical_num", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3)));
+            products.put("prod_total_quantity", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4)));
+            products.put("prod_price", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5)));
+            products.put("prod_category", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
+            productList.add(products);
+
+            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
+        }
+        return productList;
+    }
+
+    // Get Categorized Inventory Details
+    public ArrayList<HashMap<String, String>> getCategorizedProduct(String category, String sort) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> productList = new ArrayList<>();
+        String inv_sort_query_ext = null;
+
+        //SQL query according to kung ano yung gusto ni user na sort, naubusan ako ng english
+        if(sort.equals("A-Z")){
+            inv_sort_query_ext = " ORDER BY " + PROD_TABLE_NAME + "." + PROD_COL2;
+        }else if(sort.equals("Z-A")){
+            inv_sort_query_ext = " ORDER BY " + PROD_TABLE_NAME + "." + PROD_COL2 + " DESC";
+        }else if(sort.equals("Low Quantity First")){
+            inv_sort_query_ext = " ORDER BY " + PROD_TABLE_NAME + "." + PROD_COL4;
+        }else if(sort.equals("High Quantity First")){
+            inv_sort_query_ext = " ORDER BY " + PROD_TABLE_NAME + "." + PROD_COL4 + " DESC";
+        }else if(sort.equals("None")){
+            inv_sort_query_ext = "";
+        }
+
+        String query = "SELECT * FROM " + PROD_TABLE_NAME + " WHERE " + PROD_COL6 + "='" + category + "'" + inv_sort_query_ext;;
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            HashMap<String, String> products = new HashMap<>();
+            products.put("prod_ID", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1)));
+            products.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2)));
+            products.put("prod_critical_num", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3)));
+            products.put("prod_total_quantity", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4)));
+            products.put("prod_price", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5)));
+            products.put("prod_category", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
+            productList.add(products);
+
+            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
+        }
+        return productList;
+    }
+
 
     // Delete Product Details
     public void deleteProduct(String prod_ID) {
@@ -849,9 +931,6 @@ public class DbManager extends SQLiteOpenHelper {
         return salesList;
     }
 
-
-
-
     // Get Sales Details based on Sales ID
     public ArrayList<HashMap<String, String>> getSalesBySalesID(String salesID) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -877,16 +956,12 @@ public class DbManager extends SQLiteOpenHelper {
         return salesList;
     }
 
-
-
     // Delete Sales Details
     public void deleteSales(String sales_ID) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(SALES_TABLE_NAME, SALES_COL1 + " = ?", new String[]{String.valueOf(sales_ID)});
         db.close();
     }
-
-
 
     //check if User record exists
     public boolean checkUserValues(String fieldValue) {
