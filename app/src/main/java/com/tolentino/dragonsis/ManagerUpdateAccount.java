@@ -16,9 +16,8 @@ import android.widget.TextView;
 public class ManagerUpdateAccount extends AppCompatActivity {
 
     SharedPreferences pref;
-    TextView txt_upd_acc_username;
-    TextView txt_upd_acc_password;
     DbManager db;
+    String origUsername;
 
     EditText edit_upd_acc_username;
     EditText edit_upd_acc_password;
@@ -44,6 +43,7 @@ public class ManagerUpdateAccount extends AppCompatActivity {
         pref = getSharedPreferences("user_list", MODE_PRIVATE);
         edit_upd_acc_username.setText(pref.getString("username",null));
         edit_upd_acc_password.setText(pref.getString("password",null));
+        origUsername = edit_upd_acc_username.getText().toString();
 
         //Adapter for the user type spinner
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, userTypeArray);
@@ -78,7 +78,7 @@ public class ManagerUpdateAccount extends AppCompatActivity {
                 String password = edit_upd_acc_password.getText().toString();
                 String user_type = spin_upd_acc_usertype.getSelectedItem().toString();
 
-                db.updateUser(username, password, user_type);
+                db.updateUser(username, password, user_type, origUsername);
                 Intent i = new Intent(ManagerUpdateAccount.this, ManagerUserAccounts.class);
                 startActivity(i);
                 finish();
