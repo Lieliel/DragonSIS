@@ -34,6 +34,7 @@ public class EmployeeViewProducts extends AppCompatActivity {
     DbManager db;
     ListView list_emp_view_prod;
     ListAdapter listAdapter;
+    ArrayList<HashMap<String, String>> productList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,7 @@ public class EmployeeViewProducts extends AppCompatActivity {
 
         //Adapt Products List
         list_emp_view_prod = findViewById(R.id.list_emp_view_prod);
-        ArrayList<HashMap<String, String>> productList = db.getProducts();
+        productList = db.getProducts();
         listAdapter = new SimpleAdapter(EmployeeViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category});
         list_emp_view_prod.setAdapter(listAdapter);
 
@@ -102,6 +103,7 @@ public class EmployeeViewProducts extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 SharedPreferences pref = getSharedPreferences("product_list", MODE_PRIVATE);
+                //list_emp_view_prod.getAdapter().getView(i,view, (ViewGroup) adapterView.getParent());
 
                 //Add information of selected item to Shared Preferences
                 SharedPreferences.Editor edit = pref.edit();
@@ -160,7 +162,7 @@ public class EmployeeViewProducts extends AppCompatActivity {
         //default Category
         if(prodCategory.equals("None")){
             list_emp_view_prod = findViewById(R.id.list_emp_view_prod);
-            ArrayList<HashMap<String, String>> productList = db.getSortedProduct(invSort);
+            productList = db.getSortedProduct(invSort);
             Log.i("CATEG PROD TAG", productList.toString());
 
             listAdapter = new SimpleAdapter(EmployeeViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category}) {
@@ -187,7 +189,7 @@ public class EmployeeViewProducts extends AppCompatActivity {
             list_emp_view_prod.setAdapter(listAdapter);
         }else{
             //Adapt Categorized Products to the List View
-            ArrayList<HashMap<String, String>> productList = db.getCategorizedProduct(prodCategory, invSort);
+            productList = db.getCategorizedProduct(prodCategory, invSort);
             Log.i("CATEG PROD TAG", productList.toString());
             listAdapter = new SimpleAdapter(EmployeeViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category}){
                 @Override

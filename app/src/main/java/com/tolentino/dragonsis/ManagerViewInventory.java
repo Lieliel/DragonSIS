@@ -33,6 +33,7 @@ public class ManagerViewInventory extends AppCompatActivity {
     DbManager db;
     ListView list_inventory;
     ListAdapter listAdapter;
+    ArrayList<HashMap<String, String>> inventoryList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +78,7 @@ public class ManagerViewInventory extends AppCompatActivity {
 
         //Adapt Inventory List
         list_inventory = findViewById(R.id.list_inventory);
-        ArrayList<HashMap<String, String>> inventoryList = db.getInventory();
+        inventoryList = db.getInventory();
         listAdapter = new SimpleAdapter(ManagerViewInventory.this, inventoryList, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity}){
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -179,7 +180,7 @@ public class ManagerViewInventory extends AppCompatActivity {
         //default Category
         if(prodCategory.equals("None")){
             list_inventory = findViewById(R.id.list_inventory);
-            ArrayList<HashMap<String, String>> inventoryList = db.getSortedInventory(invSort);
+            inventoryList = db.getSortedInventory(invSort);
 
             listAdapter = new SimpleAdapter(ManagerViewInventory.this, inventoryList, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity}){
                 @Override
@@ -204,7 +205,7 @@ public class ManagerViewInventory extends AppCompatActivity {
             list_inventory.setAdapter(listAdapter);
         }else{
             //Adapt Categorized Inventory to the List View
-            ArrayList<HashMap<String, String>> inventoryList = db.getCategorizedInventory(prodCategory, invSort);
+            inventoryList = db.getCategorizedInventory(prodCategory, invSort);
             Log.i("CATEGORY TAG", String.valueOf(inventoryList.toString()));
             listAdapter = new SimpleAdapter(ManagerViewInventory.this, inventoryList, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity}){
                 @Override

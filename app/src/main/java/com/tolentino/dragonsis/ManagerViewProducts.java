@@ -35,6 +35,7 @@ public class ManagerViewProducts extends AppCompatActivity {
     DbManager db;
     ListView list_products;
     ListAdapter listAdapter;
+    ArrayList<HashMap<String, String>> productList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,7 @@ public class ManagerViewProducts extends AppCompatActivity {
 
         //Adapt Products List
         list_products = findViewById(R.id.list_products);
-        ArrayList<HashMap<String, String>> productList = db.getProducts();
+        productList = db.getProducts();
         listAdapter = new SimpleAdapter(ManagerViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category}){
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -181,7 +182,7 @@ public class ManagerViewProducts extends AppCompatActivity {
         //default Category
         if(prodCategory.equals("None")){
             list_products = findViewById(R.id.list_products);
-            ArrayList<HashMap<String, String>> productList = db.getSortedProduct(invSort);
+            productList = db.getSortedProduct(invSort);
             Log.i("CATEG PROD TAG", productList.toString());
 
             listAdapter = new SimpleAdapter(ManagerViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category}) {
@@ -208,7 +209,7 @@ public class ManagerViewProducts extends AppCompatActivity {
             list_products.setAdapter(listAdapter);
         }else{
             //Adapt Categorized Products to the List View
-            ArrayList<HashMap<String, String>> productList = db.getCategorizedProduct(prodCategory, invSort);
+            productList = db.getCategorizedProduct(prodCategory, invSort);
             Log.i("CATEG PROD TAG", productList.toString());
             listAdapter = new SimpleAdapter(ManagerViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/,"prod_price","prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category}){
                 @Override
