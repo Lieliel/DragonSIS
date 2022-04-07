@@ -76,6 +76,7 @@ public class ManagerViewInventory extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ManagerViewInventory.this, UserAddInventory.class);
                 startActivity(i);
+                finish();
 
             }
         });
@@ -181,6 +182,19 @@ public class ManagerViewInventory extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
+        broadcastReceiverManInv = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity_man_view_inventory")) {
+                    finish();
+                    unregisterReceiver(broadcastReceiverManInv);
+                }
+            }
+        };
+        registerReceiver(broadcastReceiverManInv, new IntentFilter("finish_activity_man_view_inventory"));
     }
 
     public void OnCategoryOrSortSelected(String prodCategory, String invSort){
@@ -247,26 +261,6 @@ public class ManagerViewInventory extends AppCompatActivity {
             };
             list_inventory.setAdapter(listAdapter);
         }
-
-    }
-}
-
-
-            }
-        });
-
-        broadcastReceiverManInv = new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context arg0, Intent intent) {
-                String action = intent.getAction();
-                if (action.equals("finish_activity_man_view_inventory")) {
-                    finish();
-                    unregisterReceiver(broadcastReceiverManInv);
-                }
-            }
-        };
-        registerReceiver(broadcastReceiverManInv, new IntentFilter("finish_activity_man_view_inventory"));
 
     }
 }
