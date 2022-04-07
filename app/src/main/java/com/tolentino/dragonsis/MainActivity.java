@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 login();
 
-                //Intent intent = new Intent(MainActivity.this, ManagerMenu.class);
-                //startActivity(intent);
             }
         });
 

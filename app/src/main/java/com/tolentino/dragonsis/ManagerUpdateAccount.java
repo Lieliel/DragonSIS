@@ -19,9 +19,8 @@ import android.widget.TextView;
 public class ManagerUpdateAccount extends AppCompatActivity {
 
     SharedPreferences pref;
-    TextView txt_upd_acc_username;
-    TextView txt_upd_acc_password;
     DbManager db;
+    String origUsername;
 
     ImageView img_back_user_update;
     EditText edit_upd_acc_username;
@@ -49,6 +48,7 @@ public class ManagerUpdateAccount extends AppCompatActivity {
         pref = getSharedPreferences("user_list", MODE_PRIVATE);
         edit_upd_acc_username.setText(pref.getString("username",null));
         edit_upd_acc_password.setText(pref.getString("password",null));
+        origUsername = edit_upd_acc_username.getText().toString();
 
         //Back to Manager View Inventory Page
         img_back_user_update.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +103,7 @@ public class ManagerUpdateAccount extends AppCompatActivity {
                 String password = edit_upd_acc_password.getText().toString();
                 String user_type = spin_upd_acc_usertype.getSelectedItem().toString();
 
-                db.updateUser(username, password, user_type);
+                db.updateUser(username, password, user_type, origUsername);
                 Intent i = new Intent(ManagerUpdateAccount.this, ManagerUserAccounts.class);
                 Intent endActivity = new Intent("finish_activity_man_accounts");
                 sendBroadcast(endActivity);

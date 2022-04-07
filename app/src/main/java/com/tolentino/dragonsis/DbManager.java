@@ -17,9 +17,10 @@ public class DbManager extends SQLiteOpenHelper {
 
     //Accounts
     private static final String ACC_TABLE_NAME = "accounts_table";
-    private static final String ACC_COL1 = "user_name";
-    private static final String ACC_COL2 = "user_password";
-    private static final String ACC_COL3 = "user_type";
+    private static final String ACC_COL1 = "user_ID";
+    private static final String ACC_COL2 = "user_name";
+    private static final String ACC_COL3 = "user_password";
+    private static final String ACC_COL4 = "user_type";
 
     //Products
     private static final String PROD_TABLE_NAME = "products_table";
@@ -68,9 +69,10 @@ public class DbManager extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //Create Users Table
         String create_Acc_Table = "CREATE TABLE " + ACC_TABLE_NAME + "("
-                + ACC_COL1 + " TEXT PRIMARY KEY,"
+                + ACC_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + ACC_COL2 + " TEXT,"
-                + ACC_COL3 + " TEXT)";
+                + ACC_COL3 + " TEXT,"
+                + ACC_COL4 + " TEXT)";
         db.execSQL(create_Acc_Table);
 
         //create Products Table
@@ -144,14 +146,14 @@ public class DbManager extends SQLiteOpenHelper {
     ////////////////////////////////////////////////////////////////////
 
     // Adding new User Details
-    void insertUser(String user_password, String user_name, String user_email, String user_type) {
+    void insertUser(String user_password, String user_name, String user_type) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();
-        cValues.put(ACC_COL1, user_name);
-        cValues.put(ACC_COL2, user_password);
-        cValues.put(ACC_COL3, user_type);
+        cValues.put(ACC_COL2, user_name);
+        cValues.put(ACC_COL3, user_password);
+        cValues.put(ACC_COL4, user_type);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(ACC_TABLE_NAME, null, cValues);
 
@@ -166,15 +168,17 @@ public class DbManager extends SQLiteOpenHelper {
 
 
     // Update User Details
-    void updateUser(String username, String password, String usertype){
+    void updateUser(String username, String password, String usertype, String origUser){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(ACC_COL2, password);
-        values.put(ACC_COL3, usertype);
+        String ID = getUserByUsername(origUser).get(0).get("user_ID");
+        values.put(ACC_COL2, username);
+        values.put(ACC_COL3, password);
+        values.put(ACC_COL4, usertype);
 
         //Cursor cursor = db.rawQuery("Select * from " + ACC_TABLE_NAME + " where " + ACC_COL1 + "= ?",new String[]{username});
 
-        long newRowId = db.update(ACC_TABLE_NAME, values, ACC_COL1 + "=?", new String[]{username});
+        long newRowId = db.update(ACC_TABLE_NAME, values, ACC_COL1 + "=?", new String[]{ID});
 
         if(newRowId == 1){
             Log.i("SALES TABLE:", "User Updated Correctly");
@@ -193,9 +197,9 @@ public class DbManager extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
             HashMap<String, String> users = new HashMap<>();
-            users.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
-            users.put("user_password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
-            users.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+            users.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
+            users.put("user_password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+            users.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
             userList.add(users);
 
             Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1))
@@ -211,16 +215,18 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> userList = new ArrayList<>();
         String query = "SELECT * FROM " + ACC_TABLE_NAME;
-        Cursor cursor = db.query(ACC_TABLE_NAME, new String[]{ACC_COL1, ACC_COL2, ACC_COL3}, ACC_COL1 + "=?", new String[]{String.valueOf(username)}, null, null, null, null);
+        Cursor cursor = db.query(ACC_TABLE_NAME, new String[]{ACC_COL1,ACC_COL2, ACC_COL3, ACC_COL4}, ACC_COL2 + "=?", new String[]{String.valueOf(username)}, null, null, null, null);
         if (cursor.moveToNext()) {
             HashMap<String, String> user = new HashMap<>();
-            user.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
-            user.put("user_password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
-            user.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+            user.put("user_ID", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1)));
+            user.put("user_name", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2)));
+            user.put("user_password", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+            user.put("user_type", cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
 
             Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL1))
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL2))
-                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3)));
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL3))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(ACC_COL4)));
 
             userList.add(user);
         }
@@ -231,7 +237,7 @@ public class DbManager extends SQLiteOpenHelper {
     // Delete User Details
     public void deleteUser(String user_name) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(ACC_TABLE_NAME, ACC_COL1 + " = ?", new String[]{String.valueOf(user_name)});
+        db.delete(ACC_TABLE_NAME, ACC_COL2 + " = ?", new String[]{String.valueOf(user_name)});
         db.close();
     }
 

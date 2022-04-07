@@ -32,10 +32,10 @@ public class ManagerAddUser extends AppCompatActivity {
         setContentView(R.layout.activity_manager_add_user);
 
         img_back_add_user = findViewById(R.id.img_back_add_user);
-        spin_add_usertype = findViewById(R.id.spin_add_usertype);
         edit_add_username = findViewById(R.id.edit_add_username);
         edit_add_password = findViewById(R.id.edit_add_password);
         edit_confirm_password = findViewById(R.id.edit_confirm_password);
+        spin_add_usertype = findViewById(R.id.spin_add_usertype);
         btn_user_submit = findViewById(R.id.btn_user_submit);
         db = new DbManager(this);
 
@@ -77,7 +77,7 @@ public class ManagerAddUser extends AppCompatActivity {
                 String spin_usertype = spin_add_usertype.getSelectedItem().toString();
 
                 if (validateCredentials()) {
-                    db.insertUser(txt_password, txt_username, txt_confirm, spin_usertype);
+                    db.insertUser(txt_password, txt_username, spin_usertype);
                     Log.i("ACCOUNTS TABLE", "User Inserted: " + txt_username + ", " + txt_password + ", " + txt_confirm + ", " + spin_usertype);
 
                     Intent i = new Intent(ManagerAddUser.this, ManagerUserAccounts.class);
