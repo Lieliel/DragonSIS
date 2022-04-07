@@ -38,8 +38,8 @@ public class EmployeeViewInventory extends AppCompatActivity {
     ListView list_emp_view_inv;
 
     DbManager db;
-    ListView list_inventory_emp;
     ListAdapter listAdapter;
+    ArrayList<HashMap<String, String>> inventoryList;
     BroadcastReceiver broadcastReceiverEmpInv;
 
     @Override
@@ -84,8 +84,8 @@ public class EmployeeViewInventory extends AppCompatActivity {
 
         //Adapt Inventory List
         list_emp_view_inv = findViewById(R.id.list_emp_view_inv);
-        ArrayList<HashMap<String, String>> inventorylist = db.getInventory();
-        listAdapter = new SimpleAdapter(EmployeeViewInventory.this, inventorylist, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity});
+        inventoryList = db.getInventory();
+        listAdapter = new SimpleAdapter(EmployeeViewInventory.this, inventoryList, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity});
         list_emp_view_inv.setAdapter(listAdapter);
 
         //Search Inventory Function
@@ -113,13 +113,13 @@ public class EmployeeViewInventory extends AppCompatActivity {
 
                 //Add information of selected item to Shared Preferences
                 SharedPreferences.Editor edit = pref.edit();
-                edit.putString("inventory_ID", inventorylist.get(i).get("inventory_ID"));
-                edit.putString("inventory_date", inventorylist.get(i).get("inventory_date"));
-                edit.putString("inventory_quantity", inventorylist.get(i).get("inventory_quantity"));
-                edit.putString("inventory_quantity_change", inventorylist.get(i).get("inventory_quantity_chang"));
-                edit.putString("inventory_remark", inventorylist.get(i).get("inventory_remark"));
-                edit.putString("inventory_date_updated", inventorylist.get(i).get("inventory_date_updated"));
-                edit.putString("prod_name", inventorylist.get(i).get("prod_name"));
+                edit.putString("inventory_ID", inventoryList.get(i).get("inventory_ID"));
+                edit.putString("inventory_date", inventoryList.get(i).get("inventory_date"));
+                edit.putString("inventory_quantity", inventoryList.get(i).get("inventory_quantity"));
+                edit.putString("inventory_quantity_change", inventoryList.get(i).get("inventory_quantity_chang"));
+                edit.putString("inventory_remark", inventoryList.get(i).get("inventory_remark"));
+                edit.putString("inventory_date_updated", inventoryList.get(i).get("inventory_date_updated"));
+                edit.putString("prod_name", inventoryList.get(i).get("prod_name"));
                 edit.commit();
 
                 Intent intent = new Intent(EmployeeViewInventory.this, UserUpdateInventory.class);
@@ -161,6 +161,19 @@ public class EmployeeViewInventory extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
+        broadcastReceiverEmpInv = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity_emp_view_inventory")) {
+                    finish();
+                    unregisterReceiver(broadcastReceiverEmpInv);
+                }
+            }
+        };
+        registerReceiver(broadcastReceiverEmpInv, new IntentFilter("finish_activity_emp_view_inventory"));
     }
 
     public void OnCategoryOrSortSelected(String prodCategory, String invSort){
@@ -168,7 +181,7 @@ public class EmployeeViewInventory extends AppCompatActivity {
         //default Category
         if(prodCategory.equals("None")){
             list_emp_view_inv = findViewById(R.id.list_emp_view_inv);
-            ArrayList<HashMap<String, String>> inventoryList = db.getSortedInventory(invSort);
+            inventoryList = db.getSortedInventory(invSort);
 
             listAdapter = new SimpleAdapter(EmployeeViewInventory.this, inventoryList, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity}){
                 @Override
@@ -197,7 +210,7 @@ public class EmployeeViewInventory extends AppCompatActivity {
             list_emp_view_inv.setAdapter(listAdapter);
         }else{
             //Adapt Categorized Inventory to the List View
-            ArrayList<HashMap<String, String>> inventoryList = db.getCategorizedInventory(prodCategory, invSort);
+            inventoryList = db.getCategorizedInventory(prodCategory, invSort);
             Log.i("CATEGORY TAG", String.valueOf(inventoryList.toString()));
             listAdapter = new SimpleAdapter(EmployeeViewInventory.this, inventoryList, R.layout.list_row_inventory, new String[]{"inventory_ID","prod_name","inventory_date","inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity}){
                 @Override
@@ -225,23 +238,4 @@ public class EmployeeViewInventory extends AppCompatActivity {
 
     }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        broadcastReceiverEmpInv = new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context arg0, Intent intent) {
-                String action = intent.getAction();
-                if (action.equals("finish_activity_emp_view_inventory")) {
-                    finish();
-                    unregisterReceiver(broadcastReceiverEmpInv);
-                }
-            }
-        };
-        registerReceiver(broadcastReceiverEmpInv, new IntentFilter("finish_activity_emp_view_inventory"));
-    }
 }
