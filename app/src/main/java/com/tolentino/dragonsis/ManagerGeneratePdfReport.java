@@ -27,7 +27,9 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.VerticalAlignment;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -302,6 +304,7 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
         ArrayList<HashMap<String, String>> salesList = db.getSales();
 
         int tablePosition = 200;
+        int totalSales = 0;
         for (int i = 0; i < salesList.size(); i++) {
             HashMap<String, String> salesRecord = salesList.get(i);
             salTable.addCell(salesRecord.get("sales_ID")).setPadding(10);
@@ -310,8 +313,12 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
             salTable.addCell(salesRecord.get("sales_time")).setPadding(10);
             salTable.addCell(salesRecord.get("items_sold")).setPadding(10);
             salTable.addCell(salesRecord.get("sales_amount")).setPadding(10);
+            totalSales = totalSales + Integer.parseInt(salesRecord.get("sales_amount"));
             tablePosition += 18;
+            Log.i("SALES TAG", String.valueOf(totalSales));
         }
+
+        salTable.addCell(new Cell(1,6).add(new Paragraph("Total Sales Amount: " + String.valueOf(totalSales)))).setTextAlignment(TextAlignment.CENTER);
 
         salTable.setFixedPosition(25, pageSize.getTop() - tablePosition,pageSize.getWidth()-50);
 
