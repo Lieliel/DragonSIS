@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -92,7 +93,7 @@ public class EmployeeViewProducts extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                ((SimpleAdapter) EmployeeViewProducts.this.listAdapter).getFilter().filter(s);
+                onProductSearch(s);
                 return false;
             }
         });
@@ -215,6 +216,38 @@ public class EmployeeViewProducts extends AppCompatActivity {
             list_emp_view_prod.setAdapter(listAdapter);
         }
 
+    }
+
+    public void onProductSearch(String q) {
+
+        list_emp_view_prod = findViewById(R.id.list_emp_view_prod);
+        productList = db.getSearchedProduct(q);
+
+        listAdapter = new SimpleAdapter(EmployeeViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/, "prod_price", "prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category}) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                // Get Current View
+                View view = super.getView(position, convertView, parent);
+
+                // Initialize Values
+                int prod_total_quant = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
+                int prod_crit_num = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
+
+                //Compare Total Product Quantity to Product Critical Number
+                if (prod_total_quant <= prod_crit_num) {
+                    ((TextView) view.findViewById(R.id.row_product_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    ((TextView) view.findViewById(R.id.row_product_price)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    ((TextView) view.findViewById(R.id.row_product_category)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    view.setBackgroundColor(Color.parseColor("#FFF45B69"));
+                } else {
+                    view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                }
+
+                return view;
+
+            }
+        };
+        list_emp_view_prod.setAdapter(listAdapter);
     }
 
 }
