@@ -45,20 +45,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="Username:"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:text="Username:"/>
 
         <EditText
             android:id="@+id/edit_upd_acc_username"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="15dp"
-            android:hint="Type Username"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_upd_acc_username_label"/>
+            android:hint="Type Username"/>
 
         <TextView
             android:id="@+id/txt_upd_acc_password_label"
@@ -66,21 +60,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:textSize="20sp"
-            android:text="Password:"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_upd_acc_username"/>
+            android:text="Password:"/>
 
         <EditText
             android:id="@+id/edit_upd_acc_password"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="15dp"
-            android:hint="Type Password"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_upd_acc_password_label"
-            />
+            android:hint="Type Password"/>
 
         <TextView
             android:id="@+id/txt_upd_acc_usertype_label"
@@ -88,10 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:textSize="20sp"
-            android:text="User Type:"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_upd_acc_password"/>
+            android:text="User Type:"/>
 
         <LinearLayout
             android:layout_width="wrap_content"

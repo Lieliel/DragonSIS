@@ -181,11 +181,10 @@ public class DbManager extends SQLiteOpenHelper {
         long newRowId = db.update(ACC_TABLE_NAME, values, ACC_COL1 + "=?", new String[]{ID});
 
         if(newRowId == 1){
-            Log.i("SALES TABLE:", "User Updated Correctly");
+            Log.i("ACCOUNT TABLE", "User Updated Correctly");
         }else{
-            Log.i("SALES TABLE:", "User not Updated Correctly");
+            Log.i("ACCOUNT TABLE", "User not Updated Correctly");
         }
-
     }
 
 
