@@ -59,6 +59,8 @@ public class EmployeeViewProducts extends AppCompatActivity {
         img_emp_back_view_prod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(EmployeeViewProducts.this, EmployeeMenu.class);
+                startActivity(i);
                 finish();
             }
         });
@@ -69,6 +71,7 @@ public class EmployeeViewProducts extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(EmployeeViewProducts.this, UserAddProduct.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -95,7 +98,7 @@ public class EmployeeViewProducts extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                ((SimpleAdapter) EmployeeViewProducts.this.listAdapter).getFilter().filter(s);
+                onProductSearch(s);
                 return false;
             }
         });
@@ -192,13 +195,10 @@ public class EmployeeViewProducts extends AppCompatActivity {
                     int prod_crit_num = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
 
                     //Compare Total Product Quantity to Product Critical Number
-                    if(prod_total_quant <= prod_crit_num){
-                        ((TextView)view.findViewById(R.id.row_product_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                        ((TextView)view.findViewById(R.id.row_product_price)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                        ((TextView)view.findViewById(R.id.row_product_category)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                        view.setBackgroundColor(Color.parseColor("#FFF45B69"));
+                    if (prod_total_quant <= prod_crit_num) {
+                        view.setBackgroundColor(Color.parseColor("#FFB6B546"));
                     } else {
-                        view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                        view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
                     }
 
                     return view;
@@ -235,4 +235,37 @@ public class EmployeeViewProducts extends AppCompatActivity {
         }
 
     }
+
+    public void onProductSearch(String q) {
+
+        list_emp_view_prod = findViewById(R.id.list_emp_view_prod);
+        productList = db.getSearchedProduct(q);
+
+        listAdapter = new SimpleAdapter(EmployeeViewProducts.this, productList, R.layout.list_row_product, new String[]{"prod_name"/*,"prod_total_quantity"*/, "prod_price", "prod_category"}, new int[]{R.id.row_product_name, /*R.id.row_product_description,*/ R.id.row_product_price, R.id.row_product_category}) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                // Get Current View
+                View view = super.getView(position, convertView, parent);
+
+                // Initialize Values
+                int prod_total_quant = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
+                int prod_crit_num = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
+
+                //Compare Total Product Quantity to Product Critical Number
+                if (prod_total_quant <= prod_crit_num) {
+                    ((TextView) view.findViewById(R.id.row_product_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    ((TextView) view.findViewById(R.id.row_product_price)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    ((TextView) view.findViewById(R.id.row_product_category)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    view.setBackgroundColor(Color.parseColor("#FFF45B69"));
+                } else {
+                    view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                }
+
+                return view;
+
+            }
+        };
+        list_emp_view_prod.setAdapter(listAdapter);
+    }
+
 }

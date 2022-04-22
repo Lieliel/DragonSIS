@@ -483,6 +483,33 @@ public class DbManager extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Get Searched Product Details
+    public ArrayList<HashMap<String, String>> getSearchedProduct(String q) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> productList = new ArrayList<>();
+
+        String query = "SELECT * FROM " + PROD_TABLE_NAME + " WHERE " + PROD_COL2 + " LIKE '%" + q + "%'";
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            HashMap<String, String> products = new HashMap<>();
+            products.put("prod_ID", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1)));
+            products.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2)));
+            products.put("prod_critical_num", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3)));
+            products.put("prod_total_quantity", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4)));
+            products.put("prod_price", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5)));
+            products.put("prod_category", cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
+            productList.add(products);
+
+            Log.i("ADDED TO DATABASE",  cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL1))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL2))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL3))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL4))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL5))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
+        }
+        return productList;
+    }
+
     // Update Product Details
     void updateProduct(String prod_id, String prod_name, String prod_total_quantity, String prod_critnum, String prod_price, String prod_category){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -752,12 +779,41 @@ public class DbManager extends SQLiteOpenHelper {
         return inventoryList;
     }
 
-
     // Delete Inventory Details
     public void deleteInventory(String inventory_ID) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(INV_TABLE_NAME, INV_COL1 + " = ?", new String[]{String.valueOf(inventory_ID)});
         db.close();
+    }
+
+    // Get Searched Inventory Details
+    public ArrayList<HashMap<String, String>> getSearchedInventory(String s) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> inventoryList = new ArrayList<>();
+        String inv_sort_query_ext = null;
+
+        String query = "SELECT * FROM " + INV_TABLE_NAME + " WHERE " + INV_COL7 + " LIKE '%" + s + "%'";
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            HashMap<String, String> inventory = new HashMap<>();
+            inventory.put("inventory_ID", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL1)));
+            inventory.put("inventory_date", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL2)));
+            inventory.put("inventory_quantity", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL3)));
+            inventory.put("inventory_quantity_change", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL4)));
+            inventory.put("inventory_remark", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL5)));
+            inventory.put("inventory_date_updated", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL6)));
+            inventory.put("prod_name", cursor.getString(cursor.getColumnIndexOrThrow(INV_COL7)));
+            inventoryList.add(inventory);
+
+            Log.i("ADDED TO INV TABLE",  cursor.getString(cursor.getColumnIndexOrThrow(INV_COL1))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL2))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL3))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL4))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL5))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL6))
+                    + " " + cursor.getString(cursor.getColumnIndexOrThrow(INV_COL7)));
+        }
+        return inventoryList;
     }
 
     ////////////////////////////////////////////////////////////////////

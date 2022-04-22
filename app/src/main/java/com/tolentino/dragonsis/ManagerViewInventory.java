@@ -120,7 +120,7 @@ public class ManagerViewInventory extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                ((SimpleAdapter) ManagerViewInventory.this.listAdapter).getFilter().filter(s);
+                onInventorySearch(s);
                 return false;
             }
         });
@@ -262,5 +262,38 @@ public class ManagerViewInventory extends AppCompatActivity {
             list_inventory.setAdapter(listAdapter);
         }
 
+    }
+
+    public void onInventorySearch(String q) {
+
+        //default Category
+        list_inventory = findViewById(R.id.list_inventory);
+        inventoryList = db.getSearchedInventory(q);
+
+        listAdapter = new SimpleAdapter(ManagerViewInventory.this, inventoryList, R.layout.list_row_inventory, new String[]{"inventory_ID", "prod_name", "inventory_date", "inventory_quantity"}, new int[]{R.id.row_inventory_product_ID, R.id.row_inventory_name, R.id.row_inventory_date, R.id.row_inventory_quantity}) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                // Get Current View
+                View view = super.getView(position, convertView, parent);
+
+                // Initialize Values
+                int prod_total_quant = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
+                int prod_crit_num = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
+
+                //Compare Total Product Quantity to Product Critical Number
+                if (prod_total_quant <= prod_crit_num) {
+                    ((TextView) view.findViewById(R.id.row_inventory_product_ID)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    ((TextView) view.findViewById(R.id.row_inventory_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    ((TextView) view.findViewById(R.id.row_inventory_date)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    ((TextView) view.findViewById(R.id.row_inventory_quantity)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    view.setBackgroundColor(Color.parseColor("#FFF45B69"));
+                } else {
+                    view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                }
+
+                return view;
+            }
+        };
+        list_inventory.setAdapter(listAdapter);
     }
 }
