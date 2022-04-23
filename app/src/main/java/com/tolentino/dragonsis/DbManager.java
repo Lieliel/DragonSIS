@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -509,6 +510,19 @@ public class DbManager extends SQLiteOpenHelper {
                     + " " + cursor.getString(cursor.getColumnIndexOrThrow(PROD_COL6)));
         }
         return productList;
+    }
+
+    boolean checkProductCritical(String prod){
+        int prod_total_quant = Integer.parseInt(getProductByProductName(prod).get(0).get("prod_total_quantity"));
+        int prod_crit_num = Integer.parseInt(getProductByProductName(prod).get(0).get("prod_critical_num"));
+
+        //return true if product critical
+        if(prod_total_quant <= prod_crit_num){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
     // Update Product Details
