@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class UserUpdateProducts extends AppCompatActivity {
 
@@ -141,7 +143,11 @@ public class UserUpdateProducts extends AppCompatActivity {
 
                 db.updateProduct(prod_id, prod_name, prod_total_quantity, prod_critnum, prod_price, prod_category);
 
-                if(user_pref.getString("user_type", null).equals("Manager")){
+                if (TextUtils.isEmpty(prod_id) || TextUtils.isEmpty(prod_name) || TextUtils.isEmpty(prod_total_quantity)|| TextUtils.isEmpty(prod_critnum)|| TextUtils.isEmpty(prod_price)|| TextUtils.isEmpty(prod_category))
+                {
+                    Toast.makeText(UserUpdateProducts.this, "Please make sure to input in all fields.", Toast.LENGTH_SHORT).show();
+
+                }else if(user_pref.getString("user_type", null).equals("Manager")){
                     Intent i = new Intent(UserUpdateProducts.this, ManagerViewProducts.class);
                     startActivity(i);
                     finish();

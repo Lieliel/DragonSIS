@@ -77,11 +77,11 @@
         android:id="@+id/btn_inv_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Add Inventory"
-
         android:layout_below="@id/edit_inv_quantity"
+        android:layout_centerHorizontal="true"
+
         android:layout_marginTop="10dp"
+        android:text="Add Inventory"
 
 
         ></Button>

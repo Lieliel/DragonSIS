@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -63,6 +65,8 @@ public class UserAddInventory extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, prod_name_spinner);
         spin_add_inventory_productname.setAdapter(adapter);
 
+
+
         //Add Inventory
         btn_inv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,11 +76,15 @@ public class UserAddInventory extends AppCompatActivity {
                 String spin_prodName = spin_add_inventory_productname.getSelectedItem().toString();
                 int invQuantity = Integer.parseInt(edit_inv_quantity.getText().toString());
 
-                //Use db function to add record to inventory table
-                db.insertInventory(spin_prodName, productDate, invQuantity);
-                db.addProductTotalQuant(spin_prodName,invQuantity);
-                Log.i("INVENTORY TABLE", "Inventory Inserted: " + spin_prodName + ", " + productDate + ", " + invQuantity);
+                if (TextUtils.isEmpty(productDate) || TextUtils.isEmpty(spin_prodName)){
+                    Toast.makeText(UserAddInventory.this, "Please make sure to input in all fields.", Toast.LENGTH_SHORT).show();
+                }else {
 
+                    //Use db function to add record to inventory table
+                    db.insertInventory(spin_prodName, productDate, invQuantity);
+                    db.addProductTotalQuant(spin_prodName, invQuantity);
+                    Log.i("INVENTORY TABLE", "Inventory Inserted: " + spin_prodName + ", " + productDate + ", " + invQuantity);
+                }
                 //Back to View Inventory
                 if(user_pref.getString("user_type", null).equals("Manager")){
                     Intent i = new Intent(UserAddInventory.this, ManagerViewInventory.class);
