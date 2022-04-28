@@ -269,7 +269,7 @@ public class UserUpdateInventory extends AppCompatActivity {
 
         Notification not_Builder = new NotificationCompat.Builder(this, chan_ID)
                 .setSmallIcon(R.drawable.ic_warning)
-                .setContentTitle("An item is now below critical number")
+                .setContentTitle("An item is now on critical quantity")
                 .setContentText(prod_name + " needs to be restocked")
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
