@@ -21,7 +21,6 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -247,18 +246,12 @@ public class EmployeeViewProducts extends AppCompatActivity {
                 // Get Current View
                 View view = super.getView(position, convertView, parent);
 
-                // Initialize Values
-                int prod_total_quant = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
-                int prod_crit_num = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
-
+                boolean isProdCrit = db.checkProductCritical(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_name"));
                 //Compare Total Product Quantity to Product Critical Number
-                if (prod_total_quant <= prod_crit_num) {
-                    ((TextView) view.findViewById(R.id.row_product_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                    ((TextView) view.findViewById(R.id.row_product_price)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                    ((TextView) view.findViewById(R.id.row_product_category)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                    view.setBackgroundColor(Color.parseColor("#FFF45B69"));
-                } else {
-                    view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                if(isProdCrit){
+                    view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                }else{
+                    view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
                 }
 
                 return view;

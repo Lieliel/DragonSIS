@@ -215,12 +215,9 @@ public class EmployeeViewInventory extends AppCompatActivity {
                     // Get Current View
                     View view = super.getView(position, convertView, parent);
 
-                    // Initialize Values
-                    int prod_total_quant = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
-                    int prod_crit_num = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
-
+                    boolean isProdCrit = db.checkProductCritical(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_name"));
                     //Compare Total Product Quantity to Product Critical Number
-                    if(prod_total_quant <= prod_crit_num){
+                    if(isProdCrit){
                         view.setBackgroundColor(Color.parseColor("#FFB6B546"));
                     }else{
                         view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
