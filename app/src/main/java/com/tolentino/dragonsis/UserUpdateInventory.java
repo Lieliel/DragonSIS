@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Notification;
 import android.content.DialogInterface;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -26,7 +27,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
 
 public class UserUpdateInventory extends AppCompatActivity {
 
@@ -197,16 +197,6 @@ public class UserUpdateInventory extends AppCompatActivity {
             if(isProdCrit){
                 notifyCritical(pref.getString("prod_name",null));
             }
-
-            if(user_pref.getString("user_type", null).equals("Manager")){
-                Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
-                startActivity(i);
-                finish();
-            }else {
-                Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
-                startActivity(i);
-                finish();
-            }
         }else if(radioText.equals("Sold")){
             if(checkQuantity(inv_quantity_change,inv_curr_quan)){
                 fin_quantity = inv_curr_quan - inv_quantity_change;
@@ -226,16 +216,6 @@ public class UserUpdateInventory extends AppCompatActivity {
                 boolean isProdCrit = db.checkProductCritical(pref.getString("prod_name", null));
                 if(isProdCrit){
                     notifyCritical(pref.getString("prod_name",null));
-                }
-
-                if(user_pref.getString("user_type", null).equals("Manager")){
-                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
-                    startActivity(i);
-                    finish();
-                }else {
-                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
-                    startActivity(i);
-                    finish();
                 }
             }else{
                 fin_quantity = inv_curr_quan;
@@ -257,16 +237,6 @@ public class UserUpdateInventory extends AppCompatActivity {
                 boolean isProdCrit = db.checkProductCritical(pref.getString("prod_name", null));
                 if(isProdCrit){
                     notifyCritical(pref.getString("prod_name",null));
-                }
-
-                if(user_pref.getString("user_type", null).equals("Manager")){
-                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
-                    startActivity(i);
-                    finish();
-                }else {
-                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
-                    startActivity(i);
-                    finish();
                 }
             }else{
                 fin_quantity = inv_curr_quan;
@@ -294,21 +264,25 @@ public class UserUpdateInventory extends AppCompatActivity {
         String chan_ID = "chan_id";
         String chan_name = "chan_name";
         String chan_desc = "chan_desc";
+        int chan_importance = NotificationManager.IMPORTANCE_HIGH;
         String prod_name = prod;
 
-        NotificationCompat.Builder not_Builder = new NotificationCompat.Builder(this, chan_ID)
+        Notification not_Builder = new NotificationCompat.Builder(this, chan_ID)
                 .setSmallIcon(R.drawable.ic_warning)
                 .setContentTitle("An item is now below critical number")
-                .setContentText(prod + " needs to be restocked")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setContentText(prod_name + " needs to be restocked")
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .build();
 
         NotificationManagerCompat notif_man = NotificationManagerCompat.from(this);
-        notif_man.notify(1,not_Builder.build());
+        notif_man.notify(001,not_Builder);
 
         //Run notification
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel(chan_ID,chan_name, NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel(chan_ID,chan_name, chan_importance);
             channel.setDescription(chan_desc);
+            channel.setShowBadge(true);
             NotificationManager man = getSystemService(NotificationManager.class);
             man.createNotificationChannel(channel);
         }

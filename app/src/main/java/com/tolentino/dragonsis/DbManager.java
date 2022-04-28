@@ -186,6 +186,7 @@ public class DbManager extends SQLiteOpenHelper {
         }else{
             Log.i("ACCOUNT TABLE", "User not Updated Correctly");
         }
+
     }
 
 

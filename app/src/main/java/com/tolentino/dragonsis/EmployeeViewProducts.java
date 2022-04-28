@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -194,10 +195,13 @@ public class EmployeeViewProducts extends AppCompatActivity {
                     int prod_crit_num = Integer.parseInt(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
 
                     //Compare Total Product Quantity to Product Critical Number
-                    if (prod_total_quant <= prod_crit_num) {
-                        view.setBackgroundColor(Color.parseColor("#FFB6B546"));
+                    if(prod_total_quant <= prod_crit_num){
+                        ((TextView)view.findViewById(R.id.row_product_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                        ((TextView)view.findViewById(R.id.row_product_price)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                        ((TextView)view.findViewById(R.id.row_product_category)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                        view.setBackgroundColor(Color.parseColor("#FFF45B69"));
                     } else {
-                        view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                        view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                     }
 
                     return view;
@@ -248,10 +252,13 @@ public class EmployeeViewProducts extends AppCompatActivity {
 
                 boolean isProdCrit = db.checkProductCritical(db.getProductByProductName(productList.get(position).get("prod_name")).get(0).get("prod_name"));
                 //Compare Total Product Quantity to Product Critical Number
-                if(isProdCrit){
-                    view.setBackgroundColor(Color.parseColor("#FFB6B546"));
-                }else{
-                    view.setBackgroundColor(Color.parseColor("#FFCCCB4C"));
+                if (isProdCrit) {
+                    ((TextView) view.findViewById(R.id.row_product_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    ((TextView) view.findViewById(R.id.row_product_price)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    ((TextView) view.findViewById(R.id.row_product_category)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                    view.setBackgroundColor(Color.parseColor("#FFF45B69"));
+                } else {
+                    view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                 }
 
                 return view;

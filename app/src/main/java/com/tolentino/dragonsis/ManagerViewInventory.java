@@ -157,7 +157,6 @@ public class ManagerViewInventory extends AppCompatActivity {
 
                 //get Category Selected in the Spinner
                 prodCategory = spin_view_inventory.getSelectedItem().toString();
-                prodCategory = spin_view_inventory.getSelectedItem().toString();
                 invSort = spin_man_sort_inventory.getSelectedItem().toString();
                 OnCategoryOrSortSelected(prodCategory, invSort);
 

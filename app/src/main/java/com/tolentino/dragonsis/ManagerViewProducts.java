@@ -284,6 +284,8 @@ public class ManagerViewProducts extends AppCompatActivity {
                     view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                 }
 
+
+
                 return view;
 
             }
