@@ -88,10 +88,6 @@ public class UserUpdateInventory extends AppCompatActivity {
             }
         });
 
-        Boolean RadioButtonAdd = radio_man_upd_inv_add.isChecked();
-        Boolean RadioButtonSold = radio_man_upd_inv_sold.isChecked();
-        Boolean RadioButtonRemove = radio_man_upd_inv_remove.isChecked();
-
         db = new DbManager(this);
         pref = getSharedPreferences("inventory_list", MODE_PRIVATE);
         user_pref = getSharedPreferences("acc_details", MODE_PRIVATE);
