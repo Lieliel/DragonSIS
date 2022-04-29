@@ -105,17 +105,22 @@ public class ManagerUpdateAccount extends AppCompatActivity {
                 String user_type = spin_upd_acc_usertype.getSelectedItem().toString();
 
                 if(username.trim().equals("") || password.trim().equals("") || user_type.trim().equals("")){
-                    edit_upd_acc_username.setError("Username Required");
-                    edit_upd_acc_password.setError("Password Required");
+                    if(username.equals("") && !password.equals("")){
+                        edit_upd_acc_username.setError("Username Required");
+
+                    }
+                    else{
+                        edit_upd_acc_password.setError("Password Required");
+                    }
                     Toast.makeText(ManagerUpdateAccount.this, "All fields are required! ", Toast.LENGTH_LONG).show();
-                }
-                else{
+                }else{
                     db.updateUser(username, password, user_type, origUsername);
                     Intent i = new Intent(ManagerUpdateAccount.this, ManagerUserAccounts.class);
                     Intent endActivity = new Intent("finish_activity_man_accounts");
                     sendBroadcast(endActivity);
                     startActivity(i);
-                    finish();}
+                    finish();
+                }
             }
         });
 

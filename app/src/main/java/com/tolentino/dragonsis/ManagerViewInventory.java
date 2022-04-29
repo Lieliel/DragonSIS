@@ -2,6 +2,7 @@ package com.tolentino.dragonsis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -91,22 +92,25 @@ public class ManagerViewInventory extends AppCompatActivity {
                 View view = super.getView(position, convertView, parent);
 
                 // Initialize Values
-                int prod_total_quant = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
-                int prod_crit_num = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
+                try{
+                    int prod_total_quant = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_total_quantity"));
+                    int prod_crit_num = Integer.parseInt(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_critical_num"));
 
-                //Compare Total Product Quantity to Product Critical Number
-                if(prod_total_quant <= prod_crit_num){
-                    ((TextView)view.findViewById(R.id.row_inventory_product_ID)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                    ((TextView)view.findViewById(R.id.row_inventory_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                    ((TextView)view.findViewById(R.id.row_inventory_date)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                    ((TextView)view.findViewById(R.id.row_inventory_quantity)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                    view.setBackgroundColor(Color.parseColor("#FFF45B69"));
-                }else{
-                    view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                    //Compare Total Product Quantity to Product Critical Number
+                    if(prod_total_quant <= prod_crit_num){
+                        ((TextView)view.findViewById(R.id.row_inventory_product_ID)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                        ((TextView)view.findViewById(R.id.row_inventory_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                        ((TextView)view.findViewById(R.id.row_inventory_date)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                        ((TextView)view.findViewById(R.id.row_inventory_quantity)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                        view.setBackgroundColor(Color.parseColor("#FFF45B69"));
+                    }else{
+                        view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                    new AlertDialog.Builder(ManagerViewInventory.this).setTitle("Missing Product").setMessage("A product used for inventory cannot be found. Please remove the inventory item with missing or removed product to avoid this error. Thank you.").setNeutralButton("Close", null).show();
                 }
 
                 return view;
-
             }
         };
         list_inventory.setAdapter(listAdapter);
@@ -209,17 +213,22 @@ public class ManagerViewInventory extends AppCompatActivity {
                     // Get Current View
                     View view = super.getView(position, convertView, parent);
 
-                    boolean isProdCrit = db.checkProductCritical(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_name"));
-                    //Compare Total Product Quantity to Product Critical Number
-                    if(isProdCrit){
-                        ((TextView)view.findViewById(R.id.row_inventory_product_ID)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                        ((TextView)view.findViewById(R.id.row_inventory_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                        ((TextView)view.findViewById(R.id.row_inventory_date)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                        ((TextView)view.findViewById(R.id.row_inventory_quantity)).setTextColor(Color.parseColor("#FFFFFFFF"));
-                        view.setBackgroundColor(Color.parseColor("#FFF45B69"));
-                    }else{
-                        view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                    try{
+                        boolean isProdCrit = db.checkProductCritical(db.getProductByProductName(inventoryList.get(position).get("prod_name")).get(0).get("prod_name"));
+                        //Compare Total Product Quantity to Product Critical Number
+                        if(isProdCrit){
+                            ((TextView)view.findViewById(R.id.row_inventory_product_ID)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                            ((TextView)view.findViewById(R.id.row_inventory_name)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                            ((TextView)view.findViewById(R.id.row_inventory_date)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                            ((TextView)view.findViewById(R.id.row_inventory_quantity)).setTextColor(Color.parseColor("#FFFFFFFF"));
+                            view.setBackgroundColor(Color.parseColor("#FFF45B69"));
+                        }else{
+                            view.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                        }
+                    } catch (IndexOutOfBoundsException e) {
+                        e.printStackTrace();
                     }
+
 
                     return view;
                 }

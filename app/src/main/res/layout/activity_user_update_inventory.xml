@@ -199,19 +199,19 @@
 
                 <RadioButton
                     android:id="@+id/radiobtn_man_upd_inv_add"
-                    android:layout_width="100dp"
+                    android:layout_width="90dp"
                     android:layout_height="50dp"
                     android:text="Add" />
 
                 <RadioButton
                     android:id="@+id/radiobtn_man_upd_inv_sold"
-                    android:layout_width="100dp"
+                    android:layout_width="90dp"
                     android:layout_height="50dp"
                     android:text="Sold" />
 
                 <RadioButton
                     android:id="@+id/radiobtn_man_upd_inv_remove"
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="50dp"
                     android:text="Remove" />
             </RadioGroup>

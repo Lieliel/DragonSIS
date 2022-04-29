@@ -63,7 +63,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="15dp"
-                android:hint="Enter Product Name" />
+                android:hint="Enter Product Name"
+                android:inputType="text"
+                android:maxLines="1"/>
 
             <TextView
                 android:id="@+id/txt_upd_prod_total_quantity_label"
@@ -78,7 +80,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="15dp"
-                android:hint="Enter Total Quantity" />
+                android:hint="Enter Total Quantity"
+                android:inputType="number"/>
 
             <TextView
                 android:id="@+id/txt_upd_prod_critnum_label"

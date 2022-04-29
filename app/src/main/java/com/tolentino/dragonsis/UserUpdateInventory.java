@@ -67,6 +67,31 @@ public class UserUpdateInventory extends AppCompatActivity {
         btn_man_upd_inv_update = findViewById(R.id.btn_man_upd_inv_update);
         btn_man_upd_inv_delete = findViewById(R.id.btn_man_upd_inv_delete);
 
+        radio_man_upd_inv_remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radio_man_upd_inv_remove.setError(null);
+            }
+        });
+
+        radio_man_upd_inv_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radio_man_upd_inv_remove.setError(null);
+            }
+        });
+
+        radio_man_upd_inv_sold.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radio_man_upd_inv_remove.setError(null);
+            }
+        });
+
+        Boolean RadioButtonAdd = radio_man_upd_inv_add.isChecked();
+        Boolean RadioButtonSold = radio_man_upd_inv_sold.isChecked();
+        Boolean RadioButtonRemove = radio_man_upd_inv_remove.isChecked();
+
         db = new DbManager(this);
         pref = getSharedPreferences("inventory_list", MODE_PRIVATE);
         user_pref = getSharedPreferences("acc_details", MODE_PRIVATE);
@@ -75,20 +100,6 @@ public class UserUpdateInventory extends AppCompatActivity {
         img_man_upd_inv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
-                if(user_pref.getString("user_type", null).equals("Manager")){
-                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
-                    Intent endActivity = new Intent("finish_activity_man_view_inventory");
-                    sendBroadcast(endActivity);
-                    startActivity(i);
-                    finish();
-                }else{
-                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
-                    Intent endActivity = new Intent("finish_activity_emp_view_inventory");
-                    sendBroadcast(endActivity);
-                    startActivity(i);
-                    finish();
-                }*/
                 finish();
             }
         });
@@ -109,6 +120,11 @@ public class UserUpdateInventory extends AppCompatActivity {
                 String inv_prod_name = pref.getString("prod_name", null);
                 String inv_remark = edit_man_upd_inv_remarks.getText().toString();
 
+                /*int radioID = radiogr_man_upd_inv_action.getCheckedRadioButtonId();
+                if(radioID <= 0){//Grp is your radio group object
+                    radio_man_upd_inv_remove.setError("Select Item");//Set error to last Radio button
+                }*/
+
                 int inv_quantity_change = 0;
                 int inv_curr_quantity = 0;
 
@@ -117,26 +133,19 @@ public class UserUpdateInventory extends AppCompatActivity {
                     //initialize values
                     inv_quantity_change = Integer.parseInt(edit_man_upd_inv_quantity_change.getText().toString());
                     inv_curr_quantity = Integer.parseInt(pref.getString("inventory_quantity", null));
+
                     String new_inv_quan = changeQuantity(view,inv_curr_quantity,inv_quantity_change);
                     db.updateInventory(inv_id,new_inv_quan,inv_remark,inv_prod_name);
+
                 }else{
+                    edit_man_upd_inv_quantity_change.setError("Input is required");
+                    int radioID = radiogr_man_upd_inv_action.getCheckedRadioButtonId();
+                    if(radioID <= 0){
+                        radio_man_upd_inv_remove.setError("Select Item");
+                    }
                     String new_inv_quan = pref.getString("inventory_quantity", null);
                     db.updateInventory(inv_id,new_inv_quan,inv_remark,inv_prod_name);
-                }
-
-                //Back to Inventory
-                if(user_pref.getString("user_type", null).equals("Manager")){
-                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
-                    Intent endActivity = new Intent("finish_activity_man_view_inventory");
-                    sendBroadcast(endActivity);
-                    startActivity(i);
-                    finish();
-                }else{
-                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
-                    Intent endActivity = new Intent("finish_activity_emp_view_inventory");
-                    sendBroadcast(endActivity);
-                    startActivity(i);
-                    finish();
+                    db.close();
                 }
             }
         });
@@ -175,79 +184,129 @@ public class UserUpdateInventory extends AppCompatActivity {
     }
 
     public String changeQuantity(View v, int inv_curr_quan, int inv_quantity_change){
-        int radioID = radiogr_man_upd_inv_action.getCheckedRadioButtonId();
-        radioButton = findViewById(radioID);
-        String radioText = radioButton.getText().toString();
-        //Toast.makeText(this,radioText,Toast.LENGTH_SHORT).show();
         int fin_quantity = 0;
 
-        if(radioText.equals("Add")){
-            fin_quantity = inv_curr_quan + inv_quantity_change;
-
-            Date d = Calendar.getInstance().getTime();
-            SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
-            SimpleDateFormat tf = new SimpleDateFormat("KK:mm:ss a", Locale.getDefault());
-            String curr_date = df.format(d);
-            String curr_time = tf.format(d);
-            db.insertInvHis(curr_date,"Added ", inv_quantity_change, pref.getString("prod_name", null), curr_time);
-            db.addProductTotalQuant(pref.getString("prod_name", null),inv_quantity_change);
-
-            //check if critical for notif
-            boolean isProdCrit = db.checkProductCritical(pref.getString("prod_name", null));
-            if(isProdCrit){
-                notifyCritical(pref.getString("prod_name",null));
-            }
-        }else if(radioText.equals("Sold")){
-            if(checkQuantity(inv_quantity_change,inv_curr_quan)){
-                fin_quantity = inv_curr_quan - inv_quantity_change;
+        try {
+            int radioID = radiogr_man_upd_inv_action.getCheckedRadioButtonId();
+            radioButton = findViewById(radioID);
+            String radioText = radioButton.getText().toString();
+            //Toast.makeText(this,radioText,Toast.LENGTH_SHORT).show();
+            if(radioText.equals("Add")){
+                fin_quantity = inv_curr_quan + inv_quantity_change;
 
                 Date d = Calendar.getInstance().getTime();
                 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
                 SimpleDateFormat tf = new SimpleDateFormat("KK:mm:ss a", Locale.getDefault());
                 String curr_date = df.format(d);
                 String curr_time = tf.format(d);
-                db.insertInvHis(curr_date,"Sold ", inv_quantity_change, pref.getString("prod_name", null),curr_time);
-                int prod_sales_amount = Integer.parseInt(db.getProductByProductName(pref.getString("prod_name",null)).get(0).get("prod_price"));
-                int sales_amount = inv_quantity_change * prod_sales_amount;
-                db.subtractProductTotalQuant(pref.getString("prod_name", null),inv_quantity_change);
-                db.insertSales(sales_amount,inv_quantity_change,curr_date,curr_time, pref.getString("prod_name",null));
+                db.insertInvHis(curr_date,"Added ", inv_quantity_change, pref.getString("prod_name", null), curr_time);
+                db.addProductTotalQuant(pref.getString("prod_name", null),inv_quantity_change);
 
                 //check if critical for notif
                 boolean isProdCrit = db.checkProductCritical(pref.getString("prod_name", null));
                 if(isProdCrit){
                     notifyCritical(pref.getString("prod_name",null));
                 }
-            }else{
-                fin_quantity = inv_curr_quan;
-            }
-        }else if(radioText.equals("Remove")){
 
-            if(checkQuantity(inv_quantity_change,inv_curr_quan)){
-                fin_quantity = inv_curr_quan - inv_quantity_change;
-
-                Date d = Calendar.getInstance().getTime();
-                SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
-                SimpleDateFormat tf = new SimpleDateFormat("KK:mm:ss a", Locale.getDefault());
-                String curr_date = df.format(d);
-                String curr_time = tf.format(d);
-                db.insertInvHis(curr_date,"Removed ", inv_quantity_change, pref.getString("prod_name", null),curr_time);
-                db.subtractProductTotalQuant(pref.getString("prod_name", null),inv_quantity_change);
-
-                //check if critical for notif
-                boolean isProdCrit = db.checkProductCritical(pref.getString("prod_name", null));
-                if(isProdCrit){
-                    notifyCritical(pref.getString("prod_name",null));
+                //Back to Inventory
+                if(user_pref.getString("user_type", null).equals("Manager")){
+                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
+                    Intent endActivity = new Intent("finish_activity_man_view_inventory");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
+                    Intent endActivity = new Intent("finish_activity_emp_view_inventory");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
                 }
-            }else{
-                fin_quantity = inv_curr_quan;
-            }
+            }else if(radioText.equals("Sold")){
+                if(checkQuantity(inv_quantity_change,inv_curr_quan) == true){
+                    fin_quantity = inv_curr_quan - inv_quantity_change;
 
-        }else{
+                    Date d = Calendar.getInstance().getTime();
+                    SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+                    SimpleDateFormat tf = new SimpleDateFormat("KK:mm:ss a", Locale.getDefault());
+                    String curr_date = df.format(d);
+                    String curr_time = tf.format(d);
+                    db.insertInvHis(curr_date,"Sold ", inv_quantity_change, pref.getString("prod_name", null),curr_time);
+                    int prod_sales_amount = Integer.parseInt(db.getProductByProductName(pref.getString("prod_name",null)).get(0).get("prod_price"));
+                    int sales_amount = inv_quantity_change * prod_sales_amount;
+                    db.subtractProductTotalQuant(pref.getString("prod_name", null),inv_quantity_change);
+                    db.insertSales(sales_amount,inv_quantity_change,curr_date,curr_time, pref.getString("prod_name",null));
+
+                    //check if critical for notif
+                    boolean isProdCrit = db.checkProductCritical(pref.getString("prod_name", null));
+                    if(isProdCrit){
+                        notifyCritical(pref.getString("prod_name",null));
+                    }
+                }else{
+                    fin_quantity = inv_curr_quan;
+                }
+
+                //Back to Inventory
+                if(user_pref.getString("user_type", null).equals("Manager")){
+                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
+                    Intent endActivity = new Intent("finish_activity_man_view_inventory");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
+                    Intent endActivity = new Intent("finish_activity_emp_view_inventory");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }
+            }else if(radioText.equals("Remove")){
+
+                if(checkQuantity(inv_quantity_change,inv_curr_quan) == true){
+                    fin_quantity = inv_curr_quan - inv_quantity_change;
+
+                    Date d = Calendar.getInstance().getTime();
+                    SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+                    SimpleDateFormat tf = new SimpleDateFormat("KK:mm:ss a", Locale.getDefault());
+                    String curr_date = df.format(d);
+                    String curr_time = tf.format(d);
+                    db.insertInvHis(curr_date,"Removed ", inv_quantity_change, pref.getString("prod_name", null),curr_time);
+                    db.subtractProductTotalQuant(pref.getString("prod_name", null),inv_quantity_change);
+
+                    //check if critical for notif
+                    boolean isProdCrit = db.checkProductCritical(pref.getString("prod_name", null));
+                    if(isProdCrit){
+                        notifyCritical(pref.getString("prod_name",null));
+                    }
+
+                }else{
+                    fin_quantity = inv_curr_quan;
+                }
+
+                //Back to Inventory
+                if(user_pref.getString("user_type", null).equals("Manager")){
+                    Intent i = new Intent(UserUpdateInventory.this, ManagerViewInventory.class);
+                    Intent endActivity = new Intent("finish_activity_man_view_inventory");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(UserUpdateInventory.this, EmployeeViewInventory.class);
+                    Intent endActivity = new Intent("finish_activity_emp_view_inventory");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();
+                }
+            }
+        } catch (NullPointerException e) {
+            System.err.println("Null Pointer Exception");
+            int radioID = radiogr_man_upd_inv_action.getCheckedRadioButtonId();
+            if(radioID <= 0){
+                radio_man_upd_inv_remove.setError("Select Item");
+            }
             Toast.makeText(this, "Error in Quantity Change", Toast.LENGTH_SHORT).show();
         }
-
         return String.valueOf(fin_quantity);
-
     }
 
     boolean checkQuantity(int change, int quantity){
@@ -262,10 +321,11 @@ public class UserUpdateInventory extends AppCompatActivity {
 
     void notifyCritical(String prod){
         String chan_ID = "chan_id";
-        String chan_name = "chan_name";
+        String chan_name = "Inventory Notification";
         String chan_desc = "chan_desc";
         int chan_importance = NotificationManager.IMPORTANCE_HIGH;
         String prod_name = prod;
+        String notifGroup = "Inventory Notifications";
 
         Notification not_Builder = new NotificationCompat.Builder(this, chan_ID)
                 .setSmallIcon(R.drawable.ic_warning)
@@ -273,10 +333,12 @@ public class UserUpdateInventory extends AppCompatActivity {
                 .setContentText(prod_name + " needs to be restocked")
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setGroup(notifGroup)
                 .build();
 
+        int uniqueNotifID = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
         NotificationManagerCompat notif_man = NotificationManagerCompat.from(this);
-        notif_man.notify(001,not_Builder);
+        notif_man.notify(uniqueNotifID,not_Builder);
 
         //Run notification
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
