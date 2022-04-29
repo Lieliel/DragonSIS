@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ManagerUpdateAccount extends AppCompatActivity {
 
@@ -103,12 +104,18 @@ public class ManagerUpdateAccount extends AppCompatActivity {
                 String password = edit_upd_acc_password.getText().toString();
                 String user_type = spin_upd_acc_usertype.getSelectedItem().toString();
 
-                db.updateUser(username, password, user_type, origUsername);
-                Intent i = new Intent(ManagerUpdateAccount.this, ManagerUserAccounts.class);
-                Intent endActivity = new Intent("finish_activity_man_accounts");
-                sendBroadcast(endActivity);
-                startActivity(i);
-                finish();
+                if(username.trim().equals("") || password.trim().equals("") || user_type.trim().equals("")){
+                    edit_upd_acc_username.setError("Username Required");
+                    edit_upd_acc_password.setError("Password Required");
+                    Toast.makeText(ManagerUpdateAccount.this, "All fields are required! ", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    db.updateUser(username, password, user_type, origUsername);
+                    Intent i = new Intent(ManagerUpdateAccount.this, ManagerUserAccounts.class);
+                    Intent endActivity = new Intent("finish_activity_man_accounts");
+                    sendBroadcast(endActivity);
+                    startActivity(i);
+                    finish();}
             }
         });
 
