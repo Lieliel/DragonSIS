@@ -248,7 +248,7 @@ public class DbManager extends SQLiteOpenHelper {
 
 
     // Adding New Product Details
-    void insertProduct(String prod_name, int prod_total_quantity, int prod_critical_num, int prod_price, String prod_category) {
+    void insertProduct(String prod_name, int prod_total_quantity, int prod_critical_num, float prod_price, String prod_category) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
@@ -939,7 +939,7 @@ public class DbManager extends SQLiteOpenHelper {
     ////////////////////////////////////////////////////////////////////
 
     // Adding new Sales Details
-    void insertSales(int sales_amount, int items_sold, String sales_dates, String sales_time, String product_sold) {
+    void insertSales(float sales_amount, int items_sold, String sales_dates, String sales_time, String product_sold) {
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys

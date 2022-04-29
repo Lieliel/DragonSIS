@@ -67,7 +67,7 @@
 
         android:layout_marginTop="30dp"
         android:hint="Input price in pesos"
-        android:inputType="number"
+        android:inputType="number|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_add_crit_num"></EditText>

@@ -184,8 +184,8 @@ public class UserUpdateInventory extends AppCompatActivity {
                 String curr_date = df.format(d);
                 String curr_time = tf.format(d);
                 db.insertInvHis(curr_date,"Sold ", inv_quantity_change, pref.getString("prod_name", null),curr_time);
-                int prod_sales_amount = Integer.parseInt(db.getProductByProductName(pref.getString("prod_name",null)).get(0).get("prod_price"));
-                int sales_amount = inv_quantity_change * prod_sales_amount;
+                float prod_sales_amount = Float.parseFloat(db.getProductByProductName(pref.getString("prod_name",null)).get(0).get("prod_price"));
+                float sales_amount = inv_quantity_change * prod_sales_amount;
                 db.subtractProductTotalQuant(pref.getString("prod_name", null),inv_quantity_change);
                 db.insertSales(sales_amount,inv_quantity_change,curr_date,curr_time, pref.getString("prod_name",null));
 

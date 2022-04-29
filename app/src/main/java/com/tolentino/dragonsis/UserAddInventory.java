@@ -74,9 +74,16 @@ public class UserAddInventory extends AppCompatActivity {
                 //Convert EditText Values to String
                 String productDate = edit_add_date.getText().toString();
                 String spin_prodName = spin_add_inventory_productname.getSelectedItem().toString();
-                int invQuantity = Integer.parseInt(edit_inv_quantity.getText().toString());
+                int invQuantity = -1;
 
-                if (TextUtils.isEmpty(productDate) || TextUtils.isEmpty(spin_prodName)){
+                if(edit_inv_quantity.getText().toString().equals("")){
+                    Toast.makeText(UserAddInventory.this, "Please make sure to input in all fields.", Toast.LENGTH_SHORT).show();
+                }else{
+                    invQuantity = Integer.parseInt(edit_inv_quantity.getText().toString());
+                }
+
+
+                if (TextUtils.isEmpty(productDate) || TextUtils.isEmpty(spin_prodName) || invQuantity == -1){
                     Toast.makeText(UserAddInventory.this, "Please make sure to input in all fields.", Toast.LENGTH_SHORT).show();
                 }else {
 
@@ -84,17 +91,19 @@ public class UserAddInventory extends AppCompatActivity {
                     db.insertInventory(spin_prodName, productDate, invQuantity);
                     db.addProductTotalQuant(spin_prodName, invQuantity);
                     Log.i("INVENTORY TABLE", "Inventory Inserted: " + spin_prodName + ", " + productDate + ", " + invQuantity);
+
+                    //Back to View Inventory
+                    if(user_pref.getString("user_type", null).equals("Manager")){
+                        Intent i = new Intent(UserAddInventory.this, ManagerViewInventory.class);
+                        startActivity(i);
+                        finish();
+                    }else{
+                        Intent i = new Intent(UserAddInventory.this, EmployeeViewInventory.class);
+                        startActivity(i);
+                        finish();
+                    }
                 }
-                //Back to View Inventory
-                if(user_pref.getString("user_type", null).equals("Manager")){
-                    Intent i = new Intent(UserAddInventory.this, ManagerViewInventory.class);
-                    startActivity(i);
-                    finish();
-                }else{
-                    Intent i = new Intent(UserAddInventory.this, EmployeeViewInventory.class);
-                    startActivity(i);
-                    finish();
-                }
+
             }
         });
 

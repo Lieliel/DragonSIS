@@ -67,29 +67,41 @@ public class UserAddProduct extends AppCompatActivity {
         btn_product_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int critNum = -1;
+                float prodPrice = -1;
+
+                if(edit_add_crit_num.getText().toString().equals("")){
+                    Toast.makeText(UserAddProduct.this, "Please make sure to input in all fields.", Toast.LENGTH_SHORT).show();
+                }else if(edit_add_price.getText().toString().equals("")){
+                    Toast.makeText(UserAddProduct.this, "Please make sure to input in all fields.", Toast.LENGTH_SHORT).show();
+                }else{
+                    critNum = Integer.parseInt(edit_add_crit_num.getText().toString());
+                    prodPrice = Float.parseFloat(edit_add_price.getText().toString());
+                }
 
                 //Convert to EditText Values to String
                 String txt_prod_name = edit_add_productname.getText().toString();
-                int txt_prod_crit_num = Integer.parseInt(edit_add_crit_num.getText().toString());
-                int txt_prod_price = Integer.parseInt(edit_add_price.getText().toString());
+                int txt_prod_crit_num = critNum;
+                float txt_prod_price = prodPrice;
                 String spin_category = spin_add_category.getSelectedItem().toString();
 
-                if (TextUtils.isEmpty(txt_prod_name) || TextUtils.isEmpty(spin_category)){
+                if (TextUtils.isEmpty(txt_prod_name) || TextUtils.isEmpty(spin_category) || txt_prod_crit_num == -1 || txt_prod_price == -1){
                     Toast.makeText(UserAddProduct.this, "Please make sure to input in all fields.", Toast.LENGTH_SHORT).show();
                 }else {
 
                     //Use db function to add record to products table
                     db.insertProduct(txt_prod_name, 0, txt_prod_crit_num, txt_prod_price, spin_category);
                     Log.i("ACCOUNTS TABLE", "User Inserted: " + txt_prod_name + ", " + txt_prod_crit_num + ", " + txt_prod_price + ", " + spin_category);
-                }
-                if(user_pref.getString("user_type", null).equals("Manager")){
-                    Intent i = new Intent(UserAddProduct.this, ManagerViewProducts.class);
-                    startActivity(i);
-                    finish();
-                }else{
-                    Intent i = new Intent(UserAddProduct.this, EmployeeViewProducts.class);
-                    startActivity(i);
-                    finish();
+
+                    if(user_pref.getString("user_type", null).equals("Manager")){
+                        Intent i = new Intent(UserAddProduct.this, ManagerViewProducts.class);
+                        startActivity(i);
+                        finish();
+                    }else{
+                        Intent i = new Intent(UserAddProduct.this, EmployeeViewProducts.class);
+                        startActivity(i);
+                        finish();
+                    }
                 }
             }
         });
