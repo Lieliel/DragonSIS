@@ -120,11 +120,6 @@ public class UserUpdateInventory extends AppCompatActivity {
                 String inv_prod_name = pref.getString("prod_name", null);
                 String inv_remark = edit_man_upd_inv_remarks.getText().toString();
 
-                /*int radioID = radiogr_man_upd_inv_action.getCheckedRadioButtonId();
-                if(radioID <= 0){//Grp is your radio group object
-                    radio_man_upd_inv_remove.setError("Select Item");//Set error to last Radio button
-                }*/
-
                 int inv_quantity_change = 0;
                 int inv_curr_quantity = 0;
 
@@ -226,24 +221,22 @@ public class UserUpdateInventory extends AppCompatActivity {
                 if(checkQuantity(inv_quantity_change,inv_curr_quan) == true){
                     fin_quantity = inv_curr_quan - inv_quantity_change;
 
-                    Date d = Calendar.getInstance().getTime();
-                    SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
-                    SimpleDateFormat tf = new SimpleDateFormat("KK:mm:ss a", Locale.getDefault());
-                    String curr_date = df.format(d);
-                    String curr_time = tf.format(d);
-                    db.insertInvHis(curr_date,"Sold ", inv_quantity_change, pref.getString("prod_name", null),curr_time);
-                    int prod_sales_amount = Integer.parseInt(db.getProductByProductName(pref.getString("prod_name",null)).get(0).get("prod_price"));
-                    int sales_amount = inv_quantity_change * prod_sales_amount;
-                    db.subtractProductTotalQuant(pref.getString("prod_name", null),inv_quantity_change);
-                    db.insertSales(sales_amount,inv_quantity_change,curr_date,curr_time, pref.getString("prod_name",null));
+                Date d = Calendar.getInstance().getTime();
+                SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+                SimpleDateFormat tf = new SimpleDateFormat("KK:mm:ss a", Locale.getDefault());
+                String curr_date = df.format(d);
+                String curr_time = tf.format(d);
+                db.insertInvHis(curr_date,"Sold ", inv_quantity_change, pref.getString("prod_name", null),curr_time);
+                float prod_sales_amount = Float.parseFloat(db.getProductByProductName(pref.getString("prod_name",null)).get(0).get("prod_price"));
+                float sales_amount = inv_quantity_change * prod_sales_amount;
+                db.subtractProductTotalQuant(pref.getString("prod_name", null),inv_quantity_change);
+                db.insertSales(sales_amount,inv_quantity_change,curr_date,curr_time, pref.getString("prod_name",null));
 
                     //check if critical for notif
                     boolean isProdCrit = db.checkProductCritical(pref.getString("prod_name", null));
                     if(isProdCrit){
                         notifyCritical(pref.getString("prod_name",null));
                     }
-                }else{
-                    fin_quantity = inv_curr_quan;
                 }
 
                 //Back to Inventory
