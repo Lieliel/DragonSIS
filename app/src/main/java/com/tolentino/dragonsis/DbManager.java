@@ -82,7 +82,7 @@ public class DbManager extends SQLiteOpenHelper {
                 + PROD_COL2 + " TEXT,"
                 + PROD_COL3 + " INTEGER,"
                 + PROD_COL4 + " INTEGER,"
-                + PROD_COL5 + " INTEGER,"
+                + PROD_COL5 + " FLOAT,"
                 + PROD_COL6 + " TEXT)";
         db.execSQL(create_Prod_Table);
 
@@ -100,7 +100,7 @@ public class DbManager extends SQLiteOpenHelper {
         //create_Sales_Table
         String create_Sales_Table = "CREATE TABLE " + SALES_TABLE_NAME + "("
                 + SALES_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + SALES_COL2 + " TEXT,"
+                + SALES_COL2 + " FLOAT,"
                 + SALES_COL3 + " TEXT,"
                 + SALES_COL4 + " TEXT,"
                 + SALES_COL5 + " TEXT,"
