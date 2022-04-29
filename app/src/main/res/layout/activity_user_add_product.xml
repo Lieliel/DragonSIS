@@ -106,7 +106,7 @@
 
                 android:layout_marginTop="15dp"
                 android:hint="Input Price in Pesos"
-                android:inputType="number"
+                android:inputType="number|numberDecimal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_add_crit_num"/>

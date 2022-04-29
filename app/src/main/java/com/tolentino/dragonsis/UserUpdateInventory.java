@@ -297,7 +297,7 @@ public class UserUpdateInventory extends AppCompatActivity {
             if(radioID <= 0){
                 radio_man_upd_inv_remove.setError("Select Item");
             }
-            Toast.makeText(this, "Error in Quantity Change", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Missing required input.", Toast.LENGTH_SHORT).show();
         }
         return String.valueOf(fin_quantity);
     }
