@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ManagerUpdateAccount extends AppCompatActivity {
 
@@ -78,10 +79,14 @@ public class ManagerUpdateAccount extends AppCompatActivity {
                 String password = edit_upd_acc_password.getText().toString();
                 String user_type = spin_upd_acc_usertype.getSelectedItem().toString();
 
-                db.updateUser(username, password, user_type, origUsername);
-                Intent i = new Intent(ManagerUpdateAccount.this, ManagerUserAccounts.class);
-                startActivity(i);
-                finish();
+                if(username.trim().equals("") || password.trim().equals("") || user_type.trim().equals("")){
+                    Toast.makeText(ManagerUpdateAccount.this, "All fields are required! ", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    db.updateUser(username, password, user_type, origUsername);
+                    Intent i = new Intent(ManagerUpdateAccount.this, ManagerUserAccounts.class);
+                    startActivity(i);
+                    finish();}
             }
         });
 
