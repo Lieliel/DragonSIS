@@ -29,6 +29,7 @@ android {
         exclude 'com/itextpdf/io/font/cmap_info.txt'
         exclude 'com/itextpdf/io/font/cmap/*'
     }
+    namespace 'com.tolentino.dragonsis'
 
 }
 

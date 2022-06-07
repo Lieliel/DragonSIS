@@ -4,11 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +21,6 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.AreaBreak;
 import com.itextpdf.layout.element.Cell;
-import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Text;
@@ -46,8 +43,7 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
     Button btn_gnr_sales;
     Button btn_gnr_inv;
     Button btn_gnr_full;
-    Button btn_back_report;
-    ImageView img_back_report;
+    ImageView btn_back_report;
     DbManager db;
 
     @Override
@@ -60,7 +56,7 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
         btn_gnr_sales = findViewById(R.id.btn_gnr_sales);
         btn_gnr_inv = findViewById(R.id.btn_gnr_inv);
         btn_gnr_full = findViewById(R.id.btn_gnr_full);
-        img_back_report = findViewById(R.id.img_back_report);
+        btn_back_report = findViewById(R.id.img_back_report);
         db = new DbManager(this);
 
         btn_gnr_sales.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +98,7 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
         });
 
         //Back to Manager Menu
-        img_back_report.setOnClickListener(new View.OnClickListener() {
+        btn_back_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -118,7 +114,7 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
         String myFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
         //Log.i("AYO", myFilePath);
         File myFile = new File(myFilePath, "DMFull_"+cDate+"_"+cTime+".pdf");
-        //OutputStream outputStream = new FileOutputStream(myFile);
+        OutputStream outputStream = new FileOutputStream(myFile);
 
         PdfWriter writer = new PdfWriter(myFile);
         PdfDocument pdfDocument = new PdfDocument(writer);
@@ -279,7 +275,7 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
         String myFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
         //Log.i("AYO", myFilePath);
         File myFile = new File(myFilePath, "DMSales_"+cDate+"_"+cTime+".pdf");
-        //OutputStream outputStream = new FileOutputStream(myFile);
+        OutputStream outputStream = new FileOutputStream(myFile);
 
         PdfWriter writer = new PdfWriter(myFile);
         PdfDocument pdfDocument = new PdfDocument(writer);
