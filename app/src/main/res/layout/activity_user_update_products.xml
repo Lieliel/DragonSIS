@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:hint="Enter Critical Number"
-                android:inputType="number" />
+                android:inputType="numberDecimal" />
 
             <TextView
                 android:id="@+id/txt_upd_prod_price_label"

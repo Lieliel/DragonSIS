@@ -63,7 +63,7 @@ public class UserAddProduct extends AppCompatActivity {
                 String txt_prod_price2 = edit_add_price.getText().toString();
                 String txt_prod_crit_num2 = edit_add_crit_num.getText().toString();
                 int txt_prod_crit_num = Integer.parseInt(edit_add_crit_num.getText().toString());
-                int txt_prod_price = Integer.parseInt(edit_add_price.getText().toString());
+                float txt_prod_price = Float.parseFloat(edit_add_price.getText().toString());
                 String spin_category = spin_add_category.getSelectedItem().toString();
 
                 if (TextUtils.isEmpty(txt_prod_name) || TextUtils.isEmpty(spin_category) || TextUtils.isEmpty(txt_prod_price2) || TextUtils.isEmpty(txt_prod_crit_num2)){
