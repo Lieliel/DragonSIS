@@ -184,17 +184,23 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
         salTable.addCell("NO. OF ITEM");
         salTable.addCell("SALES AMOUNT");
 
+        String currDate = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).format(new Date());
+
         ArrayList<HashMap<String, String>> salesList = db.getSales();
 
         for (int i = 0; i < salesList.size(); i++) {
             HashMap<String, String> salesRecord = salesList.get(i);
-            salTable.addCell(salesRecord.get("sales_ID")).setPadding(10);
-            salTable.addCell(salesRecord.get("product_sold")).setPadding(10);
-            salTable.addCell(salesRecord.get("sales_dates")).setPadding(10);
-            salTable.addCell(salesRecord.get("sales_time")).setPadding(10);
-            salTable.addCell(salesRecord.get("items_sold")).setPadding(10);
-            salTable.addCell(salesRecord.get("sales_amount")).setPadding(10);
-            //tablePosition += 18;
+
+            if(currDate.equals(salesRecord.get("sales_dates"))){
+                salTable.addCell(salesRecord.get("sales_ID")).setPadding(10);
+                salTable.addCell(salesRecord.get("product_sold")).setPadding(10);
+                salTable.addCell(salesRecord.get("sales_dates")).setPadding(10);
+                salTable.addCell(salesRecord.get("sales_time")).setPadding(10);
+                salTable.addCell(salesRecord.get("items_sold")).setPadding(10);
+                salTable.addCell(salesRecord.get("sales_amount")).setPadding(10);
+                //tablePosition += 18;
+            }
+
         }
 
         doc.add(salTable);
@@ -303,19 +309,26 @@ public class ManagerGeneratePdfReport extends AppCompatActivity {
 
         ArrayList<HashMap<String, String>> salesList = db.getSales();
 
+        String currDate = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).format(new Date());
+
         int tablePosition = 200;
-        int totalSales = 0;
+        double totalSales = 0;
         for (int i = 0; i < salesList.size(); i++) {
             HashMap<String, String> salesRecord = salesList.get(i);
-            salTable.addCell(salesRecord.get("sales_ID")).setPadding(10);
-            salTable.addCell(salesRecord.get("product_sold")).setPadding(10);
-            salTable.addCell(salesRecord.get("sales_dates")).setPadding(10);
-            salTable.addCell(salesRecord.get("sales_time")).setPadding(10);
-            salTable.addCell(salesRecord.get("items_sold")).setPadding(10);
-            salTable.addCell(salesRecord.get("sales_amount")).setPadding(10);
-            totalSales = totalSales + Integer.parseInt(salesRecord.get("sales_amount"));
-            tablePosition += 18;
-            Log.i("SALES TAG", String.valueOf(totalSales));
+            Log.i("TAG", salesRecord.get("sales_dates"));
+
+            if(currDate.equals(salesRecord.get("sales_dates"))){
+                salTable.addCell(salesRecord.get("sales_ID")).setPadding(10);
+                salTable.addCell(salesRecord.get("product_sold")).setPadding(10);
+                salTable.addCell(salesRecord.get("sales_dates")).setPadding(10);
+                salTable.addCell(salesRecord.get("sales_time")).setPadding(10);
+                salTable.addCell(salesRecord.get("items_sold")).setPadding(10);
+                salTable.addCell(salesRecord.get("sales_amount")).setPadding(10);
+                totalSales = totalSales + Double.parseDouble(salesRecord.get("sales_amount"));
+                tablePosition += 18;
+                Log.i("SALES TAG", String.valueOf(totalSales));
+            }
+
         }
 
         salTable.addCell(new Cell(1,6).add(new Paragraph("Total Sales Amount: " + String.valueOf(totalSales)))).setTextAlignment(TextAlignment.CENTER);

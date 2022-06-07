@@ -71,8 +71,6 @@ public class UserAddInventory extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, prod_name_spinner);
         spin_add_inventory_productname.setAdapter(adapter);
 
-
-
         //Add Inventory
         btn_inv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
