@@ -1,5 +1,5 @@
 # DragonSIS
-Software Engineering Project of 3ITE-Group 2 from CICS-UST.
+Software Engineering Project of 3ITE-Group 2 from CICS-UST. (2021-2022)
 
 # Dragon Sales and Inventory System App
 
