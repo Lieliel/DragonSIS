@@ -3,8 +3,6 @@ Software Engineering Project of 3ITE-Group 2 from CICS-UST.
 
 # Dragon Sales and Inventory System App
 
-![Logo](/path/to/logo.png)
-
 The Dragon Sales and Inventory System App is a project aimed at addressing the current issue faced by our client, Dragon M, who is struggling with the manual management of their inventory and sales. This project involves the development of an Android application that will seamlessly integrate into their existing management system, providing a more efficient and reliable solution for inventory and sales management.
 
 ## Objective
@@ -38,7 +36,7 @@ The Sales and Inventory System App will be developed using the following technol
 
 To get started with the Sales and Inventory System App, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/dragon-m/sales-inventory-app.git`
+1. Clone the repository: `git clone https://github.com/Lieliel/DragonSIS.git`
 2. Open the project in Android Studio.
 3. Set up the SQLite database and create the necessary tables for inventory and sales data.
 4. Build and run the app on an Android emulator or physical device.
